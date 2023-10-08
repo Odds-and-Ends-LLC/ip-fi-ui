@@ -154,6 +154,7 @@ const theme = createTheme({
         },
         gradient: ({ theme }) => ({
           background: theme.palette.background.gradient,
+          color: theme.palette.text.blue,
         }),
       },
     },

@@ -14,7 +14,6 @@ export default function TextButtonsReel() {
       <Typography variant="h4-unbounded">Unbounded Caption Text</Typography>
       <Typography variant="h5">Small Text</Typography>
       <Button variant="gradient">Join Waitlist</Button>
-      <Button variant="contained" color="secondary">Join Waitlist</Button>
       <Button variant="contained" color="secondary">Review</Button>
       <Stack sx={{ backgroundColor: "secondary.main", padding: "16px", width: "fit-content"}}>
         <Button variant="contained" color="blue">Review</Button>
