@@ -1,11 +1,11 @@
 // packages
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Button } from "@mui/material";
 
 export default function Navbar() {
   return (
     <AppBar>
       <Toolbar>
-        <Typography>LOGO</Typography>
+        <Button variant="text" color="secondary">Explore</Button>
       </Toolbar>
     </AppBar>
   );

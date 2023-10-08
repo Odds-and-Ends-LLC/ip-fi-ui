@@ -3,8 +3,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@shared": ["src/components/shared"],
-      "@pages": ["src/components/pages"],
     }
   }
 }

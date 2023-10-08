@@ -1,10 +1,10 @@
+"use client";
 // packages
-import { Typography } from "@mui/material";
+import { TextButtonsReel } from "@/components/shared";
 
 export default function Landing() {
   return (
-    <Typography variant="h1-unbounded">
-      I LIKE THIS FONT WHEN IT'S E OR B IT'S JAGGED
-    </Typography>
+    // just for reference, will delete
+    <TextButtonsReel />
   );
 }

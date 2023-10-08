@@ -5,6 +5,9 @@ import { Container } from "@mui/material";
 import ThemeRegistry from "@/components/ThemeRegistry";
 import { Navbar } from "@/components/shared";
 
+// styles
+import "@/styles/globals.css";
+
 export const metadata = {
   title: "IPfi",
   description: "Intellectual Property Finance",
