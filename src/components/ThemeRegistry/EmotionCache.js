@@ -68,7 +68,9 @@ export default function NextAppDirEmotionCacheProvider(props) {
           <style
             data-emotion={dataEmotionAttribute}
             // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: styles }}
+            dangerouslySetInnerHTML={{
+              __html: options.prepend ? `@layer emotion {${styles}}` : styles,
+            }}
           />
         )}
       </React.Fragment>

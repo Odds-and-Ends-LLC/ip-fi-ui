@@ -158,6 +158,19 @@ const theme = createTheme({
         }),
       },
     },
+    MuiMobileStepper: {
+      styleOverrides: {
+        dots: {
+          gap: "8px",
+        },
+        dot: ({ theme }) => ({
+          borderRadius: 0,
+          ":not(.MuiMobileStepper-dotActive)": {
+            backgroundColor: theme.palette.background.lightPurple
+          }
+        }),
+      }
+    }
   },
 });
 

@@ -7,7 +7,7 @@ import theme from "./theme";
 
 export default function ThemeRegistry({ children }) {
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
+    <NextAppDirEmotionCacheProvider options={{ key: "mui", prepend: true }}>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />

@@ -1,0 +1,17 @@
+.catalogue {
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  width: 400px;
+}
+
+.catalogueContent {
+  align-items: center;
+  perspective: 1200px;
+}
+
+.catalogueLeaf {
+  width: 0;
+  position: absolute;
+  transform-style: preserve-3d;
+}
