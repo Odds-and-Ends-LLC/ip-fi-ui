@@ -3,9 +3,13 @@ import { createTheme } from "@mui/material/styles";
 
 // colors
 const white = "#FDFDFE";
-const blue = "#010119";
-const green = "#5BCC6D";
-const purple = "#B689FF";
+const offWhite = "#E9F0F5";
+const blue = "#01022C";
+const textGreen = "#72FF88";
+const textPurple = "#7C2BFF";
+const brandGreen = "#67E67A";
+const brandPurple = "#995AFF";
+const surfaceGreen = "#398044";
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -23,16 +27,21 @@ const theme = createTheme({
   palette: {
     text: {
       primary: white,
-      secondary: green,
+      secondary: textGreen,
+      purple: textPurple,
       blue: blue,
+      gray: offWhite,
     },
     primary: {
-      main: purple,
-      contrastText: blue
+      main: brandGreen,
+      light: textGreen,
+      dark: surfaceGreen,
+      contrastText: blue,
     },
     secondary: {
-      main: green,
-      contrastText: blue
+      main: brandPurple,
+      dark: textPurple,
+      contrastText: white,
     },
     blue: {
       main: blue,
@@ -40,11 +49,14 @@ const theme = createTheme({
     },
     background: {
       default: blue,
-      paper: green,
+      paper: brandGreen,
       lightPurple: "rgba(182, 137, 255, 0.1)",
-      lightGreen: "rgba(10, 248, 255, 0.1)",
-      gradient: "linear-gradient(270deg, #50B35F 0%, #B689FF 100%)",
+      lightGreen: `${surfaceGreen}40`,
+      gradient: "linear-gradient(270deg, #A771FF 0%, #67E67A 100%)",
+      gradientInverted: "linear-gradient(270deg, #67E67A 0%, #A771FF 100%)",
+      gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
     },
+    divider: brandPurple,
   },
   typography: {
     fontFamily: workSans.style.fontFamily,
@@ -59,9 +71,9 @@ const theme = createTheme({
     h2: {
       fontFamily: unbounded.style.fontFamily,
       textTransform: "uppercase",
-      fontSize: "24px",
-      fontWeight: 700,
-      lineHeight: "32px",
+      fontSize: "48px",
+      fontWeight: 500,
+      lineHeight: "48px",
       letterSpacing: "0em",
     },
     h3: {
@@ -102,12 +114,25 @@ const theme = createTheme({
       lineHeight: "24px",
       letterSpacing: "0em",
     },
+    h6: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "16px",
+      fontWeight: "700",
+      letterSpacing: "0.04em",
+      lineHeight: "20px",
+      textTransform: "uppercase",
+    },
+    body1: {
+      fontSize: "18px",
+      fontWeight: 400,
+      lineHeight: "24px",
+    },
     button: {
       fontSize: "16px",
       fontWeight: 700,
       lineHeight: "24px",
       letterSpacing: "0.04em",
-    }
+    },
   },
   breakpoints: {
     values: {
@@ -117,6 +142,12 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiContainer: {
+      defaultProps: {
+        disableGutters: true,
+        maxWidth: false,
+      },
+    },
     MuiAppBar: {
       defaultProps: {
         position: "relative",
@@ -125,8 +156,8 @@ const theme = createTheme({
         root: {
           backgroundColor: blue,
           boxShadow: "none",
-        }
-      }
+        },
+      },
     },
     MuiToolbar: {
       styleOverrides: {
@@ -135,9 +166,9 @@ const theme = createTheme({
           padding: "16px 64px",
           [theme.breakpoints.down("tablet")]: {
             padding: "16px 24px",
-          }
+          },
         }),
-      }
+      },
     },
     MuiButton: {
       defaultProps: {
@@ -150,7 +181,7 @@ const theme = createTheme({
           height: "40px",
           padding: "8px 16px",
           borderRadius: 0,
-          width: "fit-content"
+          width: "fit-content",
         },
         gradient: ({ theme }) => ({
           background: theme.palette.background.gradient,
@@ -166,11 +197,11 @@ const theme = createTheme({
         dot: ({ theme }) => ({
           borderRadius: 0,
           ":not(.MuiMobileStepper-dotActive)": {
-            backgroundColor: theme.palette.background.lightPurple
-          }
+            backgroundColor: theme.palette.background.lightPurple,
+          },
         }),
-      }
-    }
+      },
+    },
   },
 });
 
