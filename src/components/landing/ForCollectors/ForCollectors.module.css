@@ -1,0 +1,53 @@
+.collectorsGridItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.collectorsLeftContainer {
+  padding: 72px;
+}
+
+.collectorsTitle {
+  flex-direction: row;
+  gap: 24px;
+  padding: 64px 0;
+}
+
+.collectorsImages {
+  align-items: center;
+  height: 520px;
+  position: relative;
+}
+
+.collectorsImage1,
+.collectorsImage2,
+.collectorsImage3,
+.collectorsWindow {
+  position: absolute;
+}
+
+.collectorsImage1 {
+  top: 56px;
+  z-index: 2;
+}
+
+.collectorsImage2 {
+  right: -36px;
+}
+
+.collectorsImage3 {
+  bottom: 56px;
+  left: 14px;
+}
+
+.collectorsWindow {
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.collectorsWindowButton {
+  padding: 6px 8px;
+}

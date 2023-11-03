@@ -1,0 +1,53 @@
+.brandsGridItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.brandsRightContainer {
+  padding: 0 72px;
+}
+
+.brandsTitle {
+  flex-direction: row;
+  gap: 24px;
+  padding: 64px 0;
+}
+
+.brandsImages {
+  height: 520px;
+  position: relative;
+}
+
+.brandsImage,
+.brandsWindow1,
+.brandsWindow2 {
+  position: absolute;
+}
+
+.brandsImage {
+  right: 0;
+  top: 102px;
+  z-index: 2;
+}
+
+.brandsImageBar {
+  border-style: solid;
+  border-width: 1px;
+  height: 8px;
+  width: 100%;
+}
+
+.brandsImageBarProgress {
+  height: 100%;
+  width: 15%;
+}
+
+.brandsWindow1 {
+  left: -24px;
+}
+
+.brandsWindow2 {
+  bottom: 52px;
+  left: -8px;
+}
