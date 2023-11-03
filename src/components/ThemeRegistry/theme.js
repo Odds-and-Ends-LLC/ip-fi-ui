@@ -5,6 +5,7 @@ import { createTheme } from "@mui/material/styles";
 const white = "#FDFDFE";
 const offWhite = "#E9F0F5";
 const blue = "#01022C";
+const lightBlue = "#33C7F5";
 const textGreen = "#72FF88";
 const textPurple = "#7C2BFF";
 const brandGreen = "#67E67A";
@@ -41,6 +42,10 @@ const theme = createTheme({
     secondary: {
       main: brandPurple,
       dark: textPurple,
+      contrastText: white,
+    },
+    info: {
+      main: lightBlue,
       contrastText: white,
     },
     blue: {

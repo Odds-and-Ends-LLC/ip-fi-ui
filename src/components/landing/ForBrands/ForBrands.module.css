@@ -19,6 +19,15 @@
   position: relative;
 }
 
+.brandsImagesLight {
+  border-radius: 395px;
+  filter: blur(250px);
+  height: 395px;
+  opacity: 0.7;
+  width: 395px;
+  z-index: -1;
+}
+
 .brandsImage,
 .brandsWindow1,
 .brandsWindow2 {

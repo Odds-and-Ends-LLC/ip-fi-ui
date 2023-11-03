@@ -21,6 +21,15 @@
   position: relative;
 }
 
+.collectorsImagesLight {
+  border-radius: 395px;
+  filter: blur(250px);
+  height: 395px;
+  opacity: 0.7;
+  width: 395px;
+  z-index: -1;
+}
+
 .collectorsImage1,
 .collectorsImage2,
 .collectorsImage3,

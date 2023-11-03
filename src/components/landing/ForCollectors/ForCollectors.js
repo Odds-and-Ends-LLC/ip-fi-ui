@@ -30,6 +30,7 @@ export default function ForCollectors() {
             <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} />
           </Stack>
           <Stack className={styles.collectorsImages}>
+            <Box className={styles.collectorsImagesLight} sx={{ backgroundColor: "info.main" }} />
             <Box className={styles.collectorsImage3}>
               <Frame
                 title={<Typography variant="h6">CloneX #19799</Typography>}

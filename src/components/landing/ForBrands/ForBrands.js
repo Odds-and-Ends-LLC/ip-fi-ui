@@ -61,6 +61,7 @@ export default function ForBrands() {
             {/* <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} /> */}
           </Stack>
           <Stack className={styles.brandsImages}>
+            <Box className={styles.brandsImagesLight} sx={{ backgroundColor: "info.main" }} />
             <Box className={styles.brandsWindow1}>
               <Window title="media" contentAlign="start">
                 <Box>
