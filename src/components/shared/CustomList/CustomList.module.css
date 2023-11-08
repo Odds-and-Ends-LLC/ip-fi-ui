@@ -7,6 +7,7 @@
 }
 
 .listItem {
+  align-items: center;
   border-style: solid;
   border-width: 1px;
   flex-direction: row;
@@ -19,7 +20,7 @@
 
 .listItemText {
   align-self: center;
-  margin: 0 16px;
+  margin: 9px 16px;
 }
 
 .listLines {

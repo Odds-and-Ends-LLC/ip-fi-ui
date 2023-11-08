@@ -81,6 +81,13 @@ const theme = createTheme({
       lineHeight: "48px",
       letterSpacing: "0em",
     },
+    "h2-mobile": {
+      fontFamily: unbounded.style.fontFamily,
+      textTransform: "uppercase",
+      fontSize: "36px",
+      fontWeight: 400,
+      lineHeight: "36px",
+    },
     h3: {
       fontSize: "18px",
       fontWeight: 400,

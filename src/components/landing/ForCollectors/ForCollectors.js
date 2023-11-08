@@ -29,12 +29,17 @@ export default function ForCollectors() {
             },
           }}
         >
-          <Typography variant="h2">
+          <Typography sx={{ typography: { mobile: "h2-mobile", tablet: "h2" } }}>
             FOR
             <br />
             COLLECTORS
           </Typography>
-          <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} />
+          <Box
+            className={styles.collectorsTitleAsterisk}
+            sx={{ display: { mobile: "none", tablet: "block" } }}
+          >
+            <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} />
+          </Box>
         </Stack>
         <Stack
           sx={{
@@ -75,7 +80,7 @@ export default function ForCollectors() {
                     <Image src="/icons/circles.svg" alt="icon" width={40} height={8} />
                   </>
                 }
-                width="350px"
+                width="100%"
                 height="fit-content"
                 headerJustify="space-between"
               >

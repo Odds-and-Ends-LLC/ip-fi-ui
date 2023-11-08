@@ -26,8 +26,8 @@ export default function ForBrands() {
             <Image src="/icons/window_buttons.svg" alt="buttons" width={70} height={18} />
           </>
         }
-        width="400px"
         height="fit-content"
+        width="100%"
         headerJustify="space-between"
         contentAlign={contentAlign}
       >
@@ -49,7 +49,9 @@ export default function ForBrands() {
             },
           }}
         >
-          <Typography variant="h2">FOR BRANDS</Typography>
+          <Typography sx={{ typography: { mobile: "h2-mobile", tablet: "h2" } }}>
+            FOR BRANDS
+          </Typography>
           {/* <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} /> */}
         </Stack>
         <Stack
