@@ -5,23 +5,21 @@
   width: 100%;
 }
 
-.collectorsLeftContainer {
-  padding: 72px;
-}
-
 .collectorsTitle {
   flex-direction: row;
   gap: 24px;
-  padding: 64px 0;
 }
 
 .collectorsImages {
   align-items: center;
+  align-self: center;
   height: 520px;
+  max-width: 560px;
   position: relative;
+  width: 100%;
 }
 
-.collectorsImagesLight {
+.collectorsImagesGlow {
   border-radius: 395px;
   filter: blur(250px);
   height: 395px;
@@ -42,13 +40,8 @@
   z-index: 2;
 }
 
-.collectorsImage2 {
-  right: -36px;
-}
-
 .collectorsImage3 {
   bottom: 56px;
-  left: 14px;
 }
 
 .collectorsWindow {

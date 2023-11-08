@@ -43,7 +43,7 @@ export default function Frame({
         }}
       >
         {children}
-        {imageSrc && <Image src={imageSrc} alt="image" objectFit="cover" fill />}
+        {imageSrc && <Image src={imageSrc} alt="image" fill className={styles.frameContentImage} />}
       </Stack>
     </Stack>
   );

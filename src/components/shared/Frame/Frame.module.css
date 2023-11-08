@@ -18,3 +18,7 @@
   position: relative;
   width: 100%;
 }
+
+.frameContentImage {
+  object-fit: cover;
+}

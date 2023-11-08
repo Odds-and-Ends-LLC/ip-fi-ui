@@ -11,15 +11,17 @@
 .brandsTitle {
   flex-direction: row;
   gap: 24px;
-  padding: 64px 0;
 }
 
 .brandsImages {
+  align-self: center;
   height: 520px;
+  max-width: 560px;
   position: relative;
+  width: 100%;
 }
 
-.brandsImagesLight {
+.brandsImagesGlow {
   border-radius: 395px;
   filter: blur(250px);
   height: 395px;
@@ -52,11 +54,6 @@
   width: 15%;
 }
 
-.brandsWindow1 {
-  left: -24px;
-}
-
 .brandsWindow2 {
   bottom: 52px;
-  left: -8px;
 }

@@ -11,15 +11,11 @@ export default function CustomList({ list = [] }) {
   }
 
   return (
-    <Stack className={styles.listContainer} sx={{ padding: "64px 72px" }}>
+    <Stack className={styles.listContainer}>
       <Stack className={styles.list}>
         {list.map((item, index) => {
           return (
-            <Stack
-              key={index}
-              className={styles.listItem}
-              sx={{ borderColor: "secondary.main" }}
-            >
+            <Stack key={index} className={styles.listItem} sx={{ borderColor: "secondary.main" }}>
               <Box className={styles.listItemBullet}>
                 <Image src="/icons/asterisk.svg" alt="icon" width={24} height={24} />
               </Box>
@@ -32,7 +28,7 @@ export default function CustomList({ list = [] }) {
         })}
       </Stack>
       <Box className={styles.listLines}>
-        <Image src="/images/lines.svg" alt="line" fill objectFit="cover" />
+        <Image src="/images/lines.svg" alt="line" fill className={styles.listLinesImage} />
       </Box>
     </Stack>
   );

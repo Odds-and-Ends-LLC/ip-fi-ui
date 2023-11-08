@@ -6,8 +6,7 @@ import Image from "next/image";
 import styles from "./ForCollectors.module.css";
 
 // components
-import { Frame } from "@/components/shared";
-import { TextBox, CustomList } from "..";
+import { Frame, TextBox, CustomList } from "@/components/shared";
 
 const collectorsBenefit = [
   "Collaborate with brands",
@@ -19,25 +18,44 @@ const collectorsBenefit = [
 export default function ForCollectors() {
   return (
     <Grid container>
-      <Grid item tablet={6} className={styles.collectorsGridItem}>
-        <Stack className={styles.collectorsLeftContainer}>
-          <Stack className={styles.collectorsTitle}>
-            <Typography variant="h2">
-              FOR
-              <br />
-              COLLECTORS
-            </Typography>
-            <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} />
-          </Stack>
+      <Grid item desktop={6} className={styles.collectorsGridItem}>
+        <Stack
+          className={styles.collectorsTitle}
+          sx={{
+            padding: {
+              mobile: "40px 24px",
+              tablet: "136px 100px 72px",
+              desktop: "136px 72px 64px 100px",
+            },
+          }}
+        >
+          <Typography variant="h2">
+            FOR
+            <br />
+            COLLECTORS
+          </Typography>
+          <Image src="/icons/asterisk.svg" alt="icon" width={80} height={80} />
+        </Stack>
+        <Stack
+          sx={{
+            padding: { mobile: "40px 24px", tablet: "0 100px 72px", desktop: "0 72px 72px 100px" },
+          }}
+        >
           <Stack className={styles.collectorsImages}>
-            <Box className={styles.collectorsImagesLight} sx={{ backgroundColor: "info.main" }} />
-            <Box className={styles.collectorsImage3}>
+            <Box className={styles.collectorsImagesGlow} sx={{ backgroundColor: "info.main" }} />
+            <Box
+              className={styles.collectorsImage3}
+              sx={{ left: { mobile: "0", desktop: "14px" } }}
+            >
               <Frame
                 title={<Typography variant="h6">CloneX #19799</Typography>}
                 imageSrc="/images/image_3.png"
               />
             </Box>
-            <Box className={styles.collectorsImage2}>
+            <Box
+              className={styles.collectorsImage2}
+              sx={{ right: { mobile: "0", desktop: "-36px" } }}
+            >
               <Frame
                 title={<Typography variant="h6">CloneX #19799</Typography>}
                 imageSrc="/images/image_2.png"
@@ -77,8 +95,16 @@ export default function ForCollectors() {
           </Stack>
         </Stack>
       </Grid>
-      <Grid item tablet={6} className={styles.collectorsGridItem}>
-        <Stack sx={{ padding: "64px 72px" }}>
+      <Grid item desktop={6} className={styles.collectorsGridItem}>
+        <Box
+          sx={{
+            padding: {
+              mobile: "40px 24px",
+              tablet: "0 100px 72px",
+              desktop: "64px 100px 64px 72px",
+            },
+          }}
+        >
           <TextBox>
             <Typography color="text.gray">
               We help you find brands and businesses looking to collaborate with NFT personas. Let
@@ -87,8 +113,18 @@ export default function ForCollectors() {
               personas, and receive exclusive on-chain incentives to participate.
             </Typography>
           </TextBox>
-        </Stack>
-        <CustomList list={collectorsBenefit} />
+        </Box>
+        <Box
+          sx={{
+            padding: {
+              mobile: "40px 24px",
+              tablet: "0 100px 72px",
+              desktop: "64px 100px 64px 72px",
+            },
+          }}
+        >
+          <CustomList list={collectorsBenefit} />
+        </Box>
       </Grid>
     </Grid>
   );
