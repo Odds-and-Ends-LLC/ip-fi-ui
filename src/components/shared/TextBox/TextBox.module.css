@@ -1,0 +1,25 @@
+.textFrame {
+  flex-direction: row;
+  width: 100%;
+}
+
+.textFrameLeftBorder,
+.textFrameRightBorder {
+  border-style: solid;
+  border-width: 1px;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.textFrameLeftBorder {
+  border-right-width: 0;
+}
+
+.textFrameRightBorder {
+  border-left-width: 0;
+}
+
+.textFrameContent {
+  padding: 24px 8px;
+  width: 100%;
+}

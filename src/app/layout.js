@@ -19,9 +19,7 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeRegistry>
           <Navbar />
-          <Container fixed>
-            {children}
-          </Container>
+          <Container>{children}</Container>
         </ThemeRegistry>
       </body>
     </html>

@@ -1,0 +1,34 @@
+.listContainer {
+  gap: 40px;
+}
+
+.list {
+  gap: 24px;
+}
+
+.listItem {
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  flex-direction: row;
+}
+
+.listItemBullet {
+  height: 38px;
+  padding: 7px;
+}
+
+.listItemText {
+  align-self: center;
+  margin: 9px 16px;
+}
+
+.listLines {
+  height: 40px;
+  position: relative;
+  width: 100%;
+}
+
+.listLinesImage {
+  object-fit: cover;
+}

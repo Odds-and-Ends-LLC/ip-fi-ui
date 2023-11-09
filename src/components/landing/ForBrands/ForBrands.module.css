@@ -1,0 +1,66 @@
+.brandsGridItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.brandsRightContainer {
+  padding: 0 72px;
+}
+
+.brandsTitle {
+  flex-direction: row;
+  gap: 24px;
+}
+
+.brandsImages {
+  align-self: center;
+  height: 520px;
+  max-width: 560px;
+  position: relative;
+  width: 100%;
+}
+
+.brandsImagesGlow {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(250px);
+  max-width: 400px;
+  opacity: 0.7;
+  width: 100%;
+  z-index: -1;
+}
+
+.brandsImage,
+.brandsWindow1,
+.brandsWindow2 {
+  position: absolute;
+}
+
+.brandsWindow1,
+.brandsWindow2 {
+  max-width: 400px;
+  width: 90%;
+}
+
+.brandsImage {
+  right: 0;
+  top: 102px;
+  z-index: 2;
+}
+
+.brandsImageBar {
+  border-style: solid;
+  border-width: 1px;
+  height: 8px;
+  width: 100%;
+}
+
+.brandsImageBarProgress {
+  height: 100%;
+  width: 15%;
+}
+
+.brandsWindow2 {
+  bottom: 52px;
+}
