@@ -9,7 +9,8 @@ const lightBlue = "#33C7F5";
 const textGreen = "#72FF88";
 const textPurple = "#7C2BFF";
 const brandGreen = "#67E67A";
-const brandPurple = "#995AFF";
+const brandPurple = "#A771FF";
+const dividerPurple = "#995AFF";
 const surfaceGreen = "#398044";
 
 const workSans = Work_Sans({
@@ -61,7 +62,7 @@ const theme = createTheme({
       gradientInverted: "linear-gradient(270deg, #67E67A 0%, #A771FF 100%)",
       gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
     },
-    divider: brandPurple,
+    divider: dividerPurple,
   },
   typography: {
     fontFamily: workSans.style.fontFamily,
@@ -190,10 +191,14 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
+          borderRadius: 0,
+          boxShadow: "none",
           height: "40px",
           padding: "8px 16px",
-          borderRadius: 0,
           width: "fit-content",
+          "&:hover": {
+            boxShadow: "none",
+          },
         },
         gradient: ({ theme }) => ({
           background: theme.palette.background.gradient,
@@ -211,6 +216,38 @@ const theme = createTheme({
           ":not(.MuiMobileStepper-dotActive)": {
             backgroundColor: theme.palette.background.lightPurple,
           },
+        }),
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: ({ theme, ownerState }) => ({
+          ...(ownerState.variant === "standard" && {
+            "& .MuiInput-input": {
+              color: theme.palette.text.blue,
+              height: "40px",
+              marginBottom: "16px",
+              padding: 0,
+              "&::placeholder": {
+                color: theme.palette.text.blue,
+                opacity: 1,
+              },
+            },
+            "& .MuiInput-root": {
+              "&:hover:not(.Mui-disabled, .Mui-error):before": {
+                borderBottomColor: theme.palette.divider,
+              },
+              "&::before": {
+                borderBottomColor: theme.palette.divider,
+              },
+              "&::after": {
+                borderBottomColor: theme.palette.blue.main,
+              },
+            },
+          }),
         }),
       },
     },

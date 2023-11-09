@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 import styles from "./page.module.css";
 
 // components
-import { ForCollectors, ForBrands } from "@/components/landing";
+import { ForCollectors, ForBrands, JoinWaitlist } from "@/components/landing";
 
 export default function Landing() {
   return (
@@ -14,6 +14,7 @@ export default function Landing() {
         <ForCollectors />
         <ForBrands />
       </Stack>
+      <JoinWaitlist />
     </Stack>
   );
 }
