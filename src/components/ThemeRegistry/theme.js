@@ -1,5 +1,11 @@
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
+import { forwardRef } from "react";
+import NextLink from "next/link";
+
+const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
+  return <NextLink ref={ref} {...props} />;
+});
 
 // colors
 const white = "#FDFDFE";
@@ -10,6 +16,7 @@ const textGreen = "#72FF88";
 const textPurple = "#7C2BFF";
 const brandGreen = "#67E67A";
 const brandPurple = "#A771FF";
+const dividerGray = "#D0D6DC";
 const dividerPurple = "#995AFF";
 const surfaceGreen = "#398044";
 
@@ -146,6 +153,12 @@ const theme = createTheme({
       lineHeight: "24px",
       letterSpacing: "0.04em",
     },
+    label: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "18px",
+      fontWeight: "500",
+      lineHeight: "24px",
+    },
   },
   breakpoints: {
     values: {
@@ -195,7 +208,6 @@ const theme = createTheme({
           boxShadow: "none",
           height: "40px",
           padding: "8px 16px",
-          width: "fit-content",
           "&:hover": {
             boxShadow: "none",
           },
@@ -204,6 +216,34 @@ const theme = createTheme({
           background: theme.palette.background.gradient,
           color: theme.palette.text.blue,
         }),
+        underlined: {
+          borderBottom: `1px solid ${dividerGray}`,
+          padding: "0 0 16px",
+        },
+        startIcon: {
+          alignItems: "center",
+          display: "flex",
+          height: "24px",
+          justifyContent: "center",
+          marginLeft: 0,
+          width: "24px",
+        },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        color: "text.secondary",
+        component: LinkBehaviour,
+        rel: "noreferrer",
+        target: "_blank",
+      },
+      styleOverrides: {
+        root: {
+          // "&:hover": {},
+          textDecoration: "none",
+          // transition: ".3s ease",
+          width: "fit-content",
+        },
       },
     },
     MuiMobileStepper: {
