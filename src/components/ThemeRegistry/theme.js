@@ -135,10 +135,10 @@ const theme = createTheme({
       letterSpacing: "0.04em",
     },
     h5: {
-      fontSize: "14px",
-      fontWeight: 400,
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "18px",
+      fontWeight: 700,
       lineHeight: "24px",
-      letterSpacing: "0em",
     },
     h6: {
       fontFamily: unbounded.style.fontFamily,
@@ -162,6 +162,12 @@ const theme = createTheme({
     label: {
       fontFamily: unbounded.style.fontFamily,
       fontSize: "18px",
+      fontWeight: "500",
+      lineHeight: "24px",
+    },
+    label2: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "16px",
       fontWeight: "500",
       lineHeight: "24px",
     },
@@ -311,6 +317,20 @@ const theme = createTheme({
             },
           }),
         }),
+      },
+    },
+    MuiCardActionArea: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            "& .MuiCardActionArea-focusHighlight": {
+              opacity: 0,
+            },
+          },
+        },
       },
     },
   },

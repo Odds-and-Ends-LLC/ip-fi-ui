@@ -1,0 +1,21 @@
+.updates {
+}
+
+.updatesBlogCard {
+  background: none;
+  border-radius: 0;
+  border-top-style: solid;
+  border-top-width: 1px;
+  width: 100%;
+}
+
+.updatesBlogCardTitle {
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.updatesBlogCardMedia {
+  flex-shrink: 0;
+  height: 240px;
+  width: 100%;
+}
