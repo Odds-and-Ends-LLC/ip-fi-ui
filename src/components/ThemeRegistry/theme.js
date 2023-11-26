@@ -19,6 +19,13 @@ const brandPurple = "#A771FF";
 const dividerGray = "#D0D6DC";
 const dividerPurple = "#995AFF";
 const surfaceGreen = "#398044";
+const black = "#010119";
+
+// background colors
+const lightPurple = "#b689ff1a";
+const lightGreen = `${surfaceGreen}40`;
+const purpleToGreen = `linear-gradient(270deg, ${brandPurple} 0%, ${brandGreen} 100%)`;
+const greenToPurple = `linear-gradient(270deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -63,11 +70,10 @@ const theme = createTheme({
     background: {
       default: blue,
       paper: brandGreen,
-      lightPurple: "rgba(182, 137, 255, 0.1)",
-      lightGreen: `${surfaceGreen}40`,
-      gradient: "linear-gradient(270deg, #A771FF 0%, #67E67A 100%)",
-      gradientInverted: "linear-gradient(270deg, #67E67A 0%, #A771FF 100%)",
-      gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
+      lightPurple: lightPurple,
+      lightGreen: lightGreen,
+      gradient: purpleToGreen,
+      gradientInverted: greenToPurple,
     },
     divider: dividerPurple,
   },
@@ -168,6 +174,19 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        html, body {
+          margin: 0;
+          height: 100%;
+          width: 100%;
+        }
+
+        body {
+          background: ${black};
+        }
+      `,
+    },
     MuiContainer: {
       defaultProps: {
         disableGutters: true,
@@ -212,13 +231,16 @@ const theme = createTheme({
             boxShadow: "none",
           },
         },
-        gradient: ({ theme }) => ({
-          background: theme.palette.background.gradient,
-          color: theme.palette.text.blue,
-        }),
+        gradient: {
+          background: purpleToGreen,
+          color: blue,
+        },
         underlined: {
           borderBottom: `1px solid ${dividerGray}`,
           padding: "0 0 16px",
+          "&:hover": {
+            background: "none",
+          },
         },
         startIcon: {
           alignItems: "center",
@@ -251,12 +273,12 @@ const theme = createTheme({
         dots: {
           gap: "8px",
         },
-        dot: ({ theme }) => ({
+        dot: {
           borderRadius: 0,
           ":not(.MuiMobileStepper-dotActive)": {
-            backgroundColor: theme.palette.background.lightPurple,
+            backgroundColor: lightPurple,
           },
-        }),
+        },
       },
     },
     MuiTextField: {
@@ -264,27 +286,27 @@ const theme = createTheme({
         disableRipple: true,
       },
       styleOverrides: {
-        root: ({ theme, ownerState }) => ({
+        root: ({ ownerState }) => ({
           ...(ownerState.variant === "standard" && {
             "& .MuiInput-input": {
-              color: theme.palette.text.blue,
+              color: blue,
               height: "40px",
               marginBottom: "16px",
               padding: 0,
               "&::placeholder": {
-                color: theme.palette.text.blue,
+                color: blue,
                 opacity: 1,
               },
             },
             "& .MuiInput-root": {
               "&:hover:not(.Mui-disabled, .Mui-error):before": {
-                borderBottomColor: theme.palette.divider,
+                borderBottomColor: dividerPurple,
               },
               "&::before": {
-                borderBottomColor: theme.palette.divider,
+                borderBottomColor: dividerPurple,
               },
               "&::after": {
-                borderBottomColor: theme.palette.blue.main,
+                borderBottomColor: blue,
               },
             },
           }),

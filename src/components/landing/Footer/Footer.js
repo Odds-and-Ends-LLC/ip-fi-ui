@@ -41,7 +41,10 @@ export default function Footer() {
           flexDirection: { tablet: "row" },
         }}
       >
-        <Stack className={styles.footerTeamAndContact}>
+        <Stack
+          className={styles.footerTeamAndContact}
+          sx={{ gap: { mobile: "40px", tablet: "24px" } }}
+        >
           <Stack className={styles.footerTeam}>
             <Typography variant="h6">TEAM</Typography>
             <Link href="/">@phygital_good</Link>

@@ -11,6 +11,9 @@
 .footerTeamAndContact,
 .footerSocials {
   flex-grow: 1;
+}
+
+.footerSocials {
   gap: 24px;
 }
 
