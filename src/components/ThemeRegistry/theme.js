@@ -67,6 +67,9 @@ const theme = createTheme({
       main: blue,
       contrastText: white,
     },
+    white: {
+      main: white,
+    },
     background: {
       default: blue,
       paper: brandGreen,
@@ -255,6 +258,15 @@ const theme = createTheme({
           justifyContent: "center",
           marginLeft: 0,
           width: "24px",
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            opacity: 0.25,
+          },
         },
       },
     },

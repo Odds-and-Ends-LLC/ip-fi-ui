@@ -1,6 +1,25 @@
 .updates {
 }
 
+.carouselHeaderButtons,
+.carouselHeaderPrevNextButtons {
+  flex-direction: row;
+}
+
+.updatesCarouselHeader {
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.carouselHeaderButtons {
+  gap: 32px;
+  height: 40px;
+}
+
+.carouselHeaderPrevNextButtons {
+  gap: 16px;
+}
+
 .updatesBlogCard {
   background: none;
   border-radius: 0;

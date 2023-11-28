@@ -5,3 +5,4 @@ export { default as Catalogue } from "./Catalogue";
 export { default as Frame } from "./Frame";
 export { default as TextBox } from "./TextBox";
 export { default as CustomList } from "./CustomList";
+export { default as Carousel } from "./Carousel";
