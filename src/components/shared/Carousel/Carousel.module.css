@@ -17,10 +17,7 @@
   backface-visibility: hidden;
   display: flex;
   gap: 24px;
-  margin: 0 auto;
-  /* margin-left: -24px; */
   touch-action: pan-y;
-  width: fit-content;
 }
 
 .carouselSlide {
@@ -29,7 +26,6 @@
   flex-shrink: 0;
   justify-content: center;
   min-width: 0;
-  /* padding-left: 24px; */
   position: relative;
 }
 

@@ -16,7 +16,7 @@ export default function Carousel({
   loading = true,
   loader,
   header,
-  viewportPaddingRight,
+  containerMarginRight,
 }) {
   const theme = useTheme();
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -60,7 +60,7 @@ export default function Carousel({
     <Stack className={styles.carousel} sx={{ padding: { tablet: showArrows && "0 56px" } }}>
       {header && <Stack className={styles.carouselHeader}>{header(buttonPrev, buttonNext)}</Stack>}
       <Box ref={emblaRef} className={styles.carouselViewport}>
-        <Box className={styles.carouselContainer} sx={{ paddingRight: viewportPaddingRight }}>
+        <Box className={styles.carouselContainer} sx={{ marginRight: containerMarginRight }}>
           {loading ? (
             <Box
               className={styles.carouselSlide}
