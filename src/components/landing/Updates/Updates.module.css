@@ -28,7 +28,7 @@
   border-radius: 0;
   border-top-style: solid;
   border-top-width: 1px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .updatesBlogCardTitle {
