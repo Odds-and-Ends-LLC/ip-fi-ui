@@ -1,7 +1,11 @@
+.updates,
+.updatesContainer {
+  width: 100%;
+}
+
 .updates {
   align-self: center;
   max-width: 1440px;
-  width: 100%;
 }
 
 .carouselHeaderButtons,
@@ -12,15 +16,16 @@
 .updatesCarouselHeader {
   gap: 32px;
   justify-content: space-between;
+  max-width: 1340px;
 }
 
 .carouselHeaderButtons {
   gap: 32px;
-  height: 40px;
 }
 
 .carouselHeaderPrevNextButtons {
   gap: 16px;
+  height: 40px;
 }
 
 .updatesBlogCard {
@@ -28,7 +33,6 @@
   border-radius: 0;
   border-top-style: solid;
   border-top-width: 1px;
-  /* width: 100%; */
 }
 
 .updatesBlogCardTitle {

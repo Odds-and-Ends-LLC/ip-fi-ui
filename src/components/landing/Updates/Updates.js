@@ -1,6 +1,6 @@
 // packages
+import { useEffect, useRef, useState } from "react";
 import {
-  Box,
   Button,
   Card,
   CardActionArea,
@@ -19,6 +19,30 @@ import styles from "./Updates.module.css";
 import { Carousel } from "@/components/shared";
 
 export default function Updates() {
+  const [mainContainerSize, setMainContainerSize] = useState(0);
+  const [updatesContainerSize, setUpdatesContainerSize] = useState(0);
+  const mainContainerRef = useRef(null);
+  const updatesContainerRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (updatesContainerRef.current) {
+        setUpdatesContainerSize(updatesContainerRef.current.getBoundingClientRect().width);
+      }
+      if (mainContainerRef.current) {
+        setMainContainerSize(mainContainerRef.current.getBoundingClientRect().width);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const whitespace = mainContainerSize - updatesContainerSize;
+
   const BlogCard = ({ date = "Jan 1, 2023", type = "Blog", title = "Title", image, width }) => {
     return (
       <Card className={styles.updatesBlogCard} sx={{ borderColor: "divider", width: width }}>
@@ -50,7 +74,7 @@ export default function Updates() {
   };
 
   const renderBlogs = () => {
-    return Array(7)
+    return Array(10)
       .fill(0)
       .map((_, index) => {
         return (
@@ -64,58 +88,68 @@ export default function Updates() {
   };
 
   return (
-    <Stack
-      className={styles.updates}
-      sx={{
-        padding: { mobile: "40px 24px", tablet: "100px 100px" },
-        // padding: { mobile: "40px 0 40px 24px", tablet: "100px 0 100px 100px" },
-      }}
-    >
-      <Carousel
-        slides={renderBlogs()}
-        emblaOptions={{
-          align: "start",
-          containScroll: "trimSnaps",
-          slidesToScroll: "auto",
+    <Stack ref={mainContainerRef} sx={{ width: "100%" }}>
+      <Stack
+        ref={updatesContainerRef}
+        className={styles.updates}
+        sx={{
+          padding: { mobile: "40px 0 40px 24px", tablet: "100px 0 100px 100px" },
         }}
-        loading={false}
-        slideWidth={{ mobile: "auto", desktop: "calc(20% - 19px)" }}
-        // containerMarginRight={{ mobile: "24px", tablet: "100px" }}
-        header={(prev, next) => {
-          return (
-            <Stack
-              className={styles.updatesCarouselHeader}
-              sx={{
-                flexDirection: { tablet: "row" },
-                // paddingRight: { mobile: "24px", tablet: "100px" },
-              }}
-            >
-              <Typography sx={{ typography: { mobile: "h2-mobile", tablet: "h2" } }}>
-                UPDATES
-              </Typography>
-              <Stack
-                className={styles.carouselHeaderButtons}
-                sx={{
-                  flexDirection: { tablet: "row" },
-                  justifyContent: { mobile: "space-between", tablet: "unset" },
-                }}
-              >
-                <Stack className={styles.carouselHeaderPrevNextButtons}>
-                  <IconButton aria-label="previous blogs" {...prev}>
-                    <ArrowBack color="white" />
-                  </IconButton>
-                  <IconButton aria-label="next blogs" {...next}>
-                    <ArrowForward color="white" />
-                  </IconButton>
+      >
+        <Stack
+          sx={{ marginRight: `calc(${whitespace}px * -0.5)` }}
+        >
+          <Carousel
+            slides={renderBlogs()}
+            emblaOptions={{
+              align: "start",
+              containScroll: "trimSnaps",
+              slidesToScroll: "auto",
+            }}
+            loading={false}
+            slideWidth={{ mobile: "auto", desktop: "calc(20% - 20px)" }}
+            containerMarginRight={{
+              mobile: "24px",
+              tablet: "100px",
+              desktop: `calc(100px + ${whitespace}px * 0.5)`,
+            }}
+            header={(prev, next) => {
+              return (
+                <Stack
+                  className={styles.updatesCarouselHeader}
+                  sx={{
+                    flexDirection: { tablet: "row" },
+                    paddingRight: { mobile: "24px", tablet: "100px" },
+                  }}
+                >
+                  <Typography sx={{ typography: { mobile: "h2-mobile", tablet: "h2" } }}>
+                    UPDATES
+                  </Typography>
+                  <Stack
+                    className={styles.carouselHeaderButtons}
+                    sx={{
+                      flexDirection: { tablet: "row" },
+                      justifyContent: { mobile: "space-between", tablet: "unset" },
+                    }}
+                  >
+                    <Stack className={styles.carouselHeaderPrevNextButtons}>
+                      <IconButton aria-label="previous blogs" {...prev}>
+                        <ArrowBack color="white" />
+                      </IconButton>
+                      <IconButton aria-label="next blogs" {...next}>
+                        <ArrowForward color="white" />
+                      </IconButton>
+                    </Stack>
+                    <Button variant="contained" color="primary" endIcon={<ArrowOutward />}>
+                      browse all
+                    </Button>
+                  </Stack>
                 </Stack>
-                <Button variant="contained" color="primary" endIcon={<ArrowOutward />}>
-                  browse all
-                </Button>
-              </Stack>
-            </Stack>
-          );
-        }}
-      />
+              );
+            }}
+          />
+        </Stack>
+      </Stack>
     </Stack>
   );
 }

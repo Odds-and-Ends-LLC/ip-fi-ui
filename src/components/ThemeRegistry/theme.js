@@ -234,7 +234,7 @@ const theme = createTheme({
         root: {
           borderRadius: 0,
           boxShadow: "none",
-          height: "40px",
+          height: "fit-content",
           padding: "8px 16px",
           "&:hover": {
             boxShadow: "none",
