@@ -1,0 +1,33 @@
+.footer {
+  align-self: center;
+  max-width: 1440px;
+  width: 100%;
+}
+
+.footerLinksGrid {
+  gap: 40px;
+}
+
+.footerTeamAndContact,
+.footerSocials {
+  flex-grow: 1;
+}
+
+.footerSocials {
+  gap: 24px;
+}
+
+.footerTeam,
+.footerContact,
+.footerLinks {
+  gap: 16px;
+}
+
+.footerLinks {
+  width: 256px;
+}
+
+.footerSocialsText {
+  text-align: start;
+  width: 100%;
+}

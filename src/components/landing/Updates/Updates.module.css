@@ -1,0 +1,47 @@
+.updates,
+.updatesContainer {
+  width: 100%;
+}
+
+.updates {
+  align-self: center;
+  max-width: 1440px;
+}
+
+.carouselHeaderButtons,
+.carouselHeaderPrevNextButtons {
+  flex-direction: row;
+}
+
+.updatesCarouselHeader {
+  gap: 32px;
+  justify-content: space-between;
+  max-width: 1340px;
+}
+
+.carouselHeaderButtons {
+  gap: 32px;
+}
+
+.carouselHeaderPrevNextButtons {
+  gap: 16px;
+  height: 40px;
+}
+
+.updatesBlogCard {
+  background: none;
+  border-radius: 0;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.updatesBlogCardTitle {
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.updatesBlogCardMedia {
+  flex-shrink: 0;
+  height: 240px;
+  width: 100%;
+}

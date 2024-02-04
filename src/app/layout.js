@@ -6,7 +6,7 @@ import ThemeRegistry from "@/components/ThemeRegistry";
 import { Navbar } from "@/components/shared";
 
 // styles
-import "./globals.css";
+// import "./globals.css";
 
 export const metadata = {
   title: "IPfi",

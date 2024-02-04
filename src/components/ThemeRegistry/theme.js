@@ -1,5 +1,11 @@
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
+import { forwardRef } from "react";
+import NextLink from "next/link";
+
+const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
+  return <NextLink ref={ref} {...props} />;
+});
 
 // colors
 const white = "#FDFDFE";
@@ -10,8 +16,17 @@ const lightBlue = "#33C7F5";
 const textGreen = "#72FF88";
 const textPurple = "#7C2BFF";
 const brandGreen = "#67E67A";
-const brandPurple = "#995AFF";
+const brandPurple = "#A771FF";
+const dividerGray = "#D0D6DC";
+const dividerPurple = "#995AFF";
 const surfaceGreen = "#398044";
+const black = "#010119";
+
+// background colors
+const lightPurple = "#b689ff1a";
+const lightGreen = `${surfaceGreen}40`;
+const purpleToGreen = `linear-gradient(270deg, ${brandPurple} 0%, ${brandGreen} 100%)`;
+const greenToPurple = `linear-gradient(270deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -53,17 +68,20 @@ const theme = createTheme({
       main: blue,
       contrastText: white,
     },
+    white: {
+      main: white,
+    },
     background: {
       default: blue,
       paper: brandGreen,
-      lightPurple: "rgba(182, 137, 255, 0.1)",
-      lightGreen: `${surfaceGreen}40`,
-      gradient: "linear-gradient(270deg, #A771FF 0%, #67E67A 100%)",
-      gradientInverted: "linear-gradient(270deg, #67E67A 0%, #A771FF 100%)",
+      lightPurple: lightPurple,
+      lightGreen: lightGreen,
+      gradient: purpleToGreen,
+      gradientInverted: greenToPurple,
       gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
       dividerWhite,
     },
-    divider: brandPurple,
+    divider: dividerPurple,
   },
   typography: {
     fontFamily: workSans.style.fontFamily,
@@ -123,10 +141,10 @@ const theme = createTheme({
       letterSpacing: "0.04em",
     },
     h5: {
-      fontSize: "14px",
-      fontWeight: 400,
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "18px",
+      fontWeight: 700,
       lineHeight: "24px",
-      letterSpacing: "0em",
     },
     h6: {
       fontFamily: unbounded.style.fontFamily,
@@ -147,6 +165,18 @@ const theme = createTheme({
       lineHeight: "24px",
       letterSpacing: "0.04em",
     },
+    label: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "18px",
+      fontWeight: "500",
+      lineHeight: "24px",
+    },
+    label2: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "16px",
+      fontWeight: "500",
+      lineHeight: "24px",
+    },
   },
   breakpoints: {
     values: {
@@ -156,6 +186,19 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        html, body {
+          margin: 0;
+          height: 100%;
+          width: 100%;
+        }
+
+        body {
+          background: ${black};
+        }
+      `,
+    },
     MuiContainer: {
       defaultProps: {
         disableGutters: true,
@@ -214,15 +257,58 @@ const theme = createTheme({
       },
       styleOverrides: {
         root: {
-          height: "40px",
-          padding: "8px 16px",
           borderRadius: 0,
+          boxShadow: "none",
+          height: "fit-content",
+          padding: "8px 16px",
+          "&:hover": {
+            boxShadow: "none",
+          },
+        },
+        gradient: {
+          background: purpleToGreen,
+          color: blue,
+        },
+        underlined: {
+          borderBottom: `1px solid ${dividerGray}`,
+          padding: "0 0 16px",
+          "&:hover": {
+            background: "none",
+          },
+        },
+        startIcon: {
+          alignItems: "center",
+          display: "flex",
+          height: "24px",
+          justifyContent: "center",
+          marginLeft: 0,
+          width: "24px",
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          "&.Mui-disabled": {
+            opacity: 0.25,
+          },
+        },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        color: "text.secondary",
+        component: LinkBehaviour,
+        rel: "noreferrer",
+        target: "_blank",
+      },
+      styleOverrides: {
+        root: {
+          // "&:hover": {},
+          textDecoration: "none",
+          // transition: ".3s ease",
           width: "fit-content",
         },
-        gradient: ({ theme }) => ({
-          background: theme.palette.background.gradient,
-          color: theme.palette.text.blue,
-        }),
       },
     },
     MuiMobileStepper: {
@@ -230,12 +316,58 @@ const theme = createTheme({
         dots: {
           gap: "8px",
         },
-        dot: ({ theme }) => ({
+        dot: {
           borderRadius: 0,
           ":not(.MuiMobileStepper-dotActive)": {
-            backgroundColor: theme.palette.background.lightPurple,
+            backgroundColor: lightPurple,
           },
+        },
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: ({ ownerState }) => ({
+          ...(ownerState.variant === "standard" && {
+            "& .MuiInput-input": {
+              color: blue,
+              height: "40px",
+              marginBottom: "16px",
+              padding: 0,
+              "&::placeholder": {
+                color: blue,
+                opacity: 1,
+              },
+            },
+            "& .MuiInput-root": {
+              "&:hover:not(.Mui-disabled, .Mui-error):before": {
+                borderBottomColor: dividerPurple,
+              },
+              "&::before": {
+                borderBottomColor: dividerPurple,
+              },
+              "&::after": {
+                borderBottomColor: blue,
+              },
+            },
+          }),
         }),
+      },
+    },
+    MuiCardActionArea: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          "&:hover": {
+            "& .MuiCardActionArea-focusHighlight": {
+              opacity: 0,
+            },
+          },
+        },
       },
     },
   },

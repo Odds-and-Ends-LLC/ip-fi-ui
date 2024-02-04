@@ -1,0 +1,66 @@
+.carousel {
+  flex: 1 0;
+  position: relative;
+}
+
+.carouselHeader {
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.carouselViewport {
+  flex: 1 0;
+  overflow: hidden;
+}
+
+.carouselContainer {
+  backface-visibility: hidden;
+  display: flex;
+  gap: 24px;
+  touch-action: pan-y;
+}
+
+.carouselSlide {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: center;
+  min-width: 0;
+  position: relative;
+}
+
+.carouselButtonContainer {
+  height: calc(100% - 32px);
+  justify-content: center;
+  position: absolute;
+  top: 0;
+}
+
+.carouselButton {
+  position: absolute;
+  padding: 0;
+  min-width: 0;
+  width: 40px;
+}
+
+.carouselDots {
+  align-items: center;
+  bottom: 16px;
+  gap: 16px;
+  height: 40px;
+  justify-content: center;
+  z-index: 1;
+}
+.carouselDot {
+  align-items: center;
+  display: flex;
+  height: 12px;
+  width: 12px;
+}
+.carouselDot:after {
+  border-radius: 12px;
+  content: "";
+  cursor: pointer;
+  height: 12px;
+  width: 100%;
+}
