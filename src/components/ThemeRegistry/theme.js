@@ -10,6 +10,7 @@ const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
 // colors
 const white = "#FDFDFE";
 const offWhite = "#E9F0F5";
+const dividerWhite = "#D0D6DC";
 const blue = "#01022C";
 const lightBlue = "#33C7F5";
 const textGreen = "#72FF88";
@@ -77,6 +78,8 @@ const theme = createTheme({
       lightGreen: lightGreen,
       gradient: purpleToGreen,
       gradientInverted: greenToPurple,
+      gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
+      dividerWhite,
     },
     divider: dividerPurple,
   },
@@ -86,7 +89,7 @@ const theme = createTheme({
       fontFamily: unbounded.style.fontFamily,
       textTransform: "uppercase",
       fontSize: "80px",
-      fontWeight: 400,
+      fontWeight: 500,
       lineHeight: "80px",
       letterSpacing: "-0.04em",
     },
@@ -201,6 +204,11 @@ const theme = createTheme({
         disableGutters: true,
         maxWidth: false,
       },
+      styleOverrides: {
+        root: {
+          overflowX: "hidden",
+        }
+      },
     },
     MuiAppBar: {
       defaultProps: {
@@ -212,6 +220,23 @@ const theme = createTheme({
           boxShadow: "none",
         },
       },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          height: "56px",
+          paddingBottom: "16px",
+        },
+        underline: {
+          ":before, &:hover:not(.Mui-disabled, .Mui-error):before": {
+            borderColor: dividerWhite,
+            borderWidth: "1px",
+          },
+          ":after": {
+            borderWidth: "1px"
+          }
+        }
+      }
     },
     MuiToolbar: {
       styleOverrides: {

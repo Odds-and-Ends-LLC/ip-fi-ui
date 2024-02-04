@@ -5,11 +5,12 @@ import { Stack } from "@mui/material";
 import styles from "./page.module.css";
 
 // components
-import { Footer, ForCollectors, ForBrands, JoinWaitlist, Updates } from "@/components/landing";
+import { Hero, Footer, ForCollectors, ForBrands, JoinWaitlist, Updates } from "@/components/landing";
 
 export default function Landing() {
   return (
     <Stack>
+      <Hero />
       <Stack className={styles.forCollectorsAndBrands}>
         <ForCollectors />
         <ForBrands />
