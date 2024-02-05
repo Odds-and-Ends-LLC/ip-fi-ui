@@ -67,18 +67,6 @@ export default function Hero() {
         <Typography variant="h6" color="text.secondary">
           Engage, collect, share, create, earn, license, and more with IP-Fi.
         </Typography>
-        <TextField
-          placeholder="Enter your email"
-          variant="standard"
-          InputProps={{
-            endAdornment:
-              <InputAdornment position="end">
-                <Button variant="contained">
-                  Submit
-                </Button>
-              </InputAdornment>,
-          }}
-        />
       </Stack>
       <Stack className={styles.heroReel} sx={{ display: { desktop: "flex", mobile: "none" } }}>
         <HeroBubbleCarousel

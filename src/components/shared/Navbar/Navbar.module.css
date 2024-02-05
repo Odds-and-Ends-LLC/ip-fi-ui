@@ -1,0 +1,41 @@
+.navbarLinksContainer {
+  width: 100%;
+}
+
+.navbarLinks {
+  gap: 16px;
+  width: 100%;
+}
+
+.navbarMobileMenu {
+  min-width: 40px;
+  min-height: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.navbarMobileDrawer {
+  width: 100%;
+  z-index: 2;
+  padding: 24px;
+  gap: 24px;
+}
+
+.navbarMobileDrawerHeader {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbarMobileDrawerContent {
+  gap: 24px;
+}
+
+.navbarMobileDrawerFooter {
+  margin-top: auto;
+  gap: 16px;
+}
+
+.navbarMobileDrawerSocials {
+  flex-direction: row;
+  gap: 16px;
+}

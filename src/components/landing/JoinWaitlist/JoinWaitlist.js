@@ -1,5 +1,5 @@
 // packages
-import { Button, Stack, TextField, Typography, useTheme } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 
 // styles
 import styles from "./JoinWaitlist.module.css";
@@ -7,14 +7,10 @@ import styles from "./JoinWaitlist.module.css";
 // components
 
 export default function JoinWaitlist() {
-  const theme = useTheme();
-
   return (
     <Stack
       className={styles.joinWaitlist}
-      sx={{
-        background: theme.palette.background.gradientInverted,
-      }}
+      sx={{ background: (theme) => theme.palette.background.gradient }}
     >
       <Stack
         className={styles.joinWaitlistContainer}

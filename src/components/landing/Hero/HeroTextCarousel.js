@@ -24,7 +24,7 @@ export default function HeroTextCarousel({
             animate={{ y: `calc(-${showTextIndex} * 100%)` }}
             transition={{ duration: .7, ease: "backOut" }}
             sx={(theme) => ({
-              background: theme.palette.background.gradient,
+              background: theme.palette.background.gradientInverted,
               typography: { desktop: "h1", mobile: "h2" }
             })}
           >

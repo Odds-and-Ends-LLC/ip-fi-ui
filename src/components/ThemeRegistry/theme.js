@@ -25,8 +25,8 @@ const black = "#010119";
 // background colors
 const lightPurple = "#b689ff1a";
 const lightGreen = `${surfaceGreen}40`;
-const purpleToGreen = `linear-gradient(270deg, ${brandPurple} 0%, ${brandGreen} 100%)`;
-const greenToPurple = `linear-gradient(270deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
+const purpleToGreen = `linear-gradient(90deg, ${brandPurple} 0%, ${brandGreen} 100%)`;
+const greenToPurple = `linear-gradient(90deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -238,11 +238,22 @@ const theme = createTheme({
         }
       }
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          position: "fixed",
+          top: 0,
+          background: blue,
+        }
+      }
+    },
     MuiToolbar: {
       styleOverrides: {
         root: ({ theme }) => ({
           height: "72px",
           padding: "16px 64px",
+          gap: "24px",
+          justifyContent: "space-between",
           [theme.breakpoints.down("tablet")]: {
             padding: "16px 24px",
           },
@@ -267,6 +278,10 @@ const theme = createTheme({
         },
         gradient: {
           background: purpleToGreen,
+          color: blue,
+        },
+        gradientInverted: {
+          background: greenToPurple,
           color: blue,
         },
         underlined: {
@@ -294,6 +309,11 @@ const theme = createTheme({
           },
         },
       },
+      variants: [
+        {
+          props: { color: "" }
+        }
+      ]
     },
     MuiLink: {
       defaultProps: {
@@ -325,9 +345,6 @@ const theme = createTheme({
       },
     },
     MuiTextField: {
-      defaultProps: {
-        disableRipple: true,
-      },
       styleOverrides: {
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "standard" && {

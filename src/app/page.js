@@ -9,14 +9,18 @@ import { Hero, Footer, ForCollectors, ForBrands, JoinWaitlist, Updates } from "@
 
 export default function Landing() {
   return (
-    <Stack>
+    <Stack sx={{
+      pt: {
+        desktop: "64px",
+        mobile: "64px"
+      }
+    }}>
       <Hero />
       <Stack className={styles.forCollectorsAndBrands}>
         <ForCollectors />
         <ForBrands />
       </Stack>
       <Updates />
-      <JoinWaitlist />
       <Footer />
     </Stack>
   );
