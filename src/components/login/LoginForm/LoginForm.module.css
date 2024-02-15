@@ -1,0 +1,18 @@
+.loginForm {
+  align-items: center;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+}
+
+.loginFormForm {
+  gap: 24px;
+  text-align: left;
+  width: 100%;
+}
+
+.loginFormSignup {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}

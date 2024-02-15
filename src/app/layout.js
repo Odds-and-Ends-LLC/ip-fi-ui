@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ThemeRegistry>
-          <Navbar />
+          {/* <Navbar /> */}
           <Container>{children}</Container>
         </ThemeRegistry>
       </body>

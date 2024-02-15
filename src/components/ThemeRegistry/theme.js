@@ -12,6 +12,7 @@ const white = "#FDFDFE";
 const offWhite = "#E9F0F5";
 const dividerWhite = "#D0D6DC";
 const blue = "#01022C";
+const darkBlue = "#1A1B46";
 const lightBlue = "#33C7F5";
 const textGreen = "#72FF88";
 const textPurple = "#7C2BFF";
@@ -21,12 +22,15 @@ const dividerGray = "#D0D6DC";
 const dividerPurple = "#995AFF";
 const surfaceGreen = "#398044";
 const black = "#010119";
+const textDisabledBlue = "#808198";
 
 // background colors
 const lightPurple = "#b689ff1a";
 const lightGreen = `${surfaceGreen}40`;
 const purpleToGreen = `linear-gradient(90deg, ${brandPurple} 0%, ${brandGreen} 100%)`;
 const greenToPurple = `linear-gradient(90deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
+const grayBackground = "#74777A59";
+const darkBlueBackground = "#1A1B46E6";
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -48,6 +52,7 @@ const theme = createTheme({
       purple: textPurple,
       blue: blue,
       gray: offWhite,
+      disabledBlue: textDisabledBlue,
     },
     primary: {
       main: brandGreen,
@@ -66,10 +71,14 @@ const theme = createTheme({
     },
     blue: {
       main: blue,
+      dark: darkBlue,
       contrastText: white,
     },
     white: {
       main: white,
+    },
+    dividerGray: {
+      main: dividerGray,
     },
     background: {
       default: blue,
@@ -79,9 +88,17 @@ const theme = createTheme({
       gradient: purpleToGreen,
       gradientInverted: greenToPurple,
       gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
+      darkBlue: darkBlueBackground,
       dividerWhite,
     },
     divider: dividerPurple,
+  },
+  breakpoints: {
+    values: {
+      mobile: 0,
+      tablet: 768,
+      desktop: 1440,
+    },
   },
   typography: {
     fontFamily: workSans.style.fontFamily,
@@ -93,14 +110,17 @@ const theme = createTheme({
       lineHeight: "80px",
       letterSpacing: "-0.04em",
     },
-    h2: {
+    h2: ({ theme }) => ({
       fontFamily: unbounded.style.fontFamily,
       textTransform: "uppercase",
       fontSize: "48px",
       fontWeight: 500,
       lineHeight: "48px",
       letterSpacing: "0em",
-    },
+      [theme.breakpoints.up("mobile")]: {
+        fontSize: "8px",
+      },
+    }),
     "h2-mobile": {
       fontFamily: unbounded.style.fontFamily,
       textTransform: "uppercase",
@@ -159,6 +179,10 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "24px",
     },
+    body2: {
+      fontSize: "16px",
+      lineHeight: "20px",
+    },
     button: {
       fontSize: "16px",
       fontWeight: 700,
@@ -177,12 +201,16 @@ const theme = createTheme({
       fontWeight: "500",
       lineHeight: "24px",
     },
-  },
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 768,
-      desktop: 1440,
+    label3: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "14px",
+      fontWeight: 500,
+      lineHeight: "normal",
+    },
+    link: {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "14px",
+      lineHeight: "24px",
     },
   },
   components: {
@@ -207,7 +235,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           overflowX: "hidden",
-        }
+        },
       },
     },
     MuiAppBar: {
@@ -233,10 +261,10 @@ const theme = createTheme({
             borderWidth: "1px",
           },
           ":after": {
-            borderWidth: "1px"
-          }
-        }
-      }
+            borderWidth: "1px",
+          },
+        },
+      },
     },
     MuiAppBar: {
       styleOverrides: {
@@ -244,8 +272,8 @@ const theme = createTheme({
           position: "fixed",
           top: 0,
           background: blue,
-        }
-      }
+        },
+      },
     },
     MuiToolbar: {
       styleOverrides: {
@@ -311,9 +339,9 @@ const theme = createTheme({
       },
       variants: [
         {
-          props: { color: "" }
-        }
-      ]
+          props: { color: "" },
+        },
+      ],
     },
     MuiLink: {
       defaultProps: {
@@ -370,7 +398,43 @@ const theme = createTheme({
               },
             },
           }),
+          ...(ownerState.variant === "filled" && {
+            backgroundColor: grayBackground,
+            "& .MuiInputBase-input": {
+              height: "40px",
+              padding: 0,
+              "&::placeholder": {
+                color: textDisabledBlue,
+                opacity: 1,
+              },
+            },
+            "& .MuiInputBase-root": {
+              borderColor: dividerGray,
+              borderRadius: 0,
+              borderStyle: "solid",
+              borderWidth: "1px",
+              paddingLeft: "8px",
+              "&:hover:not(.Mui-disabled, .Mui-error):before, &::before, &::after": {
+                borderBottom: "none",
+              },
+              "&.Mui-focused": {
+                borderColor: brandGreen,
+              },
+            },
+          }),
         }),
+      },
+    },
+    MuiInputAdornment: {
+      styleOverrides: {
+        root: {
+          marginTop: "0 !important",
+        },
+        positionStart: {
+          padding: 0,
+          minWidth: "24px",
+          justifyContent: "center",
+        },
       },
     },
     MuiCardActionArea: {
@@ -384,6 +448,14 @@ const theme = createTheme({
               opacity: 0,
             },
           },
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        wrapper: {
+          paddingLeft: "24px",
+          paddingRight: "24px",
         },
       },
     },
