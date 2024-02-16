@@ -76,7 +76,8 @@ export default function Login() {
         <Stack
           className={styles.loginFormGridContainer}
           sx={{
-            backgroundColor: { mobile: "background.darkBlue", desktop: "blue.dark" },          }}
+            backgroundColor: { mobile: "background.darkBlue", desktop: "blue.dark" },
+          }}
         >
           <Stack className={styles.loginFormContainer}>
             <Box className={styles.loginFormLogo}>

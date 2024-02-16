@@ -17,11 +17,16 @@ import styles from "./LoginForm.module.css";
 
 // components
 
-export default function LoginForm() {
+export default function LoginForm({ onClickLogin }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleLogin = () => {
+    console.log(credentials);
   };
 
   return (
@@ -31,6 +36,7 @@ export default function LoginForm() {
         <TextField
           placeholder="Email"
           variant="filled"
+          onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -44,6 +50,7 @@ export default function LoginForm() {
             placeholder="Password"
             variant="filled"
             type={showPassword ? "text" : "password"}
+            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -64,11 +71,13 @@ export default function LoginForm() {
               ),
             }}
           />
-          <Typography component={Link} href="/" variant="link">
+          <Typography component={Link} href="/login/forgot-password" variant="link">
             Forgot Password?
           </Typography>
         </Stack>
-        <Button variant="contained">LOGIN</Button>
+        <Button variant="contained" onClick={handleLogin}>
+          LOGIN
+        </Button>
         <Divider sx={{ "&::before, &::after": { borderTopColor: "dividerGray.main" } }}>
           <Typography variant="link" color="text.secondary">
             or
@@ -80,7 +89,7 @@ export default function LoginForm() {
       </Stack>
       <Stack className={styles.loginFormSignup}>
         <Typography variant="body2">Don&apos;t have an account?</Typography>&nbsp;
-        <Typography component={Link} href="/" variant="body2" color="text.secondary">
+        <Typography component={Link} href="/signup" variant="body2" color="text.secondary">
           Create an account
         </Typography>
       </Stack>
