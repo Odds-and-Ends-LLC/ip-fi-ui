@@ -7,3 +7,4 @@ export { default as LockIcon } from "./Lock";
 export { default as MailIcon } from "./Mail";
 export { default as EyeOnIcon } from "./EyeOn";
 export { default as EyeOffIcon } from "./EyeOff";
+export { default as CloseIcon } from "./Close";

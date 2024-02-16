@@ -120,7 +120,7 @@ export default function Carousel({
                 "&:after": {
                   background:
                     index === selectedIndex
-                      ? theme.palette.background.paper
+                      ? theme.palette.background.green
                       : theme.palette.background.gray,
                 },
               }}

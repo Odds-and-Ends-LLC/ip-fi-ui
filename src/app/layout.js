@@ -18,7 +18,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ThemeRegistry>
-          {/* <Navbar /> */}
+          {/* navbar not visible on login page */}
+          <Navbar />
           <Container>{children}</Container>
         </ThemeRegistry>
       </body>

@@ -82,7 +82,7 @@ const theme = createTheme({
     },
     background: {
       default: blue,
-      paper: brandGreen,
+      green: brandGreen,
       lightPurple: lightPurple,
       lightGreen: lightGreen,
       gradient: purpleToGreen,
@@ -319,6 +319,10 @@ const theme = createTheme({
             background: "none",
           },
         },
+        unstyled: {
+          minWidth: 0,
+          padding: 0,
+        },
         startIcon: {
           alignItems: "center",
           display: "flex",
@@ -456,6 +460,41 @@ const theme = createTheme({
         wrapper: {
           paddingLeft: "24px",
           paddingRight: "24px",
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: blue,
+          borderColor: dividerGray,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          maxWidth: "576px",
+          width: "100%",
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          borderBottomColor: dividerGray,
+          borderBottomStyle: "solid",
+          borderBottomWidth: "1px",
+          display: "flex",
+          flexDirection: "row",
+          gap: "24px",
+          padding: "24px 32px",
+        },
+      },
+    },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px",
+          padding: "24px 32px 32px !important",
         },
       },
     },
