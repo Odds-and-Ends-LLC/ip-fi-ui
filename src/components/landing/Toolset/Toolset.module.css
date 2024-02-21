@@ -1,0 +1,34 @@
+.toolset {
+  width: 100%;
+  position: relative;
+}
+
+.toolsetContent {
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.toolsetBackground {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.toolsetTitle {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: fit-content;
+  text-transform: initial;
+}
+
+.toolsetText {
+  max-width: 1068px;
+}
+
+.toolsetImage {
+  max-width: 876px;
+  max-height: 500px;
+  position: relative;
+}
