@@ -29,6 +29,8 @@ const lightPurple = "#b689ff1a";
 const lightGreen = `${surfaceGreen}40`;
 const purpleToGreen = `linear-gradient(90deg, ${brandPurple} 0%, ${brandGreen} 100%)`;
 const greenToPurple = `linear-gradient(90deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
+const translucentGray =
+  "linear-gradient(130deg, rgba(26, 27, 70, 0.3) -1.35%, rgba(26, 27, 70, 0.05) 100%)";
 const grayBackground = "#74777A59";
 const darkBlueBackground = "#1A1B46E6";
 
@@ -89,6 +91,7 @@ const theme = createTheme({
       gradientInverted: greenToPurple,
       gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
       darkBlue: darkBlueBackground,
+      translucentGray,
       dividerWhite,
     },
     divider: dividerPurple,
@@ -330,6 +333,11 @@ const theme = createTheme({
           justifyContent: "center",
           marginLeft: 0,
           width: "24px",
+        },
+        containedPrimary: {
+          "&.Mui-disabled": {
+            backgroundColor: "#88BE90",
+          },
         },
       },
     },

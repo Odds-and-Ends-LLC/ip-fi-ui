@@ -1,0 +1,10 @@
+.passwordInput {
+  gap: 8px;
+  text-align: start;
+}
+
+.passwordInputHelperText {
+  flex-direction: row;
+  gap: 8px;
+  padding: 8px;
+}
