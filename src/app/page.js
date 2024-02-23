@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 import styles from "./page.module.css";
 
 // components
-import { Hero, Footer, ForCollectors, ForBrands, JoinWaitlist, Updates, Toolset } from "@/components/landing";
+import { Hero, Footer, ForCollectors, ForBrands, JoinWaitlist, Updates, Toolset, FAQs } from "@/components/landing";
 
 export default function Landing() {
   return (
@@ -22,6 +22,7 @@ export default function Landing() {
       </Stack>
       <Toolset />
       <Updates />
+      <FAQs />
       <Footer />
     </Stack>
   );

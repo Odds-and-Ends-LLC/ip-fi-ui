@@ -166,6 +166,14 @@ const theme = createTheme({
       fontWeight: 700,
       lineHeight: "24px",
     },
+    "h6-sans": {
+      fontFamily: workSans.style.fontFamily,
+      fontSize: "16px",
+      fontWeight: "700",
+      letterSpacing: "0.04em",
+      lineHeight: "20px",
+      textTransform: "uppercase",
+    },
     h6: {
       fontFamily: unbounded.style.fontFamily,
       fontSize: "16px",
@@ -214,6 +222,59 @@ const theme = createTheme({
     },
   },
   components: {
+    MuiAccordion: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.MuiPaper-root": {
+            backgroundColor: "unset",
+          },
+          "&.Mui-expanded": {
+            margin: "0px 0px 24px",
+            [theme.breakpoints.down("desktop")]: {
+              margin: "0px 0px 16px",
+            },
+          },
+          "&.Mui-expanded:before": {
+            opacity: 1,
+          },
+        }),
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontFamily: unbounded.style.fontFamily,
+          fontSize: "24px",
+          fontWeight: "700",
+          lineHeight: "32px",
+          backgroundColor: "unset",
+          padding: "16px 0px",
+          minHeight: "40px",
+          [theme.breakpoints.down("desktop")]: {
+            fontSize: "16px",
+            fontWeight: "700",
+            lineHeight: "24px",
+            backgroundColor: "unset",
+            padding: "8px 0px",
+          },
+        }),
+        content: {
+          alignItems: "center",
+          margin: 0,
+          "&.Mui-expanded": {
+            margin: 0,
+          }
+        }
+      }
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          paddingTop: "0px",
+          paddingBottom: "0px",
+        }
+      }
+    },
     MuiCssBaseline: {
       styleOverrides: `
         html, body {

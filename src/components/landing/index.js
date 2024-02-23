@@ -7,3 +7,4 @@ export { default as Toolset } from "./Toolset";
 export { default as JoinWaitlist } from "./JoinWaitlist";
 export { default as Footer } from "./Footer";
 export { default as Updates } from "./Updates";
+export { default as FAQs } from "./FAQs";

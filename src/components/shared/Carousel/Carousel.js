@@ -59,7 +59,7 @@ export default function Carousel({
   return (
     <Stack className={styles.carousel} sx={{ padding: { tablet: showArrows && "0 56px" } }}>
       {header && <Stack className={styles.carouselHeader}>{header(buttonPrev, buttonNext)}</Stack>}
-      <Box ref={emblaRef} className={styles.carouselViewport}>
+      <Box ref={emblaRef} className={styles.carouselViewport} sx={{ px: { tablet: "100px", mobile: "24px" } }}>
         <Box className={styles.carouselContainer} sx={{ marginRight: containerMarginRight }}>
           {loading ? (
             <Box
