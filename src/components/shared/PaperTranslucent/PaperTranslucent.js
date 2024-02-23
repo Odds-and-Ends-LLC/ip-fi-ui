@@ -22,8 +22,10 @@ export default function PaperTranslucent({ children, iconPosition = "left", maxW
       <Box
         className={styles.paperTranslucentIcon}
         sx={{
-          left: iconPosition === "left" && "-41px",
-          right: iconPosition === "right" && "-41px",
+          height: { mobile: "56px", tablet: "80px" },
+          top: { mobile: "-29px", tablet: "-41px" },
+          left: iconPosition === "left" && { mobile: "-29px", tablet: "-41px" },
+          right: iconPosition === "right" && { mobile: "-29px", tablet: "-41px" },
         }}
       >
         <AsteriskIcon size="100%" />

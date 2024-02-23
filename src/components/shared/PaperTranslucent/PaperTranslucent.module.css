@@ -8,10 +8,8 @@
 }
 
 .paperTranslucentIcon {
-  height: 80px;
-  width: 80px;
+  aspect-ratio: 1;
   position: absolute;
-  top: -41px;
 }
 
 .paperTranslucentContent {
