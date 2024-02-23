@@ -36,3 +36,6 @@ next-env.d.ts
 
 # template - components
 *_template
+
+# copies local files
+* copy.*

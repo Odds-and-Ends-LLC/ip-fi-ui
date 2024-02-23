@@ -1,0 +1,80 @@
+.login {
+  min-height: 100vh;
+}
+
+.loginArtGrid {
+  flex: 1;
+  min-height: 100vh;
+}
+
+.loginArtGridContainer {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.loginArtImgContainer {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6.25%;
+}
+
+.loginArtImg {
+  object-fit: cover;
+  object-position: left;
+}
+
+.loginFormGrid {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  position: relative;
+}
+
+.loginFormGridContainer {
+  align-items: center;
+  border-radius: 12px;
+  gap: 40px;
+  height: 100%;
+  max-width: 468px;
+  padding: 16px 24px;
+  text-align: center;
+  width: 100%;
+}
+
+.loginFormContainer {
+  align-items: center;
+  flex-grow: 1;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+}
+
+.loginFormLogo {
+  height: 64px;
+  position: relative;
+  width: 100%;
+}
+
+.artBackground {
+  bottom: 0;
+  flex-grow: 1;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.artBackgroundImgContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.artBackgroundImg {
+  object-fit: contain;
+  object-position: bottom;
+}
