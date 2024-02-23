@@ -37,7 +37,7 @@ export default function Hero() {
         <Stack className={styles.heroBanner}>
           <Stack>
             <Typography variant="h1" color="text.secondary" sx={{ typography: { desktop: "h1", mobile: "h2" } }}>NFT</Typography>
-            <HeroTextCarousel texts={["LICENSING", "COLLAB", "UTILITY"]} showTextIndex={turns - 1} />
+            <HeroTextCarousel texts={["LICENSING", "UTILITY", "REWARDS", "COLLAB", "SHARING"]} showTextIndex={turns - 1} />
             <Typography variant="h1" color="text.purple" sx={{ typography: { desktop: "h1", mobile: "h2" } }}>PLATFORM</Typography>
           </Stack>
           <Stack className={styles.heroReelMobile} sx={{ display: { desktop: "none", mobile: "flex" } }}>
@@ -47,10 +47,13 @@ export default function Hero() {
                 "/images/image_2.png",
                 "/images/image_3.png",
                 "/images/image_4.png",
+                "/images/image_1.png",
+                "/images/image_2.png",
+                "/images/image_3.png",
                 "/images/image_4.png",
               ]}
               turns={turns}
-              onTurn={() => setTurns(turns + 1 > 3 ? 1 : turns + 1)}
+              onTurn={() => setTurns(turns + 1 > 5 ? 1 : turns + 1)}
             />
           </Stack>
           <Typography className={styles.heroBannerText}>
@@ -75,10 +78,13 @@ export default function Hero() {
             "/images/image_2.png",
             "/images/image_3.png",
             "/images/image_4.png",
+            "/images/image_1.png",
+            "/images/image_2.png",
+            "/images/image_3.png",
             "/images/image_4.png",
           ]}
           turns={turns}
-          onTurn={() => setTurns(turns + 1 > 3 ? 1 : turns + 1)}
+          onTurn={() => setTurns(turns + 1 > 5 ? 1 : turns + 1)}
         />
       </Stack>
     </Stack>

@@ -5,7 +5,6 @@
 
 .updates {
   align-self: center;
-  max-width: 1440px;
 }
 
 .carouselHeaderButtons,
@@ -16,7 +15,6 @@
 .updatesCarouselHeader {
   gap: 32px;
   justify-content: space-between;
-  max-width: 1340px;
 }
 
 .carouselHeaderButtons {

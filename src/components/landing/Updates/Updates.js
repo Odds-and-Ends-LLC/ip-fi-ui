@@ -93,7 +93,7 @@ export default function Updates() {
         ref={updatesContainerRef}
         className={styles.updates}
         sx={{
-          padding: { mobile: "40px 0 40px 24px", tablet: "100px 0 100px 100px" },
+          padding: { mobile: "40px 0px", tablet: "100px 0px" },
         }}
       >
         <Stack
@@ -119,7 +119,7 @@ export default function Updates() {
                   className={styles.updatesCarouselHeader}
                   sx={{
                     flexDirection: { tablet: "row" },
-                    paddingRight: { mobile: "24px", tablet: "100px" },
+                    px: { mobile: "24px", tablet: "100px" },
                   }}
                 >
                   <Typography sx={{ typography: { mobile: "h2-mobile", tablet: "h2" } }}>
