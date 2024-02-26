@@ -93,6 +93,7 @@ const theme = createTheme({
       darkBlue: darkBlueBackground,
       translucentGray,
       dividerWhite,
+      black,
     },
     divider: dividerPurple,
   },
@@ -263,17 +264,17 @@ const theme = createTheme({
           margin: 0,
           "&.Mui-expanded": {
             margin: 0,
-          }
-        }
-      }
+          },
+        },
+      },
     },
     MuiAccordionDetails: {
       styleOverrides: {
         root: {
           paddingTop: "0px",
           paddingBottom: "0px",
-        }
-      }
+        },
+      },
     },
     MuiCssBaseline: {
       styleOverrides: `
@@ -299,17 +300,6 @@ const theme = createTheme({
         },
       },
     },
-    MuiAppBar: {
-      defaultProps: {
-        position: "relative",
-      },
-      styleOverrides: {
-        root: {
-          backgroundColor: blue,
-          boxShadow: "none",
-        },
-      },
-    },
     MuiInput: {
       styleOverrides: {
         root: {
@@ -330,9 +320,10 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
+          boxShadow: "none",
           position: "fixed",
           top: 0,
-          background: blue,
+          transition: "background-color 0.3s"
         },
       },
     },

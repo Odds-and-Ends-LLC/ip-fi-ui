@@ -12,7 +12,7 @@ export default function PasswordPageContainer({ children }) {
       className={styles.passwordPageContainer}
       sx={{
         backgroundColor: "blue.main",
-        padding: { mobile: "124px 40px 32px", tablet: "136px 40px 32px" },
+        paddingTop: { mobile: "124px", tablet: "136px", desktop: "72px" },
       }}
     >
       <Stack className={styles.bgContainer} sx={{ position: "absolute" }}>
