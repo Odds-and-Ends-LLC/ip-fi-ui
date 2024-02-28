@@ -9,7 +9,7 @@ import styles from "./Signup.module.css";
 import { TermsAndConditions, CreateAccount } from "..";
 
 export default function Signup() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const handleNextStep = () => setStep(step + 1);
 
   return (
@@ -28,7 +28,7 @@ export default function Signup() {
       </Stack>
       <Stack className={styles.signupContents}>
         {step === 0 && <TermsAndConditions onAcceptTerms={handleNextStep} />}
-        {step === 1 && <CreateAccount step={step} />}
+        {step > 0 && <CreateAccount step={step} setStep={setStep} />}
       </Stack>
       <Typography variant="label3">
         {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.

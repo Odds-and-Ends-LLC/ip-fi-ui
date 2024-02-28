@@ -1,2 +1,19 @@
 .createAccount {
 }
+
+.createAccountTitle,
+.createAccountInput {
+  text-align: start;
+  gap: 8px;
+}
+
+.createAccountContent {
+  gap: 24px;
+}
+
+.createAccountButtons {
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+}
