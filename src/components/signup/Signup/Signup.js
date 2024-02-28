@@ -6,10 +6,10 @@ import { Box, Stack, Typography } from "@mui/material";
 import styles from "./Signup.module.css";
 
 // components
-import { TermsAndConditions } from "..";
+import { TermsAndConditions, CreateAccount } from "..";
 
 export default function Signup() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const handleNextStep = () => setStep(step + 1);
 
   return (
@@ -28,7 +28,7 @@ export default function Signup() {
       </Stack>
       <Stack className={styles.signupContents}>
         {step === 0 && <TermsAndConditions onAcceptTerms={handleNextStep} />}
-        {step === 1 && "next step"}
+        {step === 1 && <CreateAccount step={step} />}
       </Stack>
       <Typography variant="label3">
         {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
