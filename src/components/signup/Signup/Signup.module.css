@@ -1,0 +1,48 @@
+.signup {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.signupContents {
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  min-height: 0;
+}
+
+.bgContainer {
+  flex-shrink: 0;
+  height: 672px;
+  opacity: 50%;
+  width: 880px;
+}
+
+.bgGreenCircle,
+.bgPurpleCircle,
+.bgCircleOutline {
+  aspect-ratio: 1;
+  border-radius: 100%;
+  position: absolute;
+}
+
+.bgGreenCircle {
+  height: 400px;
+  right: 0;
+}
+
+.bgPurpleCircle {
+  bottom: 0;
+  height: 200px;
+  right: 80px;
+}
+
+.bgCircleOutline {
+  border-style: solid;
+  border-width: 2px;
+  bottom: 8px;
+  height: 248px;
+}
