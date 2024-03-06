@@ -8,3 +8,6 @@ export { default as MailIcon } from "./Mail";
 export { default as EyeOnIcon } from "./EyeOn";
 export { default as EyeOffIcon } from "./EyeOff";
 export { default as CloseIcon } from "./Close";
+export { default as AsteriskIcon } from "./Asterisk";
+export { default as ArrowRightIcon } from "./ArrowRight";
+export { default as InfoIcon } from "./Info";

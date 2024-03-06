@@ -2,9 +2,19 @@
   width: 100%;
 }
 
+.navbarLogo {
+  align-items: center;
+  display: flex;
+}
+
 .navbarLinks {
   gap: 16px;
   width: 100%;
+}
+
+.navbarLinksDesktop {
+  flex-direction: row;
+  gap: 16px;
 }
 
 .navbarMobileMenu {
