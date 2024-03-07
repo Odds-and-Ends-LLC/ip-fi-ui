@@ -287,6 +287,26 @@ const theme = createTheme({
         body {
           background: ${black};
         }
+
+        /* Scrollbar - Chrome, Edge, and Safari */
+        *::-webkit-scrollbar {
+          width: 8px;
+          background-color: transparent;
+        }
+        *::-webkit-scrollbar-track {
+          border-radius: 8px;
+          background-color: #8B8F92;
+        }
+        *::-webkit-scrollbar-thumb {
+          border-radius: 8px;
+          background-color: #4D4E6F;
+        }
+
+        // /* Scrollbar - Firefox */
+        // * {
+        //   scrollbar-width: thin;
+        //   scrollbar-color: #ff0000 #000000;
+        // }
       `,
     },
     MuiContainer: {
