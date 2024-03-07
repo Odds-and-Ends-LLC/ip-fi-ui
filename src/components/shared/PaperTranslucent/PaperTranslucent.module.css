@@ -15,11 +15,18 @@
   position: absolute;
 }
 
-.paperTranslucentContent {
+.paperTranslucentContentWrapper {
   flex: 1;
-  gap: 42px;
   height: 100%;
   min-height: 0;
-  text-align: center;
+  overflow: auto;
   width: 100%;
+}
+
+.paperTranslucentContent {
+  flex: 1;
+  height: 100%;
+  gap: 42px;
+  text-align: center;
+  margin-right: 8px;
 }

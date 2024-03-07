@@ -12,7 +12,7 @@ export default function PaperTranslucent({
   children,
   iconPosition = "left",
   maxWidth = "576px",
-  padding = { mobile: "32px", tablet: "72px" },
+  padding = { mobile: "32px 24px 32px 32px", tablet: "72px 64px 72px 72px" },
   flex,
 }) {
   const theme = useTheme();
@@ -39,8 +39,8 @@ export default function PaperTranslucent({
       >
         <AsteriskIcon size="100%" />
       </Box>
-      <Stack className={styles.paperTranslucentContent}>
-        {children}
+      <Stack className={styles.paperTranslucentContentWrapper}>
+        <Stack className={styles.paperTranslucentContent}>{children}</Stack>
       </Stack>
     </Paper>
   );
