@@ -9,7 +9,7 @@ import styles from "./Signup.module.css";
 import { TermsAndConditions, CreateAccount } from "..";
 
 export default function Signup() {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   const handleNextStep = () => setStep(step + 1);
 
   return (
