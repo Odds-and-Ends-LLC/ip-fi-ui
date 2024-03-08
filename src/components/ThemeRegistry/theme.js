@@ -381,6 +381,9 @@ const theme = createTheme({
           "&:hover": {
             boxShadow: "none",
           },
+          "&.Mui-disabled": {
+            color: textDisabledBlue,
+          },
         },
         gradient: {
           background: purpleToGreen,
@@ -470,7 +473,43 @@ const theme = createTheme({
         },
       },
     },
+    MuiFilledInput: {
+      defaultProps: {
+        hiddenLabel: true,
+      },
+      styleOverrides: {
+        root: {
+          backgroundColor: grayBackground,
+          borderColor: dividerGray,
+          borderRadius: 0,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          paddingLeft: "8px",
+          "&:hover": {
+            backgroundColor: grayBackground,
+          },
+          "&:hover:not(.Mui-disabled, .Mui-error):before, &::before, &::after": {
+            borderBottom: "none",
+          },
+          "&.Mui-focused": {
+            borderColor: brandGreen,
+            backgroundColor: grayBackground,
+          },
+        },
+        input: {
+          height: "40px",
+          padding: 0,
+          "&::placeholder": {
+            color: textDisabledBlue,
+            opacity: 1,
+          },
+        },
+      },
+    },
     MuiTextField: {
+      defaultProps: {
+        hiddenLabel: true,
+      },
       styleOverrides: {
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "standard" && {
@@ -493,30 +532,6 @@ const theme = createTheme({
               },
               "&::after": {
                 borderBottomColor: blue,
-              },
-            },
-          }),
-          ...(ownerState.variant === "filled" && {
-            backgroundColor: grayBackground,
-            "& .MuiInputBase-input": {
-              height: "40px",
-              padding: 0,
-              "&::placeholder": {
-                color: textDisabledBlue,
-                opacity: 1,
-              },
-            },
-            "& .MuiInputBase-root": {
-              borderColor: dividerGray,
-              borderRadius: 0,
-              borderStyle: "solid",
-              borderWidth: "1px",
-              paddingLeft: "8px",
-              "&:hover:not(.Mui-disabled, .Mui-error):before, &::before, &::after": {
-                borderBottom: "none",
-              },
-              "&.Mui-focused": {
-                borderColor: brandGreen,
               },
             },
           }),

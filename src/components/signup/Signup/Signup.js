@@ -6,11 +6,19 @@ import { Box, Stack, Typography } from "@mui/material";
 import styles from "./Signup.module.css";
 
 // components
-import { TermsAndConditions, CreateAccount } from "..";
+import { TermsAndConditions, StepEmailPassword, StepConnectWallet, StepProfilePhoto } from "..";
+import { PaperTranslucent } from "@/components/shared";
+import { StepUsername } from "..";
 
 export default function Signup() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
+  const [userData, setUserData] = useState();
   const handleNextStep = () => setStep(step + 1);
+  const handlePrevStep = () => setStep(step - 1);
+
+  const handleCreateAccount = () => {
+    console.log("create account: ", userData);
+  };
 
   return (
     <Stack
@@ -28,7 +36,49 @@ export default function Signup() {
       </Stack>
       <Stack className={styles.signupContents}>
         {step === 0 && <TermsAndConditions onAcceptTerms={handleNextStep} />}
-        {step > 0 && <CreateAccount step={step} setStep={setStep} />}
+        {step > 0 && (
+          <PaperTranslucent maxWidth="832px">
+            <Stack gap="42px">
+              <Stack className={styles.createAccountTitle}>
+                <Typography variant="link" color="text.secondary">
+                  {step}/4
+                </Typography>
+                <Typography variant="h4-unbounded">CREATE USER ACCOUNT</Typography>
+              </Stack>
+              {step === 1 && (
+                <StepUsername
+                  data={userData}
+                  setUserData={setUserData}
+                  onBack={handlePrevStep}
+                  onNext={handleNextStep}
+                />
+              )}
+              {step === 2 && (
+                <StepEmailPassword
+                  data={userData}
+                  setUserData={setUserData}
+                  onBack={handlePrevStep}
+                  onNext={handleNextStep}
+                />
+              )}
+              {step === 3 && (
+                <StepConnectWallet
+                  data={userData}
+                  setUserData={setUserData}
+                  onBack={handlePrevStep}
+                  onNext={handleNextStep}
+                />
+              )}
+              {step === 4 && (
+                <StepProfilePhoto
+                  data={userData}
+                  onBack={handlePrevStep}
+                  onCreateAccount={handleCreateAccount}
+                />
+              )}
+            </Stack>
+          </PaperTranslucent>
+        )}
       </Stack>
       <Typography variant="label3">
         {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.

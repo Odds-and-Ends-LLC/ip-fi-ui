@@ -38,7 +38,9 @@ export default function LoginForm() {
   return (
     <>
       <Stack className={styles.loginForm}>
-        <Typography variant="h2">LOGIN TO GET STARTED</Typography>
+        <Typography sx={{ typography: { mobile: "h5", desktop: "h2" } }}>
+          LOGIN TO GET STARTED
+        </Typography>
         <Stack className={styles.loginFormForm}>
           <TextField
             placeholder="Email"
