@@ -13,6 +13,7 @@
 .paperTranslucentIcon {
   aspect-ratio: 1;
   position: absolute;
+  transition: all 0.4s linear;
 }
 
 .paperTranslucentContentWrapper {

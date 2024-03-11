@@ -17,6 +17,12 @@ export default function PaperTranslucent({
 }) {
   const theme = useTheme();
   const iconPositionValues = { mobile: "-25px", tablet: "-29px", desktop: "-41px" };
+  const iconLeftPositionValues = { mobile: "-25px", tablet: "-29px", desktop: "-41px" };
+  const iconRightPositionValues = {
+    mobile: "calc(100% - 23px)",
+    tablet: "calc(100% - 27px)",
+    desktop: "calc(100% - 39px)",
+  };
 
   return (
     <Paper
@@ -33,8 +39,8 @@ export default function PaperTranslucent({
         sx={{
           height: { mobile: "48px", tablet: "56px", desktop: "80px" },
           top: iconPositionValues,
-          left: iconPosition === "left" && iconPositionValues,
-          right: iconPosition === "right" && iconPositionValues,
+          left: iconPosition === "left" ? iconLeftPositionValues : iconRightPositionValues,
+          // right: iconPosition === "right" && iconPositionValues,
         }}
       >
         <AsteriskIcon size="100%" />

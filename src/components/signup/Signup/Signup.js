@@ -35,9 +35,17 @@ export default function Signup() {
         <Box className={styles.bgCircleOutline} borderColor="primary.main" />
       </Stack>
       <Stack className={styles.signupContents}>
-        {step === 0 && <TermsAndConditions onAcceptTerms={handleNextStep} />}
-        {step > 0 && (
-          <PaperTranslucent maxWidth="832px">
+        <PaperTranslucent
+          maxWidth={step > 0 ? "832px" : "1168px"}
+          padding={
+            step > 0
+              ? { mobile: "32px 24px 32px 32px", tablet: "72px 64px 72px 72px" }
+              : { mobile: "32px 16px 24px 24px", desktop: "40px 64px 24px 72px" }
+          }
+          iconPosition={step % 2 ? "right" : "left"}
+        >
+          {step === 0 && <TermsAndConditions onAcceptTerms={handleNextStep} />}
+          {step > 0 && (
             <Stack gap="42px">
               <Stack className={styles.createAccountTitle}>
                 <Typography variant="link" color="text.secondary">
@@ -77,8 +85,8 @@ export default function Signup() {
                 />
               )}
             </Stack>
-          </PaperTranslucent>
-        )}
+          )}
+        </PaperTranslucent>
       </Stack>
       <Typography variant="label3">
         {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
