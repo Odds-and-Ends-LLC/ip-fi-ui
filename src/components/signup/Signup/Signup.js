@@ -16,36 +16,21 @@ export default function Signup() {
   const [userData, setUserData] = useState();
   const handleNextStep = () => setStep(step + 1);
   const handlePrevStep = () => setStep(step - 1);
-  const [greenCircleRotation, setGreenCircleRotation] = useState(20);
-  const [purpleCircleRotation, setPurpleCircleRotation] = useState(-40);
-  const [circleOutlineRotation, setCircleOutlineRotation] = useState(10);
-
+  
+  const greenCircleRotationValues = [20, -130, -290, -390, -515];
+  const purpleCircleRotationValues = [-40, -110, -220, -425, -515];
+  const outlineCircleRotationValues = [10, -120, -250, -325, -515];
+  const [circleRotationValues, setCircleRotationValues] = useState({
+    greenCircle: greenCircleRotationValues[0],
+    purpleCircle: purpleCircleRotationValues[0],
+    outlineCircle: outlineCircleRotationValues[0],
+  });
   useEffect(() => {
-    if (step === 0) {
-      setGreenCircleRotation(20);
-      setPurpleCircleRotation(-40);
-      setCircleOutlineRotation(10);
-    }
-    if (step === 1) {
-      setGreenCircleRotation(-130);
-      setPurpleCircleRotation(-110);
-      setCircleOutlineRotation(-120);
-    }
-    if (step === 2) {
-      setGreenCircleRotation(-290);
-      setPurpleCircleRotation(-220);
-      setCircleOutlineRotation(-250);
-    }
-    if (step === 3) {
-      setGreenCircleRotation(-390);
-      setPurpleCircleRotation(-425);
-      setCircleOutlineRotation(-325);
-    }
-    if (step === 4) {
-      setGreenCircleRotation(-515);
-      setPurpleCircleRotation(-515);
-      setCircleOutlineRotation(-515);
-    }
+    setCircleRotationValues({
+      greenCircle: greenCircleRotationValues[step],
+      purpleCircle: purpleCircleRotationValues[step],
+      outlineCircle: outlineCircleRotationValues[step],
+    });
   }, [step]);
 
   const handleCreateAccount = () => {
@@ -66,7 +51,7 @@ export default function Signup() {
           className={styles.bgGreenCircleContainer}
           component={motion.div}
           initial={{ rotate: "20deg" }}
-          animate={{ rotate: `${greenCircleRotation}deg` }}
+          animate={{ rotate: `${circleRotationValues?.greenCircle}deg` }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
           <Box className={styles.bgGreenCircle} bgcolor="primary.light" />
@@ -75,7 +60,7 @@ export default function Signup() {
           className={styles.bgPurpleCircleContainer}
           component={motion.div}
           initial={{ rotate: "-40deg" }}
-          animate={{ rotate: `${purpleCircleRotation}deg` }}
+          animate={{ rotate: `${circleRotationValues?.purpleCircle}deg` }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
           <Box className={styles.bgPurpleCircle} bgcolor="secondary.main" />
@@ -84,7 +69,7 @@ export default function Signup() {
           className={styles.bgCircleOutlineContainer}
           component={motion.div}
           initial={{ rotate: "10deg" }}
-          animate={{ rotate: `${circleOutlineRotation}deg` }}
+          animate={{ rotate: `${circleRotationValues?.outlineCircle}deg` }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
           <Box className={styles.bgCircleOutline} borderColor="primary.main" />
