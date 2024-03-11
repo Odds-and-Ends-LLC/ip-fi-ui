@@ -16,10 +16,15 @@ export default function Signup() {
   const [userData, setUserData] = useState();
   const handleNextStep = () => setStep(step + 1);
   const handlePrevStep = () => setStep(step - 1);
-  
-  const greenCircleRotationValues = [20, -130, -290, -390, -515];
-  const purpleCircleRotationValues = [-40, -110, -220, -425, -515];
-  const outlineCircleRotationValues = [10, -120, -250, -325, -515];
+  const [circlePosition, setCirclePosition] = useState({
+    green: { y: 0 },
+    purple: { x: 0, y: 0 },
+    outline: { x: 0 },
+  });
+
+  const greenCircleRotationValues = [20, -130, -290, -390, -485];
+  const purpleCircleRotationValues = [-40, -110, -220, -425, -505];
+  const outlineCircleRotationValues = [10, -120, -250, -315, -515];
   const [circleRotationValues, setCircleRotationValues] = useState({
     greenCircle: greenCircleRotationValues[0],
     purpleCircle: purpleCircleRotationValues[0],
@@ -31,6 +36,20 @@ export default function Signup() {
       purpleCircle: purpleCircleRotationValues[step],
       outlineCircle: outlineCircleRotationValues[step],
     });
+
+    step > 2
+      ? setCirclePosition({
+          ...circlePosition,
+          green: { y: 200 },
+          purple: { x: -104, y: step === 4 ? -76 : 0 },
+          outline: { x: 128 },
+        })
+      : setCirclePosition({
+          green: { y: 0 },
+          purple: { x: 0, y: 0 },
+          outline: { x: 0 },
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
   const handleCreateAccount = () => {
@@ -51,7 +70,7 @@ export default function Signup() {
           className={styles.bgGreenCircleContainer}
           component={motion.div}
           initial={{ rotate: "20deg" }}
-          animate={{ rotate: `${circleRotationValues?.greenCircle}deg` }}
+          animate={{ rotate: `${circleRotationValues?.greenCircle}deg`, y: circlePosition.green.y }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
           <Box className={styles.bgGreenCircle} bgcolor="primary.light" />
@@ -60,7 +79,11 @@ export default function Signup() {
           className={styles.bgPurpleCircleContainer}
           component={motion.div}
           initial={{ rotate: "-40deg" }}
-          animate={{ rotate: `${circleRotationValues?.purpleCircle}deg` }}
+          animate={{
+            rotate: `${circleRotationValues?.purpleCircle}deg`,
+            x: circlePosition.purple.x,
+            y: circlePosition.purple.y,
+          }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
           <Box className={styles.bgPurpleCircle} bgcolor="secondary.main" />
@@ -69,7 +92,10 @@ export default function Signup() {
           className={styles.bgCircleOutlineContainer}
           component={motion.div}
           initial={{ rotate: "10deg" }}
-          animate={{ rotate: `${circleRotationValues?.outlineCircle}deg` }}
+          animate={{
+            rotate: `${circleRotationValues?.outlineCircle}deg`,
+            x: circlePosition.outline.x,
+          }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
           <Box className={styles.bgCircleOutline} borderColor="primary.main" />
