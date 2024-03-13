@@ -25,6 +25,7 @@ const black = "#010119";
 const textDisabled = "#B9BEC3";
 const textDisabledBlue = "#808198";
 const iconButtonGray = "#E7EEF4";
+const red = "#ED523D";
 
 // background colors
 const lightPurple = "#b689ff1a";
@@ -74,6 +75,10 @@ const theme = createTheme({
       main: lightBlue,
       contrastText: white,
     },
+    error: {
+      main: red,
+      contrastText: white,
+    },
     blue: {
       main: blue,
       dark: darkBlue,
@@ -81,6 +86,7 @@ const theme = createTheme({
     },
     white: {
       main: white,
+      contrastText: black,
     },
     dividerGray: {
       main: dividerGray,
@@ -355,7 +361,7 @@ const theme = createTheme({
           boxShadow: "none",
           position: "fixed",
           top: 0,
-          transition: "background-color 0.3s"
+          transition: "background-color 0.3s",
         },
       },
     },
@@ -386,6 +392,9 @@ const theme = createTheme({
           padding: "8px 16px",
           "&:hover": {
             boxShadow: "none",
+          },
+          "&.Mui-disabled": {
+            color: textDisabledBlue,
           },
         },
         gradient: {
@@ -429,10 +438,21 @@ const theme = createTheme({
             opacity: 0.25,
           },
         },
+        colorGray: {
+          backgroundColor: "#E7EEF4",
+          color: "#808198",
+          transition: "background-color 0.3s",
+          "&:hover": {
+            backgroundColor: white,
+          },
+        },
       },
       variants: [
         {
           props: { color: "" },
+        },
+        {
+          props: { color: "gray" },
         },
       ],
     },
@@ -491,7 +511,43 @@ const theme = createTheme({
         },
       },
     },
+    MuiFilledInput: {
+      defaultProps: {
+        hiddenLabel: true,
+      },
+      styleOverrides: {
+        root: {
+          backgroundColor: grayBackground,
+          borderColor: dividerGray,
+          borderRadius: 0,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          paddingLeft: "8px",
+          "&:hover": {
+            backgroundColor: grayBackground,
+          },
+          "&:hover:not(.Mui-disabled, .Mui-error):before, &::before, &::after": {
+            borderBottom: "none",
+          },
+          "&.Mui-focused": {
+            borderColor: brandGreen,
+            backgroundColor: grayBackground,
+          },
+        },
+        input: {
+          height: "40px",
+          padding: 0,
+          "&::placeholder": {
+            color: textDisabledBlue,
+            opacity: 1,
+          },
+        },
+      },
+    },
     MuiTextField: {
+      defaultProps: {
+        hiddenLabel: true,
+      },
       styleOverrides: {
         root: ({ ownerState }) => ({
           ...(ownerState.variant === "standard" && {
@@ -514,30 +570,6 @@ const theme = createTheme({
               },
               "&::after": {
                 borderBottomColor: blue,
-              },
-            },
-          }),
-          ...(ownerState.variant === "filled" && {
-            backgroundColor: grayBackground,
-            "& .MuiInputBase-input": {
-              height: "40px",
-              padding: 0,
-              "&::placeholder": {
-                color: textDisabledBlue,
-                opacity: 1,
-              },
-            },
-            "& .MuiInputBase-root": {
-              borderColor: dividerGray,
-              borderRadius: 0,
-              borderStyle: "solid",
-              borderWidth: "1px",
-              paddingLeft: "8px",
-              "&:hover:not(.Mui-disabled, .Mui-error):before, &::before, &::after": {
-                borderBottom: "none",
-              },
-              "&.Mui-focused": {
-                borderColor: brandGreen,
               },
             },
           }),

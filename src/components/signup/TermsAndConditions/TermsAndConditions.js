@@ -9,10 +9,10 @@ import { PaperTranslucent } from "@/components/shared";
 
 export default function TermsAndConditions({ onAcceptTerms = () => {} }) {
   return (
-    <PaperTranslucent
-      maxWidth="1168px"
-      padding={{ mobile: "32px 24px 24px", desktop: "40px 72px 24px" }}
-    >
+    // <PaperTranslucent
+    //   maxWidth="1168px"
+    //   padding={{ mobile: "32px 16px 24px 24px", desktop: "40px 64px 24px 72px" }}
+    // >
       <Stack className={styles.termsAndConditions}>
         <Typography variant="h4-unbounded">TERMS AND CONDITIONS</Typography>
         <Stack
@@ -93,6 +93,6 @@ export default function TermsAndConditions({ onAcceptTerms = () => {} }) {
           </Button>
         </Stack>
       </Stack>
-    </PaperTranslucent>
+    // </PaperTranslucent>
   );
 }
