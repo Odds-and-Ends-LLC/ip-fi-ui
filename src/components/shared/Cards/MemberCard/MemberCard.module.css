@@ -9,6 +9,7 @@
   justify-content: flex-start;
   position: relative;
   padding: 0px 24px 24px;
+  cursor: pointer;
 }
 
 .memberCardProfilePicture {

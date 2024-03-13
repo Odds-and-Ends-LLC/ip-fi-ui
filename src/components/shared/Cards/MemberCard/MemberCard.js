@@ -7,6 +7,7 @@ import { ProfilePicture } from "../..";
 
 // styles
 import styles from "./MemberCard.module.css";
+import { motion } from "framer-motion";
 
 export default function MemberCard({
   memberName = "Member",
@@ -22,12 +23,16 @@ export default function MemberCard({
   return (
     <Card
       className={styles.memberCard}
-      sx={{
+      component={motion.div}
+      whileHover={{
+        background: theme.palette.background.translucentStrongGray,
+      }}
+      animate={{
         background: theme.palette.background.translucentGray,
       }}
     >
       <Box className={styles.memberCardProfilePicture}>
-        <ProfilePicture />
+        <ProfilePicture variant="member" letters="AH" />
       </Box>
       <CardHeader
         className={styles.memberCardHeader}

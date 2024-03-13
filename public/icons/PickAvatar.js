@@ -1,4 +1,4 @@
-export default function ArrowLeftIcon({ color = "currentColor", size = 24 }) {
+export default function PickAvatarIcon({ color = "currentColor", size = 24 }) {
   return (
     <svg
       width={size}

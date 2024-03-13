@@ -17,3 +17,5 @@ export { default as WalletIcon } from "./Wallet";
 export { default as XTwitterIcon } from "./XTwitter";
 export { default as UploadIcon } from "./Upload";
 export { default as PickAvatarIcon } from "./PickAvatar";
+export { default as RemoveIcon } from "./Remove";
+export { default as ExpandIcon } from "./Expand";

@@ -1,13 +1,58 @@
+.nftCardWrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+}
+
 .nftCard {
   width: 328px;
+  max-height: 486px;
   padding: 4px;
   border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .nftCardMedia {
-  height: 250px;
-  border-radius: 8px 8px 0px 0px;
   position: relative;
+}
+
+.nftCardShadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.nftCardFixedShadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+}
+
+.nftCardHiddenText {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.nftCardHeaderAction {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  z-index: 1;
+  width: 56px;
+  height: 40px;
+  padding: 0;
+  min-width: unset;
+  min-height: unset;
 }
 
 .nftCardPrice {
@@ -19,6 +64,9 @@
   height: 32px;
 }
 
+.nftCardContent {
+  height: 128px;
+}
 
 .nftCardDetails {
   flex-direction: row;

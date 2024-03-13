@@ -34,6 +34,7 @@ const purpleToGreen = `linear-gradient(90deg, ${brandPurple} 0%, ${brandGreen} 1
 const greenToPurple = `linear-gradient(90deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
 const translucentGray =
   "linear-gradient(130deg, rgba(26, 27, 70, 0.3) -1.35%, rgba(26, 27, 70, 0.05) 100%)";
+const translucentStrongGray = "linear-gradient(130deg, rgba(255, 255, 255, 0.15) -1.35%, rgba(255, 255, 255, 0.05) 100%)";
 const grayBackground = "#74777A59";
 const darkBlueBackground = "#1A1B46E6";
 
@@ -102,6 +103,7 @@ const theme = createTheme({
       darkBlue: darkBlueBackground,
       iconButtonGray,
       translucentGray,
+      translucentStrongGray,
       dividerWhite,
       black,
       white,
@@ -429,6 +431,22 @@ const theme = createTheme({
             backgroundColor: "#88BE90",
           },
         },
+        containedSolidDark: {
+          backgroundColor: blue,
+          "&:hover": {
+            backgroundColor: black,
+          }
+        },
+        containedSolidWhite: {
+          backgroundColor: white,
+          color: blue,
+          "&:hover": {
+            backgroundColor: "#A2A7AB",
+          },
+          "&:active": {
+            backgroundColor: "#B8B8D3",
+          }
+        }
       },
     },
     MuiIconButton: {
@@ -439,7 +457,7 @@ const theme = createTheme({
           },
         },
         colorGray: {
-          backgroundColor: "#E7EEF4",
+          backgroundColor: iconButtonGray,
           color: "#808198",
           transition: "background-color 0.3s",
           "&:hover": {
