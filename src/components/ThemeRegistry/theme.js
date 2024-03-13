@@ -22,7 +22,9 @@ const dividerGray = "#D0D6DC";
 const dividerPurple = "#995AFF";
 const surfaceGreen = "#398044";
 const black = "#010119";
+const textDisabled = "#B9BEC3";
 const textDisabledBlue = "#808198";
+const iconButtonGray = "#E7EEF4";
 
 // background colors
 const lightPurple = "#b689ff1a";
@@ -55,6 +57,7 @@ const theme = createTheme({
       blue: blue,
       gray: offWhite,
       disabledBlue: textDisabledBlue,
+      disabled: textDisabled,
     },
     primary: {
       main: brandGreen,
@@ -91,9 +94,11 @@ const theme = createTheme({
       gradientInverted: greenToPurple,
       gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
       darkBlue: darkBlueBackground,
+      iconButtonGray,
       translucentGray,
       dividerWhite,
       black,
+      white,
     },
     divider: dividerPurple,
   },
@@ -130,6 +135,13 @@ const theme = createTheme({
       lineHeight: "36px",
     },
     h3: {
+      fontSize: "18px",
+      fontWeight: 400,
+      lineHeight: "24px",
+      letterSpacing: "0em",
+    },
+    "h3-unbounded": {
+      fontFamily: unbounded.style.fontFamily,
       fontSize: "18px",
       fontWeight: 400,
       lineHeight: "24px",
@@ -423,6 +435,32 @@ const theme = createTheme({
           props: { color: "" },
         },
       ],
+    },
+    MuiTabs: {
+      styleOverrides: {
+        flexContainer: {
+          gap: "12px",
+        },
+        indicator: {
+          display: "none",
+        }
+      }
+    },
+    MuiTab: {
+      defaultProps: {
+        disableRipple: true,
+        disableFocusRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          borderRadius: "4px",
+          color: white,
+          "&.Mui-selected": {
+            backgroundColor: grayBackground,
+            color: white,
+          },
+        }
+      }
     },
     MuiLink: {
       defaultProps: {

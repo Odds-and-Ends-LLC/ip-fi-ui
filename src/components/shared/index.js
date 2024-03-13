@@ -8,4 +8,6 @@ export { default as CustomList } from "./CustomList";
 export { default as Carousel } from "./Carousel";
 export { default as Modal } from "./Modal";
 export { default as PaperTranslucent } from "./PaperTranslucent";
+export { default as Tabs } from "./Tabs";
+export { default as ProfilePicture } from "./ProfilePicture";
 export { PasswordInput } from "./Input";

@@ -1,0 +1,55 @@
+.memberCard {
+  width: 328px;
+  height: 310px;
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  border: 2px solid #72ff8833;
+  overflow: visible;
+  margin-top: 47px;
+  justify-content: flex-start;
+  position: relative;
+  padding: 0px 24px 24px;
+}
+
+.memberCardProfilePicture {
+  position: absolute;
+  width: fit-content;
+  margin: 0 auto;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.memberCardHeader {
+  padding-top: 12px;
+}
+
+.memberCardContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  padding-top: 12px;
+  gap: 42px;
+}
+
+.memberCardTopDetails {
+  gap: 16px;
+}
+
+.memberCardItem {
+  align-items: center;
+}
+
+.memberCardNumbers {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.memberCardBottomDetails {
+  gap: 8px;
+}
+
+.memberCardRow {
+  flex-direction: row;
+  gap: 8px;
+}

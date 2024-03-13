@@ -1,0 +1,33 @@
+.nftCard {
+  width: 328px;
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.nftCardMedia {
+  height: 250px;
+  border-radius: 8px 8px 0px 0px;
+  position: relative;
+}
+
+.nftCardPrice {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  border-radius: unset;
+  height: 32px;
+}
+
+
+.nftCardDetails {
+  flex-direction: row;
+}
+
+.nftCardAction {
+  padding: 0;
+}
+
+.nftCardActionButton {
+  border-radius: 0px 0px 8px 8px;
+}

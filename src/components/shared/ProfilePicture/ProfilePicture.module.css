@@ -1,0 +1,16 @@
+.profilePicture {
+  position: relative;
+  overflow: visible;
+}
+
+.profilePictureUpload {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.profilePictureUploadWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
