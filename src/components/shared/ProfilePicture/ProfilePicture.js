@@ -99,7 +99,7 @@ export default function ProfilePicture({
           className={styles.profilePictureUpload}
           onClick={() => setOpenUploadModal(true)}
           color="gray"
-          sx={...getIconStyle()}
+          sx={getIconStyle()}
         >
           <CameraIcon />
         </IconButton>
