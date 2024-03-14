@@ -60,7 +60,7 @@ export default function Navbar() {
       sx={{ flexDirection: { desktop: "row", mobile: "column" } }}
     >
       <Stack className={styles.navbarLinksDesktop} sx={{ display: displayDesktop }}>
-        <Button variant="text" color="white">
+        <Button variant="text" color="white" href="/explore">
           Explore
         </Button>
         <Button variant="text" color="white">

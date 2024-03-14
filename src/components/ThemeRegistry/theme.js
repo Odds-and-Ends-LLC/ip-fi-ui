@@ -152,6 +152,12 @@ const theme = createTheme({
       lineHeight: "24px",
       letterSpacing: "0em",
     },
+    "h3-desktop": {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "32px",
+      fontWeight: 600,
+      lineHeight: "40px",
+    },
     "h3-unbounded": {
       fontFamily: unbounded.style.fontFamily,
       fontSize: "18px",
@@ -170,6 +176,12 @@ const theme = createTheme({
       fontWeight: 400,
       lineHeight: "24px",
       letterSpacing: "0.04em",
+    },
+    "h4-desktop": {
+      fontFamily: unbounded.style.fontFamily,
+      fontSize: "24px",
+      fontWeight: 700,
+      lineHeight: "32px",
     },
     "h4-bold": {
       fontSize: "16px",
@@ -299,6 +311,31 @@ const theme = createTheme({
           paddingBottom: "0px",
         },
       },
+    },
+    MuiDataGrid: {
+      defaultProps: {
+        disableColumnMenu: true
+      },
+      styleOverrides: {
+        root: {
+          border: "none",
+          "& .MuiDataGrid-columnHeader": {
+            fontFamily: unbounded.style.fontFamily,
+            fontSize: "14px",
+            fontWeight: 500,
+            lineHeight: "normal",
+          },
+          "[class^=MuiDataGrid-cell]": {
+            border: "none",
+          },
+          "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
+            display: 'none',
+          },
+          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
+            outline: "none",
+          },
+        },
+      }
     },
     MuiCssBaseline: {
       styleOverrides: `
@@ -497,6 +534,10 @@ const theme = createTheme({
         root: {
           borderRadius: "4px",
           color: white,
+          transition: ".3s ease",
+          "&:hover": {
+            backgroundColor: "#74777ABF",
+          },
           "&.Mui-selected": {
             backgroundColor: grayBackground,
             color: white,

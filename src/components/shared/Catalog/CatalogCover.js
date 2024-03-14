@@ -1,5 +1,5 @@
 // packages
-import { Card, CardMedia, Typography, useTheme } from "@mui/material";
+import { Card, CardHeader, CardMedia, Typography, useTheme } from "@mui/material";
 import { useMeasure } from "@uidotdev/usehooks";
 import { motion } from "framer-motion";
 import { clamp } from "@/utils/clamp";
@@ -15,9 +15,10 @@ export default function CatalogCover({
   catalogName = "CATALOG_NAME",
   backgroundColor,
   image = "/images/image_3.png",
+  title = "🥇 TOP 1",
 }) {
   const theme = useTheme();
-  const [ref, { height }] = useMeasure();
+  const [ref, { width, height }] = useMeasure();
 
   return (
     <Card
@@ -31,11 +32,22 @@ export default function CatalogCover({
         background: backgroundColor || theme.palette.background.green,
       }}
     >
+      <CardHeader
+        className={styles.catalogCoverHeader}
+        title={title}
+        titleTypographyProps={{
+          className: styles.catalogCoverTitle,
+          variant: "button",
+          sx: {
+            bgcolor: "text.purple",
+
+          }
+        }}
+      />
       <CardMedia
-        image={image}
         className={styles.catalogCoverMedia}
-      >
-      </CardMedia>
+        image={image}
+      />
       <Typography
         className={styles.catalogCoverOverlay}
         variant="h2"
@@ -67,8 +79,8 @@ export default function CatalogCover({
         className={styles.catalogCoverFlip}
         src="/images/catalog_flip.png"
         alt="catalog flip"
-        width={120}
-        height={120}
+        width={120 / (475 / width)}
+        height={120 / (679 / height)}
       />
     </Card>
   )

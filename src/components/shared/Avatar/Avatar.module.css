@@ -1,0 +1,14 @@
+.avatar {
+  position: relative;
+  overflow: visible;
+}
+
+.avatarIconContainer {
+  border-radius: 50%;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  bottom: 0;
+  transform: translate(35%, 35%);
+}

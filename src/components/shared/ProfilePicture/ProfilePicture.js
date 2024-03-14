@@ -56,7 +56,7 @@ export default function ProfilePicture({
       case "xs": return "40px";
       case "s": return "80px";
       case "base": return "100px";
-      case "l": return "180px";
+      case "m": return "180px";
       default: return "100px";
     }
   };
@@ -74,7 +74,7 @@ export default function ProfilePicture({
       case "xs": return { width: "14px", height: "14px", p: "2px" };
       case "s": return { width: "22px", height: "22px", p: "4px" };
       case "base": return { width: "32px", height: "32px", p: "9px" };
-      case "l": return { width: "50px", height: "50px", p: "9px" };
+      case "m": return { width: "50px", height: "50px", p: "9px" };
       default: return { width: "32px", height: "32px", p: "4px" };
     }
   };

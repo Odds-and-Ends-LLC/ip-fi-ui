@@ -12,5 +12,6 @@ export { default as Tabs } from "./Tabs";
 export { default as ProfilePicture } from "./ProfilePicture";
 export { default as Member } from "./Member";
 export { default as NFT } from "./NFT";
+export { default as Avatar } from "./Avatar";
 export * from "./Catalog";
 export { PasswordInput } from "./Input";

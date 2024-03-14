@@ -29,7 +29,7 @@ export default function StepProfilePhoto({ data, onBack, onCreateAccount }) {
           </Stack>
           <Stack className={styles.profilePhoto}>
             <Stack className={styles.profileInfo}>
-              <ProfilePicture size="l" upload />
+              <ProfilePicture size="m" upload />
               <Stack>
                 <Typography variant="h5">{data?.username}</Typography>
                 <Typography variant="body2">{data?.email}</Typography>
