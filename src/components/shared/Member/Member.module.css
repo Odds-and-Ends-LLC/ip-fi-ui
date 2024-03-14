@@ -1,3 +1,5 @@
+/* Member Card */
+
 .memberCard {
   width: 328px;
   height: 310px;
@@ -53,4 +55,13 @@
 .memberCardRow {
   flex-direction: row;
   gap: 8px;
+}
+
+/* Member List */
+
+.memberList {
+  flex-direction: row;
+  width: fit-content;
+  gap: 16px;
+  align-items: center;
 }

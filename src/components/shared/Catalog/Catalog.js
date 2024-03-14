@@ -6,9 +6,9 @@ import { useEffect, useState, useRef } from "react";
 import Leaf from "./Leaf";
 
 // styles
-import styles from "./Catalogue.module.css";
+import styles from "./Catalog.module.css";
 
-export default function Catalogue({
+export default function Catalog({
   pages = Array(4).fill(0),
   pageWidth = 300,
   pageHeight = 480,
@@ -91,10 +91,10 @@ export default function Catalogue({
   }, [])
 
   return (
-    <Stack className={styles.catalogue}>
+    <Stack className={styles.catalog}>
       <Button onClick={() => handleControls(-1)}>{"<"}</Button>
       <Stack
-        className={styles.catalogueContent}
+        className={styles.catalogContent}
         sx={{
           minWidth: pageWidth * 2,
           height: pageHeight * 2,

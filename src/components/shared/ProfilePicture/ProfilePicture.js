@@ -12,8 +12,8 @@ import { CameraIcon, PickAvatarIcon, RemoveIcon, UploadIcon } from "public/icons
 export default function ProfilePicture({
   image,
   letters = "",
-  upload = true,
-  variant = "profile"
+  upload = false,
+  size = "base",
 }) {
   const [openUploadModal, setOpenUploadModal] = useState(false);
   const getAvatarSrc = () => {
@@ -51,49 +51,55 @@ export default function ProfilePicture({
     };
   };
 
+  const getAvatarSize = () => {
+    switch (size) {
+      case "xs": return "40px";
+      case "s": return "80px";
+      case "base": return "100px";
+      case "l": return "180px";
+      default: return "100px";
+    }
+  };
+
+  const getAvatarTypography = () => {
+    switch (size) {
+      case "xs": return "label3";
+      case "s": return "h3-unbounded";
+      default: return "h2-mobile";
+    }
+  };
+
+  const getIconStyle = () => {
+    switch (size) {
+      case "xs": return { width: "14px", height: "14px", p: "2px" };
+      case "s": return { width: "22px", height: "22px", p: "4px" };
+      case "base": return { width: "32px", height: "32px", p: "9px" };
+      case "l": return { width: "50px", height: "50px", p: "9px" };
+      default: return { width: "32px", height: "32px", p: "4px" };
+    }
+  };
+
   return (
     <Box className={styles.profilePicture}>
       <Avatar
         {...getAvatarSrc()}
         alt="profile picture"
         sx={{
-          typography: {
-            mobile: variant === "profile" ? "h3-unbounded" : "h2-mobile",
-            tablet: "h2-mobile",
-          },
           color: "text.primary",
-          width: {
-            mobile: variant === "profile" ? "80px" : "100px",
-            tablet: variant === "profile" ? "180px" : "100px",
-          },
-          height: {
-            mobile: variant === "profile" ? "80px" : "100px",
-            tablet: variant === "profile" ? "180px" : "100px",
-          },
+          typography: getAvatarTypography(),
+          width: getAvatarSize(),
+          height: getAvatarSize(),
           ...getAvatarDesign(),
         }}
       >
         {letters}
       </Avatar>
-      {(upload && variant === "profile") &&
+      {upload &&
         <IconButton
           className={styles.profilePictureUpload}
           onClick={() => setOpenUploadModal(true)}
           color="gray"
-          sx={{
-            width: {
-              mobile: "22px",
-              tablet: "50px",
-            },
-            height: {
-              mobile: "22px",
-              tablet: "50px",
-            },
-            p: {
-              mobile: "4px",
-              tablet: "9px",
-            },
-          }}
+          sx={...getIconStyle()}
         >
           <CameraIcon />
         </IconButton>

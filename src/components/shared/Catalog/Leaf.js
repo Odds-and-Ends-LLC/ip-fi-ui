@@ -7,7 +7,7 @@ import { motion, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
 
 // styles
-import styles from "./Catalogue.module.css";
+import styles from "./Catalog.module.css";
 
 export default function Leaf({
   index,
@@ -19,7 +19,7 @@ export default function Leaf({
 }) {
   return (
     <motion.div
-      className={styles.catalogueLeaf}
+      className={styles.catalogLeaf}
       animate={{ rotateY }}
       transition={{
         duration: 1,

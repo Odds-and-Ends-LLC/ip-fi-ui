@@ -37,6 +37,8 @@ const translucentGray =
 const translucentStrongGray = "linear-gradient(130deg, rgba(255, 255, 255, 0.15) -1.35%, rgba(255, 255, 255, 0.05) 100%)";
 const grayBackground = "#74777A59";
 const darkBlueBackground = "#1A1B46E6";
+const darkGreenBackground = "#39804459";
+
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -60,6 +62,7 @@ const theme = createTheme({
       gray: offWhite,
       disabledBlue: textDisabledBlue,
       disabled: textDisabled,
+      grayOverlay: grayBackground,
     },
     primary: {
       main: brandGreen,
@@ -101,6 +104,7 @@ const theme = createTheme({
       gradientInverted: greenToPurple,
       gradientBlue: "linear-gradient(180deg, #010119 0%, #01020F 97.5%)",
       darkBlue: darkBlueBackground,
+      darkGreen: darkGreenBackground,
       iconButtonGray,
       translucentGray,
       translucentStrongGray,

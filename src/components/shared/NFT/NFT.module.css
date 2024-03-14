@@ -1,10 +1,10 @@
-.nftCardWrapper {
+.nftWrapper {
   position: relative;
   width: fit-content;
   height: fit-content;
 }
 
-.nftCard {
+.nft {
   width: 328px;
   max-height: 486px;
   padding: 4px;
@@ -16,26 +16,25 @@
   justify-content: space-between;
 }
 
-.nftCardMedia {
+.nftMedia {
   position: relative;
 }
 
-.nftCardShadow {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.nftCardFixedShadow {
+.nftShadow {
   position: absolute;
   width: 100%;
   height: 100%;
   transition: opacity 0.3s;
 }
 
-.nftCardHiddenText {
+.nftFixedShadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s;
+}
+
+.nftHiddenText {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -43,7 +42,7 @@
   z-index: 1;
 }
 
-.nftCardHeaderAction {
+.nftHeaderAction {
   position: absolute;
   right: 8px;
   top: 8px;
@@ -55,7 +54,7 @@
   min-height: unset;
 }
 
-.nftCardPrice {
+.nftPrice {
   position: absolute;
   right: 8px;
   bottom: 8px;
@@ -64,18 +63,18 @@
   height: 32px;
 }
 
-.nftCardContent {
+.nftContent {
   height: 128px;
 }
 
-.nftCardDetails {
+.nftDetails {
   flex-direction: row;
 }
 
-.nftCardAction {
+.nftAction {
   padding: 0;
 }
 
-.nftCardActionButton {
+.nftActionButton {
   border-radius: 0px 0px 8px 8px;
 }
