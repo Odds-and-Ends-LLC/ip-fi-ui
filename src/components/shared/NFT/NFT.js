@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "public/icons";
 
 // styles
-import styles from "./nft.module.css";
+import styles from "./Nft.module.css";
 
 export default function NFT({
   collectionName = "Collection Name",
