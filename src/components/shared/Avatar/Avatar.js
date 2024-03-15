@@ -1,5 +1,5 @@
 // packages
-import { Stack, Avatar as MuiAvatar } from "@mui/material";
+import { Stack, Avatar as MuiAvatar, Box } from "@mui/material";
 import Image from "next/image";
 
 // styles
@@ -7,8 +7,8 @@ import styles from "./Avatar.module.css";
 
 export default function Avatar({
   image,
-  icon = "/icons/close.svg",
-  letters = "al",
+  icon,
+  letters,
   size = "l",
 }) {
   const getAvatarTypography = () => {
@@ -62,18 +62,22 @@ export default function Avatar({
   };
 
   return (
-    <MuiAvatar
-      className={styles.avatar}
-      {...getAvatarSrc()}
-      sx={{
-        bgcolor: "text.purple",
-        color: "text.primary",
-        typography: getAvatarTypography(),
-        width: getAvatarSize(),
-        height: getAvatarSize(),
-      }}
-    >
-      {letters}
+    <Box className={styles.avatar}>
+      <MuiAvatar
+        imgProps={{
+          className: styles.avatarImage,
+        }}
+        {...getAvatarSrc()}
+        sx={{
+          bgcolor: "text.purple",
+          color: "text.primary",
+          typography: getAvatarTypography(),
+          width: getAvatarSize(),
+          height: getAvatarSize(),
+        }}
+      >
+        {letters}
+      </MuiAvatar>
       {icon &&
         <Stack
           className={styles.avatarIconContainer}
@@ -89,6 +93,6 @@ export default function Avatar({
           }
         </Stack>
       }
-    </MuiAvatar>
+    </Box>
   )
 };

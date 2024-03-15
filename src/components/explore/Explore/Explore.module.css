@@ -1,3 +1,12 @@
 .explore {
   min-height: 100%;
 }
+
+.exploreHeader {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.exploreTrendingTable {
+  flex-direction: row;
+}

@@ -1,15 +1,21 @@
 // packages
-import { Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useState } from "react";
+
+// components
+import { CatalogCover, ItemsSectionHeader, Tabs } from "@/components/shared";
+import { Member, NFT } from "@/components/shared";
+import { Footer } from "@/components/landing";
+import { TrendingTable } from "..";
 
 // styles
 import styles from "./Explore.module.css";
-import { Avatar, CatalogCover, Tabs } from "@/components/shared";
-import { Member, NFT } from "@/components/shared";
-import { DataGrid } from "@mui/x-data-grid";
+import { PlusIcon } from "public/icons";
 
 export default function Explore() {
   const [mainTab, setMainTab] = useState("all");
+  const [catalogTab, setCatalogTab] = useState("trending");
+  const [durationTab, setDurationTab] = useState("all");
 
   return (
     <Stack
@@ -30,31 +36,114 @@ export default function Explore() {
         ]}
         onChange={setMainTab}
       />
-      <NFT />
-      <Member />
-      <Stack width={679} height={475}>
-        <CatalogCover />
+      <Stack className={styles.exploreHeader}>
+        <Stack>
+          <Typography variant="body2" color="text.disabled">Exchange Portal</Typography>
+          <Typography variant="h4-desktop">TOP CATALOGS 🔥</Typography>
+        </Stack>
+        <Button
+          variant="outlined"
+          color="white"
+          startIcon={<PlusIcon />}
+        >
+          CREATE CATALOG
+        </Button>
       </Stack>
-      <DataGrid
-        columns={[
-          {
-            field: "rank",
-            headerName: "Rank",
-            renderCell: ({ row }) => <Typography variant="b1">{row.rank}</Typography>
-          },
-          { field: "catalog", headerName: "Catalog", flex: 1 },
-          { field: "col3", headerName: "Col3", flex: 1 },
-          { field: "col4", headerName: "Col4", flex: 1 },
-        ]}
-        rows={[
-          { id: 1, rank: "1", col2: "A2", col3: "A3", col4: "A4" },
-          { id: 2, rank: "2", col2: "B2", col3: "B3", col4: "B4" },
-          { id: 3, rank: "3", col2: "C2", col3: "C3", col4: "C4" },
-          { id: 4, rank: "4", col2: "D2", col3: "D3", col4: "D4" },
-          { id: 5, rank: "5", col2: "D2", col3: "D3", col4: "D4" },
-        ]}
-      />
-      <Avatar />
+      <Grid container spacing={3} height="36vw">
+        <Grid item mobile={6}>
+          <CatalogCover image="images/image_1.png" title="🥇 TOP 1" />
+        </Grid>
+        <Grid item mobile={6}>
+          <Grid container spacing={3} height="36vw">
+            <Grid item mobile={6}>
+              <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
+            </Grid>
+            <Grid item mobile={6}>
+              <CatalogCover image="images/image_3.png" title="🥇 TOP 3" />
+            </Grid>
+            <Grid item mobile={6}>
+              <CatalogCover image="images/image_4.png" title="🥇 TOP 4" />
+            </Grid>
+            <Grid item mobile={6}>
+              <CatalogCover image="images/image_1.png" title="🥇 TOP 5" />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Stack className={styles.exploreHeader}>
+        <Tabs
+          value={catalogTab}
+          tabs={[
+            { label: "TRENDING", value: "trending" },
+            { label: "MARKET", value: "market" },
+          ]}
+          onChange={setCatalogTab}
+        />
+        <Tabs
+          value={durationTab}
+          tabs={[
+            { label: "ALL", value: "all" },
+            { label: "1h", value: "1h" },
+            { label: "6h", value: "6h" },
+            { label: "24h", value: "24h" },
+            { label: "7d", value: "1d" },
+          ]}
+          onChange={setDurationTab}
+        />
+      </Stack>
+      <TrendingTable />
+      <ItemsSectionHeader title="COLLECTIONS" count={33} />
+      <Grid container spacing={3} height="29vw">
+        <Grid item mobile={6}>
+          <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
+        </Grid>
+        <Grid item mobile={6}>
+          <CatalogCover image="images/image_3.png" title="🥇 TOP 3" />
+        </Grid>
+      </Grid>
+      <ItemsSectionHeader title="NFTS" count={33} />
+      <Grid container spacing={3}>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+        <Grid item mobile={3}>
+          <NFT variant="card" />
+        </Grid>
+      </Grid>
+      <ItemsSectionHeader title="NFTS" count={33} />
+      <Grid container spacing={3}>
+        <Grid item mobile={3}>
+          <Member />
+        </Grid>
+        <Grid item mobile={3}>
+          <Member />
+        </Grid>
+        <Grid item mobile={3}>
+          <Member />
+        </Grid>
+        <Grid item mobile={3}>
+          <Member />
+        </Grid>
+      </Grid>
+      <Footer />
     </Stack>
-  )
+  );
 };

@@ -84,7 +84,7 @@ export default function Navbar() {
   return pathname !== "/login" ? (
     <AppBar sx={{ backgroundColor: backgroundColor }}>
       <Toolbar>
-        <Link href="/" className={styles.navbarLogo}>
+        <Link href="/" className={styles.navbarLogo} rel="" target="">
           <Image src="/images/logo.svg" alt="logo" width={106} height={40} />
         </Link>
         <Box className={styles.navbarLinksContainer} sx={{ display: displayDesktop }}>

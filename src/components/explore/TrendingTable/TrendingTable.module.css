@@ -1,0 +1,25 @@
+.trendingTable {
+  border: 2px solid #72ff8833;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.trendingTableItem {
+  width: 50%;
+}
+
+.trendingTableCatalog {
+  flex-direction: row;
+  align-items: center;
+}
+
+.trendingTablePrice {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.trendingTableVolume {
+  gap: 2px;
+}
+
