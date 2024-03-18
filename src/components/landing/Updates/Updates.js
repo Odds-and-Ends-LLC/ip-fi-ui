@@ -113,6 +113,10 @@ export default function Updates() {
               tablet: "100px",
               desktop: `calc(100px + ${whitespace}px * 0.5)`,
             }}
+            padding={{
+              tablet: "0px 100px",
+              mobile: "0px 24px",
+            }}
             header={(prev, next) => {
               return (
                 <Stack

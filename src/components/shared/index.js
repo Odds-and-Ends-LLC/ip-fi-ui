@@ -15,5 +15,6 @@ export { default as NFT } from "./NFT";
 export { default as Avatar } from "./Avatar";
 export { default as Table } from "./Table";
 export { default as ItemsSectionHeader } from "./ItemsSectionHeader";
+export { default as ItemsCarousel } from "./ItemsCarousel";
 export * from "./Catalog";
 export { PasswordInput } from "./Input";

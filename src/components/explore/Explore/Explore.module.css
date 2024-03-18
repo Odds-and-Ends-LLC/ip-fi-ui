@@ -1,10 +1,16 @@
 .explore {
   min-height: 100%;
+  align-items: center;
+}
+
+.exploreSection {
+  max-width: 1512px;
+  width: 100%;
 }
 
 .exploreHeader {
-  flex-direction: row;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .exploreTrendingTable {

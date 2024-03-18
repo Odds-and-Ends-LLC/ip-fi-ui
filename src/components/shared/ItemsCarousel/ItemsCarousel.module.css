@@ -1,0 +1,12 @@
+.itemsCarouselHeader {
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.itemsCarouselPagination {
+  flex-direction: row;
+}
+
+.itemsCarouselPaginationArrows {
+  flex-direction: row;
+}

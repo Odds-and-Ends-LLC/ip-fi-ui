@@ -1,6 +1,7 @@
 .table {
   border-radius: 12px;
-  width: 100%;
+  width: 1512px;
+  max-width: 100%;
 }
 
 .tableHeader {

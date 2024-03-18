@@ -10,7 +10,7 @@ export default function ItemsSectionHeader({
 }) {
   return (
     <Stack className={styles.itemsSectionHeader}>
-      <Typography variant="h4-desktop">{title}</Typography>
+      <Typography sx={{ typography: { tablet: "h4-desktop", mobile: "h5" } }}>{title}</Typography>
       <Stack className={styles.itemsSectionHeaderCount} sx={{ bgcolor: "text.grayOverlay" }}>
         <Typography variant="label3" color="text.secondary">{count}</Typography>
       </Stack>

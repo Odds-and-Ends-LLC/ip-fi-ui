@@ -1,3 +1,5 @@
+export { default as ArrowHeadLeftIcon } from "./ArrowHeadLeft";
+export { default as ArrowHeadRightIcon } from "./ArrowHeadRight";
 export { default as ArrowLeftIcon } from "./ArrowLeft";
 export { default as ArrowRightIcon } from "./ArrowRight";
 export { default as AsteriskIcon } from "./Asterisk";

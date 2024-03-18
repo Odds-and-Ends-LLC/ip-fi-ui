@@ -35,7 +35,7 @@ export default function Table({
           <Divider sx={{ borderColor: "dividerGray.main" }}  />
         </>
       }
-      <DataGrid className={styles.tableData} {...dataGridProps} />
+      <DataGrid className={styles.tableData} {...dataGridProps} autoHeight />
     </Stack>
   )
 };

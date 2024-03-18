@@ -11,7 +11,7 @@ export default function Tabs({
   };
 
   return (
-    <MuiTabs value={value || tabs[0]?.value} onChange={handleChange}>
+    <MuiTabs variant="scrollable" allowScrollButtonsMobile value={value || tabs[0]?.value} onChange={handleChange}>
       {tabs.map((tab, i) => <Tab key={i} label={tab.label} value={tab.value} />)}
     </MuiTabs>
   )

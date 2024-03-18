@@ -120,6 +120,7 @@ const theme = createTheme({
       mobile: 0,
       tablet: 768,
       desktop: 1512,
+      desktopL: 1920,
     },
   },
   typography: {
@@ -535,7 +536,7 @@ const theme = createTheme({
         },
         indicator: {
           display: "none",
-        }
+        },
       }
     },
     MuiTab: {
