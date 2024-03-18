@@ -11,7 +11,7 @@ export default function NFTs() {
       count={33}
       viewAllurl="/"
       slides={[
-        <Grid container spacing={3}>
+        <Grid key={1} container spacing={3}>
           <Grid item mobile={3}>
             <NFT variant="card" />
           </Grid>
@@ -37,7 +37,7 @@ export default function NFTs() {
             <NFT variant="card" />
           </Grid>
         </Grid>,
-        <Grid container spacing={3}>
+        <Grid key={2} container spacing={3}>
           <Grid item mobile={3}>
             <NFT variant="card" />
           </Grid>

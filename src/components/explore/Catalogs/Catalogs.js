@@ -11,7 +11,7 @@ export default function Catalogs() {
       count={26}
       viewAllurl="/"
       slides={[
-        <Grid container spacing={3} height="30vw" maxHeight="475px">
+        <Grid key={1} container spacing={3} height="30vw" maxHeight="475px">
           <Grid item mobile={6}>
             <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
           </Grid>
@@ -19,7 +19,7 @@ export default function Catalogs() {
             <CatalogCover image="images/image_3.png" title="🥇 TOP 3" />
           </Grid>
         </Grid>,
-        <Grid container spacing={3} height="30vw" maxHeight="475px">
+        <Grid key={2} container spacing={3} height="30vw" maxHeight="475px">
           <Grid item mobile={6}>
             <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
           </Grid>

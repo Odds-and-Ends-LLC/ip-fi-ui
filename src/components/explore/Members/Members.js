@@ -11,7 +11,7 @@ export default function Members() {
       count={33}
       viewAllurl="/"
       slides={[
-        <Grid container spacing={3}>
+        <Grid key={1} container spacing={3}>
           <Grid item mobile={3}>
             <Member />
           </Grid>
@@ -25,7 +25,7 @@ export default function Members() {
             <Member />
           </Grid>
         </Grid>,
-        <Grid container spacing={3}>
+        <Grid key={2} container spacing={3}>
           <Grid item mobile={3}>
             <Member />
           </Grid>
