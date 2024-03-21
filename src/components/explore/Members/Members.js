@@ -1,6 +1,3 @@
-// packages
-import { Grid } from "@mui/material";
-
 // components
 import { ItemsCarousel, Member } from "@/components/shared";
 
@@ -11,35 +8,15 @@ export default function Members() {
       count={33}
       viewAllurl="/"
       slides={[
-        <Grid key={1} container spacing={3}>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-        </Grid>,
-        <Grid key={2} container spacing={3}>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-          <Grid item mobile={3}>
-            <Member />
-          </Grid>
-        </Grid>
+        <Member key={1} />,
+        <Member key={2} />,
+        <Member key={3} />,
+        <Member key={4} />,
+        <Member key={5} />,
       ]}
+      slideWidth={{ mobile: "70%", tablet: "42%", laptop: "25%"  }}
+      slideHeight={{ mobile: "90vw", tablet: "45vw", laptop: "30vw"  }}
+      slideMaxHeight="357px"
     />
   )
 }

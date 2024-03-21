@@ -9,7 +9,7 @@ import { EthIcon } from "public/icons";
 import styles from "./TrendingTable.module.css";
 
 export default function TrendingTable() {
-  const renderRank = (rank) => <Typography variant="body1" color="text.gray">{rank}</Typography>;
+  const renderRank = (rank) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
 
   const renderCatalog = (row, showPrice) => (
     <Stack
@@ -17,19 +17,28 @@ export default function TrendingTable() {
       sx={{
         gap: {
           desktop: "24px",
-          mobile: "8px",
-        }
+          mobile: "16px",
+        },
       }}
     >
       <Avatar size="s" image="/images/image_1.png" />
-      <Stack>
-        <Typography variant="h6">{row.catalogName}</Typography>
-        <Typography variant="body2" color="text.disabledBlue">{row.totalNfts} Total NFTS</Typography>
+      <Stack className={styles.trendingTableCatalogName}>
+        <Typography
+          className={styles.trendingTableCatalogName}
+          sx={{
+            typography: { desktop: "h6", mobile: "label3" },
+            width: { mobile: "calc(100%)", desktop: "unset" },
+          }}
+        >
+          {row.catalogName}
+        </Typography>
+        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.totalNfts} Total NFTS</Typography>
         {showPrice &&
-          <Stack flexDirection="row">
-            <Typography variant="body1">Price: </Typography>
-            <EthIcon />
-            <Typography variant="body1" color="text.gray">{row.price}</Typography>
+          <Stack flexDirection="row" alignItems="center">
+            <Typography sx={{ typography: { desktop: "body1", mobile: "body3" }}}>Price: </Typography>
+            <Stack justifyContent="center" sx={{ display: { desktop: "flex", mobile: "none" }}}><EthIcon /></Stack>
+            <Stack justifyContent="center" sx={{ display: { desktop: "none", mobile: "flex" }}}><EthIcon size={16} /></Stack>
+            <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{row.price}</Typography>
           </Stack>
         }
       </Stack>
@@ -43,10 +52,10 @@ export default function TrendingTable() {
     </Stack>
   );
 
-  const renderVolume = (volume) => <Typography variant="body1" color="text.gray">{volume} eth</Typography>;
+  const renderVolume = (volume) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body2" }}}>{volume} eth</Typography>;
 
   const renderVolumeDelta = (volumeDelta) => (
-    <Typography variant="body2" color={volumeDelta < 0 ? "text.red" : "text.secondary"}>
+    <Typography color={volumeDelta < 0 ? "text.red" : "text.secondary"} sx={{ typography: { desktop: "body2", mobile: "body3" }}}>
       {volumeDelta > 0 && "+"} {volumeDelta} %
     </Typography>
   );
@@ -56,24 +65,28 @@ export default function TrendingTable() {
       field: "rank",
       headerName: "Rank",
       width: 96,
+      sortable: false,
       renderCell: ({ row }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
+      sortable: false,
       renderCell: ({ row }) => renderCatalog(row),
     },
     {
       field: "price",
       headerName: "Price",
       width: 111,
+      sortable: false,
       renderCell: ({ row }) => renderPrice(row.price),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
+      sortable: false,
       renderCell: ({ row }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
@@ -86,26 +99,23 @@ export default function TrendingTable() {
   const tabletColumns = [
     {
       field: "rank",
-      headerName: "Rank",
-      width: 96,
+      headerName: "#",
+      width: 64,
+      sortable: false,
       renderCell: ({ row }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
-      renderCell: ({ row }) => renderCatalog(row),
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 111,
-      renderCell: ({ row }) => renderPrice(row.price),
+      sortable: false,
+      renderCell: ({ row }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
+      sortable: false,
       renderCell: ({ row }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
@@ -117,20 +127,29 @@ export default function TrendingTable() {
 
   const mobileColumns = [
     {
+      field: "rank",
+      headerName: "#",
+      minWidth: 24,
+      width: 24,
+      sortable: false,
+      renderCell: ({ row }) => renderRank(row.rank),
+    },
+    {
       field: "catalog",
       headerName: "Catalog",
+      minWidth: 156,
       flex: 1,
+      sortable: false,
+      renderCell: ({ row }) => renderCatalog(row, true),
+    },
+    {
+      field: "volume",
+      headerName: "Volume",
+      sortable: false,
       renderCell: ({ row }) => (
-        <Stack flexDirection="row" gap="8px" width="100%" flexWrap="wrap" justifyContent="space-between">
-          <Stack flexDirection="row" gap="16px" flex="1" alignItems="center">
-            {renderRank(row.rank)}
-            {renderCatalog(row, true)}
-          </Stack>
-          <Stack flexDirection="row" alignItems="center" justifyContent="flex-end" gap="8px" flex="1">
-            <Typography variant="body2" color="text.disabledBlue">Volume: </Typography>
-            {renderVolume(row.volume)}
-            {renderVolumeDelta(row.volumeDelta)}
-          </Stack>
+        <Stack className={styles.trendingTableVolume}>
+          {renderVolume(row.volume)}
+          {renderVolumeDelta(row.volumeDelta)}
         </Stack>
       ),
     },
@@ -150,54 +169,79 @@ export default function TrendingTable() {
   ];
 
   return (
-    <Grid container className={styles.trendingTable}>
-      {/* Desktop Twin Tables */}
-      <Grid item desktop={6} sx={{ display: { desktop: "block", mobile: "none"} }}>
-        <Table
-          bordered={false}
-          dataGridProps={{
-            rows: rows.slice(0, 5),
-            rowHeight: 70,
-            hideFooter: true,
-            columns: desktopColumns,
-          }}
-        />
+    <>
+      <Grid container className={styles.trendingTable} sx={{ display: { desktop: "flex", mobile: "none"} }}>
+        <Grid item mobile={6} minWidth="690px">
+          <Table
+            bordered={false}
+            dataGridProps={{
+              rows: rows.slice(0, 5),
+              rowHeight: 70,
+              hideFooter: true,
+              columns: desktopColumns,
+            }}
+          />
+        </Grid>
+        <Grid item mobile={6}  minWidth="690px">
+          <Table
+            bordered={false}
+            dataGridProps={{
+              rows: rows.slice(5),
+              rowHeight: 70,
+              hideFooter: true,
+              columns: desktopColumns,
+            }}
+          />
+        </Grid>
       </Grid>
-      <Grid item desktop={6} sx={{ display: { desktop: "block", mobile: "none"} }}>
-        <Table
-          bordered={false}
-          dataGridProps={{
-            rows: rows.slice(5),
-            rowHeight: 70,
-            hideFooter: true,
-            columns: desktopColumns,
-          }}
-        />
+      <Grid container className={styles.trendingTable} sx={{ display: { desktop: "none", tablet: "flex", mobile: "none"} }}>
+        <Grid item mobile={6} minWidth="480px">
+          <Table
+            bordered={false}
+            dataGridProps={{
+              rows: rows.slice(0, 5),
+              rowHeight: 96,
+              hideFooter: true,
+              columns: tabletColumns,
+            }}
+          />
+        </Grid>
+        <Grid item mobile={6} minWidth="480px">
+          <Table
+            bordered={false}
+            dataGridProps={{
+              rows: rows.slice(5),
+              rowHeight: 96,
+              hideFooter: true,
+              columns: tabletColumns,
+            }}
+          />
+        </Grid>
       </Grid>
-      {/* Tablet Table */}
-      <Grid item mobile={12} sx={{ display: { desktop: "none", tablet: "block", mobile: "none"} }}>
-        <Table
-          bordered={false}
-          dataGridProps={{
-            rows,
-            rowHeight: 70,
-            hideFooter: true,
-            columns: tabletColumns,
-          }}
-        />
+      <Grid container className={styles.trendingTable} sx={{ display: { tablet: "none", mobile: "flex"} }}>
+        <Grid item mobile={6} minWidth="80vw">
+          <Table
+            bordered={false}
+            dataGridProps={{
+              rows: rows.slice(0, 5),
+              rowHeight: 96,
+              hideFooter: true,
+              columns: mobileColumns,
+            }}
+          />
+        </Grid>
+        <Grid item mobile={6}  minWidth="80vw">
+          <Table
+            bordered={false}
+            dataGridProps={{
+              rows: rows.slice(5),
+              rowHeight: 96,
+              hideFooter: true,
+              columns: mobileColumns,
+            }}
+          />
+        </Grid>
       </Grid>
-      {/* Mobile Table */}
-      <Grid item mobile={12} sx={{ display: { tablet: "none", mobile: "block"} }}>
-        <Table
-          bordered={false}
-          dataGridProps={{
-            rows,
-            columns: mobileColumns,
-            rowHeight: 140,
-            hideFooter: true,
-          }}
-        />
-      </Grid>
-    </Grid>
+    </>
   );
 };

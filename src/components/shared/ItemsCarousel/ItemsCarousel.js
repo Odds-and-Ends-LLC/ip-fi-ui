@@ -9,15 +9,19 @@ import { ArrowHeadLeftIcon, ArrowHeadRightIcon } from "public/icons";
 import styles from "./ItemsCarousel.module.css";
 
 export default function ItemsCarousel({
-  title = "TITLE",
+  title,
   count = 0,
   slides,
+  slideWidth,
+  slideHeight,
+  slideMaxHeight,
   viewAllurl,
+  loading = false,
 }) {
   return (
     <Carousel
       slides={slides}
-      slideWidth={{ mobile: "100%" }}
+      slideWidth={slideWidth}
       headerMarginBottom={{
         tablet: "24px",
         mobile: "16px",
@@ -27,7 +31,9 @@ export default function ItemsCarousel({
         containScroll: "trimSnaps",
         slidesToScroll: "auto",
       }}
-      loading={false}
+      loading={loading}
+      containerHeight={slideHeight}
+      containerMaxHeight={slideMaxHeight}
       header={(prev, next) => {
         return (
           <Stack
@@ -39,11 +45,13 @@ export default function ItemsCarousel({
               }
             }}
           >
-            <ItemsSectionHeader title={title} count={count} />
+            {title && <ItemsSectionHeader title={title} count={count} />}
             <Stack className={styles.itemsCarouselPagination} sx={{ justifyContent: { tablet: "center", mobile: "space-between" } }}>
-              <Button variant="text" color="white" {...viewAllurl && { href: viewAllurl }}>
-                VIEW ALL
-              </Button>
+              {viewAllurl &&
+                <Button variant="text" color="white" {...viewAllurl && { href: viewAllurl }}>
+                  VIEW ALL
+                </Button>
+              }
               <Stack className={styles.itemsCarouselPaginationArrows}>
                 <IconButton {...prev}>
                   <ArrowHeadLeftIcon color="white" />

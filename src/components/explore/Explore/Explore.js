@@ -1,22 +1,56 @@
 // packages
-import { Button, Grid, IconButton, Stack, Typography, useTheme } from "@mui/material";
-import { useState } from "react";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 
 // components
-import { Carousel, CatalogCover, ItemsCarousel, ItemsSectionHeader, Tabs } from "@/components/shared";
-import { Member, NFT } from "@/components/shared";
+import { Tabs } from "@/components/shared";
 import { Footer } from "@/components/landing";
-import { Catalogs, Members, NFTs, TopCatalogs, TrendingTable } from "..";
+import { Catalogs, MarketTable, Members, NFTs, TopCatalogs, TrendingTable } from "..";
 
 // styles
 import styles from "./Explore.module.css";
-import { ArrowHeadLeftIcon, ArrowHeadRightIcon, PlusIcon } from "public/icons";
+import { PlusIcon } from "public/icons";
+import { useInView } from "framer-motion";
 
 export default function Explore() {
-  const theme = useTheme();
   const [mainTab, setMainTab] = useState("all");
   const [catalogTab, setCatalogTab] = useState("trending");
   const [durationTab, setDurationTab] = useState("all");
+  const catalogsRef = useRef();
+  const nftsRef = useRef();
+  const membersRef = useRef();
+  const catalogsInView = useInView(catalogsRef);
+  const nftsInView = useInView(nftsRef);
+  const membersInView = useInView(membersRef);
+
+  const scrollTo = (ref) => {
+    const topOffset = -96;
+    window.scrollTo({ top: ref.current.getBoundingClientRect().top + topOffset, behavior: "smooth" })
+  };
+
+  const handleMainTabChange = (value) => {
+    if (value === "catalogs") {
+      scrollTo(catalogsRef);
+    } else if (value === "nfts") {
+      scrollTo(nftsRef);
+    } else if (value === "members") {
+      scrollTo(membersRef);
+    }
+
+    setMainTab(value);
+  };
+
+  useEffect(() => {
+    setMainTab(catalogsInView ? "catalogs" : "all");
+  }, [catalogsInView]);
+
+  useEffect(() => {
+    setMainTab(nftsInView ? "nfts" : "all");
+  }, [nftsInView]);
+
+  useEffect(() => {
+    setMainTab(membersInView ? "members" : "all");
+  }, [membersInView]);
 
   return (
     <Stack
@@ -25,10 +59,13 @@ export default function Explore() {
         backgroundColor: "blue.main",
       }}
     >
+      {/* <Box className={styles.exploreBackgroundImage} sx={{ backgroundImage: "url('/images/image_1.png')" }}>
+        <Box className={styles.exploreBackgroundGlassOverlay} />
+      </Box> */}
       <Stack
         className={styles.exploreSection}
         sx={{
-          padding: { mobile: "104px 40px 32px", tablet: "96px 64px 32px" },
+          padding: { mobile: "104px 24px 32px", tablet: "96px 64px 32px" },
           gap: { mobile: "24px", tablet: "32px" },
         }}
       >
@@ -40,7 +77,7 @@ export default function Explore() {
             { label: "NFTS", value: "nfts" },
             { label: "MEMBERS", value: "members" },
           ]}
-          onChange={setMainTab}
+          onChange={handleMainTabChange}
         />
         <Stack
           className={styles.exploreHeader}
@@ -97,10 +134,17 @@ export default function Explore() {
             onChange={setDurationTab}
           />
         </Stack>
-        <TrendingTable />
-        <Catalogs />
-        <NFTs />
-        <Members />
+        {catalogTab === "trending" && <TrendingTable />}
+        {catalogTab === "market" && <MarketTable />}
+        <Box ref={catalogsRef}>
+          <Catalogs />
+        </Box>
+        <Box ref={nftsRef}>
+          <NFTs />
+        </Box>
+        <Box ref={membersRef}>
+          <Members />
+        </Box>
       </Stack>
       <Footer />
     </Stack>

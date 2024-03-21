@@ -1,6 +1,3 @@
-// packages
-import { Grid } from "@mui/material";
-
 // components
 import { ItemsCarousel, NFT } from "@/components/shared";
 
@@ -11,59 +8,15 @@ export default function NFTs() {
       count={33}
       viewAllurl="/"
       slides={[
-        <Grid key={1} container spacing={3}>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-        </Grid>,
-        <Grid key={2} container spacing={3}>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-          <Grid item mobile={3}>
-            <NFT variant="card" />
-          </Grid>
-        </Grid>
+        <NFT variant="card" key={1} />,
+        <NFT variant="card" key={2} />,
+        <NFT variant="card" key={3} />,
+        <NFT variant="card" key={4} />,
+        <NFT variant="card" key={5} />
       ]}
+      slideWidth={{ mobile: "60%", tablet: "40%", laptop: "25%"  }}
+      slideHeight={{ mobile: "80vw", tablet: "40vw", laptop: "30vw"  }}
+      slideMaxHeight="426px"
     />
   )
 }

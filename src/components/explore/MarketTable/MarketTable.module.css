@@ -1,4 +1,4 @@
-.trendingTable {
+.marketTable {
   border: 2px solid #72ff8833;
   border-radius: 12px;
   width: 100%;
@@ -6,11 +6,11 @@
   flex-wrap: nowrap;
 }
 
-.trendingTableItem {
+.marketTableItem {
   width: 50%;
 }
 
-.trendingTableCatalog {
+.marketTableCatalog {
   flex-direction: row;
   align-items: center;
   overflow: hidden;
@@ -18,18 +18,18 @@
   white-space: nowrap;
 }
 
-.trendingTableCatalogName {
+.marketTableCatalogName {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.trendingTablePrice {
+.marketTablePrice {
   flex-direction: row;
   gap: 8px;
   align-items: center;
 }
 
-.trendingTableVolume {
+.marketTableVolume {
   gap: 2px;
 }
 

@@ -15,7 +15,7 @@ export default function CatalogCover({
   catalogName = "CATALOG_NAME",
   backgroundColor,
   image = "/images/image_3.png",
-  title = "🥇 TOP 1",
+  title,
 }) {
   const theme = useTheme();
   const [ref, { width, height }] = useMeasure();

@@ -119,8 +119,8 @@ const theme = createTheme({
     values: {
       mobile: 0,
       tablet: 768,
+      laptop: 1200,
       desktop: 1512,
-      desktopL: 1920,
     },
   },
   typography: {
@@ -228,6 +228,10 @@ const theme = createTheme({
     },
     body2: {
       fontSize: "16px",
+      lineHeight: "20px",
+    },
+    body3: {
+      fontSize: "14px",
       lineHeight: "20px",
     },
     button: {

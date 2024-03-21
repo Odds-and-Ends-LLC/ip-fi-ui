@@ -26,7 +26,7 @@ export default function Table({
     <Stack className={styles.table} sx={{ ...(bordered && { border: "2px solid #72ff8833" }) }}>
       {(headerLeftComponent || headerRightComponent) &&
         <>
-          <Stack className={styles.tableHeader}>
+          <Stack className={styles.tableHeader} sx={{ padding: { tablet: "24px 32px", mobile: "16px" }}}>
             {headerLeftComponent}
             <Box className={styles.tableHeaderRight}>
               {headerRightComponent}

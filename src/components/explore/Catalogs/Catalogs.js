@@ -1,6 +1,3 @@
-// packages
-import { Grid } from "@mui/material";
-
 // components
 import { CatalogCover, ItemsCarousel } from "@/components/shared";
 
@@ -8,26 +5,18 @@ export default function Catalogs() {
   return (
     <ItemsCarousel
       title="CATALOGS"
-      count={26}
+      count={33}
       viewAllurl="/"
       slides={[
-        <Grid key={1} container spacing={3} height="30vw" maxHeight="475px">
-          <Grid item mobile={6}>
-            <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
-          </Grid>
-          <Grid item mobile={6}>
-            <CatalogCover image="images/image_3.png" title="🥇 TOP 3" />
-          </Grid>
-        </Grid>,
-        <Grid key={2} container spacing={3} height="30vw" maxHeight="475px">
-          <Grid item mobile={6}>
-            <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
-          </Grid>
-          <Grid item mobile={6}>
-            <CatalogCover image="images/image_3.png" title="🥇 TOP 3" />
-          </Grid>
-        </Grid>
+        <CatalogCover key={1} image="images/image_1.png" />,
+        <CatalogCover key={2} image="images/image_2.png" />,
+        <CatalogCover key={3} image="images/image_3.png" />,
+        <CatalogCover key={4} image="images/image_4.png" />,
+        <CatalogCover key={5} image="images/image_1.png" />,
       ]}
+      slideWidth={{ mobile: "80%", tablet: "45%", laptop: "45%" }}
+      slideHeight={{ mobile: "45vw", tablet: "25vw", laptop: "30vw"  }}
+      slideMaxHeight="453px"
     />
   )
 }
