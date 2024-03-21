@@ -1,6 +1,12 @@
-export default function WalletIcon({ color = "#FDFDFE" }) {
+export default function WalletIcon({ color = "#FDFDFE", size = 22 }) {
   return (
-    <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 22 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         id="Change-Color"
         fillRule="evenodd"

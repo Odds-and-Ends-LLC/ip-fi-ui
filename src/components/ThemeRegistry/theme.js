@@ -34,11 +34,11 @@ const purpleToGreen = `linear-gradient(90deg, ${brandPurple} 0%, ${brandGreen} 1
 const greenToPurple = `linear-gradient(90deg, ${brandGreen} 0%, ${brandPurple} 100%)`;
 const translucentGray =
   "linear-gradient(130deg, rgba(26, 27, 70, 0.3) -1.35%, rgba(26, 27, 70, 0.05) 100%)";
-const translucentStrongGray = "linear-gradient(130deg, rgba(255, 255, 255, 0.15) -1.35%, rgba(255, 255, 255, 0.05) 100%)";
+const translucentStrongGray =
+  "linear-gradient(130deg, rgba(255, 255, 255, 0.15) -1.35%, rgba(255, 255, 255, 0.05) 100%)";
 const grayBackground = "#74777A59";
 const darkBlueBackground = "#1A1B46E6";
 const darkGreenBackground = "#39804459";
-
 
 const workSans = Work_Sans({
   weight: ["300", "400", "500", "700"],
@@ -314,7 +314,7 @@ const theme = createTheme({
     },
     MuiDataGrid: {
       defaultProps: {
-        disableColumnMenu: true
+        disableColumnMenu: true,
       },
       styleOverrides: {
         root: {
@@ -329,13 +329,14 @@ const theme = createTheme({
             border: "none",
           },
           "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
-            display: 'none',
+            display: "none",
           },
-          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
-            outline: "none",
-          },
+          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
+            {
+              outline: "none",
+            },
         },
-      }
+      },
     },
     MuiCssBaseline: {
       styleOverrides: `
@@ -476,7 +477,7 @@ const theme = createTheme({
           backgroundColor: blue,
           "&:hover": {
             backgroundColor: black,
-          }
+          },
         },
         containedSolidWhite: {
           backgroundColor: white,
@@ -486,8 +487,8 @@ const theme = createTheme({
           },
           "&:active": {
             backgroundColor: "#B8B8D3",
-          }
-        }
+          },
+        },
       },
     },
     MuiIconButton: {
@@ -522,8 +523,14 @@ const theme = createTheme({
         },
         indicator: {
           display: "none",
+        },
+        vertical: {
+          " .MuiTab-root": {
+            padding: "8px 24px",
+            justifyContent: "flex-start"
+          }
         }
-      }
+      },
     },
     MuiTab: {
       defaultProps: {
@@ -534,6 +541,8 @@ const theme = createTheme({
         root: {
           borderRadius: "4px",
           color: white,
+          minHeight: "40px",
+          padding: "8px 16px",
           transition: ".3s ease",
           "&:hover": {
             backgroundColor: "#74777ABF",
@@ -542,8 +551,12 @@ const theme = createTheme({
             backgroundColor: grayBackground,
             color: white,
           },
-        }
-      }
+        },
+        labelIcon: {
+          flexDirection: "row",
+          gap: "8px",
+        },
+      },
     },
     MuiLink: {
       defaultProps: {

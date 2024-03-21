@@ -19,3 +19,4 @@ export { default as UploadIcon } from "./Upload";
 export { default as PickAvatarIcon } from "./PickAvatar";
 export { default as RemoveIcon } from "./Remove";
 export { default as ExpandIcon } from "./Expand";
+export { default as SettingsIcon } from "./Settings";

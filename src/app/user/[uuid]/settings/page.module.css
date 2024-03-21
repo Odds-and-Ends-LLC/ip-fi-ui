@@ -1,0 +1,9 @@
+.settings {
+  border-radius: 12px;
+  border: 2px solid rgba(114, 255, 136, 0.2);
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  flex: 1;
+  height: 100%;
+  flex-direction: row;
+}
