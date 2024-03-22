@@ -1,0 +1,13 @@
+.itemsSectionHeader {
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.itemsSectionHeaderCount {
+  width: 40px;
+  height: 33px;
+  border-radius: 1033px;
+  justify-content: center;
+  align-items: center;
+}

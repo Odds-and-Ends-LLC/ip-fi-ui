@@ -1,7 +1,7 @@
 // packages
 import { useState, useEffect, useCallback } from "react";
-import { Box, Button, IconButton, Stack, useTheme } from "@mui/material";
-import { ArrowBack, ArrowForward, ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { Box, IconButton, Stack, useTheme } from "@mui/material";
+import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import useEmblaCarousel from "embla-carousel-react";
 
 // styles
@@ -16,7 +16,11 @@ export default function Carousel({
   loading = true,
   loader,
   header,
+  containerHeight = "auto",
+  containerMaxHeight = "auto",
   containerMarginRight,
+  padding = "0px",
+  headerMarginBottom = "40px",
 }) {
   const theme = useTheme();
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -58,9 +62,9 @@ export default function Carousel({
 
   return (
     <Stack className={styles.carousel} sx={{ padding: { tablet: showArrows && "0 56px" } }}>
-      {header && <Stack className={styles.carouselHeader}>{header(buttonPrev, buttonNext)}</Stack>}
-      <Box ref={emblaRef} className={styles.carouselViewport} sx={{ px: { tablet: "100px", mobile: "24px" } }}>
-        <Box className={styles.carouselContainer} sx={{ marginRight: containerMarginRight }}>
+      {header && <Stack className={styles.carouselHeader} sx={{ mb: headerMarginBottom }}>{header(buttonPrev, buttonNext)}</Stack>}
+      <Box ref={emblaRef} className={styles.carouselViewport} sx={{ padding }}>
+        <Box className={styles.carouselContainer} sx={{ marginRight: containerMarginRight, height: containerHeight, maxHeight: containerMaxHeight }}>
           {loading ? (
             <Box
               className={styles.carouselSlide}

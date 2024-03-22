@@ -13,6 +13,8 @@ export default function Tabs({
 
   return (
     <MuiTabs
+      variant="scrollable"
+      allowScrollButtonsMobile
       value={value || tabs[0]?.value}
       onChange={handleChange}
       orientation={orientation}

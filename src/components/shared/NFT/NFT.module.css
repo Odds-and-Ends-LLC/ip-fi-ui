@@ -1,12 +1,12 @@
 .nftWrapper {
   position: relative;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
 }
 
 .nft {
-  width: 328px;
-  max-height: 486px;
+  width: 100%;
+  height: 100%;
   padding: 4px;
   border-radius: 12px;
   cursor: pointer;
@@ -18,6 +18,7 @@
 
 .nftMedia {
   position: relative;
+  flex: 1;
 }
 
 .nftShadow {
@@ -40,6 +41,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+  width: 100%;
+  text-align: center;
 }
 
 .nftHeaderAction {

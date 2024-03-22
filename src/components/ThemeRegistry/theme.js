@@ -63,6 +63,7 @@ const theme = createTheme({
       disabledBlue: textDisabledBlue,
       disabled: textDisabled,
       grayOverlay: grayBackground,
+      red,
     },
     primary: {
       main: brandGreen,
@@ -118,7 +119,8 @@ const theme = createTheme({
     values: {
       mobile: 0,
       tablet: 768,
-      desktop: 1440,
+      laptop: 1200,
+      desktop: 1512,
     },
   },
   typography: {
@@ -228,6 +230,10 @@ const theme = createTheme({
       fontSize: "16px",
       lineHeight: "20px",
     },
+    body3: {
+      fontSize: "14px",
+      lineHeight: "20px",
+    },
     button: {
       fontSize: "16px",
       fontWeight: 700,
@@ -315,28 +321,36 @@ const theme = createTheme({
     MuiDataGrid: {
       defaultProps: {
         disableColumnMenu: true,
+        sortingMode: "server",
+        filterMode: "server",
       },
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           border: "none",
+          "& .MuiDataGrid-withBorderColor": {
+            borderColor: grayBackground,
+          },
           "& .MuiDataGrid-columnHeader": {
             fontFamily: unbounded.style.fontFamily,
             fontSize: "14px",
             fontWeight: 500,
             lineHeight: "normal",
+            [theme.breakpoints.down("tablet")]: {
+              fontSize: "12px",
+              padding: "0px 4px",
+            },
           },
           "[class^=MuiDataGrid-cell]": {
             border: "none",
+            [theme.breakpoints.down("tablet")]: {
+              padding: "0px 4px",
+            },
           },
           "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
             display: "none",
           },
-          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
-            {
-              outline: "none",
-            },
-        },
-      },
+        }),
+      }
     },
     MuiCssBaseline: {
       styleOverrides: `

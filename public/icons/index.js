@@ -1,3 +1,5 @@
+export { default as ArrowHeadLeftIcon } from "./ArrowHeadLeft";
+export { default as ArrowHeadRightIcon } from "./ArrowHeadRight";
 export { default as ArrowLeftIcon } from "./ArrowLeft";
 export { default as ArrowRightIcon } from "./ArrowRight";
 export { default as AsteriskIcon } from "./Asterisk";
@@ -18,5 +20,6 @@ export { default as XTwitterIcon } from "./XTwitter";
 export { default as UploadIcon } from "./Upload";
 export { default as PickAvatarIcon } from "./PickAvatar";
 export { default as RemoveIcon } from "./Remove";
+export { default as EthIcon } from "./Eth";
 export { default as ExpandIcon } from "./Expand";
 export { default as SettingsIcon } from "./Settings";

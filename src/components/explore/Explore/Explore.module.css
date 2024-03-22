@@ -1,3 +1,36 @@
 .explore {
   min-height: 100%;
+  align-items: center;
+  position: relative;
+}
+
+.exploreBackgroundGlassOverlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(130.33deg, rgba(26, 27, 70, 0.15) -1.35%, rgba(26, 27, 70, 0.025) 100%);
+  backdrop-filter: blur(20px);
+}
+
+.exploreBackgroundImage {
+  position: absolute;
+  background-size: cover;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.exploreSection {
+  max-width: 1512px;
+  width: 100%;
+}
+
+.exploreHeader {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.exploreTrendingTable {
+  flex-direction: row;
 }

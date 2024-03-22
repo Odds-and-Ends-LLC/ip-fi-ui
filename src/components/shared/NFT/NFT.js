@@ -51,7 +51,6 @@ export default function NFT({
         className={styles.nft}
         sx={{
           bgcolor: "background.darkBlue",
-          height: variant === "profile" ? "486px" : "426px",
           "& > .MuiCardMedia-root > .MuiStack-root": {
             opacity: 0,
           },
@@ -67,13 +66,13 @@ export default function NFT({
           image={image}
           className={styles.nftMedia}
           sx={{
-            height: variant === "profile" ? "100%" : "250px",
             borderRadius: (variant === "profile" && !action) ? "8px" : "8px 8px 0px 0px",
           }}
         >
           <Stack
             className={styles.nftShadow}
             sx={{
+              borderRadius: (variant === "profile" && !action) ? "8px" : "8px 8px 0px 0px",
               background: "linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%)",
             }}
           />
@@ -91,6 +90,7 @@ export default function NFT({
               <Box
                 className={styles.nftFixedShadow}
                 sx={{
+                  borderRadius: (variant === "profile" && !action) ? "8px" : "8px 8px 0px 0px",
                   background: "linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%)",
                 }}
               />

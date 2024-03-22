@@ -1,13 +1,13 @@
 /* Member Card */
 
 .memberCard {
-  width: 328px;
-  height: 310px;
+  width: 100%;
+  height: calc(100% - 48px);
   border-radius: 12px;
   backdrop-filter: blur(20px);
   border: 2px solid #72ff8833;
   overflow: visible;
-  margin-top: 47px;
+  margin-top: 48px;
   justify-content: flex-start;
   position: relative;
   padding: 0px 24px 24px;
@@ -32,7 +32,8 @@
   flex-direction: column;
   padding: 0;
   padding-top: 12px;
-  gap: 42px;
+  justify-content: space-between;
+  height: calc(100% - 48px);
 }
 
 .memberCardTopDetails {

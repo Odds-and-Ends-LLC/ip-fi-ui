@@ -1,5 +1,5 @@
 // packages
-import { Card, CardHeader, CardMedia, Typography, useTheme } from "@mui/material";
+import { Box, Card, CardHeader, CardMedia, Typography, useTheme } from "@mui/material";
 import { useMeasure } from "@uidotdev/usehooks";
 import { motion } from "framer-motion";
 import { clamp } from "@/utils/clamp";
@@ -15,7 +15,7 @@ export default function CatalogCover({
   catalogName = "CATALOG_NAME",
   backgroundColor,
   image = "/images/image_3.png",
-  title = "🥇 TOP 1",
+  title,
 }) {
   const theme = useTheme();
   const [ref, { width, height }] = useMeasure();
@@ -40,7 +40,18 @@ export default function CatalogCover({
           variant: "button",
           sx: {
             bgcolor: "text.purple",
-
+            fontSize: {
+              desktop: "16px",
+              tablet: "14px",
+              mobile: "12px",
+            }
+          }
+        }}
+        sx={{
+          p: {
+            desktop: "12px 16px",
+            tablet: "8px",
+            mobile: "6px",
           }
         }}
       />
@@ -54,7 +65,7 @@ export default function CatalogCover({
         color="text.grayOverlay"
         sx={{
           rotate: "-180deg",
-          left: 0,
+          left: 8,
           bottom: 0,
           fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
           lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
@@ -67,7 +78,7 @@ export default function CatalogCover({
         variant="h2"
         color="text.grayOverlay"
         sx={{
-          right: 0,
+          right: 8,
           top: 0,
           fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
           lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
@@ -75,13 +86,19 @@ export default function CatalogCover({
       >
         {`${catalogName} ${catalogName}`}
       </Typography>
-      <Image
+      <Box
         className={styles.catalogCoverFlip}
-        src="/images/catalog_flip.png"
-        alt="catalog flip"
-        width={120 / (475 / width)}
-        height={120 / (679 / height)}
-      />
+        sx={{
+          width: { desktop: "120px", tablet: "64px", mobile: "32px" },
+          height: { desktop: "120px", tablet: "80px", mobile: "32px" }
+        }}
+      >
+        <Image
+          src="/images/catalog_flip.png"
+          alt="catalog flip"
+          fill
+        />
+      </Box>
     </Card>
   )
 };

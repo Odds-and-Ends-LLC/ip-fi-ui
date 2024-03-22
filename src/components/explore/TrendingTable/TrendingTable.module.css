@@ -1,0 +1,35 @@
+.trendingTable {
+  border: 2px solid #72ff8833;
+  border-radius: 12px;
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.trendingTableItem {
+  width: 50%;
+}
+
+.trendingTableCatalog {
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trendingTableCatalogName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trendingTablePrice {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.trendingTableVolume {
+  gap: 2px;
+}
+

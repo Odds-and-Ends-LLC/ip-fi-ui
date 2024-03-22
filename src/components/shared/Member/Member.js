@@ -17,7 +17,7 @@ export default function Member({
   joinedDate = "2 months ago",
   responseTime = "Within Hours",
   responseRate = 84,
-  variant = "list"
+  variant = "card"
 }) {
   const theme = useTheme();
 
