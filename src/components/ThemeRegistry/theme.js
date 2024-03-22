@@ -350,7 +350,7 @@ const theme = createTheme({
             display: "none",
           },
         }),
-      }
+      },
     },
     MuiCssBaseline: {
       styleOverrides: `
@@ -541,9 +541,9 @@ const theme = createTheme({
         vertical: {
           " .MuiTab-root": {
             padding: "8px 24px",
-            justifyContent: "flex-start"
-          }
-        }
+            justifyContent: "flex-start",
+          },
+        },
       },
     },
     MuiTab: {

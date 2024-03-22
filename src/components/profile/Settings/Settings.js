@@ -30,21 +30,19 @@ export default function Settings() {
 
   return (
     <Stack
-    className={styles.settings}
+      className={styles.settings}
       sx={{
-        padding: "134px 68px 74px",
-        backgroundColor: "#01022C",
-
+        padding: { mobile: "80px 24px 24px", tablet: "134px 68px 74px" },
+        backgroundColor: "blue.main",
       }}
     >
-      <Stack className={styles.settingsPaper}>
+      <Stack
+        className={styles.settingsPaper}
+        sx={{ flexDirection: { mobile: "column", laptop: "row" } }}
+      >
         <Stack
-          sx={{
-            backgroundColor: "#1A1B46",
-            width: "309px",
-            borderRadius: "10px 0 0 10px",
-            padding: "42px 0",
-          }}
+          className={styles.tabsLaptopUp}
+          sx={{ backgroundColor: "blue.dark", display: { mobile: "none", laptop: "flex" } }}
         >
           <Tabs
             orientation="vertical"
@@ -58,23 +56,39 @@ export default function Settings() {
           />
         </Stack>
         <Stack
+          className={styles.tabsMobileUp}
+          sx={{ backgroundColor: "blue.dark", display: { mobile: "flex", laptop: "none" } }}
+        >
+          <Tabs
+            variant="fullWidth"
+            value={tab}
+            tabs={[
+              { label: "PROFILE", value: "profile" },
+              { label: "ACCOUNT", value: "account" },
+              { label: "WALLET", value: "wallet" },
+            ]}
+            onChange={(value) => handleTabChange(value)}
+          />
+        </Stack>
+        <Stack
+          className={styles.tabPanelContainer}
           sx={{
-            flex: 1,
-            // backgroundColor: "beige",
-            borderRadius: "0 10px 10px 0",
-            padding: "24px 42px 42px",
-            alignItems: "start",
-            gap: "24px",
-            overflowY: "auto",
+            padding: {
+              mobile: "0 0 4px",
+              laptop: "4px 0",
+            },
           }}
         >
-          <Button startIcon={<ArrowLeftIcon />}>BACK TO PROFILE</Button>
           <Stack
-            sx={{ padding: "0 24px", alignItems: "start", flex: 1, width: "100%", gap: "24px" }}
+            className={styles.tabPanel}
+            sx={{ padding: { mobile: "12px 0 20px", laptop: "24px 42px 42px" } }}
           >
-            {tab === "profile" && <SettingsProfile />}
-            {tab === "account" && <SettingsAccount />}
-            {tab === "wallet" && <SettingsWallet data={data} />}
+            <Button startIcon={<ArrowLeftIcon />}>BACK TO PROFILE</Button>
+            <Stack className={styles.tabPanelContent}>
+              {tab === "profile" && <SettingsProfile />}
+              {tab === "account" && <SettingsAccount />}
+              {tab === "wallet" && <SettingsWallet data={data} />}
+            </Stack>
           </Stack>
         </Stack>
       </Stack>

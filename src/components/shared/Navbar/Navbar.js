@@ -16,7 +16,7 @@ import {
 import Image from "next/image";
 
 // components
-import { Discord, Instagram, Linkedin, Twitter } from "public/icons";
+import { DiscordIcon, InstagramIcon, Linkedin, Twitter } from "public/icons";
 
 // styles
 import styles from "./Navbar.module.css";
@@ -129,10 +129,10 @@ export default function Navbar() {
                   <Twitter />
                 </IconButton>
                 <IconButton color="secondary" href="/">
-                  <Instagram />
+                  <InstagramIcon />
                 </IconButton>
                 <IconButton color="secondary" href="/">
-                  <Discord />
+                  <DiscordIcon />
                 </IconButton>
                 <IconButton color="secondary" href="/">
                   <Linkedin />

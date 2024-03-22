@@ -6,6 +6,7 @@ export default function Tabs({
   tabs = [], // { label, value, icon }
   onChange = () => {},
   orientation,
+  variant = "scrollable",
 }) {
   const handleChange = (_, newValue) => {
     onChange(newValue);
@@ -13,7 +14,7 @@ export default function Tabs({
 
   return (
     <MuiTabs
-      variant="scrollable"
+      variant={variant}
       allowScrollButtonsMobile
       value={value || tabs[0]?.value}
       onChange={handleChange}
