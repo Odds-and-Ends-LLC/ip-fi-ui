@@ -14,7 +14,8 @@ export default function SettingsAccount() {
   const [openModal, setOpenModal] = useState();
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [passwordInput, setPasswordInput] = useState({ current: "", new: "", match: "" });
-  const [passwordVerified, setPasswordVerified] = useState(false);
+  const [changePasswordVerified, setChangePasswordVerified] = useState(false);
+  const [deletePasswordVerified, setDeletePasswordVerified] = useState(false);
   const [errors, setErrors] = useState({
     passwordIncorrect: false,
     passwordInvalid: false,
@@ -22,7 +23,7 @@ export default function SettingsAccount() {
   });
 
   const handleVerifyPassword = () => {
-    setPasswordVerified(true);
+    setChangePasswordVerified(true);
     setErrors({ ...errors, passwordIncorrect: false });
   };
   const handleEnterPassword = (e) => {
@@ -33,7 +34,7 @@ export default function SettingsAccount() {
   };
   const handleCancelChangePassword = () => {
     setPasswordInput({ current: "", new: "", match: "" });
-    setPasswordVerified(false);
+    setChangePasswordVerified(false);
   };
   const handleUpdatePassword = () => {
     setOpenModal("updatePassword");
@@ -41,8 +42,15 @@ export default function SettingsAccount() {
   const handleConfirmUpdatePassword = () => {
     setOpenModal();
     setPasswordInput({ current: "", new: "", match: "" });
-    setPasswordVerified(false);
+    setChangePasswordVerified(false);
     setOpenSnackbar(true);
+  };
+  const handleDeletePassword = () => {
+    setOpenModal("deleteAccount");
+  };
+  const handleConfirmDeleteAccount = () => {
+    setOpenModal();
+    setDeletePasswordVerified(false);
   };
 
   useEffect(() => {
@@ -68,11 +76,11 @@ export default function SettingsAccount() {
             value={passwordInput.current}
             label="Current Password"
             onChange={(e) => setPasswordInput({ ...passwordInput, current: e.target.value })}
-            disabled={passwordVerified}
+            disabled={changePasswordVerified}
             error={errors.passwordIncorrect}
             helperText="Incorrect password."
           />
-          {!passwordVerified ? (
+          {!changePasswordVerified ? (
             <Button
               variant="contained"
               disabled={!passwordInput.current}
@@ -118,63 +126,14 @@ export default function SettingsAccount() {
             </>
           )}
         </Stack>
-        <Stack>
-          <Stack gap="4px">
+        <Stack className={styles.accountAutoAddNft}>
+          <Stack className={styles.autoAddNftText}>
             <Typography variant="label">AUTO-ADD NFTs TO iP-Fi</Typography>
             <Typography>Enable auto-adding of NFTs to the platform.</Typography>
           </Stack>
-          <Switch
-            focusVisibleClassName=".Mui-focusVisible"
-            sx={{
-              width: 42,
-              height: 26,
-              padding: 0,
-              "& .MuiSwitch-switchBase": {
-                padding: 0,
-                margin: 2,
-                transitionDuration: "300ms",
-                "&.Mui-checked": {
-                  transform: "translateX(16px)",
-                  color: "#fff",
-                  "& + .MuiSwitch-track": {
-                    backgroundColor:
-                      // theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
-                      "#2ECA45",
-                    opacity: 1,
-                    border: 0,
-                  },
-                  "&.Mui-disabled + .MuiSwitch-track": {
-                    opacity: 0.5,
-                  },
-                },
-                "&.Mui-focusVisible .MuiSwitch-thumb": {
-                  color: "#33cf4d",
-                  border: "6px solid #fff",
-                },
-                "&.Mui-disabled .MuiSwitch-thumb": {
-                  color: "gray",
-                },
-                "&.Mui-disabled + .MuiSwitch-track": {
-                  opacity: 0.3,
-                },
-              },
-              "& .MuiSwitch-thumb": {
-                boxSizing: "border-box",
-                width: 22,
-                height: 22,
-              },
-              "& .MuiSwitch-track": {
-                borderRadius: 26 / 2,
-                backgroundColor: "#E9E9EA",
-                opacity: 1,
-                // transition: theme.transitions.create(["background-color"], {
-                //   duration: 500,
-                // }),
-              },
-            }}
-          />
+          <Switch focusVisibleClassName=".Mui-focusVisible" />
         </Stack>
-        <Stack sx={{ alignItems: "flex-start", gap: "24px" }}>
+        <Stack className={styles.accountDelete}>
           <Stack gap="4px">
             <Typography variant="label">DELETE ACCOUNT</Typography>
             <Typography>
@@ -182,7 +141,7 @@ export default function SettingsAccount() {
               be undone.
             </Typography>
           </Stack>
-          <Button variant="contained" color="white">
+          <Button variant="contained" color="white" onClick={handleDeletePassword}>
             DELETE
           </Button>
         </Stack>
@@ -194,24 +153,50 @@ export default function SettingsAccount() {
         open={openModal === "updatePassword"}
         onClose={() => setOpenModal(false)}
         actions={
-          <Stack
-            gap="10px"
-            sx={{
-              flexDirection: { tablet: "row" },
-              justifyContent: { tablet: "flex-end" },
-              width: { mobile: "100%" },
-            }}
-          >
+          <>
             <Button variant="outlined" onClick={() => setOpenModal(false)}>
               CANCEL
             </Button>
             <Button variant="contained" onClick={handleConfirmUpdatePassword}>
               YES, UPDATE PASSWORD
             </Button>
-          </Stack>
+          </>
         }
       >
-        <Typography variant="body1">Are you sure you want to update your password?</Typography>
+        <Typography>Are you sure you want to update your password?</Typography>
+      </Modal>
+      <Modal
+        title="DELETE ACCOUNT"
+        titleIcon={<AlertIcon />}
+        open={openModal === "deleteAccount"}
+        onClose={() => setOpenModal(false)}
+        actions={
+          <>
+            <Button variant="outlined" onClick={() => setOpenModal(false)}>
+              CANCEL
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleConfirmDeleteAccount}
+              disabled={!deletePasswordVerified}
+            >
+              YES, DELETE ACCOUNT
+            </Button>
+          </>
+        }
+      >
+        <Typography>
+          Are you sure you want to delete your account? Your profile and account information will be
+          completely deleted from iP-Fi.
+        </Typography>
+        <Stack gap="8px">
+          <Typography>Enter Password</Typography>
+          <PasswordInput
+            onChange={() => setDeletePasswordVerified(true)}
+            // error={errors.passwordIncorrect}
+            // helperText="Incorrect password."
+          />
+        </Stack>
       </Modal>
 
       <Snackbar

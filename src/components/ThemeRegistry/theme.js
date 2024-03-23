@@ -790,6 +790,52 @@ const theme = createTheme({
         },
       },
     },
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          width: 56,
+          height: 32,
+          padding: 0,
+          "& .MuiSwitch-switchBase": {
+            padding: 0,
+            margin: 2,
+            transitionDuration: "300ms",
+            "&.Mui-checked": {
+              transform: "translateX(24px)",
+              color: white,
+              "& + .MuiSwitch-track": {
+                backgroundColor: brandGreen,
+                opacity: 1,
+                border: 0,
+              },
+              "&.Mui-disabled + .MuiSwitch-track": {
+                opacity: 0.5,
+              },
+            },
+            "&.Mui-focusVisible .MuiSwitch-thumb": {
+              color: brandGreen,
+              border: "6px solid #fff",
+            },
+            "&.Mui-disabled .MuiSwitch-thumb": {
+              color: "gray",
+            },
+            "&.Mui-disabled + .MuiSwitch-track": {
+              opacity: 0.3,
+            },
+          },
+          "& .MuiSwitch-thumb": {
+            boxSizing: "border-box",
+            width: 28,
+            height: 28,
+          },
+          "& .MuiSwitch-track": {
+            borderRadius: 32 / 2,
+            backgroundColor: dividerGray,
+            opacity: 1,
+          },
+        },
+      },
+    },
   },
 });
 

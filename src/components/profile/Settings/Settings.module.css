@@ -91,3 +91,19 @@
   gap: 16px;
   width: 100%;
 }
+
+.accountAutoAddNft {
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+}
+
+.autoAddNftText {
+  flex-grow: 1;
+  gap: 4px;
+}
+
+.accountDelete {
+  align-items: flex-start;
+  gap: 24px;
+}

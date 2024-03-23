@@ -21,16 +21,26 @@ export default function Modal({ title, titleIcon, children, actions, open, onClo
       <DialogTitle>
         <Stack className={styles.modalTitle} color="text.secondary">
           {titleIcon}
-          <Typography variant="h6">
-            {title}
-          </Typography>
+          <Typography variant="h6">{title}</Typography>
         </Stack>
         <Button variant="unstyled" onClick={onClose}>
           <CloseIcon size={18} />
         </Button>
       </DialogTitle>
       <DialogContent>{children}</DialogContent>
-      {actions && <DialogActions>{actions}</DialogActions>}
+      {actions && (
+        <DialogActions>
+          <Stack
+            className={styles.modalActions}
+            sx={{
+              flexDirection: { tablet: "row" },
+              justifyContent: { tablet: "flex-end" },
+            }}
+          >
+            {actions}
+          </Stack>
+        </DialogActions>
+      )}
     </Dialog>
   );
 }
