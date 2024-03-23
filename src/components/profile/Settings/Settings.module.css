@@ -107,3 +107,8 @@
   align-items: flex-start;
   gap: 24px;
 }
+
+.accountWalletList {
+  gap: 16px;
+  width: 100%;
+}

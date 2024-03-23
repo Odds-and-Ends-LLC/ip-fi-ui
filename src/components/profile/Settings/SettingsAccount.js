@@ -61,8 +61,6 @@ export default function SettingsAccount() {
     });
   }, [passwordInput.match, passwordInput.new]);
 
-  console.log(passwordInput);
-
   return (
     <>
       <Typography typography={{ mobile: "h5", tablet: "h4-desktop" }}>ACCOUNT SETTINGS</Typography>
