@@ -1,4 +1,5 @@
 // packages
+import { useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button, Stack } from "@mui/material";
 
@@ -27,6 +28,10 @@ export default function Settings() {
   const handleTabChange = (value) => {
     router.push(pathname + "?tab=" + value);
   };
+
+  useEffect(() => {
+    if (!tab) router.push(pathname + "?tab=profile");
+  }, [pathname, router, tab]);
 
   return (
     <Stack

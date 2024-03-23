@@ -511,6 +511,7 @@ const theme = createTheme({
           "&.Mui-disabled": {
             opacity: 0.25,
           },
+          marginRight: "-8px",
         },
         colorGray: {
           backgroundColor: iconButtonGray,
@@ -613,6 +614,7 @@ const theme = createTheme({
           borderStyle: "solid",
           borderWidth: "1px",
           paddingLeft: "8px",
+          paddingRight: "8px",
           "&:hover": {
             backgroundColor: grayBackground,
           },
@@ -732,6 +734,59 @@ const theme = createTheme({
           flexDirection: "column",
           gap: "24px",
           padding: "24px 32px 32px !important",
+        },
+      },
+    },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          borderTopColor: dividerGray,
+          borderTopStyle: "solid",
+          borderTopWidth: "1px",
+          padding: "16px",
+        }),
+      },
+    },
+    MuiSnackbar: {
+      styleOverrides: {
+        root: {
+          position: "absolute",
+          width: "100%",
+        },
+        anchorOriginTopRight: ({ theme }) => ({
+          top: "-24px",
+          right: "-24px",
+          [theme.breakpoints.down("tablet")]: {
+            top: "-8px",
+            right: 0,
+            left: 0,
+          },
+        }),
+      },
+    },
+    MuiAlert: {
+      styleOverrides: {
+        root: {
+          padding: "12px",
+        },
+        filledSuccess: {
+          alignItems: "center",
+          backgroundColor: brandGreen,
+          color: blue,
+        },
+        icon: {
+          padding: 0,
+        },
+        message: {
+          padding: 0,
+        },
+        action: {
+          padding: 0,
+          "& .MuiButtonBase-root": {
+            marginLeft: "16px",
+            marginRight: 0,
+            padding: "0 8px",
+          },
         },
       },
     },

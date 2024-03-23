@@ -57,7 +57,12 @@ export default function SettingsProfile() {
   return (
     <>
       <Typography typography={{ mobile: "h5", tablet: "h4-desktop" }}>PROFILE SETTINGS</Typography>
-      <Stack width="100%" sx={{ alignItems: { mobile: "center", laptop: "flex-start" } }}>
+      <Stack
+        width="100%"
+        sx={{
+          alignItems: { mobile: "center", laptop: "flex-start" },
+        }}
+      >
         <ProfilePicture size="m" upload />
       </Stack>
       <Stack
