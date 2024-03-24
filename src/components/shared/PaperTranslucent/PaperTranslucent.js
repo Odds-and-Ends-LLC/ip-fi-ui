@@ -16,12 +16,12 @@ export default function PaperTranslucent({
   flex,
 }) {
   const theme = useTheme();
-  const iconPositionValues = { mobile: "-25px", tablet: "-29px", desktop: "-41px" };
-  const iconLeftPositionValues = { mobile: "-25px", tablet: "-29px", desktop: "-41px" };
+  const iconPositionValues = { mobile: "-17px", tablet: "-29px", laptop: "-41px" };
+  const iconLeftPositionValues = { mobile: "-17px", tablet: "-29px", laptop: "-41px" };
   const iconRightPositionValues = {
-    mobile: "calc(100% - 23px)",
+    mobile: "calc(100% - 15px)",
     tablet: "calc(100% - 27px)",
-    desktop: "calc(100% - 39px)",
+    laptop: "calc(100% - 39px)",
   };
 
   return (
@@ -37,7 +37,7 @@ export default function PaperTranslucent({
       <Box
         className={styles.paperTranslucentIcon}
         sx={{
-          height: { mobile: "48px", tablet: "56px", desktop: "80px" },
+          height: { mobile: "32px", tablet: "56px", laptop: "80px" },
           top: iconPositionValues,
           left: iconPosition === "left" ? iconLeftPositionValues : iconRightPositionValues,
           // right: iconPosition === "right" && iconPositionValues,

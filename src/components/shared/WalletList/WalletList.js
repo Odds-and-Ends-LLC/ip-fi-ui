@@ -15,10 +15,10 @@ export default function WalletList({ walletAddress, onClickRemove }) {
       <Box className={styles.walletListIcon}>
         <Image priority src="/images/metamask.png" alt="metamask" sizes="100%" fill />
       </Box>
-      <Typography width="100%" sx={{ display: { mobile: "none", tablet: "block" } }}>
+      <Typography width="100%" sx={{ display: { mobile: "none", laptop: "block" } }}>
         {walletAddress}
       </Typography>
-      <Typography width="100%" sx={{ display: { mobile: "block", tablet: "none" } }}>
+      <Typography width="100%" sx={{ display: { mobile: "block", laptop: "none" } }}>
         {truncate(walletAddress, 8, 4)}
       </Typography>
       <IconButton color="error" onClick={onClickRemove}>
