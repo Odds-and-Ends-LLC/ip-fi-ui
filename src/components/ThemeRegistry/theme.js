@@ -349,6 +349,10 @@ const theme = createTheme({
           "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
             display: "none",
           },
+          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
+            {
+              outline: "none",
+            },
         }),
       },
     },
