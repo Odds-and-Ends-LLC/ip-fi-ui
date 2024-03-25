@@ -1,6 +1,12 @@
-export default function SvgComponent({ color = "#72FF88" }) {
+export default function InstagramIcon({ color = "#72FF88", size = 23 }) {
   return (
-    <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 23 23"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         id="Change-Color"
         fillRule="evenodd"

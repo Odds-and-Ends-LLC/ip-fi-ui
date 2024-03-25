@@ -1,4 +1,4 @@
-export default function InfoIcon({ color = "#FDFDFE", size = 24 }) {
+export default function InfoIcon({ color = "currentColor", size = 24 }) {
   return (
     <svg
       width={size}
