@@ -13,6 +13,7 @@ export default function Carousel({
   showArrows = false,
   showDots = false,
   slideWidth = "auto",
+  slideGap = "24px",
   loading = true,
   loader,
   header,
@@ -64,7 +65,13 @@ export default function Carousel({
     <Stack className={styles.carousel} sx={{ padding: { tablet: showArrows && "0 56px" } }}>
       {header && <Stack className={styles.carouselHeader} sx={{ mb: headerMarginBottom }}>{header(buttonPrev, buttonNext)}</Stack>}
       <Box ref={emblaRef} className={styles.carouselViewport} sx={{ padding }}>
-        <Box className={styles.carouselContainer} sx={{ marginRight: containerMarginRight, height: containerHeight, maxHeight: containerMaxHeight }}>
+        <Box className={styles.carouselContainer} sx={{
+          gap: slideGap,
+          pl: emblaOptions.loop ? slideGap : 0,
+          marginRight: containerMarginRight,
+          height: containerHeight,
+          maxHeight: containerMaxHeight
+        }}>
           {loading ? (
             <Box
               className={styles.carouselSlide}

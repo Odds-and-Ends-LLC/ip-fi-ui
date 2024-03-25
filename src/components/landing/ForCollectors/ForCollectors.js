@@ -9,10 +9,10 @@ import styles from "./ForCollectors.module.css";
 import { Frame, TextBox, CustomList } from "@/components/shared";
 
 const collectorsBenefit = [
-  "Collaborate with brands",
-  "Earn passive revenue",
-  "Find or get endorsement deals",
-  "Receive participation incentives",
+  "SHOWCASE NEW IP",
+  "EARN PASSIVE REVENUE",
+  "RECEIVE PARTICIPATION INCENTIVES",
+  "ACCESS NFT WITHOUT PURCHASING IT",
 ];
 
 export default function ForCollectors() {
@@ -102,10 +102,10 @@ export default function ForCollectors() {
       >
         <TextBox>
           <Typography color="text.gray">
-            We help you find brands and businesses looking to collaborate with NFT personas. Let us
-            help your personas find the endorsement deals and collaborations of your dreams. You can
-            add a stream of passive revenue to your collection, grow the profile of your personas,
-            and receive exclusive on-chain incentives to participate.
+            iPFi makes it easy to find NFT personas all while giving you the potential to earn by
+            being early to do so. Think a Bored Ape is going to release his own coffee brand? Get
+            in early and add a stream of passive revenue to your collection, grow the profile of
+            your personas, and receive exclusive on-chain incentives to participate.
           </Typography>
         </TextBox>
         <CustomList list={collectorsBenefit} />

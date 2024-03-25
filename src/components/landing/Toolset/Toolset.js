@@ -29,10 +29,10 @@ export default function Toolset() {
           Make Passive Income off your IP
         </Typography>
         <Typography className={styles.toolsetText} color="text.gray">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat.
+          You can now add another layer of income to the NFT in your collection that increases over
+          time. The more people who purchase licensing agreements, the bigger the reward to each
+          subsequent holder of the agreements, and most of all, to you. Use our analytics tools
+          to dive in to see how well your assets are performing.
         </Typography>
         <Box
           className={styles.toolsetImage}

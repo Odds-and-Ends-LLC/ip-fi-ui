@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 // components
 import { Tabs } from "@/components/shared";
 import { Footer } from "@/components/landing";
-import { Catalogs, MarketTable, Members, NFTs, TopCatalogs, TrendingTable } from "..";
+import { CatalogTables, Catalogs, MarketTable, Members, NFTs, TopCatalogs, TrendingTable } from "..";
 
 // styles
 import styles from "./Explore.module.css";
@@ -14,8 +14,6 @@ import { useInView } from "framer-motion";
 
 export default function Explore() {
   const [mainTab, setMainTab] = useState("all");
-  const [catalogTab, setCatalogTab] = useState("trending");
-  const [durationTab, setDurationTab] = useState("all");
   const catalogsRef = useRef();
   const nftsRef = useRef();
   const membersRef = useRef();
@@ -89,7 +87,7 @@ export default function Explore() {
           }}
         >
           <Stack>
-            <Typography variant="body2" color="text.disabled">Exchange Portal</Typography>
+            <Typography variant="body2" color="text.disabled">Explore</Typography>
             <Typography variant="h4-desktop">TOP CATALOGS 🔥</Typography>
           </Stack>
           <Button
@@ -101,41 +99,7 @@ export default function Explore() {
           </Button>
         </Stack>
         <TopCatalogs />
-        <Stack
-          className={styles.exploreHeader}
-          sx={{
-            flexDirection: {
-              desktop: "row",
-              tablet: "row",
-              mobile: "column"
-            },
-            ["@media (max-width:980px)"]: {
-              flexDirection: "column"
-            }
-          }}
-        >
-          <Tabs
-            value={catalogTab}
-            tabs={[
-              { label: "TRENDING", value: "trending" },
-              { label: "MARKET", value: "market" },
-            ]}
-            onChange={setCatalogTab}
-          />
-          <Tabs
-            value={durationTab}
-            tabs={[
-              { label: "ALL", value: "all" },
-              { label: "1h", value: "1h" },
-              { label: "6h", value: "6h" },
-              { label: "24h", value: "24h" },
-              { label: "7d", value: "1d" },
-            ]}
-            onChange={setDurationTab}
-          />
-        </Stack>
-        {catalogTab === "trending" && <TrendingTable />}
-        {catalogTab === "market" && <MarketTable />}
+        <CatalogTables />
         <Box ref={catalogsRef}>
           <Catalogs />
         </Box>

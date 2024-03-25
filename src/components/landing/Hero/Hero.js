@@ -57,18 +57,19 @@ export default function Hero() {
             />
           </Stack>
           <Typography className={styles.heroBannerText}>
-            We connect brands of all sizes to NFT IP to facilitate collaboration and cobranding opportunities.
-            With IP-Fi, you can find the licensing deal of your dreams or search for
-            opportunities that will unlock mutual value for NFT collectors and brands alike.
+            Earn rewards for licensing your IP to others and gain visibility into those rewards
+            without giving up the rights to your assets. NFT holders can leverage their IP while
+            maintaining it in their wallet, all while viewing their potential IP licensing
+            earnings on-chain.
           </Typography>
           <Typography className={styles.heroBannerText}>
-            We are on a mission to help brands enter the NFT world without spending $400,000 worth
-            of Ethereum on a Bored Ape, while at the same time helping NFT collectors build up the
-            profile of their NFT personas and generate a stream of passive income.
+            If you love that Bored Ape or always wanted a CloneX, now you can license to access
+            the IP, all while having the potential to earn rewards when other people license it
+            after you. Get an authorized derivative that includes your license to the IP.
           </Typography>
         </Stack>
         <Typography variant="h6" color="text.secondary">
-          Engage, collect, share, create, earn, license, and more with IP-Fi.
+          ENGAGE, COLLECT, SHARE, CREATE, EARN, LICENSE, AND MORE WITH IPFI.
         </Typography>
       </Stack>
       <Stack className={styles.heroReel} sx={{ display: { desktop: "flex", mobile: "none" } }}>
