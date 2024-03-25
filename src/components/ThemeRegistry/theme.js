@@ -552,6 +552,7 @@ const theme = createTheme({
           " .MuiTab-root": {
             padding: "8px 24px",
             justifyContent: "flex-start",
+            width: "100%"
           },
         },
       },
