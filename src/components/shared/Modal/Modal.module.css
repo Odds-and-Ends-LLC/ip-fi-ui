@@ -1,0 +1,11 @@
+.modalTitle {
+  align-items: center;
+  flex: 1;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.modalActions {
+  gap: 10px;
+  width: 100%
+}

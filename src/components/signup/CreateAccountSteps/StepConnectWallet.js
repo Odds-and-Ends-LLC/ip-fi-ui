@@ -11,19 +11,7 @@ import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "public/icons
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C";
 
-export default function StepConnectWallet({ data, setUserData, onBack, onNext }) {
-  const handleConnectWallet = () => {
-    const walletAddresses = data?.walletAddresses || [];
-    walletAddresses.push(userWalletA);
-    setUserData({ ...data, walletAddresses: walletAddresses });
-  };
-  const handleRemoveWallet = (index) => {
-    const walletAddresses = data?.walletAddresses || [];
-    walletAddresses.splice(index, 1);
-    setUserData({ ...data, walletAddresses: walletAddresses });
-  };
-
-  const WalletInfo = ({ walletAddress, index }) => {
+  export const WalletInfo = ({ walletAddress, index }) => {
     return (
       <Stack className={styles.walletInfo}>
         <Box className={styles.walletInfoIcon}>
@@ -35,6 +23,18 @@ export default function StepConnectWallet({ data, setUserData, onBack, onNext })
         </IconButton>
       </Stack>
     );
+  };
+
+export default function StepConnectWallet({ data, setUserData, onBack, onNext }) {
+  const handleConnectWallet = () => {
+    const walletAddresses = data?.walletAddresses || [];
+    walletAddresses.push(userWalletA);
+    setUserData({ ...data, walletAddresses: walletAddresses });
+  };
+  const handleRemoveWallet = (index) => {
+    const walletAddresses = data?.walletAddresses || [];
+    walletAddresses.splice(index, 1);
+    setUserData({ ...data, walletAddresses: walletAddresses });
   };
 
   return (
