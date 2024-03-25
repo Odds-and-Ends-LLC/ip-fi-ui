@@ -15,7 +15,6 @@
 .carouselContainer {
   backface-visibility: hidden;
   display: flex;
-  gap: 24px;
   touch-action: pan-y;
 }
 

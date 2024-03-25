@@ -71,9 +71,10 @@ export default function TopCatalogs() {
             mobile: "16px",
           }}
           emblaOptions={{
-            align: "start",
+            align: "center",
             containScroll: "trimSnaps",
             slidesToScroll: "auto",
+            loop: true,
           }}
           loading={false}
           containerHeight="45vw"
