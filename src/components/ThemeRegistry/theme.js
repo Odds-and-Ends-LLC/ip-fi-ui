@@ -240,6 +240,11 @@ const theme = createTheme({
       lineHeight: "24px",
       letterSpacing: "0.04em",
     },
+    button2: {
+      fontSize: "14px",
+      fontWeight: 700,
+      lineHeight: "20px",
+    },
     label: {
       fontFamily: unbounded.style.fontFamily,
       fontSize: "18px",
@@ -563,6 +568,9 @@ const theme = createTheme({
           minHeight: "40px",
           padding: "8px 16px",
           transition: ".3s ease",
+          width: "fit-content",
+          minWidth: "unset",
+          maxWidth: "unset",
           "&:hover": {
             backgroundColor: "#74777ABF",
           },

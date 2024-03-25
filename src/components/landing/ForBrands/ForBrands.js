@@ -9,10 +9,10 @@ import styles from "./ForBrands.module.css";
 import { Frame, TextBox, CustomList } from "@/components/shared";
 
 const brandsBenefit = [
-  "Collaborate with NFT personas",
-  "Dive into NFTs easily",
-  "Set custom licensing terms",
-  "Access NFTs without buying it",
+  "COLLABORATE WITH OTHERS",
+  "MAINTAIN ASSET OWNERSHIP",
+  "EARN ADDITIONAL REVENUE",
+  "SET CUSTOM LICENSING TERMS",
 ];
 
 export default function ForBrands() {
@@ -116,10 +116,9 @@ export default function ForBrands() {
           <Typography color="text.gray">
             From Adidas to Nightclub E11even, businesses are “apeing in” to the NFT space. They
             often purchase an NFT themselves (the Florida nightclub recently paid more then $400,000
-            for a single Bored Ape NFT). IP-Fi enables your brand to collaborate with NFT personas
-            across multiple collections and blockchains. Start partnering with Bored Apes, RTFKT
-            Clones, Dead Fellas, and many other top NFT personas without having to buy the
-            underlying NFTs.
+            for a single Bored Ape NFT). IP-Fi enables your IP to generate multiple revenue streams
+            through a downflow of users all while not having to give up ownership of the asset in
+            your wallet.
           </Typography>
         </TextBox>
 

@@ -1,5 +1,5 @@
 // packages
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
 
 // styles
@@ -30,9 +30,8 @@ export default function SettingsWallet({ data }) {
       </Stack>
       <Stack className={styles.accountWalletList}>
         {data?.walletAddresses?.map((walletAddress, i) => (
-          <>
+          <Fragment key={i}>
             <WalletList
-              key={i}
               walletAddress={walletAddress}
               onClickRemove={() => handleRemoveWallet(walletAddress)}
             />
@@ -60,7 +59,7 @@ export default function SettingsWallet({ data }) {
                 Are you sure you want to remove the selected wallet from your account?
               </Typography>
             </Modal>
-          </>
+          </Fragment>
         ))}
       </Stack>
       <Button fullWidth variant="outlined" onClick={handleAddWallet}>

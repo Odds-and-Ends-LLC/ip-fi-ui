@@ -48,7 +48,7 @@ export default function ItemsCarousel({
             {title && <ItemsSectionHeader title={title} count={count} />}
             <Stack className={styles.itemsCarouselPagination} sx={{ justifyContent: { tablet: "center", mobile: "space-between" } }}>
               {viewAllurl &&
-                <Button variant="text" color="white" {...viewAllurl && { href: viewAllurl }}>
+                <Button variant="text" color="white" {...viewAllurl && { href: viewAllurl }} sx={{ typography: { tablet: "button", mobile: "button2" } }}>
                   VIEW ALL
                 </Button>
               }

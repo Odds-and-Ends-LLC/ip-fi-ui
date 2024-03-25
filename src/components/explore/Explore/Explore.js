@@ -87,7 +87,7 @@ export default function Explore() {
           }}
         >
           <Stack>
-            <Typography variant="body2" color="text.disabled">Exchange Portal</Typography>
+            <Typography variant="body2" color="text.disabled">Explore</Typography>
             <Typography variant="h4-desktop">TOP CATALOGS 🔥</Typography>
           </Stack>
           <Button

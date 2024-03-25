@@ -23,6 +23,10 @@ export default function CatalogTables() {
             tablet: "row",
             mobile: "column"
           },
+          gap: {
+            desktop: "16px",
+            mobile: "8px",
+          },
           ["@media (max-width:980px)"]: {
             flexDirection: "column"
           }
@@ -35,6 +39,16 @@ export default function CatalogTables() {
             { label: "MARKET", value: "market" },
           ]}
           onChange={setCatalogTab}
+          tabsStyle={{
+            ["@media (max-width:980px)"]: {
+              width: "100%"
+            }
+          }}
+          tabStyle={{
+            ["@media (max-width:980px)"]: {
+              flex: 1
+            }
+          }}
         />
         <Tabs
           value={durationTab}
@@ -46,6 +60,16 @@ export default function CatalogTables() {
             { label: "7d", value: "1d" },
           ]}
           onChange={setDurationTab}
+          tabsStyle={{
+            ["@media (max-width:980px)"]: {
+              width: "100%"
+            }
+          }}
+          tabStyle={{
+            ["@media (max-width:980px)"]: {
+              flex: 1
+            }
+          }}
         />
       </Stack>
       {catalogTab === "trending" && <TrendingTable />}
