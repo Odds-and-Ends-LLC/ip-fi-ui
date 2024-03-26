@@ -156,7 +156,7 @@ export default function Signup() {
         </PaperTranslucent>
       </Stack>
       <Typography variant="label3">
-        {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
+        {new Date().getFullYear()} © iPFi. Powered by Phygital.eth.
       </Typography>
     </Stack>
   );

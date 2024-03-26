@@ -141,7 +141,7 @@ export default function Navbar() {
                 </IconButton>
               </Stack>
               <Typography variant="label">
-                {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
+                {new Date().getFullYear()} © iPFi. Powered by Phygital.eth.
               </Typography>
             </Stack>
           </Drawer>
