@@ -8,7 +8,7 @@ import styles from "./Settings.module.css";
 
 // components
 import { ArrowLeftIcon, PickAvatarIcon, SettingsIcon, WalletIcon } from "public/icons";
-import { Tabs } from "@/components/shared";
+import { BackgroundCircles, Tabs } from "@/components/shared";
 import { SettingsProfile, SettingsAccount, SettingsWallet } from "./";
 
 const data = {
@@ -41,6 +41,13 @@ export default function Settings() {
         backgroundColor: "blue.main",
       }}
     >
+      <BackgroundCircles
+        width="1024px"
+        height="832px"
+        containerPlacement={{ bottom: "48px" }}
+        circle2Props={{ placement: { top: "96px", right: "168px" } }}
+        circleOutlineProps={{ placement: { bottom: 0, right: 0 } }}
+      />
       <Stack
         className={styles.settingsPaper}
         sx={{ flexDirection: { mobile: "column", laptop: "row" } }}

@@ -19,3 +19,4 @@ export { default as ItemsCarousel } from "./ItemsCarousel";
 export { default as WalletList } from "./WalletList";
 export * from "./Catalog";
 export { PasswordInput } from "./Input";
+export { BackgroundCircles } from "./Background";
