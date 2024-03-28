@@ -15,7 +15,7 @@ export default function Login() {
         <Image priority src="/images/login_gradient.png" alt="gradient" sizes="100%" fill />
         <Box
           className={styles.artBackgroundImgContainer}
-          sx={{ maxWidth: { mobile: "480px", desktop: "1024px", position: "relative" } }}
+          sx={{ maxWidth: { mobile: "480px", laptop: "1024px", position: "relative" } }}
         >
           <Image
             priority
@@ -35,18 +35,18 @@ export default function Login() {
       <Grid
         item
         mobile={12}
-        desktop={6}
+        laptop={6}
         className={styles.loginArtGrid}
-        sx={{ display: { mobile: "none", desktop: "block" } }}
+        sx={{ display: { mobile: "none", laptop: "block" } }}
       >
         <Stack
           className={styles.loginArtGridContainer}
-          sx={{ padding: { mobile: "32px", desktop: "72px" } }}
+          sx={{ padding: { mobile: "24px", laptop: "96px 72px" } }}
         >
           <ArtBackground />
           <Box
             className={styles.loginArtImgContainer}
-            sx={{ display: { mobile: "none", desktop: "block" } }}
+            sx={{ display: { mobile: "none", laptop: "block" } }}
           >
             <Image
               priority
@@ -57,7 +57,7 @@ export default function Login() {
               className={styles.loginArtImg}
             />
           </Box>
-          <Typography sx={{ typography: { mobile: "h2-mobile", desktop: "h2" } }}>
+          <Typography sx={{ typography: { mobile: "h2-mobile", laptop: "h2" } }}>
             LOREM IPSUM DOLOR SIT AMET
           </Typography>
         </Stack>
@@ -65,18 +65,18 @@ export default function Login() {
       <Grid
         item
         mobile={12}
-        desktop={6}
+        laptop={6}
         className={styles.loginFormGrid}
         sx={{
-          backgroundColor: { mobile: "transparent", desktop: "blue.dark" },
-          padding: { mobile: "40px", desktop: "24px" },
+          backgroundColor: { mobile: "transparent", laptop: "blue.dark" },
+          padding: { mobile: "96px 24px 24px", laptop: "72px 24px 24px" },
         }}
       >
-        <ArtBackground display={{ mobile: "block", desktop: "none" }} />
+        <ArtBackground display={{ mobile: "block", laptop: "none" }} />
         <Stack
           className={styles.loginFormGridContainer}
           sx={{
-            backgroundColor: { mobile: "background.darkBlue", desktop: "blue.dark" },
+            backgroundColor: { mobile: "background.darkBlue", laptop: "blue.dark" },
           }}
         >
           <Stack className={styles.loginFormContainer}>
@@ -91,7 +91,7 @@ export default function Login() {
             </Box>
             <LoginForm />
           </Stack>
-          <Typography variant="label3">2023 © IP-Fi. Powered by Phygital.eth.</Typography>
+          <Typography variant="label3">2023 © iPFi. Powered by Phygital.eth.</Typography>
         </Stack>
       </Grid>
     </Grid>

@@ -71,17 +71,19 @@ export default function Navbar() {
         <Button variant="gradient">Explore</Button>
         <Button variant="gradient">Trading</Button>
       </Stack>
-      <Button
-        href="/login"
-        variant="gradientInverted"
-        sx={{ ml: { desktop: "auto", mobile: "none" } }}
-      >
-        Login
-      </Button>
+      {pathname !== "/login" && (
+        <Button
+          href="/login"
+          variant="gradientInverted"
+          sx={{ ml: { desktop: "auto", mobile: "none" } }}
+        >
+          Login
+        </Button>
+      )}
     </Stack>
   );
 
-  return pathname !== "/login" ? (
+  return (
     <AppBar sx={{ backgroundColor: backgroundColor }}>
       <Toolbar>
         <Link href="/" className={styles.navbarLogo} rel="" target="">
@@ -139,12 +141,12 @@ export default function Navbar() {
                 </IconButton>
               </Stack>
               <Typography variant="label">
-                {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
+                {new Date().getFullYear()} © iPFi. Powered by Phygital.eth.
               </Typography>
             </Stack>
           </Drawer>
         )}
       </Toolbar>
     </AppBar>
-  ) : null;
+  );
 }

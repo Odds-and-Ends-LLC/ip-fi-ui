@@ -1,4 +1,5 @@
 // packages
+import { useRef } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 
 // styles
@@ -10,6 +11,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from "public/icons";
 // data
 
 export default function StepUsername({ data, setUserData, onBack, onNext }) {
+  const nextButtonRef = useRef(null);
+
   return (
     <>
       <Stack className={styles.createAccountContent}>
@@ -25,6 +28,7 @@ export default function StepUsername({ data, setUserData, onBack, onNext }) {
             variant="filled"
             value={data?.username || ""}
             onChange={(e) => setUserData({ ...data, username: e.target.value })}
+            onKeyDown={(e) => (e.key === "Enter" ? nextButtonRef.current.focus() : null)}
           />
         </Stack>
       </Stack>
@@ -32,7 +36,13 @@ export default function StepUsername({ data, setUserData, onBack, onNext }) {
         <Button startIcon={<ArrowLeftIcon />} onClick={onBack}>
           BACK
         </Button>
-        <Button endIcon={<ArrowRightIcon />} onClick={onNext} disabled={!data?.username}>
+        <Button
+          ref={nextButtonRef}
+          endIcon={<ArrowRightIcon />}
+          onClick={onNext}
+          disabled={!data?.username}
+          onFocus={onNext}
+        >
           NEXT
         </Button>
       </Stack>

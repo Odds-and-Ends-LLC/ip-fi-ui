@@ -23,7 +23,7 @@ export default function SettingsWallet({ data }) {
       <Stack gap="4px">
         <Typography typography={{ mobile: "h5", tablet: "h4-desktop" }}>WALLET SETTINGS</Typography>
         <Typography>
-          Explain why we encourage users to connect their wallet on iP-Fi. Lorem ipsum dolor sit
+          Explain why we encourage users to connect their wallet on iPFi. Lorem ipsum dolor sit
           amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua.
         </Typography>

@@ -62,7 +62,7 @@ export default function Signup() {
       sx={{
         backgroundColor: "blue.main",
         gap: { mobile: "24px", tablet: "40px" },
-        padding: { mobile: "104px 40px 32px", tablet: "124px 64px 32px" },
+        padding: { mobile: "104px 24px 32px", tablet: "124px 64px 32px" },
       }}
     >
       <Stack className={styles.bgContainer} sx={{ position: "absolute" }}>
@@ -107,7 +107,7 @@ export default function Signup() {
           padding={
             step > 0
               ? { mobile: "32px 24px 32px 32px", tablet: "72px 64px 72px 72px" }
-              : { mobile: "32px 16px 24px 24px", desktop: "40px 64px 24px 72px" }
+              : { mobile: "32px 16px 24px 24px", laptop: "40px 64px 24px 72px" }
           }
           iconPosition={step % 2 ? "right" : "left"}
         >
@@ -156,7 +156,7 @@ export default function Signup() {
         </PaperTranslucent>
       </Stack>
       <Typography variant="label3">
-        {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
+        {new Date().getFullYear()} © iPFi. Powered by Phygital.eth.
       </Typography>
     </Stack>
   );

@@ -59,6 +59,7 @@ export default function SettingsAccount() {
       passwordInvalid: passwordInput.new && !REGEX.password.test(passwordInput.new),
       passwordNotMatched: passwordInput.match && passwordInput.new !== passwordInput.match,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [passwordInput.match, passwordInput.new]);
 
   return (
@@ -126,10 +127,10 @@ export default function SettingsAccount() {
         </Stack>
         <Stack className={styles.accountAutoAddNft}>
           <Stack className={styles.autoAddNftText}>
-            <Typography variant="label">AUTO-ADD NFTs TO iP-Fi</Typography>
+            <Typography variant="label">AUTO-ADD NFTs TO iPFi</Typography>
             <Typography>Enable auto-adding of NFTs to the platform.</Typography>
           </Stack>
-          <Switch focusVisibleClassName=".Mui-focusVisible" />
+          <Switch defaultChecked focusVisibleClassName=".Mui-focusVisible" />
         </Stack>
         <Stack className={styles.accountDelete}>
           <Stack gap="4px">
@@ -185,7 +186,7 @@ export default function SettingsAccount() {
       >
         <Typography>
           Are you sure you want to delete your account? Your profile and account information will be
-          completely deleted from iP-Fi.
+          completely deleted from iPFi.
         </Typography>
         <Stack gap="8px">
           <Typography>Enter Password</Typography>

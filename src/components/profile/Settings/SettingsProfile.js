@@ -89,35 +89,31 @@ export default function SettingsProfile() {
       <Stack className={styles.profileTextFieldContainer}>
         <Typography variant="label">Links</Typography>
         <Stack gap="16px">
-          <LinkInput
-            icon={(props) => <WebIcon {...props} />}
-            title="Website"
-            value="https://www.example.com"
-          />
+          <LinkInput icon={(props) => <WebIcon {...props} />} title="Website" value="example.com" />
           <LinkInput
             icon={(props) => <XTwitterIcon {...props} />}
             title="Twitter"
-            value="https://www.twitter.com/example"
+            value="twitter.com/example"
           />
           <LinkInput
             icon={(props) => <InstagramIcon {...props} />}
             title="Instagram"
-            value="https://www.instagram.com/example"
+            value="instagram.com/example"
           />
           <LinkInput
             icon={(props) => <DiscordIcon {...props} />}
             title="Discord"
-            value="https://www.discord.gg/example"
+            value="discord.gg/example"
           />
           <LinkInput
             icon={(props) => <OpenSeaIcon {...props} />}
             title="OpenSea"
-            value="https://www.opensea.io/example"
+            value="opensea.io/example"
           />
           <LinkInput
             icon={(props) => <LooksRareIcon {...props} />}
             title="LooksRare"
-            value="https://www.looksrare.org/sample"
+            value="looksrare.org/sample"
           />
         </Stack>
       </Stack>

@@ -7,23 +7,10 @@ import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "public/icons";
+import { WalletList } from "@/components/shared";
 
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C";
-
-  export const WalletInfo = ({ walletAddress, index }) => {
-    return (
-      <Stack className={styles.walletInfo}>
-        <Box className={styles.walletInfoIcon}>
-          <Image priority src="/images/metamask.png" alt="metamask" sizes="100%" fill />
-        </Box>
-        <Typography width="100%">{walletAddress}</Typography>
-        <IconButton color="error" onClick={() => handleRemoveWallet(index)}>
-          <CloseIcon color="currentColor" />
-        </IconButton>
-      </Stack>
-    );
-  };
 
 export default function StepConnectWallet({ data, setUserData, onBack, onNext }) {
   const handleConnectWallet = () => {
@@ -68,7 +55,11 @@ export default function StepConnectWallet({ data, setUserData, onBack, onNext })
             </Stack>
             <Stack>
               {data?.walletAddresses?.map((walletAddress, i) => (
-                <WalletInfo walletAddress={walletAddress} index={i} key={i} />
+                <WalletList
+                  key={i}
+                  walletAddress={walletAddress}
+                  onClickRemove={() => handleRemoveWallet(i)}
+                />
               ))}
             </Stack>
             <Button
