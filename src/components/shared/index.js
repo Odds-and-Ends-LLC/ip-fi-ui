@@ -20,3 +20,4 @@ export { default as WalletList } from "./WalletList";
 export * from "./Catalog";
 export { PasswordInput } from "./Input";
 export { BackgroundCircles } from "./Background";
+export { default as Circle } from "./Circle";
