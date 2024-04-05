@@ -21,6 +21,7 @@ export { default as MailIcon } from "./Mail";
 export { default as OpenSeaIcon } from "./OpenSea";
 export { default as PickAvatarIcon } from "./PickAvatar";
 export { default as PlusIcon } from "./Plus";
+export { default as RefreshIcon } from "./Refresh";
 export { default as RemoveIcon } from "./Remove";
 export { default as SettingsIcon } from "./Settings";
 export { default as Twitter } from "./Twitter";

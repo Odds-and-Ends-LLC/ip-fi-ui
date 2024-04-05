@@ -517,6 +517,9 @@ const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
+          borderRadius: 0,
+          boxShadow: "none",
+          height: "fit-content",
           "&.Mui-disabled": {
             opacity: 0.25,
           },
@@ -538,6 +541,19 @@ const theme = createTheme({
         {
           props: { color: "gray" },
         },
+        {
+          props: { outlined: true },
+          style: {
+            borderColor: "rgba(253, 253, 254, 0.5)",
+            borderStyle: "solid",
+            borderWidth: "1px",
+            margin: 0,
+            transition: "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+            "&:hover": {
+              borderColor: white,
+            },
+          },
+        },
       ],
     },
     MuiTabs: {
@@ -552,7 +568,7 @@ const theme = createTheme({
           " .MuiTab-root": {
             padding: "8px 24px",
             justifyContent: "flex-start",
-            width: "100%"
+            width: "100%",
           },
         },
       },
