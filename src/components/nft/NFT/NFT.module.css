@@ -46,3 +46,13 @@
 .nftDetails {
   width: 100%;
 }
+
+.nftDetailsHeader {
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.nftDetailsSettings {
+  flex-direction: row;
+  gap: 8px;
+}

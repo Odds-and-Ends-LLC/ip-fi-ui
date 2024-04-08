@@ -24,6 +24,7 @@ export { default as PlusIcon } from "./Plus";
 export { default as RefreshIcon } from "./Refresh";
 export { default as RemoveIcon } from "./Remove";
 export { default as SettingsIcon } from "./Settings";
+export { default as ShareIcon } from "./Share";
 export { default as Twitter } from "./Twitter";
 export { default as UploadIcon } from "./Upload";
 export { default as WalletIcon } from "./Wallet";

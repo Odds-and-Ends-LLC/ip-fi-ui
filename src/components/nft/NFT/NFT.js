@@ -1,15 +1,26 @@
 // packages
+import { useState } from "react";
 import { Button, Stack, Typography, IconButton } from "@mui/material";
-import Image from "next/image";
 
 // styles
 import styles from "./NFT.module.css";
 
 // components
-import { ArrowLeftIcon, CheckIcon, LooksRareIcon, OpenSeaIcon, RefreshIcon } from "public/icons";
-import { Member, NFT as NFTCard } from "@/components/shared";
+import {
+  ArrowLeftIcon,
+  CheckIcon,
+  LooksRareIcon,
+  OpenSeaIcon,
+  RefreshIcon,
+  SettingsIcon,
+  ShareIcon,
+} from "public/icons";
+import { Member, NFT as NFTCard, Tabs } from "@/components/shared";
+import { Analytics, Contracts, Details, History } from "..";
 
 export default function NFT() {
+  const [mainTab, setMainTab] = useState("contracts");
+
   return (
     <Stack
       className={styles.nft}
@@ -61,8 +72,38 @@ export default function NFT() {
               </Stack>
             </Stack>
           </Stack>
-          <Stack className={styles.nftDetails} sx={{ border: "1px solid red" }}>
-            DETAILS
+          <Stack className={styles.nftDetails} sx={{ gap: { mobile: "24px", laptop: "32px" } }}>
+            <Stack
+              className={styles.nftDetailsHeader}
+              sx={{
+                flexDirection: { mobile: "column-reverse", laptop: "row" },
+              }}
+            >
+              <Tabs
+                value={mainTab}
+                tabs={[
+                  { label: "CONTRACTS", value: "contracts" },
+                  { label: "DETAILS", value: "details" },
+                  { label: "ANALYTICS", value: "analytics" },
+                  { label: "HISTORY", value: "history" },
+                ]}
+                onChange={setMainTab}
+              />
+              <Stack className={styles.nftDetailsSettings}>
+                <Button variant="outlined" color="white">
+                  <SettingsIcon />
+                </Button>
+                <Button variant="outlined" color="white" startIcon={<ShareIcon />}>
+                  SHARE
+                </Button>
+              </Stack>
+            </Stack>
+            <Stack>
+              {mainTab === "contracts" && <Contracts />}
+              {mainTab === "details" && <Details />}
+              {mainTab === "analytics" && <Analytics />}
+              {mainTab === "history" && <History />}
+            </Stack>
           </Stack>
         </Stack>
       </Stack>
