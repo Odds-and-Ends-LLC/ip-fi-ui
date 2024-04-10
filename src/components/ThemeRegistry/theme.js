@@ -96,6 +96,9 @@ const theme = createTheme({
     dividerGray: {
       main: dividerGray,
     },
+    dividerWhite: {
+      main: dividerWhite,
+    },
     background: {
       default: blue,
       green: brandGreen,
@@ -354,10 +357,23 @@ const theme = createTheme({
           "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
             display: "none",
           },
-          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
-            {
-              outline: "none",
-            },
+          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
+            outline: "none",
+          },
+          "& .MuiDataGrid-main": {
+            // remove overflow hidden overwise sticky does not work
+            overflow: "unset"
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            position: "sticky",
+            top: 0,
+            backgroundColor: blue,
+            zIndex: 1,
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            // remove the space left for the header
+            marginTop: "0!important"
+          }
         }),
       },
     },

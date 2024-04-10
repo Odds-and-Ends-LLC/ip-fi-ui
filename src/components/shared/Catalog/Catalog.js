@@ -1,25 +1,28 @@
 // packages
-import { Stack, Button } from "@mui/material";
+import { Stack, Button, Typography, LinearProgress } from "@mui/material";
 import { useEffect, useState, useRef } from "react";
 
 // components
-import Leaf from "./Leaf";
+import { ArrowLeftIcon, ArrowRightIcon } from "public/icons";
+import CatalogLeaf from "./CatalogLeaf";
+import CatalogRings from "./CatalogRings";
 
 // styles
 import styles from "./Catalog.module.css";
 
 export default function Catalog({
-  pages = Array(4).fill(0),
-  pageWidth = 300,
-  pageHeight = 480,
+  pages = [],
+  pageWidth = 682,
+  pageHeight = 764,
 }) {
   const leafSettings = useRef({
-    leaf: 1,
+    leaf: 0,
     direction: 0,
   });
 
   const [leafRotations, setLeafRotations] = useState([]);
-  const [leafZs, setLeafZs] = useState([]);
+  const [leafZIndexes, setLeafZIndexes] = useState([]);
+  const [page, setPage] = useState(0);
 
   const solveRotations = () => {
     const { leaf, direction } = leafSettings.current;
@@ -45,10 +48,10 @@ export default function Catalog({
     setLeafRotations(rotations);
   };
 
-  const solveZs = () => {
+  const solveZIndexes = () => {
     const { leaf } = leafSettings.current;
 
-    const zs = pages.map((_, i) => {
+    const zIndexes = pages.map((_, i) => {
       const index = i + 1;
 
       if (index < leaf) {
@@ -61,62 +64,78 @@ export default function Catalog({
 
       return pages.length;
     });
-    setLeafZs(zs);
+    setLeafZIndexes(zIndexes);
   };
 
   const handleFlipComplete = () => {
     if (leafSettings.current.direction === 1) {
-      solveZs();
+      solveZIndexes();
     }
   };
 
-  const handleControls = (value) => {
-    const newLeaf = Math.min(Math.max(leafSettings.current.leaf + value, 1), pages.length);
-    const newDirection = value;
+  const handleControls = (direction) => {
+    const newLeaf = Math.min(Math.max(leafSettings.current.leaf + direction, 1), (pages.length / 2));
+    const newPage = Math.min(Math.max(page + direction, 0), ((pages.length - 2) / 2));
 
     leafSettings.current = {
       leaf: newLeaf,
-      direction: newDirection,
+      direction,
     };
 
-    if (newDirection === -1) {
-      solveZs();
+    setPage(newPage);
+
+    if (direction === -1) {
+      solveZIndexes();
     }
 
     solveRotations();
   };
 
   useEffect(() => {
-    solveZs();
+    handleControls(1);
   }, [])
 
   return (
     <Stack className={styles.catalog}>
-      <Button onClick={() => handleControls(-1)}>{"<"}</Button>
+      {/* <Button onClick={() => handleControls(-1)}>{"<"}</Button> */}
       <Stack
         className={styles.catalogContent}
         sx={{
           minWidth: pageWidth * 2,
-          height: pageHeight * 2,
-          paddingTop: "100px",
+          height: pageHeight,
         }}
       >
-        {pages.map((page, i) => {
-
+        {pages.flatMap((_, i, a) => i % 2 ? [] : [a.slice(i, i + 2)]).map((pair, i) => {
           return (
-            <Leaf
+            <CatalogLeaf
               key={i}
               index={i + 1}
-              z={leafZs[i] || pages.length - i}
+              zIndex={leafZIndexes[i] || pages.length - i}
               rotateY={leafRotations[i]}
               width={pageWidth}
               height={pageHeight}
               onFlipComplete={handleFlipComplete}
+              frontContent={pair[0]}
+              backContent={pair[1]}
             />
           );
         })}
+        <CatalogRings height={pageHeight} sx={{ zIndex: 100, alignItems: "center", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }} />
+        <CatalogRings height={pageHeight} sx={{ zIndex: 0, alignItems: "center", left: "50%", top: "calc(50% + 12px)", transform: "translate(-50%, -50%) rotate(180deg)" }} />
       </Stack>
-      <Button onClick={() => handleControls(1)}>{">"}</Button>
+      <Stack className={styles.catalogPagination}>
+        <LinearProgress variant="determinate" value={(page / ((pages.length - 2) / 2)) * 100} />
+        <Stack className={styles.catalogPaginationControls} sx={{ p: "16px 64px" }}>
+          <Button color="white" startIcon={<ArrowLeftIcon />} onClick={() => handleControls(-1)}>BACK</Button>
+          {page > 0 &&
+            <Stack className={styles.catalogPaginationText}>
+              <Typography color="text.secondary">Page</Typography>
+              <Typography>{`${(page * 2) - 1} - ${page  * 2}`}</Typography>
+            </Stack>
+          }
+          <Button color="white" endIcon={<ArrowRightIcon />} onClick={() => handleControls(1)}>NEXT</Button>
+        </Stack>
+      </Stack>
     </Stack>
   );
 };

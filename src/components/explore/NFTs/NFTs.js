@@ -14,8 +14,8 @@ export default function NFTs() {
         <NFT variant="card" key={4} />,
         <NFT variant="card" key={5} />
       ]}
-      slideWidth={{ mobile: "60%", tablet: "40%", laptop: "25%"  }}
-      slideHeight={{ mobile: "80vw", tablet: "40vw", laptop: "30vw"  }}
+      slideWidth={{ mobile: "60%", tablet: "40%", laptop: "25%", desktop: "20%" }}
+      slideHeight={{ mobile: "80vw", tablet: "40vw", laptop: "30vw" }}
       slideMaxHeight="426px"
     />
   )

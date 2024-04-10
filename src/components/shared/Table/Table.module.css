@@ -1,7 +1,6 @@
 .table {
   border-radius: 12px;
-  width: 1512px;
-  max-width: 100%;
+  width: 100%;
 }
 
 .tableHeader {
@@ -13,7 +12,12 @@
   margin-left: auto;
 }
 
+.tableDataContainer {
+  overflow: auto;
+}
+
 .tableData {
   padding: 0px 8px;
   width: 100%;
+  overflow: unset;
 }

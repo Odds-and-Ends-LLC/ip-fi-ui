@@ -1,0 +1,35 @@
+.nftMarketTable {
+  border: 2px solid #72ff8833;
+  border-radius: 12px;
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.nftMarketTableItem {
+  width: 50%;
+}
+
+.nftMarketTableCatalog {
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nftMarketTableCatalogName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nftMarketTablePrice {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.nftMarketTableVolume {
+  gap: 2px;
+}
+

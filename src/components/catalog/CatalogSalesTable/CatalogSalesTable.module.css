@@ -1,0 +1,41 @@
+.catalogSalesTable {
+  border: 2px solid #72ff8833;
+  border-radius: 12px;
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.catalogSalesTableItem {
+  width: 50%;
+}
+
+.catalogSalesTableCatalog {
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalogSalesTableCatalogName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.catalogSalesTablePrice {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.catalogSalesTableBuyer {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.catalogSalesTableVolume {
+  gap: 2px;
+}
+

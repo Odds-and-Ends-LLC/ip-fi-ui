@@ -1,25 +1,20 @@
 // packages
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 // components
 import { Tabs } from "@/components/shared";
 import { Footer } from "@/components/landing";
-import { CatalogTables, Catalogs, MarketTable, Members, NFTs, TopCatalogs, TrendingTable } from "..";
+import { CatalogTables, Catalogs, Members, NFTs, TopCatalogs } from "..";
 
 // styles
 import styles from "./Explore.module.css";
 import { PlusIcon } from "public/icons";
-import { useInView } from "framer-motion";
 
 export default function Explore() {
-  const [mainTab, setMainTab] = useState("all");
   const catalogsRef = useRef();
   const nftsRef = useRef();
   const membersRef = useRef();
-  const catalogsInView = useInView(catalogsRef);
-  const nftsInView = useInView(nftsRef);
-  const membersInView = useInView(membersRef);
 
   const scrollTo = (ref) => {
     const topOffset = -96;
@@ -34,21 +29,7 @@ export default function Explore() {
     } else if (value === "members") {
       scrollTo(membersRef);
     }
-
-    setMainTab(value);
   };
-
-  useEffect(() => {
-    setMainTab(catalogsInView ? "catalogs" : "all");
-  }, [catalogsInView]);
-
-  useEffect(() => {
-    setMainTab(nftsInView ? "nfts" : "all");
-  }, [nftsInView]);
-
-  useEffect(() => {
-    setMainTab(membersInView ? "members" : "all");
-  }, [membersInView]);
 
   return (
     <Stack
@@ -68,7 +49,7 @@ export default function Explore() {
         }}
       >
         <Tabs
-          value={mainTab}
+          value="all"
           tabs={[
             { label: "ALL", value: "all" },
             { label: "CATALOGS", value: "catalogs" },

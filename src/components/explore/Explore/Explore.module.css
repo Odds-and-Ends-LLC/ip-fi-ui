@@ -1,5 +1,5 @@
 .explore {
-  min-height: 100%;
+  min-height: 100dvh;
   align-items: center;
   position: relative;
 }
@@ -22,7 +22,7 @@
 }
 
 .exploreSection {
-  max-width: 1512px;
+  max-width: 1920px;
   width: 100%;
 }
 
