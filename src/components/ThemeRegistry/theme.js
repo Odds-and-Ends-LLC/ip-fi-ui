@@ -542,7 +542,7 @@ const theme = createTheme({
           props: { color: "gray" },
         },
         {
-          props: { outlined: true },
+          props: { variant: "outlined" },
           style: {
             borderColor: "rgba(253, 253, 254, 0.5)",
             borderStyle: "solid",
@@ -862,6 +862,21 @@ const theme = createTheme({
             backgroundColor: dividerGray,
             opacity: 1,
           },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        outlined: {
+          backdropFilter: "blur(50px)",
+          background:
+            "linear-gradient(113deg, rgba(26, 27, 70, 0.50) 0%, rgba(26, 27, 70, 0.10) 100%)",
+          border: "1px solid rgba(114, 255, 136, 0.20)",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 24px 0px rgba(0, 0, 0, 0.15)",
+          flex: 1,
+          overflow: "auto",
+          padding: "16px",
         },
       },
     },

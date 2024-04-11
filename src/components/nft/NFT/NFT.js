@@ -25,10 +25,16 @@ export default function NFT() {
     <Stack
       className={styles.nft}
       sx={{
-        padding: { mobile: "104px 24px 32px", tablet: "96px 64px 32px" },
+        backgroundColor: "blue.main",
+        height: { laptop: "100vh" },
       }}
     >
-      <Stack className={styles.nftContents}>
+      <Stack
+        className={styles.nftSection}
+        sx={{
+          padding: { mobile: "104px 24px 32px", tablet: "96px 64px 32px" },
+        }}
+      >
         <Button startIcon={<ArrowLeftIcon />}>BACK</Button>
         <Stack className={styles.nftContainer} sx={{ flexDirection: { laptop: "row" } }}>
           <Stack
@@ -43,13 +49,28 @@ export default function NFT() {
             </Stack>
             <Stack className={styles.nftProfileDetails}>
               <Stack className={styles.nftProfileActions}>
-                <IconButton aria-label="opensea" outlined color="white" onClick={() => {}}>
+                <IconButton
+                  aria-label="opensea"
+                  variant="outlined"
+                  color="white"
+                  onClick={() => {}}
+                >
                   <OpenSeaIcon />
                 </IconButton>
-                <IconButton aria-label="looksrare" outlined color="white" onClick={() => {}}>
+                <IconButton
+                  aria-label="looksrare"
+                  variant="outlined"
+                  color="white"
+                  onClick={() => {}}
+                >
                   <LooksRareIcon />
                 </IconButton>
-                <IconButton aria-label="refresh" outlined color="white" onClick={() => {}}>
+                <IconButton
+                  aria-label="refresh"
+                  variant="outlined"
+                  color="white"
+                  onClick={() => {}}
+                >
                   <RefreshIcon />
                 </IconButton>
               </Stack>
@@ -72,7 +93,13 @@ export default function NFT() {
               </Stack>
             </Stack>
           </Stack>
-          <Stack className={styles.nftDetails} sx={{ gap: { mobile: "24px", laptop: "32px" } }}>
+          <Stack
+            className={styles.nftDetails}
+            sx={{
+              gap: { mobile: "24px", laptop: "32px" },
+              height: { laptop: "calc(100vh - 196px)" },
+            }}
+          >
             <Stack
               className={styles.nftDetailsHeader}
               sx={{
@@ -98,7 +125,7 @@ export default function NFT() {
                 </Button>
               </Stack>
             </Stack>
-            <Stack>
+            <Stack className={styles.nftDetailsContents}>
               {mainTab === "contracts" && <Contracts />}
               {mainTab === "details" && <Details />}
               {mainTab === "analytics" && <Analytics />}

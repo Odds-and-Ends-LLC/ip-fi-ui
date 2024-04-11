@@ -1,13 +1,15 @@
 .nft {
-  flex: 1;
-  height: 100vh;
+  min-height: 100vh;
+  align-items: center;
+  position: relative;
 }
 
-.nftContents {
+.nftSection {
   align-items: flex-start;
   flex: 1;
   gap: 24px;
-  overflow-y: auto;
+  max-width: 1512px;
+  width: 100%;
 }
 
 .nftContainer {
@@ -23,7 +25,7 @@
 
 .nftProfileCard {
   flex-grow: 1;
-  min-height: 304px;
+  height: 304px;
   width: 100%;
 }
 
@@ -44,6 +46,7 @@
 }
 
 .nftDetails {
+  flex: 1;
   width: 100%;
 }
 
@@ -55,4 +58,10 @@
 .nftDetailsSettings {
   flex-direction: row;
   gap: 8px;
+}
+
+.nftDetailsContents {
+  flex: 1;
+  gap: 16px;
+  overflow-y: auto;
 }
