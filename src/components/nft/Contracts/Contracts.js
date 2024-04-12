@@ -95,11 +95,9 @@ const contracts = [
 export default function Contracts() {
   return (
     <Stack className={styles.contracts}>
-      <Stack
-        sx={{ flexDirection: { tablet: "row" }, gap: "8px 32px", justifyContent: "space-between" }}
-      >
+      <Stack className={styles.contractsHeader} sx={{ flexDirection: { tablet: "row" } }}>
         <ItemsSectionHeader title="CONTRACTS" count={10} />
-        <Stack sx={{ flexDirection: "row", gap: "12px", justifyContent: "space-between" }}>
+        <Stack className={styles.contractsHeaderOptions}>
           <Select
             minWidth="112px"
             label="FILTER"

@@ -4,6 +4,17 @@
   overflow-y: auto;
 }
 
+.contractsHeader {
+  gap: 8px 32px;
+  justify-content: space-between;
+}
+
+.contractsHeaderOptions {
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-between;
+}
+
 .contractsContent {
   gap: 16px;
   overflow-y: auto;
