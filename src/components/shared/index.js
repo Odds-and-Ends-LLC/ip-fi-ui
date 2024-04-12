@@ -16,6 +16,7 @@ export { default as Avatar } from "./Avatar";
 export { default as Table } from "./Table";
 export { default as ItemsSectionHeader } from "./ItemsSectionHeader";
 export { default as ItemsCarousel } from "./ItemsCarousel";
+export { default as WalletDisplay } from "./WalletDisplay";
 export { default as WalletList } from "./WalletList";
 export * from "./Catalog";
 export { PasswordInput } from "./Input";

@@ -19,7 +19,7 @@ import { Member, NFT as NFTCard, Tabs } from "@/components/shared";
 import { Analytics, Contracts, Details, History } from "..";
 
 export default function NFT() {
-  const [mainTab, setMainTab] = useState("contracts");
+  const [mainTab, setMainTab] = useState("details");
 
   return (
     <Stack
