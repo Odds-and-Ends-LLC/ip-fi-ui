@@ -1,6 +1,8 @@
 export { default as AlertIcon } from "./Alert";
+export { default as ArrowHeadDownIcon } from "./ArrowHeadDown";
 export { default as ArrowHeadLeftIcon } from "./ArrowHeadLeft";
 export { default as ArrowHeadRightIcon } from "./ArrowHeadRight";
+export { default as ArrowHeadUpIcon } from "./ArrowHeadUp";
 export { default as ArrowLeftIcon } from "./ArrowLeft";
 export { default as ArrowRightIcon } from "./ArrowRight";
 export { default as AsteriskIcon } from "./Asterisk";

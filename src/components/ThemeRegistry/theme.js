@@ -880,6 +880,88 @@ const theme = createTheme({
         },
       },
     },
+    MuiChip: {
+      defaultProps: {
+        variant: "outlined",
+      },
+      styleOverrides: {
+        root: {
+          padding: "8px 16px",
+        },
+        label: {
+          padding: 0,
+        },
+        outlined: ({ theme }) => ({
+          ...theme.typography.label3,
+          borderRadius: "2px",
+          borderStyle: "solid",
+          borderWidth: "1px",
+        }),
+      },
+      variants: [
+        {
+          props: {
+            status: "active",
+          },
+          style: {
+            borderColor: "#72FF88",
+            background: "rgba(57, 128, 68, 0.35)",
+          },
+        },
+        {
+          props: {
+            status: "pending",
+          },
+          style: {
+            borderColor: "#D0D6DC",
+            background: "rgba(116, 119, 122, 0.35)",
+          },
+        },
+        {
+          props: {
+            status: "declined",
+          },
+          style: {
+            borderColor: "#995AFF",
+            background: "rgba(55, 10, 128, 0.35)",
+          },
+        },
+        {
+          props: {
+            status: "canceled",
+          },
+          style: {
+            borderColor: "#EDA73D",
+            background: "rgba(116, 119, 122, 0.35)",
+          },
+        },
+      ],
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "& svg": {
+            // zIndex: -1,
+            pointerEvents: "none",
+            position: "absolute",
+            right: "8px"
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderWidth: 0,
+          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: blue,
+          borderColor: dividerGray,
+          borderStyle: "solid",
+          borderWidth: "1px",
+        },
+      },
+    },
   },
 });
 
