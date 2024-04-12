@@ -26,6 +26,7 @@ const textDisabled = "#B9BEC3";
 const textDisabledBlue = "#808198";
 const iconButtonGray = "#E7EEF4";
 const red = "#ED523D";
+const orange = "#EDA73D";
 
 // background colors
 const lightPurple = "#b689ff1a";
@@ -63,6 +64,7 @@ const theme = createTheme({
       disabledBlue: textDisabledBlue,
       disabled: textDisabled,
       grayOverlay: grayBackground,
+      warning: orange,
       red,
     },
     primary: {
@@ -83,6 +85,9 @@ const theme = createTheme({
     error: {
       main: red,
       contrastText: white,
+    },
+    warning: {
+      main: orange,
     },
     blue: {
       main: blue,
@@ -931,7 +936,7 @@ const theme = createTheme({
             status: "canceled",
           },
           style: {
-            borderColor: "#EDA73D",
+            borderColor: orange,
             background: "rgba(116, 119, 122, 0.35)",
           },
         },
@@ -944,7 +949,7 @@ const theme = createTheme({
             // zIndex: -1,
             pointerEvents: "none",
             position: "absolute",
-            right: "8px"
+            right: "8px",
           },
           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
             borderWidth: 0,
