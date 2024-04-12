@@ -1,2 +1,38 @@
 .history {
+  flex: 1;
+  gap: 16px;
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.historyHeader {
+  gap: 8px 32px;
+  justify-content: space-between;
+}
+
+.historyHeaderOptions {
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.wrapper {
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.historyContent {
+  flex: 1;
+  gap: 16px;
+  overflow-y: auto;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.trendingTable {
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
 }
