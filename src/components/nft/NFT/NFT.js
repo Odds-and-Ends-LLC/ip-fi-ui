@@ -1,5 +1,5 @@
 // packages
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Stack, Typography, IconButton } from "@mui/material";
 
 // styles
@@ -19,7 +19,15 @@ import { Member, NFT as NFTCard, Tabs } from "@/components/shared";
 import { Analytics, Contracts, Details, History } from "..";
 
 export default function NFT() {
-  const [mainTab, setMainTab] = useState("analytics");
+  const [mainTab, setMainTab] = useState("contracts");
+  const [nftProfileWidth, setNftProfileWidth] = useState(null);
+  const nftProfileSectionRef = useRef(null);
+
+  useEffect(() => {
+    setNftProfileWidth(nftProfileSectionRef?.current?.clientWidth);
+  }, []);
+
+  console.log(nftProfileWidth);
 
   return (
     <Stack
@@ -38,6 +46,7 @@ export default function NFT() {
         <Button startIcon={<ArrowLeftIcon />}>BACK</Button>
         <Stack className={styles.nftContainer} sx={{ flexDirection: { laptop: "row" } }}>
           <Stack
+            ref={nftProfileSectionRef}
             className={styles.nftProfile}
             sx={{
               flexDirection: { tablet: "row", laptop: "column" },
@@ -128,12 +137,17 @@ export default function NFT() {
                 </Button>
               </Stack>
             </Stack>
-            <Stack className={styles.nftDetailsContents}>
-              {mainTab === "contracts" && <Contracts />}
-              {mainTab === "details" && <Details />}
-              {mainTab === "analytics" && <Analytics />}
-              {mainTab === "history" && <History />}
-            </Stack>
+            {nftProfileWidth && (
+              <Stack
+                className={styles.nftDetailsContents}
+                sx={{ maxWidth: { laptop: `calc(100vw - (152px + ${nftProfileWidth}px))` } }}
+              >
+                {mainTab === "contracts" && <Contracts />}
+                {mainTab === "details" && <Details />}
+                {mainTab === "analytics" && <Analytics />}
+                {mainTab === "history" && <History />}
+              </Stack>
+            )}
           </Stack>
         </Stack>
       </Stack>
