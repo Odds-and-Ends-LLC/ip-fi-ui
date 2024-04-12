@@ -19,7 +19,7 @@ import { Member, NFT as NFTCard, Tabs } from "@/components/shared";
 import { Analytics, Contracts, Details, History } from "..";
 
 export default function NFT() {
-  const [mainTab, setMainTab] = useState("details");
+  const [mainTab, setMainTab] = useState("analytics");
 
   return (
     <Stack
@@ -44,7 +44,10 @@ export default function NFT() {
               maxWidth: { mobile: "none", laptop: "352px" },
             }}
           >
-            <Stack className={styles.nftProfileCard}>
+            <Stack
+              className={styles.nftProfileCard}
+              sx={{ height: { mobile: "240px", tablet: "288px", laptop: "100%" } }}
+            >
               <NFTCard visible variant="profile" headerAction="expand" action={false} />
             </Stack>
             <Stack className={styles.nftProfileDetails}>
