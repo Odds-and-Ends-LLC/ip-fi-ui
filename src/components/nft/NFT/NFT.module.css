@@ -35,6 +35,12 @@
   width: 100%;
 }
 
+.nftExclusiveLicense {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+}
+
 .nftProfileOwner {
   flex-direction: row;
   gap: 24px;
@@ -64,4 +70,24 @@
   flex: 1;
   gap: 16px;
   overflow: auto;
+}
+
+.nftShareButton {
+  text-align: start;
+  width: 100%;
+}
+
+.nftCopyButton {
+  align-items: center;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.nftCopyLink {
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
 }

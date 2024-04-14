@@ -1,13 +1,14 @@
 // packages
-import { Grid, Paper, Stack, Typography } from "@mui/material";
+import { Paper, Stack, Typography } from "@mui/material";
 import { startCase } from "lodash";
-import Image from "next/image";
+import { format } from "date-fns";
 
 // styles
 import styles from "./History.module.css";
 
 // components
-import { ItemsSectionHeader, Select, Table } from "@/components/shared";
+import { Avatar, ItemsSectionHeader, Select, Table } from "@/components/shared";
+import { EthIcon } from "public/icons";
 
 // data
 const history = [
@@ -17,7 +18,7 @@ const history = [
     price: 29.76,
     from: "Ysa Domingo",
     to: "Ysa Domingo",
-    purchaseDate: "10/11/2023 9:55 am",
+    purchaseDate: 1697086500000,
   },
   {
     id: 2,
@@ -25,7 +26,7 @@ const history = [
     price: 29.76,
     from: "Ysa Domingo",
     to: "Ysa Domingo",
-    purchaseDate: "10/11/2023 9:55 am",
+    purchaseDate: 1697075700000,
   },
   {
     id: 3,
@@ -33,7 +34,7 @@ const history = [
     price: 29.76,
     from: "Ysa Domingo",
     to: "Ysa Domingo",
-    purchaseDate: "10/11/2023 9:55 am",
+    purchaseDate: 1697075700000,
   },
   {
     id: 4,
@@ -41,7 +42,7 @@ const history = [
     price: 29.76,
     from: "Ysa Domingo",
     to: "Ysa Domingo",
-    purchaseDate: "10/11/2023 9:55 am",
+    purchaseDate: 1697075700000,
   },
 ];
 
@@ -50,38 +51,54 @@ export default function History() {
     {
       field: "event",
       headerName: "Event",
-      // width: 64,
-      flex: 1,
+      minWidth: 128,
       sortable: false,
       renderCell: ({ row }) => <Typography color="text.gray">{startCase(row?.event)}</Typography>,
     },
     {
       field: "price",
       headerName: "Price",
-      flex: 1,
+      minWidth: 128,
       sortable: false,
-      renderCell: ({ row }) => <Typography color="text.gray">{row?.price?.toString()}</Typography>,
+      renderCell: ({ row }) => (
+        <Stack className={styles.tableColumnPrice}>
+          <EthIcon />
+          <Typography color="text.gray">{row?.price?.toString()}</Typography>
+        </Stack>
+      ),
     },
     {
       field: "from",
       headerName: "From",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => <Typography color="text.gray">{row?.price?.toString()}</Typography>,
+      renderCell: ({ row }) => (
+        <Stack className={styles.tableColumnFrom}>
+          <Avatar size="s" image="/images/image_1.png" />
+          <Typography color="text.gray">{row?.from}</Typography>
+        </Stack>
+      ),
     },
     {
       field: "to",
       headerName: "To",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => <Typography color="text.gray">{row?.price?.toString()}</Typography>,
+      renderCell: ({ row }) => (
+        <Stack className={styles.tableColumnTo}>
+          <Avatar size="s" image="/images/image_1.png" />
+          <Typography color="text.gray">{row?.to}</Typography>
+        </Stack>
+      ),
     },
     {
       field: "purchase_date",
       headerName: "Purchase Date",
       flex: 1,
       sortable: true,
-      renderCell: ({ row }) => <Typography color="text.gray">{row?.price?.toString()}</Typography>,
+      renderCell: ({ row }) => (
+        <Typography color="text.gray">{format(row?.purchaseDate, "MM/dd/yyyy h:mmaaa")}</Typography>
+      ),
     },
   ];
   return (
@@ -100,15 +117,25 @@ export default function History() {
       </Stack>
       <Paper variant="outlined" component={Stack} className={styles.historyContent}>
         <Stack
-          sx={{ minWidth: "902px", width: "100%", maxHeight: { mobile: "406px", laptop: "100%" } }}
+          className={styles.historyTableWrapper}
+          sx={{ maxHeight: { mobile: "406px", laptop: "100%" } }}
         >
           <Table
             bordered={false}
             dataGridProps={{
+              columns: columns,
               rows: history,
               rowHeight: 60,
+              columnHeaderHeight: 50,
               hideFooter: true,
-              columns: columns,
+              sx: {
+                "& .MuiDataGrid-columnHeader": {
+                  padding: "0 16px",
+                },
+                "& .MuiDataGrid-cell": {
+                  padding: "0 16px",
+                },
+              },
             }}
           />
         </Stack>

@@ -1,8 +1,7 @@
 .history {
   flex: 1;
   gap: 16px;
-  overflow-y: auto;
-  overflow-x: auto;
+  overflow: auto;
   width: 100%;
 }
 
@@ -17,22 +16,29 @@
   justify-content: space-between;
 }
 
-.wrapper {
-  overflow-y: auto;
-  overflow-x: auto;
-  width: 100%;
-}
-
 .historyContent {
+  flex-wrap: nowrap;
   flex: 1;
   gap: 16px;
   overflow-y: auto;
+  padding: 8px 16px;
   width: 100%;
-  flex-wrap: nowrap;
 }
 
-.trendingTable {
+.historyTableWrapper {
+  flex: 1;
+  min-width: 902px;
   width: 100%;
-  overflow-x: auto;
-  flex-wrap: nowrap;
+}
+
+.tableColumnPrice {
+  flex-direction: row;
+  gap: 8px;
+}
+
+.tableColumnFrom,
+.tableColumnTo {
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
 }
