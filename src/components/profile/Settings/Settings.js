@@ -26,11 +26,11 @@ export default function Settings() {
   const tab = urlQuery.get("tab");
 
   const handleTabChange = (value) => {
-    router.push(pathname + "?tab=" + value);
+    router.replace(pathname + "?tab=" + value);
   };
 
   useEffect(() => {
-    if (!tab) router.push(pathname + "?tab=profile");
+    if (!tab) router.replace(pathname + "?tab=profile");
   }, [pathname, router, tab]);
 
   return (

@@ -16,21 +16,23 @@ export default function CatalogCover({
   backgroundColor,
   image = "/images/image_3.png",
   title,
+  cover,
 }) {
   const theme = useTheme();
-  const [ref, { width, height }] = useMeasure();
+  const [ref, { height }] = useMeasure();
 
   return (
     <Card
       className={styles.catalogCover}
       component={motion.div}
       ref={ref}
-      whileHover={{
+      whileHover={!cover && {
         background: theme.palette.background.darkGreen,
       }}
       initial={{
         background: backgroundColor || theme.palette.background.green,
       }}
+      sx={{ borderRadius: cover ? 0 : "8px", cursor: cover ? "default" : "pointer" }}
     >
       <CardHeader
         className={styles.catalogCoverHeader}
@@ -86,19 +88,21 @@ export default function CatalogCover({
       >
         {`${catalogName} ${catalogName}`}
       </Typography>
-      <Box
-        className={styles.catalogCoverFlip}
-        sx={{
-          width: { desktop: "120px", tablet: "64px", mobile: "32px" },
-          height: { desktop: "120px", tablet: "80px", mobile: "32px" }
-        }}
-      >
-        <Image
-          src="/images/catalog_flip.png"
-          alt="catalog flip"
-          fill
-        />
-      </Box>
+      {!cover &&
+        <Box
+          className={styles.catalogCoverFlip}
+          sx={{
+            width: { desktop: "120px", tablet: "64px", mobile: "32px" },
+            height: { desktop: "120px", tablet: "80px", mobile: "32px" }
+          }}
+        >
+          <Image
+            src="/images/catalog_flip.png"
+            alt="catalog flip"
+            fill
+          />
+        </Box>
+      }
     </Card>
   )
 };

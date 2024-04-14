@@ -230,7 +230,7 @@ export default function TrendingTable() {
             }}
           />
         </Grid>
-        <Grid item mobile={6}  minWidth="80vw">
+        <Grid item mobile={6} minWidth="80vw">
           <Table
             bordered={false}
             dataGridProps={{

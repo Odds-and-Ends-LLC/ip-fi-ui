@@ -1,0 +1,8 @@
+.catalogInfo {
+  align-items: center;
+}
+
+.catalogInfoItem {
+  gap: 8px;
+  align-items: center;
+}

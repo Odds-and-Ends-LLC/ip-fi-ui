@@ -6,12 +6,12 @@ import { Avatar, Table } from "@/components/shared";
 import { EthIcon } from "public/icons";
 
 // styles
-import styles from "./MarketTable.module.css";
+import styles from "./NFTMarketTable.module.css";
 
-export default function MarketTable() {
+export default function NFTMarketTable() {
   const renderCatalog = (row) => (
     <Stack
-      className={styles.marketTableCatalog}
+      className={styles.nftMarketTableCatalog}
       sx={{
         gap: {
           desktop: "24px",
@@ -20,9 +20,9 @@ export default function MarketTable() {
       }}
     >
       <Avatar size="s" image="/images/image_1.png" />
-      <Stack className={styles.marketTableCatalogName}>
+      <Stack className={styles.nftMarketTableCatalogName}>
         <Typography
-          className={styles.marketTableCatalogName}
+          className={styles.nftMarketTableCatalogName}
           sx={{
             typography: { desktop: "h6", mobile: "label3" },
             width: { mobile: "calc(100%)", desktop: "unset" },
@@ -36,7 +36,7 @@ export default function MarketTable() {
   );
 
   const renderPrice = (price) => (
-    <Stack className={styles.marketTablePrice}>
+    <Stack className={styles.nftMarketTablePrice}>
       <EthIcon />
       <Typography variant="body1" color="text.gray">{price}</Typography>
     </Stack>
@@ -50,14 +50,14 @@ export default function MarketTable() {
 
   const renderHeaderLeft = () => (
     <Stack>
-      <Typography color="text.disabled" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>Market of</Typography>
+      <Typography color="text.disabled" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>NFT Market of</Typography>
       <Typography
         sx={{
           typography: { desktop: "h6", mobile: "label3" },
           width: { mobile: "calc(100%)", desktop: "unset" },
         }}
       >
-        IP-Fi&apos;s Catalog
+        uMANILA/eth
       </Typography>
     </Stack>
   );
@@ -73,7 +73,7 @@ export default function MarketTable() {
     {
       field: "price",
       headerName: "Price",
-      flex: 1,
+      width: 96,
       sortable: false,
       align: "center",
       headerAlign: "center",
@@ -108,7 +108,7 @@ export default function MarketTable() {
         rows: rows,
         rowHeight: 60,
         hideFooter: true,
-        columns: columns,
+        columns,
       }}
     />
   );

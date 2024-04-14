@@ -1,0 +1,31 @@
+.catalogView {
+  min-height: 100dvh;
+  align-items: center;
+  position: relative;
+}
+
+.catalogViewSection {
+  max-width: 1920px;
+  width: 100%;
+  gap: 24px;
+}
+
+.catalogViewHeader {
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.catalogViewHeaderLeft {
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+}
+
+.catalogViewTitle {
+  gap: 4px;
+}
+
+.catalogViewTitleDetails {
+  flex-direction: row;
+  gap: 8px;
+}

@@ -1,26 +1,99 @@
+/* Catalog */
 .catalog {
-  flex-direction: row;
   justify-items: center;
   align-items: center;
-  width: 400px;
+  height: fit-content;
+  gap: 16px;
 }
 
 .catalogContent {
   align-items: center;
-  perspective: 1200px;
+  perspective: 3000px;
 }
 
+.catalogPagination {
+  width: 100%;
+  height: 80px;
+}
+
+.catalogPaginationControls {
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+}
+
+.catalogPaginationText {
+  align-items: center;
+}
+
+.catalogRings {
+  gap: 24px;
+  position: absolute;
+  justify-content: center;
+}
+
+/* Catalog Leaf */
 .catalogLeaf {
   width: 0;
   position: absolute;
   transform-style: preserve-3d;
 }
 
+.catalogLeafFront {
+  position: absolute;
+  transform: rotateY(0deg) translateZ(1px);
+  left: 0;
+  top: 0;
+  border-radius: 12px;
+  border: 1px solid #72ff8833;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.catalogLeafBack {
+  position: absolute;
+  transform: rotateY(180deg) translateZ(1px);
+  left: 0;
+  top: 0;
+  border-radius: 12px;
+  border: 1px solid #72ff8833;
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  margin-left: 12px;
+}
+
+.catalogLeafContent {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(118deg, rgba(1, 2, 44, 0.5) 0%, rgba(1, 2, 44, .5) 100%);
+}
+
+.catalogLeafFrontEdge {
+  height: 100%;
+  width: 47px;
+  border-radius: 12px 0px 0px 12px;
+  border-right: 2px solid #72ff8833;
+  position: relative;
+}
+
+.catalogLeafBackEdge {
+  height: 100%;
+  width: 47px;
+  border-radius: 0px 12px 12px 0px;
+  border-left: 2px solid #72ff8833;
+  position: relative;
+}
+
 /* Catalog Cover */
 .catalogCover {
   width: 100%;
   height: 100%;
-  border-radius: 8px;
   overflow: hidden;
   align-items: center;
   justify-content: center;
@@ -28,6 +101,7 @@
   position: relative;
   cursor: pointer;
   transition: width height .3s ease;
+  flex-direction: row;
 }
 
 .catalogCoverMedia {

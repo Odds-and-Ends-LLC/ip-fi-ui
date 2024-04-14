@@ -1,5 +1,5 @@
 // packages
-import { Box, Divider, Stack } from "@mui/material";
+import { Box, Divider, Stack, SxProps } from "@mui/material";
 import { DataGrid, DataGridProps } from "@mui/x-data-grid";
 
 // styles
@@ -11,6 +11,7 @@ import styles from "./Table.module.css";
  *  headerLeftComponent: any,
  *  headerRightComponent: any,
  *  bordered: Boolean,
+ *  minWidth: any,
  *  dataGridProps: DataGridProps }} props
  *
  */
@@ -19,9 +20,11 @@ export default function Table({
   headerLeftComponent,
   headerRightComponent,
   bordered = true,
+  minWidth = "",
+  minHeight = "",
+  maxHeight = "",
   dataGridProps,
 }) {
-
   return (
     <Stack className={styles.table} sx={{ ...(bordered && { border: "2px solid #72ff8833" }) }}>
       {(headerLeftComponent || headerRightComponent) &&
@@ -35,7 +38,9 @@ export default function Table({
           <Divider sx={{ borderColor: "dividerGray.main" }}  />
         </>
       }
-      <DataGrid className={styles.tableData} {...dataGridProps} autoHeight />
+      <Box className={styles.tableDataContainer} sx={{ minHeight, maxHeight }} >
+        <DataGrid className={styles.tableData} {...dataGridProps} sx={{ minWidth }} />
+      </Box>
     </Stack>
   )
 };

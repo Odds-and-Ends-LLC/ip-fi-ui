@@ -14,7 +14,7 @@ export default function Catalogs() {
         <CatalogCover key={4} image="images/image_4.png" />,
         <CatalogCover key={5} image="images/image_1.png" />,
       ]}
-      slideWidth={{ mobile: "80%", tablet: "45%", laptop: "45%" }}
+      slideWidth={{ mobile: "80%", tablet: "45%", laptop: "45%", desktop: "35%" }}
       slideHeight={{ mobile: "45vw", tablet: "25vw", laptop: "30vw"  }}
       slideMaxHeight="453px"
     />
