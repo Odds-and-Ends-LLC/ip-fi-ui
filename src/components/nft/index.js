@@ -5,3 +5,4 @@ export { default as Contracts } from "./Contracts";
 export { default as Details } from "./Details";
 export { default as Analytics } from "./Analytics";
 export { default as History } from "./History";
+export { default as NFTSettings } from "./NFTSettings";

@@ -1,6 +1,8 @@
 // packages
 import { useEffect, useRef, useState } from "react";
-import { Button, Stack, Typography, IconButton, Box } from "@mui/material";
+import { usePathname } from "next/navigation";
+import { Button, Stack, Typography, IconButton } from "@mui/material";
+import copy from "copy-to-clipboard";
 
 // styles
 import styles from "./NFT.module.css";
@@ -20,13 +22,13 @@ import {
 } from "public/icons";
 import { Member, Modal, NFT as NFTCard, Tabs } from "@/components/shared";
 import { Analytics, Contracts, Details, History } from "..";
-import copy from "copy-to-clipboard";
 
 // data
 const link = "https://www.hypersona12133.com";
 
 export default function NFT() {
-  const [mainTab, setMainTab] = useState("history");
+  const pathname = usePathname();
+  const [mainTab, setMainTab] = useState("contracts");
   const [nftProfileWidth, setNftProfileWidth] = useState(null);
   const [openShareModal, setOpenShareModal] = useState(false);
   const nftProfileSectionRef = useRef(null);
@@ -156,7 +158,7 @@ export default function NFT() {
                 onChange={setMainTab}
               />
               <Stack className={styles.nftDetailsSettings}>
-                <Button variant="outlined" color="white">
+                <Button variant="outlined" color="white" href={`${pathname}/settings`}>
                   <SettingsIcon />
                 </Button>
                 <Button
