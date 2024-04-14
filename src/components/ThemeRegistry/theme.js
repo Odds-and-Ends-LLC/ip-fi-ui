@@ -372,7 +372,7 @@ const theme = createTheme({
           "& .MuiDataGrid-columnHeaders": {
             position: "sticky",
             top: 0,
-            backgroundColor: blue,
+            // backgroundColor: blue,
             zIndex: 1,
           },
           "& .MuiDataGrid-virtualScroller": {

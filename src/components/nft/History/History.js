@@ -121,6 +121,9 @@ export default function History() {
           sx={{ maxHeight: { mobile: "406px", laptop: "100%" } }}
         >
           <Table
+            minWidth="902px"
+            minHeight={0}
+            maxHeight="100%"
             bordered={false}
             dataGridProps={{
               columns: columns,
