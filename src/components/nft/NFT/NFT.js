@@ -21,7 +21,7 @@ import {
   XTwitterIcon,
 } from "public/icons";
 import { Member, Modal, NFT as NFTCard, Tabs } from "@/components/shared";
-import { Analytics, Contracts, Details, History } from "..";
+import { Analytics, Contracts, Details, History, NFTBackground } from "..";
 
 // data
 const link = "https://www.hypersona12133.com";
@@ -66,6 +66,7 @@ export default function NFT() {
         height: { laptop: "100vh" },
       }}
     >
+      <NFTBackground />
       <Stack
         className={styles.nftSection}
         sx={{

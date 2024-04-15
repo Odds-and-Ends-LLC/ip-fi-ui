@@ -7,6 +7,7 @@ import styles from "./NFTSettings.module.css";
 
 // components
 import { ArrowLeftIcon } from "public/icons";
+import { NFTBackground } from "..";
 
 export default function NFTSettings() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function NFTSettings() {
 
   return (
     <Stack className={styles.nftSettings} sx={{ backgroundColor: "blue.main" }}>
+      <NFTBackground />
       <Stack
         className={styles.nftSettingsSection}
         sx={{
