@@ -1,13 +1,13 @@
 // packages
 import { Fragment, useState } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, IconButton, Stack, Typography } from "@mui/material";
 
 // styles
 import styles from "./Settings.module.css";
 
 // components
-import { AlertIcon, PlusIcon } from "public/icons";
-import { Modal, WalletList } from "@/components/shared";
+import { AlertIcon, CloseIcon, PlusIcon } from "public/icons";
+import { Modal, WalletDisplay } from "@/components/shared";
 
 export default function SettingsWallet({ data }) {
   const [openModal, setOpenModal] = useState(false);
@@ -31,11 +31,15 @@ export default function SettingsWallet({ data }) {
       <Stack className={styles.accountWalletList}>
         {data?.walletAddresses?.map((walletAddress, i) => (
           <Fragment key={i}>
-            <WalletList
+            <WalletDisplay
+              fullWidth
               walletAddress={walletAddress}
-              onClickRemove={() => handleRemoveWallet(walletAddress)}
+              endIcon={
+                <IconButton color="error" onClick={() => handleRemoveWallet(walletAddress)}>
+                  <CloseIcon color="currentColor" />
+                </IconButton>
+              }
             />
-
             <Modal
               title="REMOVE WALLET?"
               titleIcon={<AlertIcon />}

@@ -1,13 +1,14 @@
-.walletList {
+.walletDisplay {
   align-items: center;
-  flex-direction: row;
+  border-radius: 4px;
+  flex-direction: row ;
   gap: 12px;
   min-height: 40px;
-  padding-left: 8px;
+  padding: 0 8px;
   text-align: start;
 }
 
-.walletListIcon {
+.walletDisplayIcon {
   aspect-ratio: 1;
   height: 32px;
   position: relative;

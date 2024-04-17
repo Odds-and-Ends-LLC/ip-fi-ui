@@ -26,6 +26,7 @@ const textDisabled = "#B9BEC3";
 const textDisabledBlue = "#808198";
 const iconButtonGray = "#E7EEF4";
 const red = "#ED523D";
+const orange = "#EDA73D";
 
 // background colors
 const lightPurple = "#b689ff1a";
@@ -63,6 +64,7 @@ const theme = createTheme({
       disabledBlue: textDisabledBlue,
       disabled: textDisabled,
       grayOverlay: grayBackground,
+      warning: orange,
       red,
     },
     primary: {
@@ -83,6 +85,9 @@ const theme = createTheme({
     error: {
       main: red,
       contrastText: white,
+    },
+    warning: {
+      main: orange,
     },
     blue: {
       main: blue,
@@ -367,7 +372,7 @@ const theme = createTheme({
           "& .MuiDataGrid-columnHeaders": {
             position: "sticky",
             top: 0,
-            backgroundColor: blue,
+            // backgroundColor: blue,
             zIndex: 1,
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -533,12 +538,16 @@ const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
+          borderRadius: 0,
+          boxShadow: "none",
+          height: "fit-content",
           "&.Mui-disabled": {
             opacity: 0.25,
           },
           marginRight: "-8px",
         },
         colorGray: {
+          borderRadius: "100%",
           backgroundColor: iconButtonGray,
           color: "#808198",
           transition: "background-color 0.3s",
@@ -554,6 +563,19 @@ const theme = createTheme({
         {
           props: { color: "gray" },
         },
+        {
+          props: { variant: "outlined" },
+          style: {
+            borderColor: "rgba(253, 253, 254, 0.5)",
+            borderStyle: "solid",
+            borderWidth: "1px",
+            margin: 0,
+            transition: "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+            "&:hover": {
+              borderColor: white,
+            },
+          },
+        },
       ],
     },
     MuiTabs: {
@@ -568,7 +590,7 @@ const theme = createTheme({
           " .MuiTab-root": {
             padding: "8px 24px",
             justifyContent: "flex-start",
-            width: "100%"
+            width: "100%",
           },
         },
       },
@@ -862,6 +884,103 @@ const theme = createTheme({
             backgroundColor: dividerGray,
             opacity: 1,
           },
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        outlined: {
+          backdropFilter: "blur(50px)",
+          background:
+            "linear-gradient(113deg, rgba(26, 27, 70, 0.50) 0%, rgba(26, 27, 70, 0.10) 100%)",
+          border: "1px solid rgba(114, 255, 136, 0.20)",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 24px 0px rgba(0, 0, 0, 0.15)",
+          flex: 1,
+          overflow: "auto",
+          padding: "16px",
+        },
+      },
+    },
+    MuiChip: {
+      defaultProps: {
+        variant: "outlined",
+      },
+      styleOverrides: {
+        root: {
+          padding: "8px 16px",
+        },
+        label: {
+          padding: 0,
+        },
+        outlined: ({ theme }) => ({
+          ...theme.typography.label3,
+          borderRadius: "2px",
+          borderStyle: "solid",
+          borderWidth: "1px",
+        }),
+      },
+      variants: [
+        {
+          props: {
+            status: "active",
+          },
+          style: {
+            borderColor: "#72FF88",
+            background: "rgba(57, 128, 68, 0.35)",
+          },
+        },
+        {
+          props: {
+            status: "pending",
+          },
+          style: {
+            borderColor: "#D0D6DC",
+            background: "rgba(116, 119, 122, 0.35)",
+          },
+        },
+        {
+          props: {
+            status: "declined",
+          },
+          style: {
+            borderColor: "#995AFF",
+            background: "rgba(55, 10, 128, 0.35)",
+          },
+        },
+        {
+          props: {
+            status: "canceled",
+          },
+          style: {
+            borderColor: orange,
+            background: "rgba(116, 119, 122, 0.35)",
+          },
+        },
+      ],
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          "& svg": {
+            // zIndex: -1,
+            pointerEvents: "none",
+            position: "absolute",
+            right: "8px",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderWidth: 0,
+          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: blue,
+          borderColor: dividerGray,
+          borderStyle: "solid",
+          borderWidth: "1px",
         },
       },
     },
