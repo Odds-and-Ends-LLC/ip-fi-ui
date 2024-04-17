@@ -83,7 +83,11 @@ export default function Details() {
           sx={{ gridTemplateColumns: { tablet: "1fr 49px 1fr" } }}
         >
           <Detail label="Contract Address">
-            <WalletDisplay truncated walletAddress="5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C" />
+            <WalletDisplay
+              truncated
+              withBackground
+              walletAddress="5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C"
+            />
           </Detail>
           <DetailDivider />
           <Detail label="Token Standard" value="ERC-721" textColor="text.secondary" />

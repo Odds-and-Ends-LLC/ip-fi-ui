@@ -1,13 +1,12 @@
 // packages
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Button, IconButton, Stack, Typography } from "@mui/material";
 
 // styles
 import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "public/icons";
-import { WalletList } from "@/components/shared";
+import { WalletDisplay } from "@/components/shared";
 
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C";
@@ -55,10 +54,15 @@ export default function StepConnectWallet({ data, setUserData, onBack, onNext })
             </Stack>
             <Stack>
               {data?.walletAddresses?.map((walletAddress, i) => (
-                <WalletList
+                <WalletDisplay
                   key={i}
+                  fullWidth
                   walletAddress={walletAddress}
-                  onClickRemove={() => handleRemoveWallet(i)}
+                  endIcon={
+                    <IconButton color="error" onClick={() => handleRemoveWallet(walletAddress)}>
+                      <CloseIcon color="currentColor" />
+                    </IconButton>
+                  }
                 />
               ))}
             </Stack>

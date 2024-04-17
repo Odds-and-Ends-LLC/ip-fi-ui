@@ -17,6 +17,7 @@ export default function WalletDisplay({
   fullWidth,
   endIcon,
   variant,
+  withBackground,
 }) {
   const walletDisplayRef = useRef(null);
   const [walletAddressDisplay, setWalletAddressDisplay] = useState("");
@@ -46,7 +47,7 @@ export default function WalletDisplay({
       ref={walletDisplayRef}
       className={styles.walletDisplay}
       sx={{
-        backgroundColor: "rgba(116, 119, 122, 0.35)",
+        backgroundColor: withBackground ? "rgba(116, 119, 122, 0.35)" : "transparent",
         width: fullWidth ? "100%" : "fit-content",
       }}
     >

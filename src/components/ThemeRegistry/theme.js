@@ -547,6 +547,7 @@ const theme = createTheme({
           marginRight: "-8px",
         },
         colorGray: {
+          borderRadius: "100%",
           backgroundColor: iconButtonGray,
           color: "#808198",
           transition: "background-color 0.3s",
