@@ -119,7 +119,7 @@ export default function CatalogSettings() {
               CATALOG COVER SETTINGS
             </Typography>
             <Box className={styles.catalogSettingsCover}>
-              <CatalogCover catalogName="CATALOG NAME" image={nfts[coverImage].image} backgroundColor={color} />
+              <CatalogCover catalogName="CATALOG NAME" image={nfts.find(({ id }) => id === coverImage).image} backgroundColor={color} />
             </Box>
             <Typography variant="body1">
               Select NFT as Cover:

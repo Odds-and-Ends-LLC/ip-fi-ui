@@ -21,7 +21,7 @@ export default function ColorPicker({
               borderColor: "dividerGray.main",
               borderWidth: {
                 laptop: "3px",
-                mobile: "1px",
+                mobile: "2px",
               },
               borderStyle: "solid",
               ...selected === color && {
