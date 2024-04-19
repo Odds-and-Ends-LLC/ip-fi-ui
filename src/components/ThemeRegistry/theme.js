@@ -128,6 +128,7 @@ const theme = createTheme({
       mobile: 0,
       tablet: 768,
       laptop: 1200,
+      large: 1440,
       desktop: 1512,
     },
   },
@@ -348,15 +349,17 @@ const theme = createTheme({
             fontSize: "14px",
             fontWeight: 500,
             lineHeight: "normal",
+            padding: "0px 16px",
             [theme.breakpoints.down("tablet")]: {
               fontSize: "12px",
-              padding: "0px 4px",
+              padding: "0px 8px",
             },
           },
           "[class^=MuiDataGrid-cell]": {
             border: "none",
+            padding: "0px 16px",
             [theme.breakpoints.down("tablet")]: {
-              padding: "0px 4px",
+              padding: "0px 8px",
             },
           },
           "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
@@ -372,7 +375,6 @@ const theme = createTheme({
           "& .MuiDataGrid-columnHeaders": {
             position: "sticky",
             top: 0,
-            // backgroundColor: blue,
             zIndex: 1,
           },
           "& .MuiDataGrid-virtualScroller": {
@@ -639,6 +641,16 @@ const theme = createTheme({
           width: "fit-content",
         },
       },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        bar1Determinate: {
+          background: "linear-gradient(270deg, #67E67A 0%, #A771FF 100%)",
+        },
+        root: {
+          backgroundColor: grayBackground,
+        }
+      }
     },
     MuiMobileStepper: {
       styleOverrides: {

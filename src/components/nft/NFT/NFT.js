@@ -87,7 +87,7 @@ export default function NFT() {
               className={styles.nftProfileCard}
               sx={{ height: { mobile: "240px", tablet: "288px", laptop: "100%" } }}
             >
-              <NFTCard visible variant="profile" headerAction="expand" action={false} />
+              <NFTCard visible variant="profile" action={false} />
             </Stack>
             <Stack className={styles.nftProfileDetails}>
               <Stack className={styles.nftProfileActions}>

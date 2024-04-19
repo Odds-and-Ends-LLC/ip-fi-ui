@@ -1,16 +1,20 @@
 // packages
-import { Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import { usePathname } from "next/navigation";
 
 // components
-import { Avatar } from "@/components/shared";
-import { EthIcon, ShareIcon } from "public/icons";
-import { CatalogInfo, Binder, NFTMarketTable, Statistics, CatalogSalesTable } from "..";
+import { Avatar, GlassCoverImage, WalletDisplay } from "@/components/shared";
+import { NFTBackground } from "@/components/nft";
+import { EthIcon, SettingsIcon, ShareIcon } from "public/icons";
+import { CatalogInfo, CatalogTabs } from "..";
 
 // styles
 import styles from "./CatalogView.module.css";
 import theme from "@/components/ThemeRegistry/theme";
 
 export default function CatalogView() {
+  const pathname = usePathname();
+
   return (
     <Stack
       className={styles.catalogView}
@@ -18,6 +22,10 @@ export default function CatalogView() {
         backgroundColor: "blue.main",
       }}
     >
+      <GlassCoverImage />
+      <Box className={styles.catalogViewCircles}>
+        <NFTBackground/>
+      </Box>
       <Stack
         className={styles.catalogViewSection}
         sx={{
@@ -35,13 +43,23 @@ export default function CatalogView() {
               </Stack>
             </Stack>
           </Stack>
-          <Button
-            variant="outlined"
-            color="white"
-            startIcon={<ShareIcon />}
-          >
-            SHARE
-          </Button>
+          <Stack className={styles.catalogViewHeaderRight}>
+            <WalletDisplay
+              truncated
+              withBackground
+              walletAddress="5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C"
+            />
+            <Button variant="outlined" color="white" href={`${pathname}/settings`}>
+              <SettingsIcon />
+            </Button>
+            <Button
+              variant="outlined"
+              color="white"
+              startIcon={<ShareIcon />}
+            >
+              SHARE
+            </Button>
+          </Stack>
         </Stack>
         <CatalogInfo
           info={
@@ -52,10 +70,7 @@ export default function CatalogView() {
           }
         />
         <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
-        <Binder />
-        <Statistics />
-        <NFTMarketTable />
-        <CatalogSalesTable />
+        <CatalogTabs />
       </Stack>
     </Stack>
   );

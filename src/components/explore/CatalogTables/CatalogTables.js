@@ -41,11 +41,7 @@ export default function CatalogTables() {
           onChange={setCatalogTab}
           tabsStyle={{
             ["@media (max-width:980px)"]: {
-              width: "100%"
-            }
-          }}
-          tabStyle={{
-            ["@media (max-width:980px)"]: {
+              width: "100%",
               flex: 1
             }
           }}
@@ -62,11 +58,7 @@ export default function CatalogTables() {
           onChange={setDurationTab}
           tabsStyle={{
             ["@media (max-width:980px)"]: {
-              width: "100%"
-            }
-          }}
-          tabStyle={{
-            ["@media (max-width:980px)"]: {
+              width: "100%",
               flex: 1
             }
           }}

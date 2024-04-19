@@ -3,9 +3,10 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import { useRef } from "react";
 
 // components
-import { Tabs } from "@/components/shared";
-import { Footer } from "@/components/landing";
 import { CatalogTables, Catalogs, Members, NFTs, TopCatalogs } from "..";
+import { GlassCoverImage, Tabs } from "@/components/shared";
+import { NFTBackground } from "@/components/nft";
+import { Footer } from "@/components/landing";
 
 // styles
 import styles from "./Explore.module.css";
@@ -38,9 +39,7 @@ export default function Explore() {
         backgroundColor: "blue.main",
       }}
     >
-      {/* <Box className={styles.exploreBackgroundImage} sx={{ backgroundImage: "url('/images/image_1.png')" }}>
-        <Box className={styles.exploreBackgroundGlassOverlay} />
-      </Box> */}
+      <GlassCoverImage />
       <Stack
         className={styles.exploreSection}
         sx={{

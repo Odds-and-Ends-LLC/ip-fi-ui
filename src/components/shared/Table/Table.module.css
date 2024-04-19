@@ -1,5 +1,5 @@
 .table {
-  border-radius: 12px;
+  border-radius: 8px;
   width: 100%;
 }
 
@@ -17,7 +17,6 @@
 }
 
 .tableData {
-  padding: 0px 8px;
   width: 100%;
   overflow: unset;
 }

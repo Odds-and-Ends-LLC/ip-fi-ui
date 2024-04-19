@@ -1,0 +1,14 @@
+.colorPicker {
+  width: 100%;
+}
+
+.colorPickerItem {
+  aspect-ratio: 1/1;
+}
+
+.colorPickerItemColor {
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}

@@ -125,6 +125,8 @@ export default function History() {
             minHeight={0}
             maxHeight="100%"
             bordered={false}
+            hasBackground={false}
+            hasBac
             dataGridProps={{
               columns: columns,
               rows: history,
@@ -137,6 +139,9 @@ export default function History() {
                 },
                 "& .MuiDataGrid-cell": {
                   padding: "0 16px",
+                },
+                "& .MuiDataGrid-columnHeaders": {
+                  backgroundColor: "unset",
                 },
               },
             }}

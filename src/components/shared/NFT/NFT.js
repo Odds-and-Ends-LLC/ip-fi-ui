@@ -1,5 +1,5 @@
 // packages
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -8,17 +8,19 @@ import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "public/icons";
 
 // styles
 import styles from "./NFT.module.css";
+import { motion } from "framer-motion";
 
 export default function NFT({
+  id = "",
   collectionName = "Collection Name",
   image = "/images/image_4.png",
   nftName = "NFT Name",
   contracts = 10,
   earnings = 264,
   price = "29.30",
-  action = "add",
-  headerAction = "visibility",
-  visible = false,
+  action,
+  headerAction,
+  visible = true,
   onVisibilityChange = () => {},
   onExpand = () => {},
   variant = "profile"
@@ -31,12 +33,17 @@ export default function NFT({
       setVisibleState(!visibleState);
       onVisibilityChange(!visibleState);
     } else if (headerAction === "expand") {
-      onExpand();
+      onExpand(id);
     }
   };
 
   return (
-    <Box className={styles.nftWrapper}>
+    <Card
+      className={styles.nft}
+      sx={{
+        bgcolor: "background.darkBlue",
+      }}
+    >
       {headerAction &&
         <Button
           className={styles.nftHeaderAction}
@@ -47,20 +54,18 @@ export default function NFT({
           {headerAction === "expand" && <ExpandIcon color={theme.palette.background.default} />}
         </Button>
       }
-      <Card
-        className={styles.nft}
+      <CardActionArea
+        className={styles.nftActionArea}
         sx={{
-          bgcolor: "background.darkBlue",
           "& > .MuiCardMedia-root > .MuiStack-root": {
             opacity: 0,
           },
           "&:hover > .MuiCardMedia-root > .MuiStack-root": {
             opacity: 1,
           },
-          "&:hover .MuiCardActions-root .MuiButton-root": {
-            bgcolor: "background.black"
-          }
+          cursor: variant !== "profile" ? "pointer" : "default",
         }}
+        {...variant !== "profile" && { href: "/nft" }}
       >
         <CardMedia
           image={image}
@@ -69,13 +74,15 @@ export default function NFT({
             borderRadius: (variant === "profile" && !action) ? "8px" : "8px 8px 0px 0px",
           }}
         >
-          <Stack
-            className={styles.nftShadow}
-            sx={{
-              borderRadius: (variant === "profile" && !action) ? "8px" : "8px 8px 0px 0px",
-              background: "linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%)",
-            }}
-          />
+          {variant !== "profile" &&
+            <Stack
+              className={styles.nftShadow}
+              sx={{
+                borderRadius: "8px 8px 0px 0px",
+                background: "linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%)",
+              }}
+            />
+          }
           <Chip
             className={styles.nftPrice}
             icon={<Image src="/icons/eth.svg" alt="eth" width={18} height={18} />}
@@ -106,7 +113,7 @@ export default function NFT({
         {variant !== "profile" &&
           <CardContent className={styles.nftContent}>
             <Grid container spacing={1}>
-              <Grid item mobile={12}>
+              <Grid key="name" item mobile={12}>
                 <Stack className={styles.nftItem}>
                   <Typography variant="body2" color="text.disabled">
                     {collectionName}
@@ -116,7 +123,7 @@ export default function NFT({
                   </Typography>
                 </Stack>
               </Grid>
-              <Grid item mobile={6}>
+              <Grid key="contracts" item mobile={6}>
                 <Stack className={styles.nftItem}>
                   <Typography variant="body2" color="text.disabled">
                     Contracts
@@ -126,7 +133,7 @@ export default function NFT({
                   </Typography>
                 </Stack>
               </Grid>
-              <Grid item mobile={6}>
+              <Grid key="earnings" item mobile={6}>
                 <Stack className={styles.nftItem}>
                   <Typography variant="body2" color="text.disabled">
                     Earnings
@@ -139,15 +146,15 @@ export default function NFT({
             </Grid>
           </CardContent>
         }
-        <CardActions className={styles.nftAction}>
-          {action &&
-            <>
-              {action == "view" && <Button className={styles.nftActionButton} variant="containedSolidDark" fullWidth>VIEW CATALOGS</Button>}
-              {action == "add" && <Button className={styles.nftActionButton} variant="containedSolidDark" fullWidth>ADD TO CATALOG</Button>}
-            </>
-          }
-        </CardActions>
-      </Card>
-    </Box>
+      </CardActionArea>
+      <CardActions className={styles.nftAction}>
+        {action &&
+          <>
+            {action == "view" && <Button className={styles.nftActionButton} variant="containedSolidDark" fullWidth>VIEW CATALOGS</Button>}
+            {action == "add" && <Button className={styles.nftActionButton} variant="containedSolidDark" fullWidth>ADD TO CATALOG</Button>}
+          </>
+        }
+      </CardActions>
+    </Card>
   )
 }

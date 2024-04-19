@@ -1,0 +1,19 @@
+.glassCoverImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: .8;
+}
+
+.glassCoverImageSilhouette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 1200px;
+  width: 100%;
+  height: 100vh;
+  opacity: 0.9;
+  filter: blur(200px);
+}

@@ -22,3 +22,4 @@ export { PasswordInput } from "./Input";
 export { BackgroundCircles } from "./Background";
 export { default as Circle } from "./Circle";
 export { default as Select } from "./Select";
+export { default as GlassCoverImage } from "./GlassCoverImage";
