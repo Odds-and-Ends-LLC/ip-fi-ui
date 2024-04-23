@@ -1,0 +1,15 @@
+.catalogCart {
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 72px;
+  position: relative;
+  width: 100%;
+}
+
+.catalogCartSection {
+  align-items: flex-start;
+  flex: 1;
+  gap: 24px;
+  max-width: 1920px;
+  width: 100%;
+}

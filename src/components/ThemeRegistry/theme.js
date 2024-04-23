@@ -365,12 +365,13 @@ const theme = createTheme({
           "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
             display: "none",
           },
-          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
-            outline: "none",
-          },
+          "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
+            {
+              outline: "none",
+            },
           "& .MuiDataGrid-main": {
             // remove overflow hidden overwise sticky does not work
-            overflow: "unset"
+            overflow: "unset",
           },
           "& .MuiDataGrid-columnHeaders": {
             position: "sticky",
@@ -379,8 +380,8 @@ const theme = createTheme({
           },
           "& .MuiDataGrid-virtualScroller": {
             // remove the space left for the header
-            marginTop: "0!important"
-          }
+            marginTop: "0!important",
+          },
         }),
       },
     },
@@ -649,8 +650,8 @@ const theme = createTheme({
         },
         root: {
           backgroundColor: grayBackground,
-        }
-      }
+        },
+      },
     },
     MuiMobileStepper: {
       styleOverrides: {
@@ -993,6 +994,29 @@ const theme = createTheme({
           borderColor: dividerGray,
           borderStyle: "solid",
           borderWidth: "1px",
+        },
+      },
+    },
+    MuiStep: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiStepLabel: {
+      styleOverrides: {
+        label: {
+          "&.Mui-active": {
+            fontWeight: 400,
+          },
+        },
+        labelContainer: {
+          color: textDisabledBlue,
+        },
+        iconContainer: {
+          display: "none",
+          padding: 0,
         },
       },
     },
