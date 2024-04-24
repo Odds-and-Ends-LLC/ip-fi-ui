@@ -6,7 +6,7 @@ import { DataContainer } from "@/components/shared";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 // styles
-import styles from "./priceVolumeGraph.module.css";
+import styles from "./PriceVolumeGraph.module.css";
 
 export default function Table() {
   const data = [
@@ -53,7 +53,6 @@ export default function Table() {
         className={styles.priceVolumeGraphTooltip}
         sx={{
           bgcolor: "background.black",
-          gap: "8px",
         }}
       >
         <Typography variant="h6-sans" textTransform="none">{label}</Typography>
