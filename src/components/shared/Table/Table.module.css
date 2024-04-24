@@ -1,18 +1,4 @@
 .table {
-  border-radius: 8px;
-  width: 100%;
-}
-
-.tableHeader {
-  flex-direction: row;
-  align-items: center;
-}
-
-.tableHeaderRight {
-  margin-left: auto;
-}
-
-.tableDataContainer {
   overflow: auto;
 }
 

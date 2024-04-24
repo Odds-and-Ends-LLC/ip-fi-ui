@@ -1,0 +1,13 @@
+.dataContainer {
+  border-radius: 8px;
+  width: 100%;
+}
+
+.dataContainerHeader {
+  flex-direction: row;
+  align-items: center;
+}
+
+.dataContainerHeaderRight {
+  margin-left: auto;
+}

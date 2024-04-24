@@ -80,7 +80,7 @@ export default function UpdatesCarousel({ updates = [] }) {
         return (
           <BlogCard
             key={index}
-            width={{ mobile: "225.6px", desktop: "100%" }}
+            width={{ mobile: "100%" }}
             {...update}
           />
         );
@@ -93,7 +93,7 @@ export default function UpdatesCarousel({ updates = [] }) {
         ref={updatesContainerRef}
         className={styles.updates}
         sx={{
-          padding: { mobile: "40px 0px", tablet: "100px 0px" },
+          padding: { mobile: "40px 24px", tablet: "100px" },
         }}
       >
         <Stack
@@ -101,29 +101,12 @@ export default function UpdatesCarousel({ updates = [] }) {
         >
           <Carousel
             slides={renderBlogs()}
-            emblaOptions={{
-              align: "start",
-              containScroll: "trimSnaps",
-              slidesToScroll: "auto",
-            }}
-            loading={false}
-            slideWidth={{ mobile: "auto", desktop: "calc(20% - 20px)" }}
-            containerMarginRight={{
-              mobile: "24px",
-              tablet: "100px",
-              desktop: `calc(100px + ${whitespace}px * 0.5)`,
-            }}
-            padding={{
-              tablet: "0px 100px",
-              mobile: "0px 24px",
-            }}
             header={(prev, next) => {
               return (
                 <Stack
                   className={styles.updatesCarouselHeader}
                   sx={{
                     flexDirection: { tablet: "row" },
-                    px: { mobile: "24px", tablet: "100px" },
                   }}
                 >
                   <Typography sx={{ typography: { mobile: "h2-mobile", tablet: "h2" } }}>

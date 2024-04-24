@@ -277,6 +277,10 @@ const theme = createTheme({
       fontSize: "14px",
       lineHeight: "24px",
     },
+    graph: {
+      fontSize: "12px",
+      lineHeight: "16px",
+    },
   },
   components: {
     MuiAccordion: {

@@ -11,29 +11,17 @@ import styles from "./ItemsCarousel.module.css";
 export default function ItemsCarousel({
   title,
   count = 0,
-  slides,
-  slideWidth,
-  slideHeight,
-  slideMaxHeight,
+  items,
   viewAllurl,
-  loading = false,
 }) {
   return (
     <Carousel
-      slides={slides}
-      slideWidth={slideWidth}
+      slides={items}
+      slideGap="24px"
       headerMarginBottom={{
         tablet: "24px",
         mobile: "16px",
       }}
-      emblaOptions={{
-        align: "start",
-        containScroll: "trimSnaps",
-        slidesToScroll: "auto",
-      }}
-      loading={loading}
-      containerHeight={slideHeight}
-      containerMaxHeight={slideMaxHeight}
       header={(prev, next) => {
         return (
           <Stack

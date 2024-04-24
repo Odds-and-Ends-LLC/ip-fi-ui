@@ -1,22 +1,28 @@
 // components
-import { ItemsCarousel, NFT } from "@/components/shared";
+import { NFT, ItemsCarousel } from "@/components/shared";
+import { Box } from "@mui/material";
 
 export default function NFTs() {
+  const nfts = [
+    <NFT variant="card" key={1} />,
+    <NFT variant="card" key={2} />,
+    <NFT variant="card" key={3} />,
+    <NFT variant="card" key={4} />,
+    <NFT variant="card" key={5} action="add" />
+  ];
+
+  const items = nfts.map((nft, i) => (
+    <Box key={i} sx={{ aspectRatio: "1/1.29", width: "100%", maxHeight: "426px" }}>
+      {nft}
+    </Box>
+  ));
+
   return (
     <ItemsCarousel
       title="NFTS"
       count={33}
       viewAllurl="/"
-      slides={[
-        <NFT variant="card" key={1} />,
-        <NFT variant="card" key={2} />,
-        <NFT variant="card" key={3} />,
-        <NFT variant="card" key={4} />,
-        <NFT variant="card" key={5} />
-      ]}
-      slideWidth={{ mobile: "60%", tablet: "40%", laptop: "25%", desktop: "20%" }}
-      slideHeight={{ mobile: "80vw", tablet: "40vw", laptop: "30vw" }}
-      slideMaxHeight="426px"
+      items={items}
     />
   )
 }

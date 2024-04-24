@@ -8,7 +8,6 @@ import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "public/icons";
 
 // styles
 import styles from "./NFT.module.css";
-import { motion } from "framer-motion";
 
 export default function NFT({
   id = "",

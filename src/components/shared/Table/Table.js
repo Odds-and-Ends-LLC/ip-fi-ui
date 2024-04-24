@@ -1,6 +1,9 @@
 // packages
-import { Box, Divider, Stack, SxProps } from "@mui/material";
 import { DataGrid, DataGridProps } from "@mui/x-data-grid";
+import { Box, Stack } from "@mui/material";
+
+// components
+import { DataContainer } from "..";
 
 // styles
 import styles from "./Table.module.css";
@@ -28,37 +31,14 @@ export default function Table({
   dataGridProps,
 }) {
   return (
-    <Stack className={styles.table}
-      sx={{
-        ...(bordered && { border: "2px solid #72ff8833" }),
-        ...(hasBackground && {
-          boxShadow: "0px 4px 24px 0px rgba(0, 0, 0, 0.15)",
-          backdropFilter: "blur(50px)",
-          background: "linear-gradient(139deg, rgba(1, 2, 44, 1) 0%, rgba(1, 2, 44, 0.60) 100%)",
-        }),
-      }}>
-      {(headerLeftComponent || headerRightComponent) &&
-        <>
-          <Stack
-            className={styles.tableHeader}
-            sx={{
-              padding: { tablet: "24px 32px", mobile: "16px" },
-              ...hasBackground && {
-                bgcolor: "background.default",
-                borderRadius: "8px",
-              },
-            }}
-          >
-            {headerLeftComponent}
-            <Box className={styles.tableHeaderRight}>
-              {headerRightComponent}
-            </Box>
-          </Stack>
-          <Divider sx={{ borderColor: "dividerGray.main" }}  />
-        </>
-      }
+    <DataContainer
+      headerLeftComponent={headerLeftComponent}
+      headerRightComponent={headerRightComponent}
+      bordered={bordered}
+      hasBackground={hasBackground}
+    >
       <Box
-        className={styles.tableDataContainer}
+        className={styles.table}
         sx={{ minHeight, maxHeight }}
       >
         <DataGrid
@@ -74,6 +54,6 @@ export default function Table({
             ...dataGridProps.sx }}
         />
       </Box>
-    </Stack>
-  )
+    </DataContainer>
+  );
 };

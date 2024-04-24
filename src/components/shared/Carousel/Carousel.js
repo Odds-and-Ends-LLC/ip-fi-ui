@@ -8,27 +8,26 @@ import useEmblaCarousel from "embla-carousel-react";
 import styles from "./Carousel.module.css";
 
 export default function Carousel({
-  emblaOptions,
   slides = [],
   showArrows = false,
   showDots = false,
-  slideWidth = "auto",
   slideGap = "24px",
-  loading = true,
-  loader,
   header,
-  containerHeight = "auto",
-  containerMaxHeight = "auto",
-  containerMarginRight,
-  padding = "0px",
   headerMarginBottom = "40px",
+  emblaOptions,
 }) {
   const theme = useTheme();
   const [emblaRef, emblaApi] = useEmblaCarousel({
+    containScroll: "trimSnaps",
+    breakpoints: {
+      '(max-width: 767px)': { slidesToScroll: 1 },
+      '(min-width: 768px) and (max-width: 1199px)': { slidesToScroll: 2 },
+      '(min-width: 1200px) and (max-width: 1439px)': { slidesToScroll: 3 },
+      '(min-width: 1512px)': { slidesToScroll: 4 },
+    },
     ...emblaOptions,
-    // containScroll: slides?.length < 2 ? false : "trimSnaps",
-    // align: slides?.length < 2 ? "center" : "start",
   });
+
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -62,39 +61,34 @@ export default function Carousel({
   const buttonNext = { onClick: scrollNext, disabled: nextBtnDisabled };
 
   return (
-    <Stack className={styles.carousel} sx={{ padding: { tablet: showArrows && "0 56px" } }}>
-      {header && <Stack className={styles.carouselHeader} sx={{ mb: headerMarginBottom }}>{header(buttonPrev, buttonNext)}</Stack>}
-      <Box ref={emblaRef} className={styles.carouselViewport} sx={{ padding }}>
-        <Box className={styles.carouselContainer} sx={{
-          gap: slideGap,
-          pl: emblaOptions.loop ? slideGap : 0,
-          marginRight: containerMarginRight,
-          height: containerHeight,
-          maxHeight: containerMaxHeight
-        }}>
-          {loading ? (
+    <Stack className={styles.carousel}>
+      {header && <Stack className={styles.carouselHeader} sx={{ mb: headerMarginBottom, px: { mobile: "24px", tablet: 0 } }}>{header(buttonPrev, buttonNext)}</Stack>}
+      <Box ref={emblaRef} className={styles.carouselViewport}>
+        <Stack className={styles.carouselContainer} sx={{ ml: { tablet: `-${slideGap}` } }}>
+          {slides.map((slide, index) => (
             <Box
+              key={index}
               className={styles.carouselSlide}
               sx={{
-                flexBasis: "100%",
+                flex: {
+                  desktop: "0 0 calc(100% / 4)",
+                  laptop: "0 0 calc(100% / 3)",
+                  tablet: "0 0 calc(100% / 2)",
+                  mobile: "0 0 calc(100% / 1.5)",
+                },
+                pl: slideGap,
+                "&:last-child": {
+                  mr: {
+                    mobile: slideGap,
+                    tablet: 0,
+                  }
+                }
               }}
             >
-              {loader}
+              {slide}
             </Box>
-          ) : (
-            slides.map((slide, index) => (
-              <Box
-                className={styles.carouselSlide}
-                key={index}
-                sx={{
-                  flexBasis: slideWidth,
-                }}
-              >
-                {slide}
-              </Box>
-            ))
-          )}
-        </Box>
+          ))}
+        </Stack>
       </Box>
       <Box sx={{ display: { mobile: "none", tablet: showArrows ? "flex" : "none" } }}>
         <Stack className={styles.carouselButtonContainer} sx={{ left: 0 }}>

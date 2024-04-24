@@ -1,0 +1,8 @@
+.priceVolumeGraph {
+  width: 100%;
+}
+
+.priceVolumeGraphTooltip {
+  padding: 4px 8px;
+  border-radius: 4px;
+}

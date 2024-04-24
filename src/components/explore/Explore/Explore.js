@@ -43,7 +43,7 @@ export default function Explore() {
       <Stack
         className={styles.exploreSection}
         sx={{
-          padding: { mobile: "104px 24px 32px", tablet: "96px 64px 32px" },
+          padding: { mobile: "104px 0px 32px", tablet: "96px 64px 32px" },
           gap: { mobile: "24px", tablet: "32px" },
         }}
       >
@@ -56,6 +56,7 @@ export default function Explore() {
             { label: "MEMBERS", value: "members" },
           ]}
           onChange={handleMainTabChange}
+          tabsStyle={{ px: { mobile: "24px", tablet: "0px" }, }}
         />
         <Stack
           className={styles.exploreHeader}
@@ -63,7 +64,8 @@ export default function Explore() {
             flexDirection: {
               tablet: "row",
               mobile: "column",
-            }
+            },
+            px: { mobile: "24px", tablet: "0px" },
           }}
         >
           <Stack>
