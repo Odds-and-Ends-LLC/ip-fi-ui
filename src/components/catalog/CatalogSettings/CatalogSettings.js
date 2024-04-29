@@ -6,7 +6,7 @@ import { useState } from "react";
 // components
 import { CatalogCover } from "@/components/shared";
 import { NFTBackground } from "@/components/nft";
-import { ArrowLeftIcon } from "public/icons";
+import { ArrowLeftIcon } from "@/elements/icons";
 import { CoverPicker, ColorPicker } from "..";
 
 // styles

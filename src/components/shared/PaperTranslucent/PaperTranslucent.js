@@ -6,7 +6,7 @@ import Image from "next/image";
 import styles from "./PaperTranslucent.module.css";
 
 // components
-import { AsteriskIcon } from "public/icons";
+import { AsteriskIcon } from "@/elements/icons";
 
 export default function PaperTranslucent({
   children,

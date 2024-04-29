@@ -6,7 +6,7 @@ import { Button, InputAdornment, Link, Stack, TextField, Typography } from "@mui
 
 // components
 import { PaperTranslucent } from "@/components/shared";
-import { ArrowRightIcon, MailIcon } from "public/icons";
+import { ArrowRightIcon, MailIcon } from "@/elements/icons";
 import { REGEX } from "@/utils/regex";
 
 export default function ForgotPassword() {

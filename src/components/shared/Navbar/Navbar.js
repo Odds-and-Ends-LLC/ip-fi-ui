@@ -16,14 +16,29 @@ import {
 import Image from "next/image";
 
 // components
-import { DiscordIcon, InstagramIcon, Linkedin, Twitter } from "public/icons";
+import { DiscordIcon, InstagramIcon, Linkedin, LogoutIcon, Twitter, WarningIcon } from "@/elements/icons";
+import { Avatar, Modal } from "..";
 
 // styles
 import styles from "./Navbar.module.css";
 
-export default function Navbar() {
+// actions
+import { logout } from "@/lib/actions/auth";
+
+// types
+import { User } from "@/types";
+
+
+/**
+ * @param {{ user: User | null }} props
+ */
+
+export default function Navbar({
+  user,
+}) {
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [logoutOpen, setLogoutOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("desktop"));
   const displayDesktop = { desktop: "flex", mobile: "none" };
@@ -54,32 +69,45 @@ export default function Navbar() {
     };
   }, [pathname]);
 
+  const handleLogout = () => {
+    logout();
+    setLogoutOpen(false);
+  };
+
   const renderLinks = () => (
     <Stack
       className={styles.navbarLinks}
       sx={{ flexDirection: { desktop: "row", mobile: "column" } }}
     >
-      <Stack className={styles.navbarLinksDesktop} sx={{ display: displayDesktop }}>
+      <Stack className={styles.navbarLinksDesktop}>
         <Button variant="text" color="white" href="/explore">
           Explore
         </Button>
-        <Button variant="text" color="white">
-          Trading
-        </Button>
       </Stack>
-      <Stack gap="16px" sx={{ display: displayMobile }}>
+      {/* <Stack gap="16px" sx={{ display: displayMobile }}>
         <Button variant="gradient">Explore</Button>
         <Button variant="gradient">Trading</Button>
+      </Stack> */}
+      <Stack className={styles.navbarLinksDesktop}>
+        {user && (
+          <>
+            <Link href="/profile" className={styles.navbarLogo} rel="" target="">
+              <Avatar image={user.pfp} size="s" />
+            </Link>
+            <IconButton color="white" onClick={() => setLogoutOpen(true)}>
+              <LogoutIcon />
+            </IconButton>
+          </>
+        )}
+        {(!user && pathname !== "/login") && (
+          <Button
+            href="/login"
+            variant="gradientInverted"
+          >
+            Login
+          </Button>
+        )}
       </Stack>
-      {pathname !== "/login" && (
-        <Button
-          href="/login"
-          variant="gradientInverted"
-          sx={{ ml: { desktop: "auto", mobile: "none" } }}
-        >
-          Login
-        </Button>
-      )}
     </Stack>
   );
 
@@ -147,6 +175,27 @@ export default function Navbar() {
           </Drawer>
         )}
       </Toolbar>
+      <Modal
+        title="Logout"
+        titleIcon={<WarningIcon />}
+        open={logoutOpen}
+        onClose={() => setLogoutOpen(false)}
+        actions={
+          <>
+            <Button variant="outlined" color="white" onClick={() => setLogoutOpen(false)}>
+              CANCEL
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleLogout}
+            >
+              YES, LOGOUT
+            </Button>
+          </>
+        }
+      >
+        <Typography variant="body1">Are you sure you want to logout of iP-Fi?</Typography>
+      </Modal>
     </AppBar>
   );
 }

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 // styles
 import styles from "./Footer.module.css";
-import { DiscordIcon, InstagramIcon, Linkedin, Twitter } from "public/icons";
+import { DiscordIcon, InstagramIcon, Linkedin, Twitter } from "@/elements/icons";
 
 // components
 

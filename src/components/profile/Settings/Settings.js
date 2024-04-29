@@ -7,7 +7,7 @@ import { Button, Stack } from "@mui/material";
 import styles from "./Settings.module.css";
 
 // components
-import { ArrowLeftIcon, PickAvatarIcon, SettingsIcon, WalletIcon } from "public/icons";
+import { ArrowLeftIcon, PickAvatarIcon, SettingsIcon, WalletIcon } from "@/elements/icons";
 import { BackgroundCircles, Tabs } from "@/components/shared";
 import { SettingsProfile, SettingsAccount, SettingsWallet } from "./";
 

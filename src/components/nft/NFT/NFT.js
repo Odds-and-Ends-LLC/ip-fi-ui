@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Button, Stack, Typography, IconButton } from "@mui/material";
-import copy from "copy-to-clipboard";
 
 // styles
 import styles from "./NFT.module.css";
@@ -11,16 +10,12 @@ import styles from "./NFT.module.css";
 import {
   ArrowLeftIcon,
   CheckIcon,
-  FacebookIcon,
-  LinkIcon,
   LooksRareIcon,
   OpenSeaIcon,
   RefreshIcon,
   SettingsIcon,
-  ShareIcon,
-  XTwitterIcon,
-} from "public/icons";
-import { Member, Modal, NFT as NFTCard, Tabs } from "@/components/shared";
+} from "@/elements/icons";
+import { Member, NFT as NFTCard, ShareButton, Tabs } from "@/components/shared";
 import { Analytics, Contracts, Details, History, NFTBackground } from "..";
 
 // data
@@ -30,33 +25,11 @@ export default function NFT() {
   const pathname = usePathname();
   const [mainTab, setMainTab] = useState("contracts");
   const [nftProfileWidth, setNftProfileWidth] = useState(null);
-  const [openShareModal, setOpenShareModal] = useState(false);
   const nftProfileSectionRef = useRef(null);
 
   useEffect(() => {
     setNftProfileWidth(nftProfileSectionRef?.current?.clientWidth);
   }, []);
-
-  const SocialShareButton = ({ label, icon, href = "/" }) => {
-    return (
-      <Button
-        fullWidth
-        variant="underlined"
-        href={href}
-        sx={{ color: "text.secondary" }}
-        startIcon={icon}
-        endIcon={<ShareIcon />}
-      >
-        <Typography variant="button" className={styles.nftShareButton} color="text.primary">
-          {label}
-        </Typography>
-      </Button>
-    );
-  };
-
-  const handleCopyLink = () => {
-    copy(link);
-  };
 
   return (
     <Stack
@@ -162,38 +135,7 @@ export default function NFT() {
                 <Button variant="outlined" color="white" href={`${pathname}/settings`}>
                   <SettingsIcon />
                 </Button>
-                <Button
-                  variant="outlined"
-                  color="white"
-                  startIcon={<ShareIcon />}
-                  onClick={() => setOpenShareModal(true)}
-                >
-                  SHARE
-                </Button>
-                <Modal
-                  open={openShareModal}
-                  onClose={() => setOpenShareModal(!openShareModal)}
-                  title="SHARE NFT"
-                >
-                  <SocialShareButton label="FACEBOOK" icon={<FacebookIcon />} href="/" />
-                  <SocialShareButton label="TWITTER" icon={<XTwitterIcon />} href="/" />
-                  <Stack
-                    className={styles.nftCopyButton}
-                    sx={{ borderColor: "dividerGray.main", flexDirection: { tablet: "row" } }}
-                  >
-                    <Stack className={styles.nftCopyLink}>
-                      <LinkIcon />
-                      <Typography noWrap>{link}</Typography>
-                    </Stack>
-                    <Button
-                      variant="contained"
-                      onClick={handleCopyLink}
-                      sx={{ width: { mobile: "100%", tablet: "fit-content" }, flexShrink: 0 }}
-                    >
-                      COPY LINK
-                    </Button>
-                  </Stack>
-                </Modal>
+                <ShareButton title="SHARE NFT" link={link} />
               </Stack>
             </Stack>
             {nftProfileWidth && (

@@ -12,7 +12,7 @@ import {
   OpenSeaIcon,
   WebIcon,
   XTwitterIcon,
-} from "public/icons";
+} from "@/elements/icons";
 import { ProfilePicture } from "@/components/shared";
 
 export default function SettingsProfile() {

@@ -8,7 +8,7 @@ import styles from "./History.module.css";
 
 // components
 import { Avatar, ItemsSectionHeader, Select, Table } from "@/components/shared";
-import { EthIcon } from "public/icons";
+import { EthIcon } from "@/elements/icons";
 
 // data
 const history = [

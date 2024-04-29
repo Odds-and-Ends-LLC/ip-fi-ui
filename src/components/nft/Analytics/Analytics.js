@@ -4,7 +4,7 @@ import Image from "next/image";
 
 // styles
 import styles from "./Analytics.module.css";
-import { BellIcon, CalendarIcon, EthIcon, EyeOnIcon, FileIcon, WarningIcon } from "public/icons";
+import { BellIcon, CalendarIcon, EthIcon, EyeOnIcon, FileIcon, WarningIcon } from "@/elements/icons";
 
 // components
 

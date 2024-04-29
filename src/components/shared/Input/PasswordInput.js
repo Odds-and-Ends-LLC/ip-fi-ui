@@ -6,7 +6,7 @@ import { IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/m
 import styles from "./Input.module.css";
 
 // components
-import { EyeOffIcon, EyeOnIcon, InfoIcon, LockIcon } from "public/icons";
+import { EyeOffIcon, EyeOnIcon, InfoIcon, LockIcon } from "@/elements/icons";
 
 export default function PasswordInput({ helperText, label, error, ...props }) {
   const { placeholder = "Password" } = props;

@@ -8,7 +8,7 @@ import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { Modal, ProfilePicture } from "@/components/shared";
-import { ArrowLeftIcon, CameraIcon, PickAvatarIcon, UploadIcon } from "public/icons";
+import { ArrowLeftIcon, CameraIcon, PickAvatarIcon, UploadIcon } from "@/elements/icons";
 
 // data
 

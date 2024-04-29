@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { useMeasure } from "@uidotdev/usehooks";
 
 // components
-import { ArrowLeftIcon, ArrowRightIcon } from "public/icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/elements/icons";
 import { NFT } from "@/components/shared";
 import CatalogLeaf from "./CatalogLeaf";
 import CatalogRings from "./CatalogRings";

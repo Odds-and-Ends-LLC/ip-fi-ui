@@ -8,7 +8,7 @@ import styles from "./WalletDisplay.module.css";
 
 // components
 import { truncate } from "@/utils/truncate";
-import { ArrowHeadDownIcon, ArrowHeadUpIcon } from "public/icons";
+import { ArrowHeadDownIcon, ArrowHeadUpIcon } from "@/elements/icons";
 
 export default function WalletDisplay({
   walletAddress,

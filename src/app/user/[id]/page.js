@@ -1,7 +1,6 @@
 // packages
 
 // components
-import { ProfileSettings } from "@/components/profile";
 import { notFound } from "next/navigation";
 
 async function fetchUser(id) {
@@ -10,18 +9,13 @@ async function fetchUser(id) {
   return users.includes(id);
 }
 
-export default async function ProfilePage({ params }) {
-  const { profile } = params;
-  const id = profile[0];
+export default async function UserPage({ params }) {
+  const { id } = params;
 
   const user = await fetchUser(id);
 
   if (!user) {
     notFound();
-  }
-
-  if (profile[1] === "settings") {
-    return <ProfileSettings />;
   }
 
   return "User page here";

@@ -1,3 +1,5 @@
+/* Navbar */
+
 .navbarLinksContainer {
   width: 100%;
 }
@@ -8,8 +10,8 @@
 }
 
 .navbarLinks {
-  gap: 16px;
   width: 100%;
+  justify-content: space-between;
 }
 
 .navbarLinksDesktop {
@@ -47,5 +49,15 @@
 
 .navbarMobileDrawerSocials {
   flex-direction: row;
+  gap: 16px;
+}
+
+/* NavbarAvatar */
+
+.navbarAvatarMenu {
+  margin-top: 8px;
+}
+
+.navbarAvatarProfile {
   gap: 16px;
 }

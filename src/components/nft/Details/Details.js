@@ -7,7 +7,7 @@ import { startCase } from "lodash";
 import styles from "./Details.module.css";
 
 // components
-import { EthIcon } from "public/icons";
+import { EthIcon } from "@/elements/icons";
 import { WalletDisplay } from "@/components/shared";
 
 // data

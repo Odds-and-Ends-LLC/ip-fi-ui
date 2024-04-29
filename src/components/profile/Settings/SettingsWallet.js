@@ -6,7 +6,7 @@ import { Button, IconButton, Stack, Typography } from "@mui/material";
 import styles from "./Settings.module.css";
 
 // components
-import { AlertIcon, CloseIcon, PlusIcon } from "public/icons";
+import { AlertIcon, CloseIcon, PlusIcon } from "@/elements/icons";
 import { Modal, WalletDisplay } from "@/components/shared";
 
 export default function SettingsWallet({ data }) {

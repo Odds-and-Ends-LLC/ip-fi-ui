@@ -2,7 +2,7 @@
 import { Divider, Stack, Typography } from "@mui/material";
 
 // components
-import { EthIcon } from "public/icons";
+import { EthIcon } from "@/elements/icons";
 
 // styles
 import styles from "./Statistics.module.css";

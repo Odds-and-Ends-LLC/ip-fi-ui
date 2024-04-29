@@ -7,7 +7,7 @@ import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { PasswordInput } from "@/components/shared";
-import { ArrowLeftIcon, ArrowRightIcon, MailIcon, XTwitterIcon } from "public/icons";
+import { ArrowLeftIcon, ArrowRightIcon, MailIcon, XTwitterIcon } from "@/elements/icons";
 
 // data
 

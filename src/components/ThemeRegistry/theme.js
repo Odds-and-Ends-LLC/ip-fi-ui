@@ -459,6 +459,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          transition: "filter 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+        }
+      }
+    },
     MuiToolbar: {
       styleOverrides: {
         root: ({ theme }) => ({
@@ -471,6 +478,12 @@ const theme = createTheme({
           },
         }),
       },
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+        disableTouchRipple: true,
+      }
     },
     MuiButton: {
       defaultProps: {
@@ -974,6 +987,11 @@ const theme = createTheme({
           },
         },
       ],
+    },
+    MuiCircularProgress: {
+      defaultProps: {
+        color: "primary",
+      },
     },
     MuiSelect: {
       styleOverrides: {

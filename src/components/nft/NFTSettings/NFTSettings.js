@@ -6,7 +6,7 @@ import { Button, Stack, Typography, Switch, Paper } from "@mui/material";
 import styles from "./NFTSettings.module.css";
 
 // components
-import { ArrowLeftIcon } from "public/icons";
+import { ArrowLeftIcon } from "@/elements/icons";
 import { NFTBackground } from "..";
 
 export default function NFTSettings() {

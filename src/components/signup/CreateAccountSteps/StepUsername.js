@@ -4,7 +4,7 @@ import { Button, Stack, TextField, Typography } from "@mui/material";
 
 // styles
 import styles from "./CreateAccountSteps.module.css";
-import { ArrowLeftIcon, ArrowRightIcon } from "public/icons";
+import { ArrowLeftIcon, ArrowRightIcon } from "@/elements/icons";
 
 // components
 

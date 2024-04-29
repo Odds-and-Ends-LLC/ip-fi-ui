@@ -7,7 +7,7 @@ import { Modal } from "..";
 
 // styles
 import styles from "./ProfilePicture.module.css";
-import { CameraIcon, PickAvatarIcon, RemoveIcon, UploadIcon } from "public/icons";
+import { CameraIcon, PickAvatarIcon, RemoveIcon, UploadIcon } from "@/elements/icons";
 
 export default function ProfilePicture({
   image,
@@ -80,7 +80,13 @@ export default function ProfilePicture({
   };
 
   return (
-    <Box className={styles.profilePicture}>
+    <Box
+      className={styles.profilePicture}
+      sx={{
+        width: getAvatarSize(),
+        height: getAvatarSize(),
+      }}
+    >
       <Avatar
         {...getAvatarSrc()}
         alt="profile picture"

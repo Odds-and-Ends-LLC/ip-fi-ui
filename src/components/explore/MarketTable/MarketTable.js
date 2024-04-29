@@ -3,7 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 
 // components
 import { Avatar, Table } from "@/components/shared";
-import { EthIcon } from "public/icons";
+import { EthIcon } from "@/elements/icons";
 
 // styles
 import styles from "./MarketTable.module.css";

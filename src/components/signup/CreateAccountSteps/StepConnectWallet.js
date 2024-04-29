@@ -5,7 +5,7 @@ import { Button, IconButton, Stack, Typography } from "@mui/material";
 import styles from "./CreateAccountSteps.module.css";
 
 // components
-import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "public/icons";
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "@/elements/icons";
 import { WalletDisplay } from "@/components/shared";
 
 // data

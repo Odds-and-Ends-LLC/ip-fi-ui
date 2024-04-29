@@ -10,7 +10,7 @@ import { Footer } from "@/components/landing";
 
 // styles
 import styles from "./Explore.module.css";
-import { PlusIcon } from "public/icons";
+import { PlusIcon } from "@/elements/icons";
 
 export default function Explore() {
   const catalogsRef = useRef();

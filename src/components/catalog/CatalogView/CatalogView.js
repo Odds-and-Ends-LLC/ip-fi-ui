@@ -3,10 +3,10 @@ import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
 
 // components
-import { Avatar, GlassCoverImage, WalletDisplay } from "@/components/shared";
+import { Avatar, GlassCoverImage, InfoList, WalletDisplay } from "@/components/shared";
 import { NFTBackground } from "@/components/nft";
-import { EthIcon, SettingsIcon, ShareIcon } from "public/icons";
-import { CatalogInfo, CatalogTabs } from "..";
+import { EthIcon, SettingsIcon, ShareIcon } from "@/elements/icons";
+import { CatalogTabs } from "..";
 
 // styles
 import styles from "./CatalogView.module.css";
@@ -61,11 +61,11 @@ export default function CatalogView() {
             </Button>
           </Stack>
         </Stack>
-        <CatalogInfo
+        <InfoList
           info={
             [
-              { label: "Created", value: "100 Days ago" },
-              { label: "Additional Info", value: "Data here" },
+              { label: "Created", value: <Typography variant="body2" color="text.primary">100 Days ago</Typography> },
+              { label: "Additional Info", value: <Typography variant="body2" color="text.primary">Data here</Typography> },
             ]
           }
         />

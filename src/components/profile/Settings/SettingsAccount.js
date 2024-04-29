@@ -8,7 +8,7 @@ import styles from "./Settings.module.css";
 
 // components
 import { Modal, PasswordInput } from "@/components/shared";
-import { AlertIcon, CheckIcon, InfoIcon } from "public/icons";
+import { AlertIcon, CheckIcon, InfoIcon } from "@/elements/icons";
 
 export default function SettingsAccount() {
   const [openModal, setOpenModal] = useState();

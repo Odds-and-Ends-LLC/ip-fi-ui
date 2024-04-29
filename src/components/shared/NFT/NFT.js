@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 // components
-import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "public/icons";
+import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "@/elements/icons";
 
 // styles
 import styles from "./NFT.module.css";

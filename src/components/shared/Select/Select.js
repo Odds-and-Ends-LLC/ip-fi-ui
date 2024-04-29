@@ -5,7 +5,7 @@ import { FormControl, InputLabel, MenuItem, Select as MuiSelect, Typography } fr
 // styles
 
 // components
-import { ArrowHeadDownIcon, ArrowHeadUpIcon } from "public/icons";
+import { ArrowHeadDownIcon, ArrowHeadUpIcon } from "@/elements/icons";
 import { kebabCase } from "lodash";
 
 export default function Select({ minWidth, label, options = [], onChange, hideNone }) {

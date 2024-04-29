@@ -1,7 +1,6 @@
 "use client";
 
 export { default as CatalogView } from "./CatalogView";
-export { default as CatalogInfo } from "./CatalogInfo";
 export { default as CatalogTabs } from "./CatalogTabs";
 export { default as CatalogSettings } from "./CatalogSettings";
 export { default as Binder } from "./Binder";

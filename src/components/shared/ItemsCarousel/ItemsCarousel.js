@@ -3,7 +3,7 @@ import { Button, IconButton, Stack } from "@mui/material";
 
 // components
 import { Carousel, ItemsSectionHeader } from "..";
-import { ArrowHeadLeftIcon, ArrowHeadRightIcon } from "public/icons";
+import { ArrowHeadLeftIcon, ArrowHeadRightIcon } from "@/elements/icons";
 
 // styles
 import styles from "./ItemsCarousel.module.css";

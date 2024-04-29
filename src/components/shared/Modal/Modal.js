@@ -13,7 +13,7 @@ import {
 import styles from "./Modal.module.css";
 
 // components
-import { CloseIcon } from "public/icons";
+import { CloseIcon } from "@/elements/icons";
 
 export default function Modal({ title, titleIcon, children, actions, open, onClose }) {
   return (
