@@ -4,21 +4,21 @@ import { Tabs as MuiTabs, Tab, Orientation, TabsOwnProps, SxProps } from "@mui/m
 /**
  *
  * @param {{
-*  value: any,
-*  tabs: Array,
-*  orientation: Orientation,
-*  variant: TabsOwnProps["variant"],
-*  tabsStyle: SxProps,
-*  tabStyle: SxProps }} props
-*
-*/
+ *  value: any,
+ *  tabs: Array,
+ *  orientation: Orientation,
+ *  variant: TabsOwnProps["variant"],
+ *  tabsStyle: SxProps,
+ *  tabStyle: SxProps }} props
+ *
+ */
 
 export default function Tabs({
   value,
-  tabs = [], // { label, value, icon }
+  tabs = [], // { label, value, icon, iconPosition }
   onChange = () => {},
-  orientation = 'horizontal',
-  variant = 'scrollable',
+  orientation = "horizontal",
+  variant = "scrollable",
   tabsStyle = {},
   tabStyle = {},
 }) {
@@ -36,7 +36,14 @@ export default function Tabs({
       sx={tabsStyle}
     >
       {tabs.map((tab, i) => (
-        <Tab key={i} label={tab.label} value={tab.value} icon={tab.icon} sx={{ typography: { tablet: "button", mobile: "button2" }, ...tabStyle }} />
+        <Tab
+          key={i}
+          label={tab.label}
+          value={tab.value}
+          icon={tab.icon}
+          iconPosition={tab.iconPosition}
+          sx={{ typography: { tablet: "button", mobile: "button2" }, ...tabStyle }}
+        />
       ))}
     </MuiTabs>
   );
