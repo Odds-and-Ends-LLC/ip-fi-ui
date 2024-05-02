@@ -170,7 +170,11 @@ export default function TrendingTable() {
 
   return (
     <>
-      <Grid container className={styles.trendingTable} sx={{ display: { desktop: "flex", mobile: "none"} }}>
+      <Grid
+        container
+        className={styles.trendingTable}
+        sx={{ display: { desktop: "flex", mobile: "none"} }}
+      >
         <Grid item mobile={6} minWidth="690px">
           <Table
             bordered={false}
@@ -218,7 +222,13 @@ export default function TrendingTable() {
           />
         </Grid>
       </Grid>
-      <Grid container className={styles.trendingTable} sx={{ display: { tablet: "none", mobile: "flex"} }}>
+      <Grid
+        container
+        className={styles.trendingTable}
+        sx={{
+          display: { tablet: "none", mobile: "flex"},
+        }}
+      >
         <Grid item mobile={6} minWidth="80vw">
           <Table
             bordered={false}

@@ -14,6 +14,7 @@ export { default as Member } from "./Member";
 export { default as NFT } from "./NFT";
 export { default as Avatar } from "./Avatar";
 export { default as Table } from "./Table";
+export { default as DataContainer } from "./DataContainer";
 export { default as ItemsSectionHeader } from "./ItemsSectionHeader";
 export { default as ItemsCarousel } from "./ItemsCarousel";
 export { default as WalletDisplay } from "./WalletDisplay";

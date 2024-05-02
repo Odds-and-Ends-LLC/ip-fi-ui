@@ -1,10 +1,10 @@
 // packages
 import { useState } from "react";
-import { Stack } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 
 // components
 import { Tabs } from "@/components/shared";
-import { MarketTable, TrendingTable } from "..";
+import { MarketTable, PriceVolumeGraph, TrendingTable } from "..";
 
 // styles
 import styles from "./CatalogTables.module.css";
@@ -40,6 +40,9 @@ export default function CatalogTables() {
           ]}
           onChange={setCatalogTab}
           tabsStyle={{
+            px: { mobile: "24px", tablet: "0px" },
+          }}
+          tabStyle={{
             ["@media (max-width:980px)"]: {
               width: "100%",
               flex: 1
@@ -57,6 +60,7 @@ export default function CatalogTables() {
           ]}
           onChange={setDurationTab}
           tabsStyle={{
+            px: { mobile: "24px", tablet: "0px" },
             ["@media (max-width:980px)"]: {
               width: "100%",
               flex: 1
@@ -64,8 +68,21 @@ export default function CatalogTables() {
           }}
         />
       </Stack>
-      {catalogTab === "trending" && <TrendingTable />}
-      {catalogTab === "market" && <MarketTable />}
+      <Box
+        sx={{ px: { mobile: "24px", tablet: "0px" }, }}
+      >
+        {catalogTab === "trending" && <TrendingTable />}
+        {catalogTab === "market" &&
+          <Grid container spacing={3}>
+            <Grid item mobile={12} laptop={6}>
+              <MarketTable />
+            </Grid>
+            <Grid item mobile={12} laptop={6}>
+              <PriceVolumeGraph />
+            </Grid>
+          </Grid>
+        }
+      </Box>
     </>
   );
 }

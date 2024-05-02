@@ -1,5 +1,4 @@
 .carousel {
-  flex: 1 0;
   position: relative;
 }
 
@@ -8,23 +7,19 @@
 }
 
 .carouselViewport {
-  flex: 1 0;
   overflow: hidden;
 }
 
 .carouselContainer {
   backface-visibility: hidden;
-  display: flex;
   touch-action: pan-y;
+  flex-direction: row;
 }
 
 .carouselSlide {
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  justify-content: center;
   min-width: 0;
-  position: relative;
+  height: fit-content;
+  min-height: 100%;
 }
 
 .carouselButtonContainer {

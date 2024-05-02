@@ -8,6 +8,21 @@ import { Circle, ItemsCarousel, Member } from "@/components/shared";
 import styles from "./Members.module.css";
 
 export default function Members() {
+  const members = [
+    <Member key={1} />,
+    <Member key={2} />,
+    <Member key={3} />,
+    <Member key={4} />,
+    <Member key={5} />,
+  ]
+
+  const items = members.map((member, i) => (
+    <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "340px", maxHeight: "356px" }}>
+      {member}
+    </Box>
+  ));
+
+
   return (
     <Box position="relative" >
       <Box className={styles.membersCircles}>
@@ -35,16 +50,7 @@ export default function Members() {
         title="MEMBERS"
         count={33}
         viewAllurl="/"
-        slides={[
-          <Member key={1} />,
-          <Member key={2} />,
-          <Member key={3} />,
-          <Member key={4} />,
-          <Member key={5} />,
-        ]}
-        slideWidth={{ mobile: "60%", tablet: "40%", laptop: "25%", desktop: "20%"  }}
-        slideHeight={{ mobile: "90vw", tablet: "45vw", laptop: "30vw"  }}
-        slideMaxHeight="357px"
+        items={items}
       />
     </Box>
   )

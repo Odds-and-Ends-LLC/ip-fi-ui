@@ -1,10 +1,24 @@
 // packages
-import { Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 
 // components
-import { Carousel, CatalogCover } from "@/components/shared";
+import { Carousel, CatalogCover, ItemsCarousel } from "@/components/shared";
 
 export default function TopCatalogs() {
+  const topCatalogs = [
+    <CatalogCover key={1} image="images/image_1.png" title="🥇 TOP 1" />,
+    <CatalogCover key={2} image="images/image_2.png" title="🥇 TOP 2" />,
+    <CatalogCover key={3} image="images/image_3.png" title="🥇 TOP 3" />,
+    <CatalogCover key={4} image="images/image_4.png" title="🥇 TOP 4" />,
+    <CatalogCover key={5} image="images/image_1.png" title="🥇 TOP 5" />,
+  ];
+
+  const items = topCatalogs.map((catalog, i) => (
+    <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>
+      {catalog}
+    </Box>
+  ));
+
   return (
     <>
       {/* Desktop Grid */}
@@ -58,26 +72,8 @@ export default function TopCatalogs() {
       {/* Mobile Grid */}
       <Stack height="45vw" sx={{ display: { tablet: "none", mobile: "flex" } }}>
         <Carousel
-          slides={[
-            <CatalogCover key={1} image="images/image_1.png" title="🥇 TOP 1" />,
-            <CatalogCover key={2} image="images/image_2.png" title="🥇 TOP 2" />,
-            <CatalogCover key={3} image="images/image_3.png" title="🥇 TOP 3" />,
-            <CatalogCover key={4} image="images/image_4.png" title="🥇 TOP 4" />,
-            <CatalogCover key={5} image="images/image_1.png" title="🥇 TOP 5" />,
-          ]}
-          slideWidth={{ mobile: "80%" }}
-          headerMarginBottom={{
-            tablet: "24px",
-            mobile: "16px",
-          }}
-          emblaOptions={{
-            align: "center",
-            containScroll: "trimSnaps",
-            slidesToScroll: "auto",
-            loop: true,
-          }}
-          loading={false}
-          containerHeight="45vw"
+          slides={items}
+          slideGap="24px"
         />
       </Stack>
     </>
