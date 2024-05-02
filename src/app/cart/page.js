@@ -1,8 +1,8 @@
 // packages
 
 // components
-import { CatalogCart } from "@/components/cart";
+import { Cart } from "@/components/cart";
 
-export default function Cart() {
-  return <CatalogCart />;
+export default function CartPage() {
+  return <Cart />;
 }

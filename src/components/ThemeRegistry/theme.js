@@ -1025,10 +1025,6 @@ const theme = createTheme({
         labelContainer: {
           color: textDisabledBlue,
         },
-        iconContainer: {
-          display: "none",
-          padding: 0,
-        },
       },
     },
   },

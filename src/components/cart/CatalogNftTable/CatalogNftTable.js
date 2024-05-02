@@ -10,53 +10,7 @@ import styles from "./CatalogNftTable.module.css";
 import { Table } from "@/components/shared";
 import { DeleteIcon, EthIcon } from "public/icons";
 
-// data
-const nfts = [
-  {
-    id: 1,
-    name: "NFT_NAME",
-    collectionName: "CloneX",
-    price: 29.76,
-    exclusiveLicense: false,
-  },
-  {
-    id: 2,
-    name: "NFT_NAME",
-    collectionName: "CloneX",
-    price: 29.76,
-    exclusiveLicense: true,
-  },
-  {
-    id: 3,
-    name: "NFT_NAME",
-    collectionName: "CloneX",
-    price: 29.76,
-    exclusiveLicense: true,
-  },
-  {
-    id: 4,
-    name: "NFT_NAME",
-    collectionName: "CloneX",
-    price: 29.76,
-    exclusiveLicense: false,
-  },
-  {
-    id: 5,
-    name: "NFT_NAME",
-    collectionName: "CloneX",
-    price: 29.76,
-    exclusiveLicense: true,
-  },
-  {
-    id: 6,
-    name: "NFT_NAME",
-    collectionName: "CloneX",
-    price: 29.76,
-    exclusiveLicense: false,
-  },
-];
-
-export default function CatalogNftTable() {
+export default function CatalogNftTable({ data = [] }) {
   const [selectedNfts, setSelectedNfts] = useState([]);
   const handleNftCheckbox = (e, value) => {
     const currentIndex = selectedNfts.indexOf(value);
@@ -179,7 +133,7 @@ export default function CatalogNftTable() {
         hasBackground={false}
         dataGridProps={{
           columns: columns,
-          rows: nfts,
+          rows: data,
           rowHeight: 104,
           columnHeaderHeight: 50,
           hideFooter: true,
