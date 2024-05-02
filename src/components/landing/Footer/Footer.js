@@ -78,7 +78,7 @@ export default function Footer() {
         </Stack>
       </Stack>
       <Typography variant="label">
-        {new Date().getFullYear()} © IP-Fi. Powered by Phygital.eth.
+        {new Date().getFullYear()} © Kek Labs.
       </Typography>
     </Stack>
   );

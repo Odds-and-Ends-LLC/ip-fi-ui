@@ -9,11 +9,6 @@ const protectedRoutes = [
 const publicRoutes = [
   "/login",
   "/signup",
-  "/explore",
-  "/catalog",
-  "/nft",
-  "/user",
-  "/"
 ];
 
 export default async function middleware(req: NextRequest) {
@@ -28,11 +23,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
-  if (
-    isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith("/explore")
-  ) {
+  if (isPublicRoute && session?.userId) {
     return NextResponse.redirect(new URL("/explore", req.nextUrl));
   }
 

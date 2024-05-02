@@ -1,19 +1,22 @@
 // packages
-import { Box, Card, CardActionArea, CardHeader, CardMedia, Typography, useTheme } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardHeader, CardMedia, Stack, Typography, useTheme } from "@mui/material";
 import { useMeasure } from "@uidotdev/usehooks";
 import { motion } from "framer-motion";
 import { clamp } from "@/utils/clamp";
+import Image from "next/image";
+import Link from "next/link";
 
 // styles
 import styles from "./Catalog.module.css";
-import Image from "next/image";
-import Link from "next/link";
 
 // This component is fluid and just follows the dimensions of its parent
 // so that it can be used on different grid configurations
 
 export default function CatalogCover({
   catalogName = "CATALOG_NAME",
+  nftCount = 20,
+  creatorName = "Creator",
+  creatorUserId = "user1",
   backgroundColor,
   image = "/images/image_3.png",
   title,
@@ -33,6 +36,7 @@ export default function CatalogCover({
       sx={{ cursor: cover ? "default" : "pointer" }}
     >
       <CardActionArea
+        LinkComponent={Link}
         className={styles.catalogCoverActionArea}
         {...!cover && { href: "/catalog/catalog1" }}
       >
@@ -69,28 +73,28 @@ export default function CatalogCover({
           color="text.grayOverlay"
           sx={{
             rotate: "-180deg",
-            left: 8,
+            left: 4,
             bottom: 0,
             fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
             lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
           }}
         >
-          {`${catalogName} ${catalogName}`}
+          {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
         </Typography>
         <Typography
           className={styles.catalogCoverOverlay}
           variant="h2"
           color="text.grayOverlay"
           sx={{
-            right: 8,
+            right: 4,
             top: 0,
             fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
             lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
           }}
         >
-          {`${catalogName} ${catalogName}`}
+          {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
         </Typography>
-        {!cover &&
+        {/* {!cover &&
           <Box
             className={styles.catalogCoverFlip}
             sx={{
@@ -104,8 +108,34 @@ export default function CatalogCover({
               fill
             />
           </Box>
-        }
+        } */}
       </CardActionArea>
+      <Box
+        className={styles.catalogCoverDetails}
+        sx={{
+          bgcolor: "background.default",
+        }}
+      >
+        <Stack
+          className={styles.catalogCoverDetailsContent}
+          sx={{
+            bgcolor: "background.darkBlue",
+            p: {
+              mobile: "16px",
+            }
+          }}
+        >
+          <Typography variant="h6">
+            {catalogName}
+          </Typography>
+          <Typography variant="body2">
+            {creatorName}
+          </Typography>
+          <Typography variant="body2" color="text.disabled">
+            {nftCount} NFTS
+          </Typography>
+        </Stack>
+      </Box>
     </Card>
   )
 };

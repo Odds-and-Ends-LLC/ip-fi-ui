@@ -1,7 +1,7 @@
 // packages
-import { Stack, Button, Typography, LinearProgress, useTheme, useMediaQuery, Grid, Box, Backdrop, Dialog } from "@mui/material";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { Stack, Button, Typography, LinearProgress, useTheme, useMediaQuery, Grid, Box, Dialog } from "@mui/material";
 import { useMeasure } from "@uidotdev/usehooks";
+import { useEffect, useState } from "react";
 
 // components
 import { ArrowLeftIcon, ArrowRightIcon } from "@/elements/icons";
@@ -69,7 +69,6 @@ export default function Catalog({
     [<CatalogCover key="cover" catalogName={catalogName} backgroundColor={coverBackgroundColor} image={coverImage} cover />].concat(
     nfts
     .map((nft, i) => (
-
       <Stack key={i} className={styles.catalogPocket} sx={{ borderColor: "background.darkBlue" }}>
         <Box
           className={styles.catalogNftWrapper}
@@ -208,7 +207,17 @@ export default function Catalog({
           >
             <Box
               className={styles.catalogNftWrapper}
-              sx={{ height: "520px", width: "480px", transformStyle: "preserve-3d" }}
+              sx={{
+                transformStyle: "preserve-3d",
+                height: {
+                  mobile: "356px",
+                  tablet: "520px",
+                },
+                width: {
+                  mobile: "327px",
+                  tablet: "480px",
+                },
+              }}
               component={motion.div}
               initial={{ y: "-100%", scale: .6, opacity: 0, rotateX: "20deg" }}
               animate={{ y: "0", scale: 1, opacity: 1, rotateX: "0deg" }}

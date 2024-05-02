@@ -169,7 +169,7 @@ export default function Navbar({
                 </IconButton>
               </Stack>
               <Typography variant="label">
-                {new Date().getFullYear()} © iPFi. Powered by Phygital.eth.
+                {new Date().getFullYear()} © Kek Labs.
               </Typography>
             </Stack>
           </Drawer>

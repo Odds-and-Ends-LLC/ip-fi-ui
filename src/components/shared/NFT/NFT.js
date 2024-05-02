@@ -2,6 +2,7 @@
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 // components
 import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "@/elements/icons";
@@ -14,7 +15,7 @@ export default function NFT({
   collectionName = "Collection Name",
   image = "/images/image_4.png",
   nftName = "NFT Name",
-  contracts = 10,
+  catalogs = 10,
   earnings = 264,
   price = "29.30",
   action,
@@ -55,6 +56,7 @@ export default function NFT({
       }
       <CardActionArea
         className={styles.nftActionArea}
+        LinkComponent={Link}
         sx={{
           "& > .MuiCardMedia-root > .MuiStack-root": {
             opacity: 0,
@@ -122,13 +124,13 @@ export default function NFT({
                   </Typography>
                 </Stack>
               </Grid>
-              <Grid key="contracts" item mobile={6}>
+              <Grid key="catalogs" item mobile={6}>
                 <Stack className={styles.nftItem}>
                   <Typography variant="body2" color="text.disabled">
-                    Contracts
+                    Catalogs
                   </Typography>
                   <Typography variant="h6">
-                    {contracts}
+                    {catalogs}
                   </Typography>
                 </Stack>
               </Grid>

@@ -22,7 +22,7 @@ export default function PasswordPageContainer({ children }) {
       </Stack>
       <Stack className={styles.passwordPageContents}>{children}</Stack>
       <Typography variant="label3">
-        {new Date().getFullYear()} © iPFi. Powered by Phygital.eth.
+        {new Date().getFullYear()} © Kek Labs.
       </Typography>
     </Stack>
   );

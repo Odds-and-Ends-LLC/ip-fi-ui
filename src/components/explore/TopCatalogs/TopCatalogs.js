@@ -2,7 +2,7 @@
 import { Box, Grid, Stack } from "@mui/material";
 
 // components
-import { Carousel, CatalogCover, ItemsCarousel } from "@/components/shared";
+import { Carousel, CatalogCover } from "@/components/shared";
 
 export default function TopCatalogs() {
   const topCatalogs = [
@@ -22,12 +22,12 @@ export default function TopCatalogs() {
   return (
     <>
       {/* Desktop Grid */}
-      <Grid container spacing={3} height="30vw" maxHeight="475px" sx={{ display: { desktop: "flex", mobile: "none" } }}>
+      <Grid container spacing={3} height="40vw" maxHeight="540px" sx={{ display: { desktop: "flex", mobile: "none" } }}>
         <Grid item mobile={6} >
           <CatalogCover image="images/image_1.png" title="🥇 TOP 1" />
         </Grid>
         <Grid item mobile={6}>
-          <Grid container spacing={3} height="30vw" maxHeight="475px">
+          <Grid container spacing={3} height="40vw" maxHeight="540px">
             <Grid item mobile={6}>
               <CatalogCover image="images/image_2.png" title="🥇 TOP 2" />
             </Grid>

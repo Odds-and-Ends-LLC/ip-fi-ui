@@ -91,7 +91,7 @@ export default function Login() {
             </Box>
             <LoginForm />
           </Stack>
-          <Typography variant="label3">2023 © iPFi. Powered by Phygital.eth.</Typography>
+          <Typography variant="label3">{new Date().getFullYear()} © Kek Labs.</Typography>
         </Stack>
       </Grid>
     </Grid>
