@@ -918,6 +918,7 @@ const theme = createTheme({
     MuiChip: {
       defaultProps: {
         variant: "outlined",
+        size: "medium",
       },
       styleOverrides: {
         root: {
@@ -926,12 +927,22 @@ const theme = createTheme({
         label: {
           padding: 0,
         },
-        outlined: ({ theme }) => ({
-          ...theme.typography.label3,
-          borderRadius: "2px",
+        outlined: {
           borderStyle: "solid",
           borderWidth: "1px",
+        },
+        sizeMedium: ({ theme }) => ({
+          ...theme.typography.label3,
+          borderRadius: "2px",
         }),
+        sizeSmall: {
+          borderRadius: "4px",
+          fontSize: "12px",
+          height: "fit-content",
+          lineHeight: "20px",
+          padding: "2px 4px",
+          width: "fit-content",
+        },
       },
       variants: [
         {

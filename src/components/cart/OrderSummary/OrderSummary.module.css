@@ -7,13 +7,19 @@
 }
 
 .orderSummaryDetail {
-  align-items: center;
+  align-items: start;
   flex-direction: row;
   gap: 16px;
   justify-content: space-between;
 }
 
-.orderSummaryDetailValue {
+.detailLabel {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.detailValue {
   align-items: center;
   flex-direction: row;
   gap: 8px;

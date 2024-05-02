@@ -11,10 +11,17 @@ export default function OrderSummary({ data, hideSubtotal, ContinueBtnProps }) {
   const SummaryDetail = ({ label, value, valueIcon, valueTextVariant = "body1" }) => {
     return (
       <Stack className={styles.orderSummaryDetail}>
-        <Typography color="text.disabledBlue">{label}</Typography>
-        <Stack className={styles.orderSummaryDetailValue}>
+        <Typography color="text.disabledBlue" className={styles.detailLabel}>
+          {label}
+        </Typography>
+        <Stack
+          className={styles.detailValue}
+          sx={{ maxWidth: { laptop: "160px", desktop: "256px" } }}
+        >
           {valueIcon}
-          <Typography variant={valueTextVariant}>{value}</Typography>
+          <Typography variant={valueTextVariant} noWrap>
+            {value}
+          </Typography>
         </Stack>
       </Stack>
     );

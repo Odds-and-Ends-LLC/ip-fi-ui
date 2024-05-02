@@ -18,7 +18,7 @@ import styles from "./CatalogCart.module.css";
 // components
 import { ArrowHeadRightIcon, ArrowLeftIcon, PlusIcon } from "public/icons";
 import { Modal, Tabs } from "@/components/shared";
-import { OrderSummary } from "..";
+import { CatalogNftTable, OrderSummary } from "..";
 
 // data
 const catalogs = [
@@ -154,8 +154,13 @@ export default function CatalogCart() {
           </Modal>
         </Stack>
         <Stack className={styles.catalogTableAndSummary} sx={{ flexDirection: { laptop: "row" } }}>
-          <Stack className={styles.catalogNftTable}>{/* CONTENT*/}</Stack>
-          <Stack className={styles.catalogOrderDetails} sx={{ maxWidth: { laptop: "464px" } }}>
+          <Stack className={styles.catalogNftTable}>
+            <CatalogNftTable />
+          </Stack>
+          <Stack
+            className={styles.catalogOrderDetails}
+            sx={{ maxWidth: { laptop: "368px", desktop: "464px" } }}
+          >
             <OrderSummary
               data={""}
               hideSubtotal={false}
