@@ -11,6 +11,7 @@ export { default as CalendarIcon } from "./Calendar";
 export { default as CameraIcon } from "./Camera";
 export { default as CheckIcon } from "./Check";
 export { default as CloseIcon } from "./Close";
+export { default as DeleteIcon } from "./Delete";
 export { default as DiscordIcon } from "./Discord";
 export { default as EthIcon } from "./Eth";
 export { default as ExpandIcon } from "./Expand";
