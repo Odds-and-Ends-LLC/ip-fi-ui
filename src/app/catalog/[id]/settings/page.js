@@ -1,5 +1,5 @@
 // components
-import { CatalogSettings } from "@/components/catalog";
+import { CatalogSettings } from "@/sections/catalog";
 
 export default function CatalogSettingsPage() {
   return <CatalogSettings />;

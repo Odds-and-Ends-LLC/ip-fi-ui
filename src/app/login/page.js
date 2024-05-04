@@ -6,7 +6,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 // components
-import { LoginForm } from "@/components/login";
+import { LoginForm } from "@/sections/login";
 
 export default function Login() {
   const ArtBackground = ({ display = "block" }) => {

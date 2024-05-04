@@ -1,5 +1,5 @@
 // components
-import { Explore } from "@/components/explore";
+import { Explore } from "@/sections/explore";
 
 export default function SignupPage() {
   return <Explore />;

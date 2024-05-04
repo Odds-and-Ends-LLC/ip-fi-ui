@@ -1,5 +1,5 @@
 // components
-import { CatalogView } from "@/components/catalog";
+import { CatalogView } from "@/sections/catalog";
 
 async function fetchCatalog(id) {
   // change this to an api call to get catalog

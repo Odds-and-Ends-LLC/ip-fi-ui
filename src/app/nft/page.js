@@ -2,7 +2,7 @@
 import { Stack } from "@mui/material";
 
 // components
-import { NFT } from "@/components/nft";
+import { NFT } from "@/sections/nft";
 
 export default function NftPage() {
   return <NFT />;

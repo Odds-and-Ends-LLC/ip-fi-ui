@@ -1,5 +1,5 @@
 // components
-import { ProfileSettings } from "@/components/profile";
+import { ProfileSettings } from "@/sections/profile";
 
 async function fetchProfile() {
   // change this to an api call to get user

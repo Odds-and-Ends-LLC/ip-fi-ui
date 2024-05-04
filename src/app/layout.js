@@ -1,15 +1,15 @@
 // packages
-import { Container } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 
 // components
-import ThemeRegistry from "@/components/ThemeRegistry";
-import { Navbar } from "@/components/shared";
+import { Navbar } from "@/components";
 
 // lib
 import { getUser } from "@/lib/queries/user";
 
 // styles
-// import "./globals.css";
+import { theme } from "@/styles/theme";
 
 export const metadata = {
   title: "IPfi",
@@ -22,11 +22,13 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ThemeRegistry>
-          {/* navbar not visible on login page */}
-          <Navbar user={user} />
-          <Container>{children}</Container>
-        </ThemeRegistry>
+        <AppRouterCacheProvider options={{ key: "css", enableCssLayer: true }}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Navbar user={user} />
+            <Container>{children}</Container>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

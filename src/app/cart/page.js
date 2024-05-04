@@ -1,7 +1,7 @@
 // packages
 
 // components
-import { Cart } from "@/components/cart";
+import { Cart } from "@/sections/cart";
 
 export default function CartPage() {
   return <Cart />;

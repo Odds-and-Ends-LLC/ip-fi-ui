@@ -3,7 +3,7 @@
 // styles
 
 // components
-import { PasswordPageContainer, ResetPassword } from "@/components/login";
+import { PasswordPageContainer, ResetPassword } from "@/sections/login";
 
 export default function ResetPasswordPage() {
   return (

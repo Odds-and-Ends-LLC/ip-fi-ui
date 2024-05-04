@@ -5,8 +5,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import styles from "./page.module.css";
 
 // components
-import { Signup, TermsAndConditions } from "@/components/signup";
-import { PaperTranslucent } from "@/components/shared";
+import { Signup, TermsAndConditions } from "@/sections/signup";
 
 export default function SignupPage() {
   return <Signup />;

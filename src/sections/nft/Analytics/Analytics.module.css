@@ -1,0 +1,49 @@
+.analytics {
+  flex: 1;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.analyticsContent {
+  flex: 1;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.analyticsSection {
+  gap: 16px;
+}
+
+.analyticsContracts,
+.analyticsPerformance {
+  column-gap: 24px;
+  row-gap: 16px;
+}
+
+.item {
+  backdrop-filter: blur(30px);
+  background: linear-gradient(113deg, rgba(26, 27, 70, 0.5) 0%, rgba(26, 27, 70, 0.1) 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(114, 255, 136, 0.2);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  flex: 1 0 0;
+  gap: 12px;
+  min-height: 140px;
+  padding: 24px;
+}
+
+.itemLabel {
+  height: 50%;
+  justify-content: end;
+}
+
+.itemIcon {
+  height: 32px;
+  justify-content: center;
+}
+
+.itemValue {
+  flex-direction: row;
+  gap: 12px;
+  height: 50%;
+}
