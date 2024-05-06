@@ -26,19 +26,19 @@
   height: 40px;
 }
 
-.updatesBlogCard {
+.updatesCard {
   background: none;
   border-radius: 0;
   border-top-style: solid;
   border-top-width: 1px;
 }
 
-.updatesBlogCardTitle {
+.updatesCardTitle {
   gap: 8px;
   padding: 24px 0;
 }
 
-.updatesBlogCardMedia {
+.updatesCardMedia {
   flex-shrink: 0;
   height: 240px;
   width: 100%;

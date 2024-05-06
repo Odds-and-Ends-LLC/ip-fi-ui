@@ -114,9 +114,9 @@ declare module '@mui/material/styles' {
   }
 
   interface TypeGradients {
-    1?: string;
-    2?: string;
-    3?: string;
+    one?: string;
+    two?: string;
+    three?: string;
   }
 
   interface TypeCatalog {
@@ -303,8 +303,8 @@ export const theme = createTheme({
       primary: colors.gray[100],
       secondary: colors.gray[900],
       dark: colors.blue[1100],
-      brandPrimary: colors.green[1000],
-      brandSecondary: colors.purple[900],
+      brandPrimary: colors.purple[900],
+      brandSecondary: colors.green[1000],
       disabled: colors.gray[1200],
       disabledBlue: colors.blue[500],
     },
@@ -324,9 +324,9 @@ export const theme = createTheme({
       dark: colors.blue[1100],
     },
     gradient: {
-      1: `linear-gradient(90deg, ${colors.purple[500]} 0%, ${colors.green[1200]} 100%)`,
-      2: `linear-gradient(90deg, ${colors.green[1200]} 0%, ${colors.purple[500]} 100%)`,
-      3: `linear-gradient(90deg, ${colors.green[1000]}50 0%, ${colors.purple[100]}50 100%)`,
+      one: `linear-gradient(90deg, ${colors.purple[500]} 0%, ${colors.green[1200]} 100%)`,
+      two: `linear-gradient(90deg, ${colors.green[1200]} 0%, ${colors.purple[500]} 100%)`,
+      three: `linear-gradient(90deg, ${colors.green[1000]}50 0%, ${colors.purple[100]}50 100%)`,
     },
   },
   breakpoints: {
@@ -438,8 +438,8 @@ theme.palette.catalog = {
   orange: colors.orange,
   yellow: colors.yellow,
   teal: colors.teal,
-  gradient1: theme.palette.gradient[1],
-  gradient2: theme.palette.gradient[2],
+  gradient1: theme.palette.gradient.one,
+  gradient2: theme.palette.gradient.two,
 };
 
 theme.typography.h1 = {
@@ -487,7 +487,6 @@ theme.typography.h4 = {
   fontWeight: 700,
   fontSize: "24px",
   lineHeight: "32px",
-  textTransform: "uppercase",
   [theme.breakpoints.down("tablet")]: {
     fontWeight: 600,
     fontSize: "20px",
@@ -509,6 +508,7 @@ theme.typography.h6 = {
   fontSize: "16px",
   lineHeight: "20px",
   textTransform: "uppercase",
+  letterSpacing: "0.04em",
 };
 
 theme.components = {
@@ -532,8 +532,13 @@ theme.components = {
   MuiAccordion: {
     styleOverrides: {
       root: {
+        boxShadow: "none",
         "&.MuiPaper-root": {
           backgroundColor: "unset",
+        },
+        "&:before": {
+          opacity: 1,
+          backgroundColor: theme.palette.dividers.brand,
         },
         "&.Mui-expanded": {
           margin: "0px 0px 24px",
@@ -542,6 +547,7 @@ theme.components = {
           },
         },
         "&.Mui-expanded:before": {
+          backgroundColor: theme.palette.dividers.brand,
           opacity: 1,
         },
       },
@@ -550,7 +556,11 @@ theme.components = {
   MuiAccordionSummary: {
     styleOverrides: {
       root: {
-        ...theme.typography.h4
+        ...theme.typography.h4,
+        padding: "16px 0px",
+        [theme.breakpoints.down("desktop")]: {
+          padding: "8px 0px",
+        },
       },
       content: {
         alignItems: "center",
@@ -580,7 +590,7 @@ theme.components = {
         border: "none",
         "& .MuiDataGrid-withBorderColor": {
           border: "1px solid",
-          borderImageSource: theme.palette.gradient[3]
+          borderImageSource: theme.palette.gradient.three
         },
         "& .MuiDataGrid-columnHeader": {
           ...theme.typography.label3,
@@ -716,10 +726,10 @@ theme.components = {
       {
         props: { variant: "solidGradient" },
         style: {
-          background: theme.palette.gradient[1],
+          background: theme.palette.gradient.one,
           color: theme.palette.text.dark,
           "&:hover": {
-            background: theme.palette.gradient[2],
+            background: theme.palette.gradient.one,
           },
         }
       },
@@ -875,6 +885,7 @@ theme.components = {
       {
         props: { variant: "clearPurpleUnderline" },
         style: {
+          justifyContent: "flex-start",
           color: theme.palette.text.dark,
           padding: "0 0 16px",
           borderBottom: `1px solid ${theme.palette.dividers.dark}`,
@@ -883,9 +894,20 @@ theme.components = {
       {
         props: { variant: "clearWhiteUnderline" },
         style: {
+          justifyContent: "flex-start",
           color: theme.palette.background.white,
           padding: "0 0 16px",
           borderBottom: `1px solid ${theme.palette.dividers.default}`,
+          gap: "8px",
+          "&:hover": {
+            backgroundColor: "unset",
+          },
+          "& .MuiButton-startIcon": {
+            margin: 0,
+          },
+          "& .MuiButton-endIcon": {
+            marginLeft: "auto",
+          }
         }
       },
     ],
@@ -937,7 +959,6 @@ theme.components = {
   },
   MuiLink: {
     defaultProps: {
-      color: theme.palette.text.secondary,
       component: NextLink,
     },
     styleOverrides: {
@@ -950,7 +971,7 @@ theme.components = {
   MuiLinearProgress: {
     styleOverrides: {
       bar1Determinate: {
-        background: theme.palette.gradient[2],
+        background: theme.palette.gradient.two,
       },
       root: {
         backgroundColor: colors.gray[1500],
