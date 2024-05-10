@@ -90,6 +90,7 @@ const colors = {
   orange: "#eda73d",
   red: "#cd4747",
   yellow: "#dcd75d",
+  black: "#000000",
 };
 
 declare module "@mui/material/styles" {
@@ -278,6 +279,12 @@ declare module "@mui/material/TextField" {
     clearPurpleUnderline: true;
     clearWhiteUnderline: true;
     scrollToTop: true;
+  }
+}
+
+declare module "@mui/material/Paper" {
+  interface PaperPropsVariantOverrides {
+    translucent: true;
   }
 }
 
@@ -590,7 +597,7 @@ theme.components = {
         border: "none",
         "& .MuiDataGrid-withBorderColor": {
           border: "1px solid",
-          borderImageSource: theme.palette.gradient.three
+          borderImageSource: theme.palette.gradient.three,
         },
         "& .MuiDataGrid-columnHeader": {
           ...theme.typography.label3,
@@ -1286,8 +1293,12 @@ theme.components = {
     },
   },
   MuiPaper: {
+    defaultProps: {
+      elevation: 0,
+    },
     styleOverrides: {
       outlined: {
+        //to do: change outline variant to translucent
         backdropFilter: "blur(50px)",
         background:
           "linear-gradient(113deg, rgba(26, 27, 70, 0.50) 0%, rgba(26, 27, 70, 0.10) 100%)",
@@ -1295,10 +1306,29 @@ theme.components = {
         borderRadius: "8px",
         boxShadow: "0px 4px 24px 0px rgba(0, 0, 0, 0.15)",
         flex: 1,
-        overflow: "auto",
+        overflow: "auto", //add to css
         padding: "16px",
       },
     },
+    variants: [
+      {
+        props: {
+          variant: "translucent",
+        },
+        style: {
+          backdropFilter: "blur(50px)",
+          background: `linear-gradient(130deg, ${colors.blue[900]}4d -1.35%, ${colors.blue[900]}0d 100%)`,
+          borderColor: `${colors.green[1000]}33`,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          borderRadius: "8px",
+          boxShadow: `0px 4px 24px 0px ${colors.black}33`,
+          flex: 1,
+          overflow: "auto",
+          padding: "16px",
+        },
+      },
+    ],
   },
   MuiChip: {
     defaultProps: {

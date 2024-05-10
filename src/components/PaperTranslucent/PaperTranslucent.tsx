@@ -1,7 +1,8 @@
 // packages
-import { Box, Paper, Stack, useTheme } from "@mui/material";
-import Image from "next/image";
-
+import React from "react";
+import { Box, Paper, Stack } from "@mui/material";
+import { ResponsiveStyleValue } from "@mui/system";
+import { Property } from "csstype";
 // styles
 import styles from "./PaperTranslucent.module.css";
 
@@ -13,9 +14,14 @@ export default function PaperTranslucent({
   iconPosition = "left",
   maxWidth = "576px",
   padding = { mobile: "32px 24px 32px 32px", tablet: "72px 64px 72px 72px" },
-  flex,
+  flex = 0,
+}: {
+  children: React.ReactNode;
+  iconPosition?: "left" | "right";
+  maxWidth?: Property.MaxWidth | ResponsiveStyleValue<Property.MaxWidth>;
+  padding?: Property.Padding | ResponsiveStyleValue<Property.Padding>;
+  flex?: Property.Flex | ResponsiveStyleValue<Property.Flex>;
 }) {
-  const theme = useTheme();
   const iconPositionValues = { mobile: "-17px", tablet: "-29px", laptop: "-41px" };
   const iconLeftPositionValues = { mobile: "-17px", tablet: "-29px", laptop: "-41px" };
   const iconRightPositionValues = {
@@ -26,9 +32,9 @@ export default function PaperTranslucent({
 
   return (
     <Paper
+      variant="translucent"
       className={styles.paperTranslucent}
       sx={{
-        background: theme.palette.background.translucentGray,
         padding: padding,
         maxWidth,
         flex,
@@ -40,7 +46,6 @@ export default function PaperTranslucent({
           height: { mobile: "32px", tablet: "56px", laptop: "80px" },
           top: iconPositionValues,
           left: iconPosition === "left" ? iconLeftPositionValues : iconRightPositionValues,
-          // right: iconPosition === "right" && iconPositionValues,
         }}
       >
         <AsteriskIcon size="100%" />

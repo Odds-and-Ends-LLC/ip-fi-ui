@@ -1,4 +1,10 @@
-export default function AsteriskIcon({ color = "#72FF88", size = 80 }) {
+export default function AsteriskIcon({
+  color = "#72FF88",
+  size = 80,
+}: {
+  color?: string;
+  size?: string | number;
+}) {
   return (
     <svg
       width={size}

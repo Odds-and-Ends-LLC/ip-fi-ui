@@ -4,7 +4,6 @@ import {
   FilledTextFieldProps as MuiFilledTextFieldProps,
   Stack,
   TextField as MuiTextField,
-  TextFieldProps as MuiTextFieldProps,
   Typography,
 } from "@mui/material";
 
@@ -14,14 +13,8 @@ import styles from "./TextField.module.css";
 // components
 import { InfoIcon } from "@/elements";
 
-// interface
-
-interface FieldMessageProps {
-  visible?: boolean;
-  status?: "error" | "success" | "info";
-  icon?: ReactNode;
-  message?: string;
-}
+// types
+import { FieldMessageProps } from "./types.model";
 interface TextFieldProps extends Partial<MuiFilledTextFieldProps> {
   label?: string;
   required?: boolean;
