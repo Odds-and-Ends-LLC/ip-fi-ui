@@ -2,6 +2,7 @@
 // packages
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
+import { Typography } from "@mui/material";
 import NextLink from "next/link";
 
 const workSans = Work_Sans({
@@ -91,9 +92,7 @@ const colors = {
   yellow: "#dcd75d",
 };
 
-
-
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   // custom tokens
   interface TypeStatus {
     success?: string;
@@ -219,7 +218,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-declare module '@mui/material/Typography' {
+declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     label1?: true;
     label2?: true;
@@ -232,11 +231,11 @@ declare module '@mui/material/Typography' {
     button4?: true;
     graph?: true;
   }
-};
+}
 
-declare module '@mui/material/Button' {
+declare module "@mui/material/Button" {
   interface ButtonOwnProps {
-    mode?: 'icon';
+    mode?: "icon";
   }
 
   interface ButtonPropsVariantOverrides {
@@ -258,9 +257,9 @@ declare module '@mui/material/Button' {
     clearWhiteUnderline: true;
     scrollToTop: true;
   }
-};
+}
 
-declare module '@mui/material/TextField' {
+declare module "@mui/material/TextField" {
   interface TextFieldPropsVariantOverrides {
     solidGradient: true;
     solidPurple: true;
@@ -280,7 +279,7 @@ declare module '@mui/material/TextField' {
     clearWhiteUnderline: true;
     scrollToTop: true;
   }
-};
+}
 
 export const theme = createTheme({
   palette: {
@@ -295,7 +294,8 @@ export const theme = createTheme({
       secondary: colors.blue[1100],
       tertiary: colors.blue[900],
       white: colors.gray[100],
-      grayOverlay: colors.gray[1500],
+      // grayOverlay: colors.gray[1500],
+      grayOverlay: `${colors.gray[1500]}35`,
       purpleOverlay: `${colors.purple[1500]}35`,
       greenOverlay: `${colors.green[1200]}35`,
     },
@@ -312,7 +312,7 @@ export const theme = createTheme({
       success: colors.green[1200],
       info: colors.teal,
       warning: colors.orange,
-      error: colors.purple[900]
+      error: colors.purple[900],
     },
     icon: {
       default: colors.gray[100],
@@ -526,8 +526,8 @@ theme.components = {
     styleOverrides: {
       root: {
         transition: "filter 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-      }
-    }
+      },
+    },
   },
   MuiAccordion: {
     styleOverrides: {
@@ -609,9 +609,10 @@ theme.components = {
         "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
           display: "none",
         },
-        "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
-          outline: "none",
-        },
+        "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
+          {
+            outline: "none",
+          },
         "& .MuiDataGrid-main": {
           // remove overflow hidden overwise sticky does not work
           overflow: "unset",
@@ -700,7 +701,7 @@ theme.components = {
     defaultProps: {
       disableRipple: true,
       disableTouchRipple: true,
-    }
+    },
   },
   MuiButton: {
     defaultProps: {
@@ -709,7 +710,7 @@ theme.components = {
       fullWidth: false,
     },
     styleOverrides: {
-      root: (({ theme, ownerState }) => ({
+      root: ({ theme, ownerState }) => ({
         padding: ownerState.mode === "icon" ? "8px" : "8px 16px",
         ...theme.typography.button1,
         backgroundColor: "transparent",
@@ -720,7 +721,7 @@ theme.components = {
         "&:hover": {
           boxShadow: "none",
         },
-      })),
+      }),
     },
     variants: [
       {
@@ -731,7 +732,7 @@ theme.components = {
           "&:hover": {
             background: theme.palette.gradient.one,
           },
-        }
+        },
       },
       {
         props: { variant: "solidPurple" },
@@ -745,7 +746,7 @@ theme.components = {
             color: theme.palette.text.disabled,
             backgroundColor: "#A991D0",
           },
-        }
+        },
       },
       {
         props: { variant: "solidGreen" },
@@ -759,7 +760,7 @@ theme.components = {
             color: theme.palette.text.disabledBlue,
             backgroundColor: "#88BE90",
           },
-        }
+        },
       },
       {
         props: { variant: "solidWhite" },
@@ -773,7 +774,7 @@ theme.components = {
             color: theme.palette.text.disabledBlue,
             backgroundColor: "#B8B8D3",
           },
-        }
+        },
       },
       {
         props: { variant: "solidDark" },
@@ -787,7 +788,7 @@ theme.components = {
             color: theme.palette.text.disabledBlue,
             backgroundColor: "#B8B8D3",
           },
-        }
+        },
       },
       {
         props: { variant: "outlineGreen" },
@@ -801,7 +802,7 @@ theme.components = {
             border: "1px solid #5C6B5E",
             color: "#5C6B5E",
           },
-        }
+        },
       },
       {
         props: { variant: "outlineWhite" },
@@ -815,7 +816,7 @@ theme.components = {
             border: `1px solid ${theme.palette.text.disabledBlue}`,
             color: theme.palette.text.disabledBlue,
           },
-        }
+        },
       },
       {
         props: { variant: "outlineDark" },
@@ -829,7 +830,7 @@ theme.components = {
             border: `1px solid ${theme.palette.text.disabledBlue}`,
             color: theme.palette.text.disabledBlue,
           },
-        }
+        },
       },
       {
         props: { variant: "clearGreen" },
@@ -841,7 +842,7 @@ theme.components = {
           "&.Mui-disabled": {
             color: "#5C6B5E",
           },
-        }
+        },
       },
       {
         props: { variant: "clearPurple" },
@@ -850,7 +851,7 @@ theme.components = {
           "&:hover": {
             backgroundColor: theme.palette.background.grayOverlay,
           },
-        }
+        },
       },
       {
         props: { variant: "clearWhite" },
@@ -862,7 +863,7 @@ theme.components = {
           "&.Mui-disabled": {
             color: theme.palette.text.disabledBlue,
           },
-        }
+        },
       },
       {
         props: { variant: "clearRed" },
@@ -874,13 +875,13 @@ theme.components = {
           "&.Mui-disabled": {
             color: "#7D5252",
           },
-        }
+        },
       },
       {
         props: { variant: "clearDark" },
         style: {
           color: theme.palette.text.dark,
-        }
+        },
       },
       {
         props: { variant: "clearPurpleUnderline" },
@@ -889,7 +890,7 @@ theme.components = {
           color: theme.palette.text.dark,
           padding: "0 0 16px",
           borderBottom: `1px solid ${theme.palette.dividers.dark}`,
-        }
+        },
       },
       {
         props: { variant: "clearWhiteUnderline" },
@@ -907,8 +908,8 @@ theme.components = {
           },
           "& .MuiButton-endIcon": {
             marginLeft: "auto",
-          }
-        }
+          },
+        },
       },
     ],
   },
@@ -1014,7 +1015,47 @@ theme.components = {
   },
   MuiTextField: {
     defaultProps: {
-      hiddenLabel: true,
+      InputLabelProps: {
+        component: Typography,
+      },
+    },
+    styleOverrides: {
+      root: {
+        gap: "8px",
+        "& .MuiFormLabel-root": {
+          position: "relative",
+          maxWidth: "unset",
+          transform: "none",
+          color: theme.palette.text.secondary,
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+          color: theme.palette.text.secondary,
+        },
+        "& .MuiFormLabel-root.Mui-error": {
+          color: theme.palette.text.secondary,
+        },
+        "& .MuiFormLabel-asterisk": {
+          display: "none",
+        },
+        "& .MuiFormHelperText-root": {
+          margin: 0,
+          color: theme.palette.text.secondary,
+          ...theme.typography.body1,
+        },
+        "& .MuiFormHelperText-root.Mui-error": {
+          color: theme.palette.text.secondary,
+        },
+        "& .MuiInputBase-root": {
+          margin: 0,
+        },
+        "& .MuiInputBase-input": {
+          height: "100%",
+          padding: 0,
+          "&::placeholder": {
+            color: theme.palette.text.disabledBlue,
+          },
+        },
+      },
     },
     variants: [
       {
@@ -1041,45 +1082,49 @@ theme.components = {
               borderBottomColor: theme.palette.dividers.dark,
             },
           },
-        }
-      }
+        },
+      },
+      {
+        props: { variant: "filled" },
+        style: {
+          "& :not(.MuiInputBase-multiline).MuiFilledInput-root": {
+            height: "40px",
+          },
+          "& .MuiFilledInput-root": {
+            borderRadius: 0,
+            gap: "8px",
+            padding: "8px",
+            border: `1px solid ${theme.palette.dividers.default}`,
+            transition: "border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+            background: theme.palette.background.grayOverlay,
+            "&.Mui-error": {
+              border: `1px solid ${theme.palette.status.error}`,
+              "&::before": {
+                borderBottomColor: "transparent",
+              },
+            },
+            "&.Mui-disabled": {
+              opacity: 0.5,
+            },
+          },
+          "& .MuiInputBase-adornedEnd": {
+            padding: "8px 0 8px 8px",
+          },
+        },
+      },
     ],
-    // styleOverrides: {
-    //   root: ({ ownerState }) => ({
-    //     ...(ownerState.variant === "standard" && {
-    //       "& .MuiInput-input": {
-    //         color: blue,
-    //         height: "40px",
-    //         marginBottom: "16px",
-    //         padding: 0,
-    //         "&::placeholder": {
-    //           color: blue,
-    //           opacity: 1,
-    //         },
-    //       },
-    //       "& .MuiInput-root": {
-    //         "&:hover:not(.Mui-disabled, .Mui-error):before": {
-    //           borderBottomColor: dividerPurple,
-    //         },
-    //         "&::before": {
-    //           borderBottomColor: dividerPurple,
-    //         },
-    //         "&::after": {
-    //           borderBottomColor: blue,
-    //         },
-    //       },
-    //     }),
-    //   }),
-    // },
   },
   MuiInputAdornment: {
     styleOverrides: {
       root: {
-        marginTop: "0 !important",
+        margin: "0 !important",
+        maxHeight: "unset",
+        height: "100%",
       },
       positionStart: {
-        padding: 0,
+        flexShrink: 0,
         minWidth: "24px",
+        padding: 0,
         justifyContent: "center",
       },
     },
@@ -1372,4 +1417,4 @@ theme.components = {
       },
     },
   },
-}
+};

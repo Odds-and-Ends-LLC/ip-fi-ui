@@ -40,9 +40,20 @@
   gap: 40px;
   height: 100%;
   max-width: 468px;
+  overflow: clip;
   padding: 16px 24px;
+  position: relative;
   text-align: center;
   width: 100%;
+}
+
+.loginFormMobileBg {
+  height: 100%;
+  opacity: 0.9;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
 }
 
 .loginFormContainer {

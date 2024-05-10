@@ -1,5 +1,7 @@
 // packages
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import { ResponsiveStyleValue } from "@mui/system";
+import { Property } from "csstype";
 import Image from "next/image";
 
 // styles
@@ -9,7 +11,11 @@ import styles from "./page.module.css";
 import { LoginForm } from "@/sections/login";
 
 export default function Login() {
-  const ArtBackground = ({ display = "block" }) => {
+  const ArtBackground = ({
+    display = "block",
+  }: {
+    display?: Property.Display | ResponsiveStyleValue<Property.Display>;
+  }) => {
     return (
       <Stack className={styles.artBackground} sx={{ display }}>
         <Image priority src="/images/login_gradient.png" alt="gradient" sizes="100%" fill />
@@ -57,9 +63,7 @@ export default function Login() {
               className={styles.loginArtImg}
             />
           </Box>
-          <Typography sx={{ typography: { mobile: "h2-mobile", laptop: "h2" } }}>
-            LOREM IPSUM DOLOR SIT AMET
-          </Typography>
+          <Typography variant="h2">LOREM IPSUM DOLOR SIT AMET</Typography>
         </Stack>
       </Grid>
       <Grid
@@ -68,17 +72,16 @@ export default function Login() {
         laptop={6}
         className={styles.loginFormGrid}
         sx={{
-          backgroundColor: { mobile: "transparent", laptop: "blue.dark" },
+          backgroundColor: { mobile: "transparent", laptop: "background.tertiary" },
           padding: { mobile: "96px 24px 24px", laptop: "72px 24px 24px" },
         }}
       >
         <ArtBackground display={{ mobile: "block", laptop: "none" }} />
-        <Stack
-          className={styles.loginFormGridContainer}
-          sx={{
-            backgroundColor: { mobile: "background.darkBlue", laptop: "blue.dark" },
-          }}
-        >
+        <Stack className={styles.loginFormGridContainer}>
+          <Box
+            className={styles.loginFormMobileBg}
+            sx={{ backgroundColor: "background.tertiary" }}
+          />
           <Stack className={styles.loginFormContainer}>
             <Box className={styles.loginFormLogo}>
               <Image
