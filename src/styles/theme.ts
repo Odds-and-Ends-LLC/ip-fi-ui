@@ -288,6 +288,13 @@ declare module "@mui/material/Paper" {
   }
 }
 
+declare module "@mui/material/Alert" {
+  interface AlertPropsVariantOverrides {
+    input: true;
+    snackbar: true;
+  }
+}
+
 export const theme = createTheme({
   palette: {
     primary: {
@@ -301,7 +308,6 @@ export const theme = createTheme({
       secondary: colors.blue[1100],
       tertiary: colors.blue[900],
       white: colors.gray[100],
-      // grayOverlay: colors.gray[1500],
       grayOverlay: `${colors.gray[1500]}35`,
       purpleOverlay: `${colors.purple[1500]}35`,
       greenOverlay: `${colors.green[1200]}35`,
@@ -1222,18 +1228,12 @@ theme.components = {
   },
   MuiAlert: {
     styleOverrides: {
-      root: {
-        padding: "12px",
-      },
-      filledSuccess: {
-        alignItems: "center",
-        backgroundColor: theme.palette.secondary.main,
-        color: theme.palette.text.dark,
-      },
       icon: {
+        marginRight: "8px",
         padding: 0,
       },
       message: {
+        alignSelf: "center",
         padding: 0,
       },
       action: {
@@ -1245,6 +1245,43 @@ theme.components = {
         },
       },
     },
+    variants: [
+      {
+        props: { severity: "error" },
+        style: {
+          backgroundColor: theme.palette.status.error,
+          color: theme.palette.text.primary,
+        },
+      },
+      {
+        props: { severity: "info" },
+        style: {
+          backgroundColor: theme.palette.status.info,
+          color: theme.palette.text.dark,
+        },
+      },
+      {
+        props: { severity: "success" },
+        style: {
+          backgroundColor: theme.palette.status.success,
+          color: theme.palette.text.dark,
+        },
+      },
+      {
+        props: { severity: "warning" },
+        style: {
+          backgroundColor: theme.palette.status.warning,
+          color: theme.palette.text.dark,
+        },
+      },
+      {
+        props: { variant: "input" },
+        style: {
+          borderRadius: 0,
+          padding: "8px",
+        },
+      },
+    ],
   },
   MuiSwitch: {
     styleOverrides: {

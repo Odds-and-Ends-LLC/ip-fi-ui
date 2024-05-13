@@ -15,7 +15,7 @@ import { Modal, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
 
 export default function LoginForm() {
-  const [state, action] = useFormState(signin);
+  const [state, action] = useFormState(signin, null);
   const [showPassword, setShowPassword] = useState(false);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -64,7 +64,7 @@ export default function LoginForm() {
                 Forgot Password?
               </Link>
             }
-            message={state?.error}
+            alert={state?.error}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

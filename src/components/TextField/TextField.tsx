@@ -5,6 +5,7 @@ import {
   Stack,
   TextField as MuiTextField,
   Typography,
+  Alert,
 } from "@mui/material";
 
 // styles
@@ -14,14 +15,19 @@ import styles from "./TextField.module.css";
 import { InfoIcon } from "@/elements";
 
 // types
-import { FieldMessageProps } from "./types.model";
+export interface AlertProps {
+  visible?: boolean;
+  status?: "error" | "success" | "info";
+  icon?: ReactNode;
+  message?: string;
+}
 interface TextFieldProps extends Partial<MuiFilledTextFieldProps> {
   label?: string;
   required?: boolean;
   description?: string;
   caption?: string | ReactNode;
-  message?: string;
-  FieldMessageProps?: FieldMessageProps;
+  alert?: string;
+  AlertProps?: AlertProps;
 }
 
 export default function TextField({
@@ -29,30 +35,10 @@ export default function TextField({
   required,
   description,
   caption,
-  message,
-  FieldMessageProps = { visible: true, status: "error", icon: <InfoIcon /> },
+  alert,
+  AlertProps = { visible: true, status: "error", icon: <InfoIcon /> },
   ...props
-}: TextFieldProps): JSX.Element {
-  const FieldMessage = ({
-    visible = true,
-    status = "error",
-    icon = <InfoIcon />,
-    message,
-  }: FieldMessageProps): JSX.Element | null => {
-    return visible ? (
-      <Stack
-        className={styles.textFieldMessage}
-        sx={{
-          bgcolor: `status.${status}`,
-          color: status === "error" ? "text.primary" : "text.dark",
-        }}
-      >
-        {icon}
-        <Typography>{message}</Typography>
-      </Stack>
-    ) : null;
-  };
-
+}: TextFieldProps) {
   return (
     <Stack className={styles.textField}>
       {label && (
@@ -66,7 +52,11 @@ export default function TextField({
         </Typography>
       )}
       <MuiTextField {...props} variant="filled" label={description} helperText={caption} />
-      {message && <FieldMessage {...FieldMessageProps} message={message} />}
+      {alert && AlertProps.visible && (
+        <Alert icon={AlertProps.icon} severity={AlertProps.status} variant="input">
+          {alert}
+        </Alert>
+      )}
     </Stack>
   );
 }
