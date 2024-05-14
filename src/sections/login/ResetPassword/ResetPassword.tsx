@@ -1,29 +1,34 @@
 // packages
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Button, Link, Stack, Typography } from "@mui/material";
-
-// styles
-import styles from "./ResetPassword.module.css";
 
 // components
 import { PaperTranslucent, PasswordInput } from "@/components";
 import { REGEX } from "@/utils/regex";
 
 export default function ResetPassword() {
-  const [resetPasswordStep, setResetPasswordStep] = useState("enterNewPassword");
-  const [passwords, setPasswords] = useState({ new: "", match: "" });
-  const [errors, setErrors] = useState({ passwordCorrect: false, passwordsMatch: false });
+  const [resetPasswordStep, setResetPasswordStep] = useState<
+    "enterNewPassword" | "resetPasswordConfirmed"
+  >("enterNewPassword");
+  const [passwords, setPasswords] = useState<{ new?: string; match?: string }>({
+    new: "",
+    match: "",
+  });
+  const [errors, setErrors] = useState<{ passwordCorrect: boolean; passwordsMatch: boolean }>({
+    passwordCorrect: false,
+    passwordsMatch: false,
+  });
 
-  const handleEnterPassword = (e) => {
-    setPasswords({ ...passwords, new: e.target.value });
-    if (!REGEX.password.test(e.target.value)) {
+  const handleEnterPassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPasswords({ ...passwords, new: event?.target.value });
+    if (!REGEX.password.test(event?.target.value)) {
       return setErrors({ ...errors, passwordCorrect: true });
     }
     return setErrors({ ...errors, passwordCorrect: false });
   };
 
-  const handleReEnterPassword = (e) => {
-    setPasswords({ ...passwords, match: e.target.value });
+  const handleReEnterPassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setPasswords({ ...passwords, match: event?.target.value });
   };
 
   useEffect(() => {
@@ -31,6 +36,7 @@ export default function ResetPassword() {
       return setErrors({ ...errors, passwordsMatch: true });
     }
     return setErrors({ ...errors, passwordsMatch: false });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [passwords]);
 
   const handleSetNewPassword = () => {
@@ -48,16 +54,20 @@ export default function ResetPassword() {
           <Stack gap="24px">
             <PasswordInput
               label="New Password"
+              required
               onChange={handleEnterPassword}
               error={errors.passwordCorrect}
-              helperText="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
+              alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
                 and 1 special character."
+              AlertProps={{ visible: errors.passwordCorrect }}
             />
             <PasswordInput
               label="Re-enter New Password"
+              required
               onChange={handleReEnterPassword}
               error={errors.passwordsMatch}
-              helperText="Passwords didn't match."
+              alert="Passwords didn't match."
+              AlertProps={{ visible: errors.passwordsMatch }}
             />
             <Button
               variant="solidGreen"
@@ -77,16 +87,14 @@ export default function ResetPassword() {
               Your password has been successfully updated, You can now use it to login.
             </Typography>
           </Stack>
-          <Typography
-            component={Link}
+          <Link
             href="/login"
-            target="_self"
             variant="body2"
-            color="text.secondary"
+            color="text.brandSecondary"
             sx={{ alignSelf: "center" }}
           >
             Back to Login
-          </Typography>
+          </Link>
         </>
       )}
     </PaperTranslucent>

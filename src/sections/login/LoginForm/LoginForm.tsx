@@ -1,8 +1,8 @@
 // packages
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { Button, Divider, InputAdornment, Link, Stack, Typography } from "@mui/material";
-import { EyeOffIcon, EyeOnIcon, LockIcon, MailIcon, WalletIcon } from "@/elements/icons";
+import { Alert, Button, Divider, InputAdornment, Link, Stack, Typography } from "@mui/material";
+import { InfoIcon, MailIcon, WalletIcon } from "@/elements/icons";
 
 // actions
 import { signin } from "@/lib/actions/auth";
@@ -11,17 +11,12 @@ import { signin } from "@/lib/actions/auth";
 import styles from "./LoginForm.module.css";
 
 // components
-import { Modal, TextField } from "@/components";
+import { Modal, PasswordInput, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
 
 export default function LoginForm() {
   const [state, action] = useFormState(signin, null);
-  const [showPassword, setShowPassword] = useState(false);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: MouseEvent | undefined) => {
-    event?.preventDefault();
-  };
 
   const handleConnectWallet = () => {
     console.log("connect wallet");
@@ -46,6 +41,7 @@ export default function LoginForm() {
             placeholder="Email"
             name="email"
             error={!!state?.error}
+            alert={state?.error}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -54,37 +50,22 @@ export default function LoginForm() {
               ),
             }}
           />
-          <TextField
-            placeholder="Password"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            error={!!state?.error}
-            caption={
-              <Link href="/login/forgot-password" variant="link2" color="text.brandSecondary">
-                Forgot Password?
-              </Link>
-            }
-            alert={state?.error}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockIcon />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Button
-                    mode="icon"
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <EyeOffIcon /> : <EyeOnIcon />}
-                  </Button>
-                </InputAdornment>
-              ),
-            }}
-          />
+          <Stack gap="8px">
+            <PasswordInput
+              placeholder="Password"
+              name="password"
+              error={!!state?.error}
+              alert={state?.error}
+            />
+            <Link href="/login/forgot-password" variant="link2" color="text.brandSecondary">
+              Forgot Password?
+            </Link>
+            {state?.error && (
+              <Alert icon={<InfoIcon />} severity="error" variant="input">
+                {state?.error}
+              </Alert>
+            )}
+          </Stack>
           <LoginButton />
           <Divider sx={{ "&::before, &::after": { borderTopColor: "dividers.default" } }}>
             <Typography variant="link2" color="text.brandSecondary">

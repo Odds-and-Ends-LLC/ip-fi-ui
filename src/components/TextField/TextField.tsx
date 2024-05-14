@@ -1,12 +1,6 @@
 // packages
 import { ReactNode } from "react";
-import {
-  FilledTextFieldProps as MuiFilledTextFieldProps,
-  Stack,
-  TextField as MuiTextField,
-  Typography,
-  Alert,
-} from "@mui/material";
+import { Stack, TextField as MuiTextField, Typography, Alert } from "@mui/material";
 
 // styles
 import styles from "./TextField.module.css";
@@ -15,20 +9,7 @@ import styles from "./TextField.module.css";
 import { InfoIcon } from "@/elements";
 
 // types
-export interface AlertProps {
-  visible?: boolean;
-  status?: "error" | "success" | "info";
-  icon?: ReactNode;
-  message?: string;
-}
-interface TextFieldProps extends Partial<MuiFilledTextFieldProps> {
-  label?: string;
-  required?: boolean;
-  description?: string;
-  caption?: string | ReactNode;
-  alert?: string;
-  AlertProps?: AlertProps;
-}
+import { type TextFieldProps } from "../types.model";
 
 export default function TextField({
   label,

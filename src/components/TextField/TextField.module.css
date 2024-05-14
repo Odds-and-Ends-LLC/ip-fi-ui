@@ -1,5 +1,6 @@
 .textField {
   gap: 8px;
+  text-align: start;
 }
 
 .textFieldMessage {
