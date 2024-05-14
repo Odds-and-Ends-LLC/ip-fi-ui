@@ -8,24 +8,35 @@ import styles from "./Signup.module.css";
 
 // components
 import { TermsAndConditions, StepEmailPassword, StepConnectWallet, StepProfilePhoto } from "..";
-import { PaperTranslucent } from "@/components";
+import { Circle, PaperTranslucent } from "@/components";
 import { StepUsername } from "..";
 
+// types
+import { UserSignupData } from "../types.model";
+
 export default function Signup() {
-  const [step, setStep] = useState(0);
-  const [userData, setUserData] = useState();
+  const [step, setStep] = useState<number>(0);
+  const [userData, setUserData] = useState<Partial<UserSignupData>>();
   const handleNextStep = () => setStep(step + 1);
   const handlePrevStep = () => setStep(step - 1);
-  const [circlePosition, setCirclePosition] = useState({
-    green: { y: 0 },
+  const [circlePosition, setCirclePosition] = useState<{
+    green: { x?: number; y: number };
+    purple: { x: number; y: number };
+    outline: { x: number };
+  }>({
+    green: { x: 0, y: 0 },
     purple: { x: 0, y: 0 },
     outline: { x: 0 },
   });
 
-  const greenCircleRotationValues = [20, -130, -290, -390, -485];
+  const greenCircleRotationValues = [20, -128, -290, -390, -485];
   const purpleCircleRotationValues = [-40, -110, -220, -425, -505];
   const outlineCircleRotationValues = [10, -120, -250, -315, -515];
-  const [circleRotationValues, setCircleRotationValues] = useState({
+  const [circleRotationValues, setCircleRotationValues] = useState<{
+    greenCircle: number;
+    purpleCircle: number;
+    outlineCircle: number;
+  }>({
     greenCircle: greenCircleRotationValues[0],
     purpleCircle: purpleCircleRotationValues[0],
     outlineCircle: outlineCircleRotationValues[0],
@@ -37,18 +48,26 @@ export default function Signup() {
       outlineCircle: outlineCircleRotationValues[step],
     });
 
-    step > 2
-      ? setCirclePosition({
-          ...circlePosition,
-          green: { y: 200 },
-          purple: { x: -104, y: step === 4 ? -76 : 0 },
-          outline: { x: 128 },
-        })
-      : setCirclePosition({
-          green: { y: 0 },
-          purple: { x: 0, y: 0 },
-          outline: { x: 0 },
-        });
+    if (step === 1) {
+      setCirclePosition({
+        green: { x: 150, y: 0 },
+        purple: { x: 0, y: 0 },
+        outline: { x: 0 },
+      });
+    } else if (step > 2) {
+      setCirclePosition({
+        ...circlePosition,
+        green: { y: 200 },
+        purple: { x: -104, y: step === 4 ? -76 : 0 },
+        outline: { x: 128 },
+      });
+    } else {
+      setCirclePosition({
+        green: { y: 0 },
+        purple: { x: 0, y: 0 },
+        outline: { x: 0 },
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
@@ -60,7 +79,7 @@ export default function Signup() {
     <Stack
       className={styles.signup}
       sx={{
-        backgroundColor: "blue.main",
+        backgroundColor: "background.secondary",
         gap: { mobile: "24px", tablet: "40px" },
         padding: { mobile: "104px 24px 32px", tablet: "124px 64px 32px" },
       }}
@@ -70,10 +89,14 @@ export default function Signup() {
           className={styles.bgGreenCircleContainer}
           component={motion.div}
           initial={{ rotate: "20deg" }}
-          animate={{ rotate: `${circleRotationValues?.greenCircle}deg`, y: circlePosition.green.y }}
+          animate={{
+            rotate: `${circleRotationValues?.greenCircle}deg`,
+            x: circlePosition.green.x,
+            y: circlePosition.green.y,
+          }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
-          <Box className={styles.bgGreenCircle} bgcolor="primary.light" />
+          <Circle size={400} absolute fillColor="text.brandSecondary" top={0} right={0} />
         </Box>
         <Box
           className={styles.bgPurpleCircleContainer}
@@ -86,7 +109,7 @@ export default function Signup() {
           }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
-          <Box className={styles.bgPurpleCircle} bgcolor="secondary.main" />
+          <Circle size={200} absolute fillColor="primary.main" bottom={0} right={0} />
         </Box>
         <Box
           className={styles.bgCircleOutlineContainer}
@@ -98,7 +121,14 @@ export default function Signup() {
           }}
           transition={{ bounce: 0, duration: 0.4 }}
         >
-          <Box className={styles.bgCircleOutline} borderColor="primary.main" />
+          <Circle
+            size={248}
+            absolute
+            fillColor="transparent"
+            borderColor="secondary.main"
+            bottom={0}
+            left={0}
+          />
         </Box>
       </Stack>
       <Stack className={styles.signupContents}>
@@ -106,19 +136,20 @@ export default function Signup() {
           maxWidth={step > 0 ? "832px" : "1168px"}
           padding={
             step > 0
-              ? { mobile: "32px 24px 32px 32px", tablet: "72px 64px 72px 72px" }
+              ? { mobile: "32px 24px 32px 32px", tablet: "64px 64px 48px 72px" }
               : { mobile: "32px 16px 24px 24px", laptop: "40px 64px 24px 72px" }
           }
           iconPosition={step % 2 ? "right" : "left"}
+          flex="auto"
         >
           {step === 0 && <TermsAndConditions onAcceptTerms={handleNextStep} />}
           {step > 0 && (
             <Stack gap="42px">
               <Stack className={styles.createAccountTitle}>
-                <Typography variant="link" color="text.secondary">
+                <Typography variant="link2" color="text.brandSecondary">
                   {step}/4
                 </Typography>
-                <Typography variant="h4-unbounded">CREATE USER ACCOUNT</Typography>
+                <Typography variant="h4">CREATE USER ACCOUNT</Typography>
               </Stack>
               {step === 1 && (
                 <StepUsername
@@ -155,9 +186,7 @@ export default function Signup() {
           )}
         </PaperTranslucent>
       </Stack>
-      <Typography variant="label3">
-        {new Date().getFullYear()} © Kek Labs.
-      </Typography>
+      <Typography variant="label3">{new Date().getFullYear()} © Kek Labs.</Typography>
     </Stack>
   );
 }

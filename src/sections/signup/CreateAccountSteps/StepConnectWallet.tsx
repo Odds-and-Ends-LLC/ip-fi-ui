@@ -1,11 +1,11 @@
 // packages
-import { Button, IconButton, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 // styles
 import styles from "./CreateAccountSteps.module.css";
 
 // components
-import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "@/elements/icons";
+import { ArrowLeftIcon, ArrowRightIcon, PlusIcon } from "@/elements/icons";
 import { WalletDisplay } from "@/components";
 
 // data

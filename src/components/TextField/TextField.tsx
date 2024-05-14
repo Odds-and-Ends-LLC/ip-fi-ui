@@ -23,7 +23,7 @@ export default function TextField({
   return (
     <Stack className={styles.textField}>
       {label && (
-        <Typography variant="label1" textTransform="capitalize">
+        <Typography variant="label1" textTransform="none">
           {label}
           {required && (
             <Typography variant="label1" component="span" color="text.brandSecondary">
