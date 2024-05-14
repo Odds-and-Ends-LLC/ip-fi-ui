@@ -308,9 +308,9 @@ export const theme = createTheme({
       secondary: colors.blue[1100],
       tertiary: colors.blue[900],
       white: colors.gray[100],
-      grayOverlay: `${colors.gray[1500]}35`,
-      purpleOverlay: `${colors.purple[1500]}35`,
-      greenOverlay: `${colors.green[1200]}35`,
+      grayOverlay: `${colors.gray[1500]}59`,
+      purpleOverlay: `${colors.purple[1500]}59`,
+      greenOverlay: `${colors.green[1200]}59`,
     },
     text: {
       primary: colors.gray[100],
@@ -339,7 +339,7 @@ export const theme = createTheme({
     gradient: {
       one: `linear-gradient(90deg, ${colors.purple[500]} 0%, ${colors.green[1200]} 100%)`,
       two: `linear-gradient(90deg, ${colors.green[1200]} 0%, ${colors.purple[500]} 100%)`,
-      three: `linear-gradient(90deg, ${colors.green[1000]}50 0%, ${colors.purple[100]}50 100%)`,
+      three: `linear-gradient(90deg, ${colors.green[1000]}80 0%, ${colors.purple[100]}80 100%)`,
     },
   },
   breakpoints: {
@@ -959,10 +959,10 @@ theme.components = {
         minWidth: "unset",
         maxWidth: "unset",
         "&:hover": {
-          backgroundColor: `${colors.gray[1500]}75`,
+          backgroundColor: `${colors.gray[1500]}bf`,
         },
         "&.Mui-selected": {
-          backgroundColor: `${colors.gray[1500]}45`,
+          backgroundColor: `${colors.gray[1500]}73`,
         },
       },
       labelIcon: {
