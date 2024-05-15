@@ -1,12 +1,5 @@
 // packages
-import {
-  BaseSyntheticEvent,
-  MouseEventHandler,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { BaseSyntheticEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { Box, Button, Menu, MenuItem, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -38,8 +31,8 @@ export default function WalletDisplay({
   const [walletAddressDisplay, setWalletAddressDisplay] = useState<string | undefined>("");
   const [anchorEl, setAnchorEl] = useState(null);
   const openSelect = Boolean(anchorEl);
-  const handleOpenSelect = (event: any) => {
-    setAnchorEl(event?.currentTarget);
+  const handleOpenSelect = (event: BaseSyntheticEvent) => {
+    !openSelect ? setAnchorEl(event?.currentTarget) : setAnchorEl(null);
   };
   const handleCloseSelect = () => {
     setAnchorEl(null);
@@ -57,15 +50,32 @@ export default function WalletDisplay({
     }
   }, [walletAddress, walletList, mode]);
 
+  const setBackgroundColor = () => {
+    if (withBackground || mode === "select") {
+      if (openSelect) {
+        return "background.purpleOverlay";
+      } else if (withBackground) {
+        return "background.grayOverlay";
+      }
+    } else return "transparent";
+  };
+
   return (
     <Stack
       ref={walletDisplayRef}
       className={styles.walletDisplay}
       sx={{
-        backgroundColor: withBackground ? "background.grayOverlay" : "transparent",
+        backgroundColor: setBackgroundColor(),
         width: fullWidth ? "100%" : "fit-content",
         padding: endIcon || mode === "select" ? "0 0 0 8px" : "0 8px",
+        "&:hover": {
+          backgroundColor:
+            withBackground || mode === "select"
+              ? "background.grayOverlay2"
+              : "background.grayOverlay",
+        },
       }}
+      onClick={mode === "select" ? handleOpenSelect : undefined}
     >
       <Box className={styles.walletDisplayIcon}>
         <Image priority src="/images/metamask.png" alt="metamask" sizes="100%" fill />
@@ -90,8 +100,8 @@ export default function WalletDisplay({
             aria-controls={openSelect ? "select-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={openSelect ? "true" : undefined}
-            sx={{ color: "text.primary" }}
-            onClick={handleOpenSelect}
+            sx={{ color: "text.primary", pointerEvents: "none" }}
+            // onClick={handleOpenSelect}
           >
             {openSelect ? <ArrowHeadUpIcon /> : <ArrowHeadDownIcon />}
           </Button>
@@ -100,6 +110,7 @@ export default function WalletDisplay({
             anchorEl={anchorEl}
             open={openSelect}
             onClose={handleCloseSelect}
+            autoFocus={false}
             MenuListProps={{
               "aria-labelledby": "select-button",
               sx: { width: walletDisplayRef?.current?.clientWidth },
@@ -114,8 +125,24 @@ export default function WalletDisplay({
             }}
           >
             {walletList?.map((walletAddress, i) => (
-              <MenuItem key={i} onClick={() => handleChange(walletAddress)}>
-                {truncate(walletAddress, 8, 4)}
+              <MenuItem
+                key={i}
+                onClick={() => handleChange(walletAddress)}
+                sx={{ paddingLeft: "52px" }}
+              >
+                {type === "expanded" && (
+                  <Typography width="100%" sx={{ display: { mobile: "none", laptop: "block" } }}>
+                    {walletAddress}
+                  </Typography>
+                )}
+                <Typography
+                  width="100%"
+                  sx={{
+                    display: { mobile: "block", laptop: type === "truncated" ? "block" : "none" },
+                  }}
+                >
+                  {truncate(walletAddress, 8, 4)}
+                </Typography>
               </MenuItem>
             ))}
           </Menu>

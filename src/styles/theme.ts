@@ -168,6 +168,7 @@ declare module "@mui/material/styles" {
     tertiary: string;
     white: string;
     grayOverlay: string;
+    grayOverlay2: string;
     purpleOverlay: string;
     greenOverlay: string;
   }
@@ -309,6 +310,7 @@ export const theme = createTheme({
       tertiary: colors.blue[900],
       white: colors.gray[100],
       grayOverlay: `${colors.gray[1500]}59`,
+      grayOverlay2: `${colors.gray[1500]}80`,
       purpleOverlay: `${colors.purple[1500]}59`,
       greenOverlay: `${colors.green[1200]}59`,
     },
@@ -1458,8 +1460,24 @@ theme.components = {
   MuiMenu: {
     styleOverrides: {
       paper: {
-        backgroundColor: theme.palette.background.grayOverlay,
+        backgroundColor: theme.palette.background.purpleOverlay,
         marginTop: "4px",
+      },
+      list: {
+        padding: 0,
+        "& .MuiMenuItem-root": {
+          height: "40px",
+          borderRadius: "4px",
+          "&:hover": {
+            backgroundColor: theme.palette.background.grayOverlay,
+          },
+          // "&.Mui-selected": {
+          //   backgroundColor: theme.palette.background.grayOverlay2,
+          //   "&:hover": {
+          //     backgroundColor: theme.palette.background.grayOverlay,
+          //   },
+          // },
+        },
       },
     },
   },

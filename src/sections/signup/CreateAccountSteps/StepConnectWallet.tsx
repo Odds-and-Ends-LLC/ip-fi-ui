@@ -74,13 +74,13 @@ export default function StepConnectWallet({
                   fullWidth
                   walletAddress={walletAddress}
                   endIcon={
-                    <Button
-                      mode="icon"
-                      variant="clearRed"
+                    <Stack
+                      sx={{ color: "catalog.red" }}
+                      className={styles.walletButton}
                       onClick={() => handleRemoveWallet(walletAddress)}
                     >
                       <CloseIcon color="currentColor" />
-                    </Button>
+                    </Stack>
                   }
                 />
               ))}

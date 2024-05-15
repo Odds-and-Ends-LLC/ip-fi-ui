@@ -30,6 +30,11 @@
   width: auto;
 }
 
+.walletButton {
+  align-items: center;
+  padding: 8px;
+}
+
 .profilePhoto {
   padding-bottom: 36px;
   position: relative;

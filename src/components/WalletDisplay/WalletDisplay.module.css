@@ -1,7 +1,8 @@
 .walletDisplay {
   align-items: center;
   border-radius: 4px;
-  flex-direction: row ;
+  cursor: pointer;
+  flex-direction: row;
   gap: 12px;
   min-height: 40px;
   text-align: start;
