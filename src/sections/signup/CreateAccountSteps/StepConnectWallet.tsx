@@ -82,10 +82,6 @@ export default function StepConnectWallet({
                       <CloseIcon color="currentColor" />
                     </Button>
                   }
-                  walletList={undefined}
-                  truncated={undefined}
-                  variant={undefined}
-                  withBackground={undefined}
                 />
               ))}
             </Stack>

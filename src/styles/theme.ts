@@ -1458,10 +1458,8 @@ theme.components = {
   MuiMenu: {
     styleOverrides: {
       paper: {
-        backgroundColor: theme.palette.background.secondary,
-        borderColor: theme.palette.dividers.default,
-        borderStyle: "solid",
-        borderWidth: "1px",
+        backgroundColor: theme.palette.background.grayOverlay,
+        marginTop: "4px",
       },
     },
   },
