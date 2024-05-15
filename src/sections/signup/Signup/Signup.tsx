@@ -1,14 +1,14 @@
 // packages
-import { useEffect, useState } from "react";
-import { Box, Stack, Typography } from "@mui/material";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { Stack, Typography } from "@mui/material";
 
 // styles
 import styles from "./Signup.module.css";
 
 // components
 import { TermsAndConditions, StepEmailPassword, StepConnectWallet, StepProfilePhoto } from "..";
-import { Circle, PaperTranslucent } from "@/components";
+import { PaperTranslucent } from "@/components";
+import { SignupBackground } from ".";
 import { StepUsername } from "..";
 
 // types
@@ -19,58 +19,6 @@ export default function Signup() {
   const [userData, setUserData] = useState<Partial<UserSignupData>>();
   const handleNextStep = () => setStep(step + 1);
   const handlePrevStep = () => setStep(step - 1);
-  const [circlePosition, setCirclePosition] = useState<{
-    green: { x?: number; y: number };
-    purple: { x: number; y: number };
-    outline: { x: number };
-  }>({
-    green: { x: 0, y: 0 },
-    purple: { x: 0, y: 0 },
-    outline: { x: 0 },
-  });
-
-  const greenCircleRotationValues = [20, -128, -290, -390, -485];
-  const purpleCircleRotationValues = [-40, -110, -220, -425, -505];
-  const outlineCircleRotationValues = [10, -120, -250, -315, -515];
-  const [circleRotationValues, setCircleRotationValues] = useState<{
-    greenCircle: number;
-    purpleCircle: number;
-    outlineCircle: number;
-  }>({
-    greenCircle: greenCircleRotationValues[0],
-    purpleCircle: purpleCircleRotationValues[0],
-    outlineCircle: outlineCircleRotationValues[0],
-  });
-  useEffect(() => {
-    setCircleRotationValues({
-      greenCircle: greenCircleRotationValues[step],
-      purpleCircle: purpleCircleRotationValues[step],
-      outlineCircle: outlineCircleRotationValues[step],
-    });
-
-    if (step === 1) {
-      setCirclePosition({
-        green: { x: 150, y: 0 },
-        purple: { x: 0, y: 0 },
-        outline: { x: 0 },
-      });
-    } else if (step > 2) {
-      setCirclePosition({
-        ...circlePosition,
-        green: { y: 200 },
-        purple: { x: -104, y: step === 4 ? -76 : 0 },
-        outline: { x: 128 },
-      });
-    } else {
-      setCirclePosition({
-        green: { y: 0 },
-        purple: { x: 0, y: 0 },
-        outline: { x: 0 },
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step]);
-
   const handleCreateAccount = () => {
     console.log("create account: ", userData);
   };
@@ -84,53 +32,7 @@ export default function Signup() {
         padding: { mobile: "104px 24px 32px", tablet: "124px 64px 32px" },
       }}
     >
-      <Stack className={styles.bgContainer} sx={{ position: "absolute" }}>
-        <Box
-          className={styles.bgGreenCircleContainer}
-          component={motion.div}
-          initial={{ rotate: "20deg" }}
-          animate={{
-            rotate: `${circleRotationValues?.greenCircle}deg`,
-            x: circlePosition.green.x,
-            y: circlePosition.green.y,
-          }}
-          transition={{ bounce: 0, duration: 0.4 }}
-        >
-          <Circle size={400} absolute fillColor="text.brandSecondary" top={0} right={0} />
-        </Box>
-        <Box
-          className={styles.bgPurpleCircleContainer}
-          component={motion.div}
-          initial={{ rotate: "-40deg" }}
-          animate={{
-            rotate: `${circleRotationValues?.purpleCircle}deg`,
-            x: circlePosition.purple.x,
-            y: circlePosition.purple.y,
-          }}
-          transition={{ bounce: 0, duration: 0.4 }}
-        >
-          <Circle size={200} absolute fillColor="primary.main" bottom={0} right={0} />
-        </Box>
-        <Box
-          className={styles.bgCircleOutlineContainer}
-          component={motion.div}
-          initial={{ rotate: "10deg" }}
-          animate={{
-            rotate: `${circleRotationValues?.outlineCircle}deg`,
-            x: circlePosition.outline.x,
-          }}
-          transition={{ bounce: 0, duration: 0.4 }}
-        >
-          <Circle
-            size={248}
-            absolute
-            fillColor="transparent"
-            borderColor="secondary.main"
-            bottom={0}
-            left={0}
-          />
-        </Box>
-      </Stack>
+      <SignupBackground step={step} />
       <Stack className={styles.signupContents}>
         <PaperTranslucent
           maxWidth={step > 0 ? "832px" : "1168px"}

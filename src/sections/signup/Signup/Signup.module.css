@@ -18,15 +18,17 @@
 .bgContainer {
   align-items: center;
   flex-shrink: 0;
-  height: 800px;
+  height: 832px;
   justify-content: center;
   opacity: 50%;
+  position: absolute;
+  top: 96px;
   width: 1328px;
 }
 
 .bgGreenCircleContainer,
 .bgPurpleCircleContainer,
-.bgCircleOutlineContainer  {
+.bgCircleOutlineContainer {
   aspect-ratio: 1;
   border-radius: 100%;
   position: absolute;

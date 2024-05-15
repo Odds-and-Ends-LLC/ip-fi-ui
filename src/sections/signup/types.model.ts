@@ -3,4 +3,5 @@ export interface UserSignupData {
   email: string;
   password: string;
   about?: string;
+  walletAddresses: string[];
 }

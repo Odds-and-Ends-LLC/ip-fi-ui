@@ -2,6 +2,11 @@
   gap: 24px;
 }
 
+.createAccountInput {
+  text-align: start;
+  gap: 8px;
+}
+
 .createAccountButtons {
   align-items: center;
   flex-direction: row;
