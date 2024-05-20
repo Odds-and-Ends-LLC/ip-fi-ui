@@ -1132,6 +1132,7 @@ theme.components = {
   MuiInputAdornment: {
     styleOverrides: {
       root: {
+        color: "inherit",
         margin: "0 !important",
         maxHeight: "unset",
         height: "100%",

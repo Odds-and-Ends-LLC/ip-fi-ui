@@ -1,9 +1,14 @@
 export default function Info() {
   return (
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3ZM1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12ZM11 15V12H13V15H11ZM11 7V9H13V7H11Z"
-    />
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 12V15" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
+      <path
+        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="square"
+      />
+      <path d="M12 7V9" stroke="currentColor" strokeWidth="2" />
+    </svg>
   );
 }

@@ -1,9 +1,27 @@
 export default function Upload() {
   return (
-    <path
-      fillRule="evenodd"
-      clipRule="evenodd"
-      d="M7 9.41421L7.70711 8.70711L11 5.41421V17V18H13V17V5.41421L16.2929 8.70711L17 9.41421L18.4142 8L17.7071 7.29289L12.7071 2.29289C12.3166 1.90237 11.6834 1.90237 11.2929 2.29289L6.29289 7.29289L5.58579 8L7 9.41421ZM4 20H3V22H4H20H21V20H20H4Z"
-    />
+    <svg viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12 17V4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="square"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 8L12 3L17 8"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="square"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M20 21H4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="square"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

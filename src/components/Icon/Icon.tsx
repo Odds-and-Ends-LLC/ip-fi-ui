@@ -1,11 +1,17 @@
 // packages
 import { SvgIcon, SxProps } from "@mui/material";
 
+// types
+import { ResponsiveCssProp } from "@/types";
+
 // svgs
 import * as Svg from "./svgs";
 
 const icons = {
+  active: <Svg.Active />,
+  add: <Svg.Add />,
   alert: <Svg.Alert />,
+  arrowExpand: <Svg.ArrowExpand />,
   arrowHeadDown: <Svg.ArrowHeadDown />,
   arrowHeadLeft: <Svg.ArrowHeadLeft />,
   arrowHeadRight: <Svg.ArrowHeadRight />,
@@ -13,39 +19,36 @@ const icons = {
   arrowLeft: <Svg.ArrowLeft />,
   arrowRight: <Svg.ArrowRight />,
   asterisk: <Svg.Asterisk />,
-  bell: <Svg.Bell />,
+  avatar: <Svg.Avatar />,
   calendar: <Svg.Calendar />,
   camera: <Svg.Camera />,
   check: <Svg.Check />,
   close: <Svg.Close />,
   discord: <Svg.Discord />,
+  ended: <Svg.Ended />,
   ethereum: <Svg.Ethereum />,
-  expand: <Svg.Expand />,
   eyeOff: <Svg.EyeOff />,
   eyeOn: <Svg.EyeOn />,
   facebook: <Svg.Facebook />,
-  file: <Svg.File />,
   info: <Svg.Info />,
   instagram: <Svg.Instagram />,
   link: <Svg.Link />,
-  linkedin: <Svg.Linkedin />,
-  lock: <Svg.Lock />,
+  linkedIn: <Svg.LinkedIn />,
   logout: <Svg.Logout />,
   looksRare: <Svg.LooksRare />,
-  mail: <Svg.Mail />,
+  message: <Svg.Message />,
   openSea: <Svg.OpenSea />,
-  pickAvatar: <Svg.PickAvatar />,
-  plus: <Svg.Plus />,
+  password: <Svg.Password />,
+  proposal: <Svg.Proposal />,
   refresh: <Svg.Refresh />,
   remove: <Svg.Remove />,
   settings: <Svg.Settings />,
   share: <Svg.Share />,
   twitter: <Svg.Twitter />,
+  twitterX: <Svg.TwitterX />,
   upload: <Svg.Upload />,
   wallet: <Svg.Wallet />,
-  warning: <Svg.Warning />,
-  web: <Svg.Web />,
-  xTwitter: <Svg.XTwitter />,
+  website: <Svg.Website />,
 };
 
 export type IconType = keyof typeof icons;
@@ -53,13 +56,13 @@ export type IconType = keyof typeof icons;
 export default function Icon({
   icon,
   color = "inherit",
-  fontSize = 24,
+  size = 24,
   onClick,
   sx,
 }: {
   icon: IconType;
   color?: string;
-  fontSize?: string | number;
+  size?: ResponsiveCssProp<24 | 18 | "full">;
   onClick?: () => void;
   sx?: SxProps;
 }) {
@@ -69,10 +72,13 @@ export default function Icon({
       inheritViewBox
       sx={{
         color,
-        fontSize,
         ...sx,
+        // fontSize: size,
         cursor: onClick ? "pointer" : "initial",
         pointerEvents: onClick ? "all" : "none",
+        aspectRatio: 1 / 1,
+        height: size === "full" ? "100%" : size,
+        width: size === "full" ? "100%" : size,
       }}
     >
       {icons[icon]}

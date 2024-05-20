@@ -1,5 +1,10 @@
 export default function Ethereum() {
   return (
-    <path d="M9 1.3125L4.3125 9.1875L9 12L13.6875 9.1875L9 1.3125ZM4.3125 10.125L9 16.6875L13.6875 10.125L9 12.9375L4.3125 10.125Z" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <path
+        fill="currentColor"
+        d="M12 1.75L5.75 12.25L12 16L18.25 12.25L12 1.75ZM5.75 13.5L12 22.25L18.25 13.5L12 17.25L5.75 13.5Z"
+      />
+    </svg>
   );
 }
