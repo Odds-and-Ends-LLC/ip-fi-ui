@@ -6,7 +6,7 @@ import { Property } from "csstype";
 import styles from "./PaperTranslucent.module.css";
 
 // components
-import { AsteriskIcon } from "@/elements/icons";
+import { Icon } from "@/components";
 import { ResponsiveCssProp } from "@/types";
 
 export default function PaperTranslucent({
@@ -43,12 +43,13 @@ export default function PaperTranslucent({
       <Box
         className={styles.paperTranslucentIcon}
         sx={{
+          color: "secondary.main",
           height: { mobile: "32px", tablet: "56px", laptop: "80px" },
           top: iconPositionValues,
           left: iconPosition === "left" ? iconLeftPositionValues : iconRightPositionValues,
         }}
       >
-        <AsteriskIcon size="100%" />
+        <Icon icon="asterisk" size="full" />
       </Box>
       <Stack className={styles.paperTranslucentContentWrapper}>
         <Stack className={styles.paperTranslucentContent}>{children}</Stack>

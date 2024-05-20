@@ -6,8 +6,7 @@ import { Button, InputAdornment, Stack } from "@mui/material";
 import styles from "./CreateAccountSteps.module.css";
 
 // components
-import { PasswordInput, TextField } from "@/components";
-import { ArrowLeftIcon, ArrowRightIcon, MailIcon, XTwitterIcon } from "@/elements/icons";
+import { Icon, PasswordInput, TextField } from "@/components";
 
 // types
 import { UserSignupData } from "../types";
@@ -47,7 +46,7 @@ export default function StepEmailPassword({
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <MailIcon />
+                <Icon icon="message" />
               </InputAdornment>
             ),
           }}
@@ -85,18 +84,18 @@ export default function StepEmailPassword({
             event.key === "Enter" ? nextButtonRef?.current?.focus() : null
           }
         />
-        <Button variant="outlineWhite" startIcon={<XTwitterIcon />}>
+        <Button variant="outlineWhite" startIcon={<Icon icon="twitterX" />}>
           CONNECT TO TWITTER
         </Button>
       </Stack>
       <Stack className={styles.createAccountButtons}>
-        <Button variant="clearGreen" startIcon={<ArrowLeftIcon />} onClick={onBack}>
+        <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={onBack}>
           BACK
         </Button>
         <Button
           variant="clearGreen"
           ref={nextButtonRef}
-          endIcon={<ArrowRightIcon />}
+          endIcon={<Icon icon="arrowRight" />}
           onClick={onNext}
           disabled={!data?.email || !data?.password}
           onFocus={onNext}

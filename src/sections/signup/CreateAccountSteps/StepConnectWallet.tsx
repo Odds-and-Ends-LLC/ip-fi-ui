@@ -6,8 +6,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import styles from "./CreateAccountSteps.module.css";
 
 // components
-import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "@/elements/icons";
-import { WalletDisplay } from "@/components";
+import { Icon, WalletDisplay } from "@/components";
 
 // types
 import { UserSignupData } from "../types";
@@ -79,25 +78,29 @@ export default function StepConnectWallet({
                       className={styles.walletButton}
                       onClick={() => handleRemoveWallet(walletAddress)}
                     >
-                      <CloseIcon color="currentColor" />
+                      <Icon icon="close" />
                     </Stack>
                   }
                 />
               ))}
             </Stack>
-            <Button variant="outlineGreen" startIcon={<PlusIcon />} onClick={handleConnectWallet}>
+            <Button
+              variant="outlineGreen"
+              startIcon={<Icon icon="add" />}
+              onClick={handleConnectWallet}
+            >
               ADD MORE WALLET
             </Button>
           </Stack>
         )}
       </Stack>
       <Stack className={styles.createAccountButtons}>
-        <Button variant="clearGreen" startIcon={<ArrowLeftIcon />} onClick={onBack}>
+        <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={onBack}>
           BACK
         </Button>
         <Button
           variant="clearGreen"
-          endIcon={<ArrowRightIcon />}
+          endIcon={<Icon icon="arrowRight" />}
           onClick={onNext}
           disabled={!data?.walletAddresses || data?.walletAddresses?.length === 0}
         >

@@ -5,8 +5,7 @@ import { Button, InputAdornment, Link, Stack, Typography } from "@mui/material";
 // styles
 
 // components
-import { PaperTranslucent, TextField } from "@/components";
-import { ArrowRightIcon, MailIcon } from "@/elements/icons";
+import { Icon, PaperTranslucent, TextField } from "@/components";
 import { REGEX } from "@/utils/regex";
 
 export default function ForgotPassword() {
@@ -39,7 +38,7 @@ export default function ForgotPassword() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <MailIcon />
+                    <Icon icon="message" />
                   </InputAdornment>
                 ),
               }}
@@ -48,7 +47,7 @@ export default function ForgotPassword() {
               variant="solidGreen"
               onClick={handleContinue}
               disabled={!REGEX.email.test(email)}
-              endIcon={<ArrowRightIcon />}
+              endIcon={<Icon icon="arrowRight" />}
             >
               CONTINUE
             </Button>

@@ -6,8 +6,7 @@ import { Button, Stack } from "@mui/material";
 import styles from "./CreateAccountSteps.module.css";
 
 // components
-import { ArrowLeftIcon, ArrowRightIcon } from "@/elements/icons";
-import { TextField } from "@/components";
+import { Icon, TextField } from "@/components";
 
 // types
 import { UserSignupData } from "../types";
@@ -40,13 +39,13 @@ export default function StepUsername({
         }
       />
       <Stack className={styles.createAccountButtons}>
-        <Button variant="clearGreen" startIcon={<ArrowLeftIcon />} onClick={onBack}>
+        <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={onBack}>
           BACK
         </Button>
         <Button
           variant="clearGreen"
           ref={nextButtonRef}
-          endIcon={<ArrowRightIcon />}
+          endIcon={<Icon icon="arrowRight" />}
           onClick={onNext}
           disabled={!data?.username}
           onFocus={onNext}

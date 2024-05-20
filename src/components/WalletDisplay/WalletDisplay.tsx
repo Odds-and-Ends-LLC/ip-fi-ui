@@ -8,7 +8,7 @@ import styles from "./WalletDisplay.module.css";
 
 // components
 import { truncate } from "@/utils/truncate";
-import { ArrowHeadDownIcon, ArrowHeadUpIcon } from "@/elements/icons";
+import { Icon } from "@/components";
 
 export default function WalletDisplay({
   walletAddress,
@@ -103,7 +103,7 @@ export default function WalletDisplay({
             sx={{ color: "text.primary", pointerEvents: "none" }}
             // onClick={handleOpenSelect}
           >
-            {openSelect ? <ArrowHeadUpIcon /> : <ArrowHeadDownIcon />}
+            {openSelect ? <Icon icon="arrowHeadUp" /> : <Icon icon="arrowHeadDown" />}
           </Button>
           <Menu
             id="select-menu"

@@ -5,8 +5,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import styles from "./CreateAccountSteps.module.css";
 
 // components
-import { ProfilePicture } from "@/components";
-import { ArrowLeftIcon } from "@/elements/icons";
+import { Icon, ProfilePicture } from "@/components";
 import { UserSignupData } from "../types";
 
 // data
@@ -48,7 +47,7 @@ export default function StepProfilePhoto({
         </Stack>
       </Stack>
       <Stack className={styles.createAccountButtons}>
-        <Button variant="clearGreen" startIcon={<ArrowLeftIcon />} onClick={onBack}>
+        <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={onBack}>
           BACK
         </Button>
         <Button variant="solidGreen" onClick={onCreateAccount} disabled={false}>

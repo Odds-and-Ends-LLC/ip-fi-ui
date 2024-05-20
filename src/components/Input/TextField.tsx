@@ -5,7 +5,7 @@ import { Stack, TextField as MuiTextField, Typography, Alert } from "@mui/materi
 import styles from "./Input.module.css";
 
 // components
-import { InfoIcon } from "@/elements";
+import { Icon } from "@/components";
 
 // types
 import { type TextFieldProps } from "./types";
@@ -16,7 +16,7 @@ export default function TextField({
   description,
   caption,
   alert,
-  AlertProps = { visible: true, status: "error", icon: <InfoIcon /> },
+  AlertProps = { visible: true, status: "error", icon: <Icon icon="info" /> },
   ...props
 }: TextFieldProps) {
   return (

@@ -3,8 +3,10 @@ import { MouseEvent, useState } from "react";
 import { Button, InputAdornment } from "@mui/material";
 
 // components
-import { EyeOffIcon, EyeOnIcon, InfoIcon, LockIcon } from "@/elements/icons";
+import { Icon } from "@/components";
 import { TextField } from "..";
+
+// types
 import { type TextFieldProps } from "./types";
 
 export default function PasswordInput({
@@ -22,23 +24,24 @@ export default function PasswordInput({
     <TextField
       placeholder={placeholder}
       type={showPassword ? "text" : "password"}
-      AlertProps={{ status: "error", icon: <InfoIcon />, ...AlertProps }}
+      AlertProps={{ status: "error", icon: <Icon icon="info" />, ...AlertProps }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <LockIcon />
+            <Icon icon="password" />
           </InputAdornment>
         ),
         endAdornment: (
           <InputAdornment position="end">
             <Button
               mode="icon"
+              variant="clearWhite"
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseEvent}
               onMouseUp={handleMouseEvent}
             >
-              {showPassword ? <EyeOffIcon /> : <EyeOnIcon />}
+              {showPassword ? <Icon icon="eyeOff" /> : <Icon icon="eyeOn" />}
             </Button>
           </InputAdornment>
         ),

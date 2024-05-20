@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Alert, Button, Divider, InputAdornment, Link, Stack, Typography } from "@mui/material";
-import { InfoIcon, MailIcon, WalletIcon } from "@/elements/icons";
 
 // actions
 import { signin } from "@/lib/actions/auth";
@@ -11,7 +10,7 @@ import { signin } from "@/lib/actions/auth";
 import styles from "./LoginForm.module.css";
 
 // components
-import { Modal, PasswordInput, TextField } from "@/components";
+import { Icon, Modal, PasswordInput, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
 
 export default function LoginForm() {
@@ -45,7 +44,7 @@ export default function LoginForm() {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <MailIcon />
+                  <Icon icon="message" />
                 </InputAdornment>
               ),
             }}
@@ -61,7 +60,7 @@ export default function LoginForm() {
               Forgot Password?
             </Link>
             {state?.error && (
-              <Alert icon={<InfoIcon />} severity="error" variant="input">
+              <Alert icon={<Icon icon="info" />} severity="error" variant="input">
                 {state?.error}
               </Alert>
             )}
@@ -74,7 +73,7 @@ export default function LoginForm() {
           </Divider>
           <Button
             variant="outlineWhite"
-            startIcon={<WalletIcon />}
+            startIcon={<Icon icon="wallet" />}
             onClick={() => setOpenConnectWallet(true)}
           >
             Connect to wallet
