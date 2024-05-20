@@ -12,10 +12,10 @@ import { SignupBackground } from ".";
 import { StepUsername } from "..";
 
 // types
-import { UserSignupData } from "../types.model";
+import { UserSignupData } from "../types";
 
 export default function Signup() {
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState(0);
   const [userData, setUserData] = useState<Partial<UserSignupData>>();
   const handleNextStep = () => setStep(step + 1);
   const handlePrevStep = () => setStep(step - 1);

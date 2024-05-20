@@ -1,10 +1,11 @@
 // packages
 import { Box } from "@mui/material";
-import { ResponsiveStyleValue } from "@mui/system";
-import { Property } from "csstype";
 
 // styles
 import styles from "./Circle.module.css";
+
+// types
+import { ResponsiveCssProp } from "@/types";
 
 export default function Circle({
   size = "200px",
@@ -17,15 +18,15 @@ export default function Circle({
   left,
   bottom,
 }: {
-  size?: Property.Height<string | number> | ResponsiveStyleValue<Property.Height<string | number>>;
-  fillColor?: Property.BackgroundColor | string;
-  borderColor?: Property.BorderColor | string;
-  borderWidth?: Property.BorderWidth;
+  size?: ResponsiveCssProp<string | number>;
+  fillColor?: string;
+  borderColor?: string;
+  borderWidth?: string | number;
   absolute?: boolean;
-  top?: Property.Top | ResponsiveStyleValue<Property.Top>;
-  right?: Property.Right | ResponsiveStyleValue<Property.Right>;
-  left?: Property.Left | ResponsiveStyleValue<Property.Left>;
-  bottom?: Property.Bottom | ResponsiveStyleValue<Property.Bottom>;
+  top?: ResponsiveCssProp<string | number>;
+  right?: ResponsiveCssProp<string | number>;
+  left?: ResponsiveCssProp<string | number>;
+  bottom?: ResponsiveCssProp<string | number>;
 }) {
   return (
     <Box

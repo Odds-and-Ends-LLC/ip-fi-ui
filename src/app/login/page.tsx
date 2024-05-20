@@ -1,6 +1,5 @@
 // packages
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import { ResponsiveStyleValue } from "@mui/system";
 import { Property } from "csstype";
 import Image from "next/image";
 
@@ -10,11 +9,14 @@ import styles from "./page.module.css";
 // components
 import { LoginForm } from "@/sections/login";
 
+// types
+import { ResponsiveCssProp } from "@/types";
+
 export default function Login() {
   const ArtBackground = ({
     display = "block",
   }: {
-    display?: Property.Display | ResponsiveStyleValue<Property.Display>;
+    display?: ResponsiveCssProp<Property.Display>;
   }) => {
     return (
       <Stack className={styles.artBackground} sx={{ display }}>

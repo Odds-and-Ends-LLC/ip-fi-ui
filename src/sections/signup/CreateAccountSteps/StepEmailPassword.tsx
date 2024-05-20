@@ -1,5 +1,5 @@
 // packages
-import { Dispatch, SetStateAction, useRef } from "react";
+import { ChangeEvent, Dispatch, FocusEvent, KeyboardEvent, SetStateAction, useRef } from "react";
 import { Button, InputAdornment, Stack } from "@mui/material";
 
 // styles
@@ -10,7 +10,7 @@ import { PasswordInput, TextField } from "@/components";
 import { ArrowLeftIcon, ArrowRightIcon, MailIcon, XTwitterIcon } from "@/elements/icons";
 
 // types
-import { UserSignupData } from "../types.model";
+import { UserSignupData } from "../types";
 
 export default function StepEmailPassword({
   data,
@@ -38,8 +38,12 @@ export default function StepEmailPassword({
           autoFocus
           type="email"
           value={data?.email || ""}
-          onChange={(event) => handleDataChange("email", event?.target?.value)}
-          onKeyDown={(event) => (event.key === "Enter" ? passwordRef?.current?.focus() : null)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            handleDataChange("email", event?.target?.value)
+          }
+          onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
+            event.key === "Enter" ? passwordRef?.current?.focus() : null
+          }
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -74,8 +78,12 @@ export default function StepEmailPassword({
           minRows={2}
           maxRows={6}
           defaultValue={data?.about || ""}
-          onBlur={(event) => handleDataChange("about", event.target.value)}
-          onKeyDown={(event) => (event.key === "Enter" ? nextButtonRef?.current?.focus() : null)}
+          onBlur={(event: FocusEvent<HTMLInputElement>) =>
+            handleDataChange("about", event?.target?.value)
+          }
+          onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
+            event.key === "Enter" ? nextButtonRef?.current?.focus() : null
+          }
         />
         <Button variant="outlineWhite" startIcon={<XTwitterIcon />}>
           CONNECT TO TWITTER

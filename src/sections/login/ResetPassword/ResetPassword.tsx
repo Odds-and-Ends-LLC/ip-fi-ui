@@ -1,5 +1,5 @@
 // packages
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import { Button, Link, Stack, Typography } from "@mui/material";
 
 // components
@@ -14,31 +14,18 @@ export default function ResetPassword() {
     new: "",
     match: "",
   });
-  const [errors, setErrors] = useState<{ passwordCorrect: boolean; passwordsMatch: boolean }>({
-    passwordCorrect: false,
-    passwordsMatch: false,
-  });
+  const passwordIncorrect = useMemo(
+    () => (passwords.new ? !REGEX.password.test(passwords?.new) : false),
+    [passwords],
+  );
+  const passwordDoNotMatch = useMemo(() => passwords.new !== passwords.match, [passwords]);
 
   const handleEnterPassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPasswords({ ...passwords, new: event?.target.value });
-    if (!REGEX.password.test(event?.target.value)) {
-      return setErrors({ ...errors, passwordCorrect: true });
-    }
-    return setErrors({ ...errors, passwordCorrect: false });
   };
-
   const handleReEnterPassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPasswords({ ...passwords, match: event?.target.value });
   };
-
-  useEffect(() => {
-    if (passwords.new !== passwords.match) {
-      return setErrors({ ...errors, passwordsMatch: true });
-    }
-    return setErrors({ ...errors, passwordsMatch: false });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [passwords]);
-
   const handleSetNewPassword = () => {
     setResetPasswordStep("resetPasswordConfirmed");
   };
@@ -56,23 +43,25 @@ export default function ResetPassword() {
               label="New Password"
               required
               onChange={handleEnterPassword}
-              error={errors.passwordCorrect}
+              error={passwordIncorrect}
               alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
                 and 1 special character."
-              AlertProps={{ visible: errors.passwordCorrect }}
+              AlertProps={{ visible: passwordIncorrect }}
             />
             <PasswordInput
               label="Re-enter New Password"
               required
               onChange={handleReEnterPassword}
-              error={errors.passwordsMatch}
+              error={!!passwords.match && passwordDoNotMatch}
               alert="Passwords didn't match."
-              AlertProps={{ visible: errors.passwordsMatch }}
+              AlertProps={{ visible: !!passwords.match && passwordDoNotMatch }}
             />
             <Button
               variant="solidGreen"
               onClick={handleSetNewPassword}
-              disabled={passwords.new !== passwords.match}
+              disabled={
+                passwordIncorrect || passwordDoNotMatch || !passwords.new || !passwords.match
+              }
             >
               CREATE NEW PASSWORD
             </Button>

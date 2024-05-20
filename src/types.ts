@@ -1,3 +1,10 @@
+import { Breakpoint } from "@mui/material";
+
+export type ResponsiveCssProp<T> =
+  | {
+      [K in Breakpoint]?: T;
+    }
+  | T;
 export type JustifyType = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | string;
 export type AlignType = "start" | "center" | "left" | "right" | string;
 

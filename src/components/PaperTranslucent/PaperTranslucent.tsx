@@ -1,13 +1,13 @@
 // packages
-import React from "react";
+import { ReactNode } from "react";
 import { Box, Paper, Stack } from "@mui/material";
-import { ResponsiveStyleValue } from "@mui/system";
 import { Property } from "csstype";
 // styles
 import styles from "./PaperTranslucent.module.css";
 
 // components
 import { AsteriskIcon } from "@/elements/icons";
+import { ResponsiveCssProp } from "@/types";
 
 export default function PaperTranslucent({
   children,
@@ -16,11 +16,11 @@ export default function PaperTranslucent({
   padding = { mobile: "32px 24px 32px 32px", tablet: "72px 64px 72px 72px" },
   flex = 0,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   iconPosition?: "left" | "right";
-  maxWidth?: Property.MaxWidth | ResponsiveStyleValue<Property.MaxWidth>;
-  padding?: Property.Padding | ResponsiveStyleValue<Property.Padding>;
-  flex?: Property.Flex | ResponsiveStyleValue<Property.Flex>;
+  maxWidth?: ResponsiveCssProp<Property.MaxWidth>;
+  padding?: ResponsiveCssProp<string | number>;
+  flex?: ResponsiveCssProp<Property.Flex>;
 }) {
   const iconPositionValues = { mobile: "-17px", tablet: "-29px", laptop: "-41px" };
   const iconLeftPositionValues = { mobile: "-17px", tablet: "-29px", laptop: "-41px" };

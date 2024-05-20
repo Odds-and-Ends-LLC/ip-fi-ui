@@ -1,15 +1,14 @@
 // packages
-import { ReactNode } from "react";
 import { Stack, TextField as MuiTextField, Typography, Alert } from "@mui/material";
 
 // styles
-import styles from "./TextField.module.css";
+import styles from "./Input.module.css";
 
 // components
 import { InfoIcon } from "@/elements";
 
 // types
-import { type TextFieldProps } from "../types.model";
+import { type TextFieldProps } from "./types";
 
 export default function TextField({
   label,

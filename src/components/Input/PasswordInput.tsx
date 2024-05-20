@@ -5,7 +5,7 @@ import { Button, InputAdornment } from "@mui/material";
 // components
 import { EyeOffIcon, EyeOnIcon, InfoIcon, LockIcon } from "@/elements/icons";
 import { TextField } from "..";
-import { type TextFieldProps } from "../types.model";
+import { type TextFieldProps } from "./types";
 
 export default function PasswordInput({
   placeholder = "Password",
@@ -14,7 +14,7 @@ export default function PasswordInput({
 }: TextFieldProps) {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: MouseEvent | undefined) => {
+  const handleMouseEvent = (event: MouseEvent | undefined) => {
     event?.preventDefault();
   };
 
@@ -35,7 +35,8 @@ export default function PasswordInput({
               mode="icon"
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
+              onMouseDown={handleMouseEvent}
+              onMouseUp={handleMouseEvent}
             >
               {showPassword ? <EyeOffIcon /> : <EyeOnIcon />}
             </Button>

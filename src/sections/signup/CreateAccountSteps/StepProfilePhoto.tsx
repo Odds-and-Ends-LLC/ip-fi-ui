@@ -7,7 +7,7 @@ import styles from "./CreateAccountSteps.module.css";
 // components
 import { ProfilePicture } from "@/components";
 import { ArrowLeftIcon } from "@/elements/icons";
-import { UserSignupData } from "../types.model";
+import { UserSignupData } from "../types";
 
 // data
 

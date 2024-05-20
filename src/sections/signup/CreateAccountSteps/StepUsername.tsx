@@ -10,7 +10,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@/elements/icons";
 import { TextField } from "@/components";
 
 // types
-import { UserSignupData } from "../types.model";
+import { UserSignupData } from "../types";
 
 export default function StepUsername({
   data,
@@ -35,7 +35,7 @@ export default function StepUsername({
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setUserData({ ...data, username: event.target.value })
         }
-        onKeyDown={(event: KeyboardEvent<HTMLDivElement>) =>
+        onKeyDown={(event: KeyboardEvent<HTMLInputElement>) =>
           event.key === "Enter" ? nextButtonRef?.current?.focus() : null
         }
       />

@@ -10,7 +10,7 @@ import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, PlusIcon } from "@/elements/i
 import { WalletDisplay } from "@/components";
 
 // types
-import { UserSignupData } from "../types.model";
+import { UserSignupData } from "../types";
 
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5";

@@ -1,5 +1,5 @@
 // packages
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, InputAdornment, Link, Stack, Typography } from "@mui/material";
 
 // styles
@@ -35,7 +35,7 @@ export default function ForgotPassword() {
               placeholder="Email"
               name="email"
               error={false}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event?.target?.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
