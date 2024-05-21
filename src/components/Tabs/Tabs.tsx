@@ -1,17 +1,12 @@
 // packages
-import { Tabs as MuiTabs, Tab, Orientation, TabsOwnProps, SxProps } from "@mui/material";
+import { Tabs as MuiTabs, Tab, TabsOwnProps, SxProps, TabOwnProps } from "@mui/material";
 
-/**
- *
- * @param {{
- *  value: any,
- *  tabs: Array,
- *  orientation: Orientation,
- *  variant: TabsOwnProps["variant"],
- *  tabsStyle: SxProps,
- *  tabStyle: SxProps }} props
- *
- */
+interface TabProps {
+  label: string;
+  value: string;
+  icon?: any;
+  iconPosition?: TabOwnProps["iconPosition"];
+}
 
 export default function Tabs({
   value,
@@ -21,8 +16,16 @@ export default function Tabs({
   variant = "scrollable",
   tabsStyle = {},
   tabStyle = {},
+} : {
+  value: string;
+  tabs: TabProps[];
+  onChange: (value: string) => void;
+  orientation?: TabsOwnProps["orientation"];
+  variant?: TabsOwnProps["variant"];
+  tabStyle?: SxProps;
+  tabsStyle?: SxProps;
 }) {
-  const handleChange = (_, newValue) => {
+  const handleChange = (newValue: string) => {
     onChange(newValue);
   };
 
@@ -31,7 +34,7 @@ export default function Tabs({
       variant={variant}
       allowScrollButtonsMobile
       value={value || tabs[0]?.value}
-      onChange={handleChange}
+      onChange={(_, value) => handleChange(value)}
       orientation={orientation}
       sx={tabsStyle}
     >
@@ -42,7 +45,7 @@ export default function Tabs({
           value={tab.value}
           icon={tab.icon}
           iconPosition={tab.iconPosition}
-          sx={{ typography: { tablet: "button", mobile: "button2" }, ...tabStyle }}
+          sx={{ typography: { tablet: "button1", mobile: "button2" }, ...tabStyle }}
         />
       ))}
     </MuiTabs>

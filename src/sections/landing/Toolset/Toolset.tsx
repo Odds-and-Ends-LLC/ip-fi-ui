@@ -1,3 +1,5 @@
+"use client";
+
 // packages
 import { ArrowOutward } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";

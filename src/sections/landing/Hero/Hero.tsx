@@ -1,9 +1,12 @@
+"use client";
+
 // packages
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 
 // components
-import { HeroBubbleCarousel, HeroTextCarousel } from ".";
+import HeroBubbleCarousel from "./HeroBubbleCarousel";
+import HeroTextCarousel from "./HeroTextCarousel";
 
 // styles
 import styles from "./Hero.module.css";

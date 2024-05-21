@@ -371,7 +371,6 @@ export const theme = createTheme({
       fontWeight: 500,
       fontSize: "14px",
       lineHeight: "17.36px",
-      textTransform: "uppercase",
     },
     link1: {
       fontFamily: unbounded.style.fontFamily,
@@ -936,6 +935,7 @@ theme.components = {
     },
     styleOverrides: {
       root: {
+        ...theme.typography.button1,
         borderRadius: "4px",
         color: theme.palette.text.primary,
         minHeight: "40px",
@@ -949,6 +949,7 @@ theme.components = {
         },
         "&.Mui-selected": {
           backgroundColor: `${colors.gray[1500]}45`,
+          color: theme.palette.text.primary,
         },
       },
       labelIcon: {
@@ -1150,6 +1151,11 @@ theme.components = {
         padding: "16px",
       },
     },
+  },
+  MuiSkeleton: {
+    defaultProps: {
+      variant: "rectangular",
+    }
   },
   MuiSnackbar: {
     styleOverrides: {

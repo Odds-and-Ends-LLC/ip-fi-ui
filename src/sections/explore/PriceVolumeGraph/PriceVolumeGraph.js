@@ -92,7 +92,7 @@ export default function Table() {
       >
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
-            <XAxis dataKey="month" axisLine={false} tickLine={false} />
+            <XAxis dataKey="month" axisLine={false} tickLine={false} hide />
             <YAxis orientation="right" axisLine={false} tickLine={false} width={32} />
             <CartesianGrid stroke="#1A1B46" strokeWidth={.5} />
             <Tooltip content={renderTooltip} />

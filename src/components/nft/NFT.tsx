@@ -17,13 +17,27 @@ export default function NFT({
   nftName = "NFT Name",
   catalogs = 10,
   earnings = 264,
-  price = "29.30",
+  price = 29.30,
   action,
   headerAction,
   visible = true,
   onVisibilityChange = () => {},
   onExpand = () => {},
   variant = "profile"
+} : {
+  id: string;
+  collectionName?: string;
+  image: string;
+  nftName?: string;
+  catalogs?: number;
+  earnings?: number;
+  price: number;
+  action?: "view" | "add";
+  headerAction?: "visibility" | "expand";
+  visible?: boolean;
+  onVisibilityChange?: (state: boolean) => void;
+  onExpand?: (id: string) => void;
+  variant?: "profile" | "card";
 }) {
   const theme = useTheme();
   const [visibleState, setVisibleState] = useState(visible);
@@ -41,7 +55,7 @@ export default function NFT({
     <Card
       className={styles.nft}
       sx={{
-        bgcolor: "background.darkBlue",
+        bgcolor: "background.tertiary",
       }}
     >
       {headerAction &&
@@ -89,8 +103,8 @@ export default function NFT({
             icon={<Image src="/icons/eth.svg" alt="eth" width={18} height={18} />}
             label={price}
             sx={{
-              bgcolor: "background.lightGreen",
-              typography: "button"
+              bgcolor: "background.greenOverlay",
+              typography: "button1"
             }}
           />
           {!visibleState &&

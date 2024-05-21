@@ -7,12 +7,15 @@ import styles from "./ItemsSectionHeader.module.css";
 export default function ItemsSectionHeader({
   title = "Title",
   count = 0
+} : {
+  title: string;
+  count: number;
 }) {
   return (
     <Stack className={styles.itemsSectionHeader}>
-      <Typography sx={{ typography: { tablet: "h4-desktop", mobile: "h5" } }}>{title}</Typography>
-      <Stack className={styles.itemsSectionHeaderCount} sx={{ bgcolor: "text.grayOverlay" }}>
-        <Typography variant="label3" color="text.secondary">{count}</Typography>
+      <Typography variant="h4">{title}</Typography>
+      <Stack className={styles.itemsSectionHeaderCount} sx={{ bgcolor: "background.grayOverlay" }}>
+        <Typography variant="label3" color="secondary">{count}</Typography>
       </Stack>
     </Stack>
   )

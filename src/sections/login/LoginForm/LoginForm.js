@@ -25,7 +25,7 @@ import { Modal } from "@/components";
 import { LoadingButton } from "@mui/lab";
 
 export default function LoginForm() {
-  const [state, action] = useFormState(signin);
+  const [state, action] = useFormState(signin, null);
   const [showPassword, setShowPassword] = useState(false);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);

@@ -2,6 +2,7 @@
 
 export { default as Navbar } from "./Navbar";
 export { default as Catalogue } from "./Catalog";
+export { default as Footer } from "./Footer";
 export { default as Frame } from "./Frame";
 export { default as TextBox } from "./TextBox";
 export { default as CustomList } from "./CustomList";

@@ -1,5 +1,5 @@
 // packages
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 // components
 import { Avatar, Table } from "@/components";
@@ -7,9 +7,18 @@ import { EthIcon } from "@/elements/icons";
 
 // styles
 import styles from "./MarketTable.module.css";
+import { GridColDef, GridRowModel } from "@mui/x-data-grid";
+
+interface Row {
+  id: string;
+  catalogName: string;
+  totalNfts: number;
+  price: number;
+  volumeDelta: number;
+}
 
 export default function MarketTable() {
-  const renderCatalog = (row) => (
+  const renderCatalog = (row: GridRowModel<Row>) => (
     <Stack
       className={styles.marketTableCatalog}
       sx={{
@@ -35,14 +44,14 @@ export default function MarketTable() {
     </Stack>
   );
 
-  const renderPrice = (price) => (
+  const renderPrice = (price: number) => (
     <Stack className={styles.marketTablePrice}>
       <EthIcon />
       <Typography variant="body1" color="text.gray">{price}</Typography>
     </Stack>
   );
 
-  const renderVolumeDelta = (volumeDelta) => (
+  const renderVolumeDelta = (volumeDelta: number) => (
     <Typography color={volumeDelta < 0 ? "text.red" : "text.secondary"} variant="body2">
       {volumeDelta > 0 && "+"} {volumeDelta} %
     </Typography>
@@ -62,13 +71,13 @@ export default function MarketTable() {
     </Stack>
   );
 
-  const columns = [
+  const columns : GridColDef[] = [
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row),
     },
     {
       field: "price",
@@ -77,7 +86,7 @@ export default function MarketTable() {
       sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderPrice(row.price),
     },
     {
       field: "volumeDelta",
@@ -86,17 +95,17 @@ export default function MarketTable() {
       sortable: false,
       align: "right",
       headerAlign: "right",
-      renderCell: ({ row }) => renderVolumeDelta(row.volumeDelta),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderVolumeDelta(row.volumeDelta),
     },
   ];
 
-  const rows = [
-    { id: 1, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
-    { id: 2, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
-    { id: 3, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
-    { id: 4, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
-    { id: 5, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
-    { id: 6, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
+  const rows: Row[] = [
+    { id: "1", catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
+    { id: "2", catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
+    { id: "3", catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
+    { id: "4", catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
+    { id: "5", catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
+    { id: "6", catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volumeDelta: 135 },
   ];
 
   return (
@@ -104,11 +113,11 @@ export default function MarketTable() {
       headerLeftComponent={renderHeaderLeft()}
       minWidth="640px"
       maxHeight="480px"
+      rows={rows}
+      columns={columns}
       dataGridProps={{
-        rows: rows,
         rowHeight: 60,
         hideFooter: true,
-        columns: columns,
       }}
     />
   );

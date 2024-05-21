@@ -4,30 +4,33 @@ import { useRef } from "react";
 
 // components
 import { CatalogTables, Catalogs, Members, NFTs, TopCatalogs } from "..";
-import { GlassCoverImage, Tabs } from "@/components";
-import { Footer } from "@/sections/landing";
+import { Footer, GlassCoverImage, Tabs } from "@/components";
+import { PlusIcon } from "@/elements/icons";
 
 // styles
 import styles from "./Explore.module.css";
-import { PlusIcon } from "@/elements/icons";
 
 export default function Explore() {
   const catalogsRef = useRef();
   const nftsRef = useRef();
-  const membersRef = useRef();
+  const membersRef = useRef<HTMLElement>();
 
-  const scrollTo = (ref) => {
+  const scrollTo = (elem?: HTMLElement) => {
+    if (!elem) {
+      return;
+    }
+
     const topOffset = -96;
-    window.scrollTo({ top: ref.current.getBoundingClientRect().top + topOffset, behavior: "smooth" })
+    window.scrollTo({ top: elem.getBoundingClientRect().top + topOffset, behavior: "smooth" })
   };
 
-  const handleMainTabChange = (value) => {
+  const handleMainTabChange = (value: string) => {
     if (value === "catalogs") {
-      scrollTo(catalogsRef);
+      scrollTo(catalogsRef.current);
     } else if (value === "nfts") {
-      scrollTo(nftsRef);
+      scrollTo(nftsRef.current);
     } else if (value === "members") {
-      scrollTo(membersRef);
+      scrollTo(membersRef.current);
     }
   };
 
@@ -35,7 +38,7 @@ export default function Explore() {
     <Stack
       className={styles.explore}
       sx={{
-        backgroundColor: "blue.main",
+        bgcolor: "background.default",
       }}
     >
       <GlassCoverImage />
@@ -69,7 +72,7 @@ export default function Explore() {
         >
           <Stack>
             <Typography variant="body2" color="text.disabled">Explore</Typography>
-            <Typography variant="h4-desktop">TOP CATALOGS 🔥</Typography>
+            <Typography variant="h4">TOP CATALOGS 🔥</Typography>
           </Stack>
           <Button
             variant="outlineWhite"
@@ -86,9 +89,9 @@ export default function Explore() {
         <Box ref={nftsRef}>
           <NFTs />
         </Box>
-        <Box ref={membersRef}>
+        {/* <Box ref={membersRef}>
           <Members />
-        </Box>
+        </Box> */}
       </Stack>
       <Footer />
     </Stack>

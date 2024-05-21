@@ -7,11 +7,22 @@ import { EthIcon } from "@/elements/icons";
 
 // styles
 import styles from "./TrendingTable.module.css";
+import { GridRowModel } from "@mui/x-data-grid";
+
+interface Row {
+  id: string;
+  rank: number;
+  catalogName: string;
+  totalNfts: number;
+  price: number;
+  volume: number;
+  volumeDelta: number;
+}
 
 export default function TrendingTable() {
-  const renderRank = (rank) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
+  const renderRank = (rank: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
 
-  const renderCatalog = (row, showPrice) => (
+  const renderCatalog = (row: GridRowModel<Row>, showPrice?: boolean) => (
     <Stack
       className={styles.trendingTableCatalog}
       sx={{
@@ -45,16 +56,16 @@ export default function TrendingTable() {
     </Stack>
   );
 
-  const renderPrice = (price) => (
+  const renderPrice = (price: number) => (
     <Stack className={styles.trendingTablePrice}>
       <EthIcon />
       <Typography variant="body1" color="text.gray">{price}</Typography>
     </Stack>
   );
 
-  const renderVolume = (volume) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body2" }}}>{volume} eth</Typography>;
+  const renderVolume = (volume: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body2" }}}>{volume} eth</Typography>;
 
-  const renderVolumeDelta = (volumeDelta) => (
+  const renderVolumeDelta = (volumeDelta: number) => (
     <Typography color={volumeDelta < 0 ? "text.red" : "text.secondary"} sx={{ typography: { desktop: "body2", mobile: "body3" }}}>
       {volumeDelta > 0 && "+"} {volumeDelta} %
     </Typography>
@@ -66,28 +77,28 @@ export default function TrendingTable() {
       headerName: "Rank",
       width: 96,
       sortable: false,
-      renderCell: ({ row }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row),
     },
     {
       field: "price",
       headerName: "Price",
       width: 111,
       sortable: false,
-      renderCell: ({ row }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderPrice(row.price),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
       sortable: false,
-      renderCell: ({ row }) => (
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
           {renderVolumeDelta(row.volumeDelta)}
@@ -102,21 +113,21 @@ export default function TrendingTable() {
       headerName: "#",
       width: 64,
       sortable: false,
-      renderCell: ({ row }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => renderCatalog(row, true),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
       sortable: false,
-      renderCell: ({ row }) => (
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
           {renderVolumeDelta(row.volumeDelta)}
@@ -132,7 +143,7 @@ export default function TrendingTable() {
       minWidth: 24,
       width: 24,
       sortable: false,
-      renderCell: ({ row }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
@@ -140,13 +151,13 @@ export default function TrendingTable() {
       minWidth: 156,
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => renderCatalog(row, true),
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       sortable: false,
-      renderCell: ({ row }) => (
+      renderCell: ({ row } : { row: GridRowModel<Row> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
           {renderVolumeDelta(row.volumeDelta)}
@@ -155,17 +166,17 @@ export default function TrendingTable() {
     },
   ];
 
-  const rows = [
-    { id: 1, rank: 1, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 2, rank: 2, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 3, rank: 3, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 4, rank: 4, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 5, rank: 5, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 6, rank: 6, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 7, rank: 7, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 8, rank: 8, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 9, rank: 9, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: 10, rank: 10, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+  const rows: Row[] = [
+    { id: "1", rank: 1, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "2", rank: 2, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "3", rank: 3, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "4", rank: 4, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "5", rank: 5, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "6", rank: 6, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "7", rank: 7, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "8", rank: 8, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "9", rank: 9, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
+    { id: "10", rank: 10, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
   ];
 
   return (
@@ -178,22 +189,23 @@ export default function TrendingTable() {
         <Grid item mobile={6} minWidth="690px">
           <Table
             bordered={false}
+            columns={desktopColumns}
+            rows={rows.slice(0, 5)}
             dataGridProps={{
-              rows: rows.slice(0, 5),
               rowHeight: 70,
               hideFooter: true,
-              columns: desktopColumns,
             }}
           />
         </Grid>
         <Grid item mobile={6}  minWidth="690px">
           <Table
             bordered={false}
+            rows={rows.slice(5)}
+            columns={desktopColumns}
             dataGridProps={{
               rows: rows.slice(5),
               rowHeight: 70,
               hideFooter: true,
-              columns: desktopColumns,
             }}
           />
         </Grid>
@@ -202,22 +214,22 @@ export default function TrendingTable() {
         <Grid item mobile={6} minWidth="480px">
           <Table
             bordered={false}
+            columns={tabletColumns}
+            rows={rows.slice(0, 5)}
             dataGridProps={{
-              rows: rows.slice(0, 5),
               rowHeight: 96,
               hideFooter: true,
-              columns: tabletColumns,
             }}
           />
         </Grid>
         <Grid item mobile={6} minWidth="480px">
           <Table
             bordered={false}
+            columns={tabletColumns}
+            rows={rows.slice(5)}
             dataGridProps={{
-              rows: rows.slice(5),
               rowHeight: 96,
               hideFooter: true,
-              columns: tabletColumns,
             }}
           />
         </Grid>
@@ -232,22 +244,22 @@ export default function TrendingTable() {
         <Grid item mobile={6} minWidth="80vw">
           <Table
             bordered={false}
+            columns={mobileColumns}
+            rows={rows.slice(0, 5)}
             dataGridProps={{
-              rows: rows.slice(0, 5),
               rowHeight: 96,
               hideFooter: true,
-              columns: mobileColumns,
             }}
           />
         </Grid>
         <Grid item mobile={6} minWidth="80vw">
           <Table
             bordered={false}
+            columns={mobileColumns}
+            rows={rows.slice(5)}
             dataGridProps={{
-              rows: rows.slice(5),
               rowHeight: 96,
               hideFooter: true,
-              columns: mobileColumns,
             }}
           />
         </Grid>

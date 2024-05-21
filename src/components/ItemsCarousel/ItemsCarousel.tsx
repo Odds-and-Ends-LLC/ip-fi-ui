@@ -12,7 +12,12 @@ export default function ItemsCarousel({
   title,
   count = 0,
   items,
-  viewAllurl,
+  viewAllUrl,
+} : {
+  title: string;
+  count: number;
+  items: any[];
+  viewAllUrl?: string;
 }) {
   return (
     <Carousel
@@ -35,18 +40,18 @@ export default function ItemsCarousel({
           >
             {title && <ItemsSectionHeader title={title} count={count} />}
             <Stack className={styles.itemsCarouselPagination} sx={{ justifyContent: { tablet: "center", mobile: "space-between" } }}>
-              {viewAllurl &&
-                <Button variant="text" color="white" {...viewAllurl && { href: viewAllurl }} sx={{ typography: { tablet: "button", mobile: "button2" } }}>
+              {viewAllUrl &&
+                <Button variant="clearWhite" {...viewAllUrl && { href: viewAllUrl }}>
                   VIEW ALL
                 </Button>
               }
               <Stack className={styles.itemsCarouselPaginationArrows}>
-                {/* <IconButton {...prev}>
-                  <ArrowHeadLeftIcon color="white" />
-                </IconButton>
-                <IconButton {...next}>
-                  <ArrowHeadRightIcon color="white" />
-                </IconButton> */}
+                <Button variant="clearWhite" mode="icon" {...prev}>
+                  <ArrowHeadLeftIcon />
+                </Button>
+                <Button variant="clearWhite" mode="icon" {...next}>
+                  <ArrowHeadRightIcon  />
+                </Button>
               </Stack>
             </Stack>
           </Stack>

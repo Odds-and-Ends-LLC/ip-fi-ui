@@ -1,6 +1,7 @@
+"use client";
+
 // packages
-import { ArrowOutward } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Stack, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 

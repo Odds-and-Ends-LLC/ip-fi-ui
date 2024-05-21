@@ -1,5 +1,5 @@
 // packages
-import { DataGrid, DataGridProps } from "@mui/x-data-grid";
+import { DataGrid, DataGridProps, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { Box, Stack } from "@mui/material";
 
 // components
@@ -7,18 +7,6 @@ import { DataContainer } from "..";
 
 // styles
 import styles from "./Table.module.css";
-
-/**
- *
- * @param {{
- *  headerLeftComponent: any,
- *  headerRightComponent: any,
- *  hasBackground: Boolean,
- *  bordered: Boolean,
- *  minWidth: any,
- *  dataGridProps: DataGridProps }} props
- *
- */
 
 export default function Table({
   headerLeftComponent,
@@ -28,7 +16,20 @@ export default function Table({
   minWidth = "",
   minHeight = "",
   maxHeight = "",
+  rows,
+  columns,
   dataGridProps,
+} : {
+  headerLeftComponent?: any;
+  headerRightComponent?: any;
+  bordered?: boolean;
+  hasBackground?: boolean;
+  minWidth?: string | object;
+  minHeight?: string | object;
+  maxHeight?: string | object;
+  rows: GridRowsProp;
+  columns: GridColDef[];
+  dataGridProps?: Partial<DataGridProps>,
 }) {
   return (
     <DataContainer
@@ -44,14 +45,16 @@ export default function Table({
         <DataGrid
           className={styles.tableData}
           {...dataGridProps}
+          rows={rows}
+          columns={columns}
           sx={{
-            minWidth,
+            ...minWidth && { minWidth },
             ...hasBackground && {
               "& .MuiDataGrid-columnHeaders": {
-                bgcolor: "background.default",
+                bgcolor: "background.secondary",
               },
             },
-            ...dataGridProps.sx }}
+            ...dataGridProps?.sx }}
         />
       </Box>
     </DataContainer>

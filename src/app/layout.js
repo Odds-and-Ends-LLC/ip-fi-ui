@@ -5,9 +5,6 @@ import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 // components
 import { Navbar } from "@/components";
 
-// lib
-import { getUser } from "@/lib/queries/user";
-
 // styles
 import { theme } from "@/styles/theme";
 
@@ -17,7 +14,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const user = await getUser();
 
   return (
     <html lang="en">
@@ -25,7 +21,7 @@ export default async function RootLayout({ children }) {
         <AppRouterCacheProvider options={{ key: "css", enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Navbar user={user} />
+            <Navbar />
             <Container>{children}</Container>
           </ThemeProvider>
         </AppRouterCacheProvider>

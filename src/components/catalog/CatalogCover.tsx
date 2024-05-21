@@ -17,10 +17,19 @@ export default function CatalogCover({
   nftCount = 20,
   creatorName = "Creator",
   creatorUserId = "user1",
-  backgroundColor,
+  backgroundColor = "#eda73d",
   image = "/images/image_3.png",
-  title,
+  badge,
   cover,
+} : {
+  catalogName: string;
+  nftCount: number;
+  creatorName: string;
+  creatorUserId: string;
+  backgroundColor?: string;
+  image: string;
+  badge?: string;
+  cover?: boolean;
 }) {
   const theme = useTheme();
   const [ref, { height }] = useMeasure();
@@ -30,9 +39,9 @@ export default function CatalogCover({
       className={styles.catalogCover}
       component={motion.div}
       ref={ref}
-      whileHover={!cover && {  backgroundColor: theme.palette.background.darkGreen }}
-      animate={{ backgroundColor: backgroundColor || theme.palette.background.green }}
-      initial={{ backgroundColor: backgroundColor || theme.palette.background.green }}
+      whileHover={{ backgroundColor: theme.palette.background.greenOverlay }}
+      animate={{ backgroundColor: backgroundColor || theme.palette.background.greenOverlay }}
+      initial={{ backgroundColor: backgroundColor || theme.palette.background.greenOverlay }}
       sx={{ cursor: cover ? "default" : "pointer" }}
     >
       <CardActionArea
@@ -42,12 +51,12 @@ export default function CatalogCover({
       >
         <CardHeader
           className={styles.catalogCoverHeader}
-          title={title}
+          title={badge}
           titleTypographyProps={{
-            className: styles.catalogCoverTitle,
-            variant: "button",
+            className: styles.catalogCoverBadge,
+            variant: "button1",
             sx: {
-              bgcolor: "text.purple",
+              bgcolor: "icon.brand",
               fontSize: {
                 desktop: "16px",
                 tablet: "14px",
@@ -67,33 +76,38 @@ export default function CatalogCover({
           className={styles.catalogCoverMedia}
           image={image}
         />
-        <Typography
-          className={styles.catalogCoverOverlay}
-          variant="h2"
-          color="text.grayOverlay"
-          sx={{
-            rotate: "-180deg",
-            left: 4,
-            bottom: 0,
-            fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
-            lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
-          }}
-        >
-          {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
-        </Typography>
-        <Typography
-          className={styles.catalogCoverOverlay}
-          variant="h2"
-          color="text.grayOverlay"
-          sx={{
-            right: 4,
-            top: 0,
-            fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
-            lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
-          }}
-        >
-          {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
-        </Typography>
+        {height &&
+          <>
+            <Typography
+              className={styles.catalogCoverOverlay}
+              variant="h2"
+              color="background.grayOverlay"
+              sx={{
+                rotate: "-180deg",
+                left: 4,
+                bottom: 0,
+                fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
+                lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
+              }}
+            >
+              {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
+            </Typography>
+            <Typography
+              className={styles.catalogCoverOverlay}
+              variant="h2"
+              color="background.grayOverlay"
+              sx={{
+                right: 4,
+                top: 0,
+                fontSize: `${clamp(42 / (475 / height), 0, 58)}px`,
+                lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
+              }}
+            >
+              {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
+            </Typography>
+          </>
+        }
+
         {/* {!cover &&
           <Box
             className={styles.catalogCoverFlip}
@@ -119,7 +133,7 @@ export default function CatalogCover({
         <Stack
           className={styles.catalogCoverDetailsContent}
           sx={{
-            bgcolor: "background.darkBlue",
+            bgcolor: "background.tertiary",
             p: {
               mobile: "16px",
             }
