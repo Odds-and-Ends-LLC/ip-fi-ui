@@ -1,10 +1,10 @@
+.createAccountContent {
+  gap: 24px;
+}
+
 .createAccountInput {
   text-align: start;
   gap: 8px;
-}
-
-.createAccountContent {
-  gap: 24px;
 }
 
 .createAccountButtons {
@@ -28,6 +28,11 @@
   height: 32px;
   position: relative;
   width: auto;
+}
+
+.walletButton {
+  align-items: center;
+  padding: 8px;
 }
 
 .profilePhoto {

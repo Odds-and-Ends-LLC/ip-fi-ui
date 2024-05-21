@@ -1,10 +1,10 @@
 .walletDisplay {
   align-items: center;
   border-radius: 4px;
-  flex-direction: row ;
+  cursor: pointer;
+  flex-direction: row;
   gap: 12px;
   min-height: 40px;
-  padding: 0 8px;
   text-align: start;
 }
 

@@ -1,10 +1,9 @@
-.passwordInput {
+.textField {
   gap: 8px;
   text-align: start;
-  width: 100%;
 }
 
-.passwordInputHelperText {
+.textFieldMessage {
   flex-direction: row;
   gap: 8px;
   padding: 8px;
