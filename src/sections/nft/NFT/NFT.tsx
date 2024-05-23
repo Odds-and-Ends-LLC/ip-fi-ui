@@ -1,20 +1,13 @@
 // packages
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button, Stack, Typography, IconButton } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 // styles
 import styles from "./NFT.module.css";
 
 // components
-import {
-  ArrowLeftIcon,
-  CheckIcon,
-  LooksRareIcon,
-  OpenSeaIcon,
-  RefreshIcon,
-  SettingsIcon,
-} from "@/elements/icons";
+import { ArrowLeftIcon, CheckIcon, SettingsIcon } from "@/elements/icons";
 import { Member, NFT as NFTCard, ShareButton, Tabs } from "@/components";
 import { Analytics, Contracts, Details, History, NFTBackground } from "..";
 
