@@ -10,8 +10,32 @@ import styles from "./NFT.module.css";
 import { Icon, Member, NFT as NFTCard, ShareButton, Tabs } from "@/components";
 import { Analytics, BaseTerms, Catalogs, Details, History, NFTBackground } from "..";
 
+// types
+import { NftDetails } from "../types";
+
 // data
 const link = "https://www.hypersona12133.com";
+const nft: NftDetails = {
+  id: 123,
+  name: "NFT NAME",
+  image: "/images/image_4.png",
+  collection: "Bored Ape Yacht Club",
+  withExclusiveLicense: true,
+  owner: "Member",
+  description:
+    "Collecting NFTs like stars. This section is up to 240 characters only. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+  traits: {
+    background: "Gradient 2",
+    head: "Purple",
+    hair: "Brown Bushcut",
+    face: "Straw",
+    body: "Light Blue Puffer",
+  },
+  contractAddress: "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C",
+  tokenStandard: "ERC-721",
+  tokenId: 1957,
+  blockchain: "ethereum",
+};
 
 export default function NFT() {
   const pathname = usePathname();
@@ -61,7 +85,7 @@ export default function NFT() {
                 variant="profile"
                 action={undefined}
                 id={""}
-                image={"/images/image_4.png"}
+                image={nft?.image}
                 price={0}
               />
             </Stack>
@@ -78,21 +102,23 @@ export default function NFT() {
                 </Button>
               </Stack>
               <Stack className={styles.nftProfileDetails}>
-                <Typography variant="h4">NFT NAME</Typography>
+                <Typography variant="h4">{nft?.name}</Typography>
                 <Typography variant="body2" color="text.disabledBlue">
-                  Bored Ape Yacht Club
+                  {nft?.collection}
                 </Typography>
-                <Typography
-                  className={styles.nftExclusiveLicense}
-                  variant="body2"
-                  color="text.brandSecondary"
-                >
-                  <Icon icon="check" size={18} /> with Exclusive License
-                </Typography>
+                {nft?.withExclusiveLicense && (
+                  <Typography
+                    className={styles.nftExclusiveLicense}
+                    variant="body2"
+                    color="text.brandSecondary"
+                  >
+                    <Icon icon="check" size={18} /> with Exclusive License
+                  </Typography>
+                )}
               </Stack>
               <Stack className={styles.nftProfileOwner}>
                 <Typography variant="body2">Owner:</Typography>
-                <Member variant="" />
+                <Member variant="" memberName={nft?.owner} />
               </Stack>
             </Stack>
           </Stack>
@@ -133,7 +159,7 @@ export default function NFT() {
                 sx={{ maxWidth: { laptop: `calc(100vw - (152px + ${nftProfileWidth}px))` } }}
               >
                 {mainTab === "catalogs" && <Catalogs />}
-                {mainTab === "details" && <Details />}
+                {mainTab === "details" && <Details data={nft} />}
                 {mainTab === "baseTerms" && <BaseTerms />}
                 {mainTab === "analytics" && <Analytics />}
                 {mainTab === "history" && <History />}

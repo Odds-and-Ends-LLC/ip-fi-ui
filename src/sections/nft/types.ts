@@ -1,3 +1,20 @@
+export interface NftDetails {
+  id: string | number;
+  name: string;
+  image: string;
+  collection: string;
+  withExclusiveLicense: boolean;
+  owner: string;
+  description: string;
+  traits: {
+    [key: string]: string;
+  };
+  contractAddress: string;
+  tokenStandard: string;
+  tokenId: string | number;
+  blockchain: "ethereum";
+}
+
 export interface CatalogData {
   id: number | string;
   name: string;
@@ -8,11 +25,6 @@ export interface CatalogData {
   collection_name: string;
   licensor: string;
   licensee: string;
-}
-
-export interface NftTraits {
-  traitType: string;
-  traitValue: string;
 }
 
 export interface NftHistoryData {
