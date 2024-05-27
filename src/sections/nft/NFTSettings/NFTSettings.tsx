@@ -6,8 +6,8 @@ import { Button, Stack, Typography, Switch, Paper } from "@mui/material";
 import styles from "./NFTSettings.module.css";
 
 // components
-import { ArrowLeftIcon } from "@/elements/icons";
 import { NFTBackground } from "..";
+import { Icon } from "@/components";
 
 export default function NFTSettings() {
   const router = useRouter();
@@ -25,15 +25,15 @@ export default function NFTSettings() {
         }}
       >
         <Paper
-          variant="outlined"
+          variant="translucent"
           component={Stack}
           className={styles.nftSettingsPaper}
           sx={{ padding: { tablet: "24px 40px" } }}
         >
-          <Button startIcon={<ArrowLeftIcon />} onClick={handleBack}>
+          <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={handleBack}>
             BACK
           </Button>
-          <Typography variant="h4-desktop" px="24px">
+          <Typography variant="h4" px="24px">
             NFT SETTINGS
           </Typography>
           <Stack
@@ -41,10 +41,10 @@ export default function NFTSettings() {
             sx={{ px: "24px", flexDirection: { tablet: "row" } }}
           >
             <Stack className={styles.nftSettingsContent}>
-              <Typography variant="label">ALLOW EXCLUSIVE LICENSE FOR NFT</Typography>
+              <Typography variant="h5">ENABLE EXCLUSIVE LICENSES ONLY.</Typography>
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
+                Exclusive licenses should be more expensive as it prevents your NFT from being able
+                to be a part of more than one catalog.
               </Typography>
             </Stack>
             <Switch defaultChecked focusVisibleClassName=".Mui-focusVisible" />

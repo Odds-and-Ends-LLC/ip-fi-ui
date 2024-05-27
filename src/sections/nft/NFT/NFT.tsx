@@ -7,18 +7,19 @@ import { Button, Stack, Typography } from "@mui/material";
 import styles from "./NFT.module.css";
 
 // components
-import { ArrowLeftIcon, CheckIcon, SettingsIcon } from "@/elements/icons";
-import { Member, NFT as NFTCard, ShareButton, Tabs } from "@/components";
-import { Analytics, Contracts, Details, History, NFTBackground } from "..";
+import { Icon, Member, NFT as NFTCard, ShareButton, Tabs } from "@/components";
+import { Analytics, BaseTerms, Catalogs, Details, History, NFTBackground } from "..";
 
 // data
 const link = "https://www.hypersona12133.com";
 
 export default function NFT() {
   const pathname = usePathname();
-  const [mainTab, setMainTab] = useState("contracts");
-  const [nftProfileWidth, setNftProfileWidth] = useState(null);
-  const nftProfileSectionRef = useRef(null);
+  const [mainTab, setMainTab] = useState<
+    "catalogs" | "details" | "baseTerms" | "analytics" | "history" | string
+  >("catalogs");
+  const [nftProfileWidth, setNftProfileWidth] = useState<number | undefined | null>(null);
+  const nftProfileSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setNftProfileWidth(nftProfileSectionRef?.current?.clientWidth);
@@ -28,7 +29,7 @@ export default function NFT() {
     <Stack
       className={styles.nft}
       sx={{
-        backgroundColor: "blue.main",
+        backgroundColor: "background.secondary",
         height: { laptop: "100vh" },
       }}
     >
@@ -39,7 +40,9 @@ export default function NFT() {
           padding: { mobile: "104px 24px 32px", tablet: "96px 64px 32px" },
         }}
       >
-        <Button startIcon={<ArrowLeftIcon />}>BACK</Button>
+        <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />}>
+          BACK
+        </Button>
         <Stack className={styles.nftContainer} sx={{ flexDirection: { laptop: "row" } }}>
           <Stack
             ref={nftProfileSectionRef}
@@ -53,43 +56,38 @@ export default function NFT() {
               className={styles.nftProfileCard}
               sx={{ height: { mobile: "240px", tablet: "288px", laptop: "100%" } }}
             >
-              <NFTCard visible variant="profile" action={false} />
+              <NFTCard
+                visible
+                variant="profile"
+                action={undefined}
+                id={""}
+                image={"/images/image_4.png"}
+                price={0}
+              />
             </Stack>
-            <Stack className={styles.nftProfileDetails}>
+            <Stack className={styles.nftProfileColumn}>
               <Stack className={styles.nftProfileActions}>
-                {/* <IconButton
-                  aria-label="opensea"
-                  variant="outlineWhite"
-                  onClick={() => {}}
-                >
-                  <OpenSeaIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="looksrare"
-                  variant="outlinedWhite"
-                  onClick={() => {}}
-                >
-                  <LooksRareIcon />
-                </IconButton>
-                <IconButton
-                  aria-label="refresh"
-                  variant="outlineWhite"
-                  onClick={() => {}}
-                >
-                  <RefreshIcon />
-                </IconButton> */}
+                <Button mode="icon" variant="outlineWhite">
+                  <Icon icon="openSea" />
+                </Button>
+                <Button mode="icon" variant="outlineWhite">
+                  <Icon icon="looksRare" />
+                </Button>
+                <Button mode="icon" variant="outlineWhite">
+                  <Icon icon="refresh" />
+                </Button>
               </Stack>
-              <Stack gap="4px" flex={1}>
-                <Typography variant="h4-desktop">NFT NAME</Typography>
+              <Stack className={styles.nftProfileDetails}>
+                <Typography variant="h4">NFT NAME</Typography>
                 <Typography variant="body2" color="text.disabledBlue">
                   Bored Ape Yacht Club
                 </Typography>
                 <Typography
                   className={styles.nftExclusiveLicense}
                   variant="body2"
-                  color="text.secondary"
+                  color="text.brandSecondary"
                 >
-                  <CheckIcon /> with Exclusive License
+                  <Icon icon="check" size={18} /> with Exclusive License
                 </Typography>
               </Stack>
               <Stack className={styles.nftProfileOwner}>
@@ -99,7 +97,7 @@ export default function NFT() {
             </Stack>
           </Stack>
           <Stack
-            className={styles.nftDetails}
+            className={styles.nftDetailsColumn}
             sx={{
               gap: { mobile: "24px", laptop: "32px" },
               height: { laptop: "calc(100vh - 196px)" },
@@ -114,8 +112,9 @@ export default function NFT() {
               <Tabs
                 value={mainTab}
                 tabs={[
-                  { label: "CONTRACTS", value: "contracts" },
+                  { label: "CATALOGS", value: "catalogs" },
                   { label: "DETAILS", value: "details" },
+                  { label: "BASE TERMS", value: "baseTerms" },
                   { label: "ANALYTICS", value: "analytics" },
                   { label: "HISTORY", value: "history" },
                 ]}
@@ -123,7 +122,7 @@ export default function NFT() {
               />
               <Stack className={styles.nftDetailsSettings}>
                 <Button variant="outlineWhite" href={`${pathname}/settings`}>
-                  <SettingsIcon />
+                  <Icon icon="settings" />
                 </Button>
                 <ShareButton title="SHARE NFT" link={link} />
               </Stack>
@@ -133,8 +132,9 @@ export default function NFT() {
                 className={styles.nftDetailsContents}
                 sx={{ maxWidth: { laptop: `calc(100vw - (152px + ${nftProfileWidth}px))` } }}
               >
-                {mainTab === "contracts" && <Contracts />}
+                {mainTab === "catalogs" && <Catalogs />}
                 {mainTab === "details" && <Details />}
+                {mainTab === "baseTerms" && <BaseTerms />}
                 {mainTab === "analytics" && <Analytics />}
                 {mainTab === "history" && <History />}
               </Stack>
