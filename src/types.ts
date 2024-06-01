@@ -24,6 +24,11 @@ export interface Session {
   walletAddress: string;
 };
 
+export interface LoginForm {
+  email: string;
+  password: string;
+}
+
 export interface LandingUpdate {
   date: number;
   type: "blog" | string;

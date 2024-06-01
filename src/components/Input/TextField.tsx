@@ -9,8 +9,12 @@ import { Icon } from "@/components";
 
 // types
 import { type TextFieldProps } from "./types";
+import { FieldValues, FieldPath, UseControllerProps, useController } from "react-hook-form";
 
-export default function TextField({
+export default function TextField <
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>
+>({
   label,
   required,
   description,
@@ -18,7 +22,7 @@ export default function TextField({
   alert,
   AlertProps = { visible: true, status: "error", icon: <Icon icon="info" /> },
   ...props
-}: TextFieldProps) {
+}: TextFieldProps & UseControllerProps<TFieldValues, TName>) {
   return (
     <Stack className={styles.textField}>
       {label && (

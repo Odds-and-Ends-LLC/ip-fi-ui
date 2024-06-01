@@ -12,23 +12,24 @@ import styles from "./LoginForm.module.css";
 // components
 import { Icon, Modal, PasswordInput, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
+import { useForm } from "react-hook-form";
+import { LoginForm } from "@/types";
 
 export default function LoginForm() {
-  const [state, action] = useFormState(signin, null);
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting, isValid }
+  } = useForm<LoginForm>({
+    defaultValues: {
+      email: "",
+      password: "",
+    }
+  })
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
 
   const handleConnectWallet = () => {
     console.log("connect wallet");
-  };
-
-  const LoginButton = () => {
-    const status = useFormStatus();
-
-    return (
-      <LoadingButton variant="solidGreen" type="submit" loading={status.pending}>
-        LOGIN
-      </LoadingButton>
-    );
   };
 
   return (
@@ -65,7 +66,9 @@ export default function LoginForm() {
               </Alert>
             )}
           </Stack>
-          <LoginButton />
+          <LoadingButton variant="solidGreen" type="submit" loading={status.pending}>
+            LOGIN
+          </LoadingButton>
           <Divider sx={{ "&::before, &::after": { borderTopColor: "dividers.default" } }}>
             <Typography variant="link2" color="text.brandSecondary">
               or

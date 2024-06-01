@@ -964,6 +964,7 @@ theme.components = {
           backgroundColor: `${colors.gray[1500]}bf`,
         },
         "&.Mui-selected": {
+          color: theme.palette.text.primary,
           backgroundColor: `${colors.gray[1500]}73`,
         },
       },
