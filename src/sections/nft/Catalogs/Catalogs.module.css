@@ -1,21 +1,21 @@
-.contracts {
+.catalogs {
   flex: 1;
   gap: 16px;
   overflow-y: auto;
 }
 
-.contractsHeader {
+.catalogsHeader {
   gap: 8px 32px;
   justify-content: space-between;
 }
 
-.contractsHeaderOptions {
+.catalogsHeaderOptions {
   flex-direction: row;
   gap: 12px;
   justify-content: space-between;
 }
 
-.contractsContent {
+.catalogsContent {
   gap: 16px;
   overflow-y: auto;
 }
@@ -40,7 +40,7 @@
   width: 74px;
 }
 
-.contractSection {
+.catalogsection {
   display: flex;
   flex-direction: column;
 }

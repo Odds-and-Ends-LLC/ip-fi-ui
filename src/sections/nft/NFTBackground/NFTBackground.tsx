@@ -13,13 +13,13 @@ export default function NFTBackground() {
   return (
     <Stack className={styles.nftBackground}>
       <Stack className={styles.nftBackgroundWrapper}>
-        <Circle absolute size="400px" top="128px" />
-        <Circle absolute size="200px" fillColor="secondary.main" top="25%" right="80px" />
+        <Circle absolute size="400px" fillColor="text.brandSecondary" top="128px" />
+        <Circle absolute size="200px" fillColor="primary.main" top="25%" right="80px" />
         <Circle
           absolute
           size="250px"
           fillColor="transparent"
-          borderColor="primary.light"
+          borderColor="secondary.main"
           bottom="16px"
           right={0}
         />

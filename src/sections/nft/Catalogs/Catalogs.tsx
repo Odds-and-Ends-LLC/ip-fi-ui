@@ -2,17 +2,21 @@
 import { Button, Paper, Stack } from "@mui/material";
 
 // styles
-import styles from "./Contracts.module.css";
+import styles from "./Catalogs.module.css";
 
 // components
 import { ItemsSectionHeader, Select } from "@/components";
-import ItemsContract from "./ItemsContract";
+import { ItemsCatalogs } from ".";
+
+// types
+import { CatalogData } from "../types";
 
 // data
-const contracts = [
+const catalogs: CatalogData[] = [
   {
     id: 1,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
     status: "active",
     nft_name: "nft_name",
@@ -22,7 +26,8 @@ const contracts = [
   },
   {
     id: 2,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
     status: "active",
     nft_name: "nft_name",
@@ -32,9 +37,10 @@ const contracts = [
   },
   {
     id: 3,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
-    status: "pending",
+    status: "ended",
     nft_name: "nft_name",
     collection_name: "collection_name",
     licensor: "licensorUsername",
@@ -42,9 +48,10 @@ const contracts = [
   },
   {
     id: 4,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
-    status: "declined",
+    status: "ended",
     nft_name: "nft_name",
     collection_name: "collection_name",
     licensor: "licensorUsername",
@@ -52,9 +59,10 @@ const contracts = [
   },
   {
     id: 5,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
-    status: "canceled",
+    status: "ended",
     nft_name: "nft_name",
     collection_name: "collection_name",
     licensor: "licensorUsername",
@@ -62,7 +70,8 @@ const contracts = [
   },
   {
     id: 6,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
     status: "active",
     nft_name: "nft_name",
@@ -72,7 +81,8 @@ const contracts = [
   },
   {
     id: 7,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
     status: "active",
     nft_name: "nft_name",
@@ -82,9 +92,10 @@ const contracts = [
   },
   {
     id: 8,
-    name: "CONTRACT",
+    name: "CATALOG",
+    image: "/images/checker.png",
     price: 150,
-    status: "pending",
+    status: "ended",
     nft_name: "nft_name",
     collection_name: "collection_name",
     licensor: "licensorUsername",
@@ -92,24 +103,24 @@ const contracts = [
   },
 ];
 
-export default function Contracts() {
+export default function Catalogs() {
   return (
-    <Stack className={styles.contracts}>
-      <Stack className={styles.contractsHeader} sx={{ flexDirection: { tablet: "row" } }}>
-        <ItemsSectionHeader title="CONTRACTS" count={10} />
-        <Stack className={styles.contractsHeaderOptions}>
+    <Stack className={styles.catalogs}>
+      <Stack className={styles.catalogsHeader} sx={{ flexDirection: { tablet: "row" } }}>
+        <ItemsSectionHeader title="CATALOGS" count={10} />
+        <Stack className={styles.catalogsHeaderOptions}>
           <Select
-            minWidth="112px"
+            minWidth="118px"
             label="FILTER"
             options={["filter 1", "filter 2"]}
             onChange={(value) => console.log(value)}
           />
-          <Select minWidth="104px" label="SORT" />
+          <Select minWidth="106px" label="SORT" />
         </Stack>
       </Stack>
-      <Paper variant="outlined" component={Stack} className={styles.contractsContent}>
-        {contracts?.map((contract, i) => (
-          <ItemsContract key={i} data={contract} />
+      <Paper variant="translucent" component={Stack} className={styles.catalogsContent}>
+        {catalogs?.map((catalog, i) => (
+          <ItemsCatalogs key={i} data={catalog} />
         ))}
         <Button fullWidth variant="outlineWhite">
           LOAD MORE

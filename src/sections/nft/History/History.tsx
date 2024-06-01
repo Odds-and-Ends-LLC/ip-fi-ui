@@ -7,11 +7,13 @@ import { format } from "date-fns";
 import styles from "./History.module.css";
 
 // components
-import { Avatar, ItemsSectionHeader, Select, Table } from "@/components";
-import { EthIcon } from "@/elements/icons";
+import { Avatar, Icon, Select, Table } from "@/components";
+
+// types
+import { NftHistoryData } from "../types";
 
 // data
-const history = [
+const history: NftHistoryData[] = [
   {
     id: 1,
     event: "transfer",
@@ -53,17 +55,19 @@ export default function History() {
       headerName: "Event",
       minWidth: 128,
       sortable: false,
-      renderCell: ({ row }) => <Typography color="text.gray">{startCase(row?.event)}</Typography>,
+      renderCell: ({ row }: { row: NftHistoryData }) => (
+        <Typography color="text.secondary">{startCase(row?.event)}</Typography>
+      ),
     },
     {
       field: "price",
       headerName: "Price",
       minWidth: 128,
       sortable: false,
-      renderCell: ({ row }) => (
+      renderCell: ({ row }: { row: NftHistoryData }) => (
         <Stack className={styles.tableColumnPrice}>
-          <EthIcon />
-          <Typography color="text.gray">{row?.price?.toString()}</Typography>
+          <Icon icon="ethereum" size={18} />
+          <Typography color="text.secondary">{row?.price?.toString()}</Typography>
         </Stack>
       ),
     },
@@ -72,10 +76,10 @@ export default function History() {
       headerName: "From",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => (
+      renderCell: ({ row }: { row: NftHistoryData }) => (
         <Stack className={styles.tableColumnFrom}>
           <Avatar size="s" image="/images/image_1.png" />
-          <Typography color="text.gray">{row?.from}</Typography>
+          <Typography>{row?.from}</Typography>
         </Stack>
       ),
     },
@@ -84,10 +88,10 @@ export default function History() {
       headerName: "To",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => (
+      renderCell: ({ row }: { row: NftHistoryData }) => (
         <Stack className={styles.tableColumnTo}>
           <Avatar size="s" image="/images/image_1.png" />
-          <Typography color="text.gray">{row?.to}</Typography>
+          <Typography>{row?.to}</Typography>
         </Stack>
       ),
     },
@@ -96,15 +100,17 @@ export default function History() {
       headerName: "Purchase Date",
       flex: 1,
       sortable: true,
-      renderCell: ({ row }) => (
-        <Typography color="text.gray">{format(row?.purchaseDate, "MM/dd/yyyy h:mmaaa")}</Typography>
+      renderCell: ({ row }: { row: NftHistoryData }) => (
+        <Typography color="text.secondary">
+          {format(row?.purchaseDate, "MM/dd/yyyy h:mmaaa")}
+        </Typography>
       ),
     },
   ];
   return (
     <Stack className={styles.history}>
       <Stack className={styles.historyHeader} sx={{ flexDirection: { tablet: "row" } }}>
-        <ItemsSectionHeader title="HISTORY" count={10} />
+        <Typography variant="h4">HISTORY</Typography>
         <Stack className={styles.historyHeaderOptions}>
           <Select
             minWidth="112px"
@@ -112,7 +118,7 @@ export default function History() {
             options={["filter 1", "filter 2"]}
             onChange={(value) => console.log(value)}
           />
-          <Select minWidth="104px" label="SORT" />
+          <Select minWidth="104px" label="SORT" onChange={undefined} hideNone={undefined} />
         </Stack>
       </Stack>
       <Paper variant="outlined" component={Stack} className={styles.historyContent}>
@@ -121,15 +127,14 @@ export default function History() {
           sx={{ maxHeight: { mobile: "406px", laptop: "100%" } }}
         >
           <Table
+            rows={history}
+            columns={columns}
             minWidth="902px"
-            minHeight={0}
+            minHeight={"0"}
             maxHeight="100%"
             bordered={false}
             hasBackground={false}
-            hasBac
             dataGridProps={{
-              columns: columns,
-              rows: history,
               rowHeight: 60,
               columnHeaderHeight: 50,
               hideFooter: true,

@@ -1,17 +1,21 @@
 // packages
-import { Box, Button, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Chip, Grid, Stack, Typography } from "@mui/material";
 import { capitalize } from "lodash";
 import Image from "next/image";
 
 // styles
-import styles from "./Contracts.module.css";
+import styles from "./Catalogs.module.css";
+
+// types
+import { CatalogData } from "../types";
 
 // components
 
-export default function ItemsContract({ data }) {
+export default function ItemsCatalogs({ data }: { data: Partial<CatalogData> }) {
   const {
     id,
     name,
+    image,
     price,
     status,
     nft_name: nftName,
@@ -24,7 +28,7 @@ export default function ItemsContract({ data }) {
     <Stack
       className={styles.itemsContract}
       sx={{
-        borderColor: "rgba(255, 255, 255, 0.60)",
+        borderColor: "dividers.white",
         flexDirection: { tablet: "row" },
       }}
     >
@@ -35,7 +39,7 @@ export default function ItemsContract({ data }) {
               <Box className={styles.contractImage}>
                 <Image
                   priority
-                  src="/images/checker.png"
+                  src={image || "/images/checker.png"}
                   alt="contract"
                   fill
                   sizes="100%"
@@ -43,7 +47,7 @@ export default function ItemsContract({ data }) {
                 />
               </Box>
               <Stack px="16px">
-                <Typography variant="h6" color="text.secondary">
+                <Typography variant="h6" color="text.brandSecondary">
                   {name}
                 </Typography>
                 <Typography variant="body2" color="text.disabled" noWrap>
@@ -60,7 +64,7 @@ export default function ItemsContract({ data }) {
                 alignItems: "center",
               }}
             >
-              <Chip label={capitalize(status)} status={status} sx={{ width: "120px" }} />
+              <Chip variant="status" label={capitalize(status)} status={status} />
             </Stack>
           </Grid>
         </Grid>
@@ -73,10 +77,10 @@ export default function ItemsContract({ data }) {
             className={styles.contractSection}
             sx={{ padding: { mobile: "8px 16px", tablet: "16px" } }}
           >
-            <Typography variant="body2" color="text.gray">
+            <Typography variant="body2" color="text.secondary">
               {nftName}
             </Typography>
-            <Typography variant="body2" color="text.gray">
+            <Typography variant="body2" color="text.secondary">
               {collectionName}
             </Typography>
           </Grid>
@@ -88,10 +92,10 @@ export default function ItemsContract({ data }) {
             className={styles.contractSection}
             sx={{ padding: { mobile: "8px 16px", tablet: "16px" } }}
           >
-            <Typography variant="body2" color="text.gray" noWrap>
+            <Typography variant="body2" color="text.secondary" noWrap>
               Licensor: {licensor}
             </Typography>
-            <Typography variant="body2" color="text.gray" noWrap>
+            <Typography variant="body2" color="text.secondary" noWrap>
               Licensee: {licensee}
             </Typography>
           </Grid>

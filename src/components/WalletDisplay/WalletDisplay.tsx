@@ -68,9 +68,10 @@ export default function WalletDisplay({
         backgroundColor: setBackgroundColor(),
         width: fullWidth ? "100%" : "fit-content",
         padding: endIcon || mode === "select" ? "0 0 0 8px" : "0 8px",
+        pointerEvents: mode !== "select" ? "none" : "auto",
         "&:hover": {
           backgroundColor:
-            withBackground || mode === "select"
+            (withBackground && mode === "select") || mode === "select"
               ? "background.grayOverlay2"
               : "background.grayOverlay",
         },
@@ -113,15 +114,19 @@ export default function WalletDisplay({
             autoFocus={false}
             MenuListProps={{
               "aria-labelledby": "select-button",
-              sx: { width: walletDisplayRef?.current?.clientWidth },
+              sx: {
+                width: walletDisplayRef?.current?.clientWidth,
+              },
             }}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
+            sx={{
+              "& .MuiMenu-paper": {
+                backgroundColor: "background.secondary",
+                border: "none",
+                marginTop: "4px",
+              },
+              "& ul": {
+                backgroundColor: "background.purpleOverlay",
+              },
             }}
           >
             {walletList?.map((walletAddress, i) => (
