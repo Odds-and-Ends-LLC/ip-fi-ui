@@ -9,7 +9,7 @@ import styles from "./CreateAccountSteps.module.css";
 import { Icon, TextField } from "@/components";
 
 // types
-import { UserSignupData } from "../types";
+import { UserSignupData } from "../../types";
 
 export default function StepUsername({
   data,

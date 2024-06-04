@@ -6,7 +6,7 @@ import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { Icon, ProfilePicture } from "@/components";
-import { UserSignupData } from "../types";
+import { UserSignupData } from "../../types";
 
 // data
 

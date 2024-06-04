@@ -7,9 +7,8 @@ import { Button, Stack } from "@mui/material";
 import styles from "./Settings.module.css";
 
 // components
-import { ArrowLeftIcon, PickAvatarIcon, SettingsIcon, WalletIcon } from "@/elements/icons";
-import { BackgroundCircles, Tabs } from "@/components";
-import { SettingsProfile, SettingsAccount, SettingsWallet } from "./";
+import { Icon, Tabs } from "@/components";
+import { SettingsProfile, SettingsAccount, SettingsWallet, SettingsBackground } from ".";
 
 const data = {
   walletAddresses: [
@@ -25,7 +24,7 @@ export default function Settings() {
   const urlQuery = useSearchParams();
   const tab = urlQuery.get("tab");
 
-  const handleTabChange = (value) => {
+  const handleTabChange = (value: string) => {
     router.replace(pathname + "?tab=" + value);
   };
 
@@ -38,42 +37,42 @@ export default function Settings() {
       className={styles.settings}
       sx={{
         padding: { mobile: "80px 24px 24px", tablet: "134px 68px 74px" },
-        backgroundColor: "blue.main",
+        backgroundColor: "background.secondary",
       }}
     >
-      <BackgroundCircles
-        width="1024px"
-        height="832px"
-        containerPlacement={{ bottom: "48px" }}
-        circle2Props={{ placement: { top: "96px", right: "168px" } }}
-        circleOutlineProps={{ placement: { bottom: 0, right: 0 } }}
-      />
+      <SettingsBackground />
       <Stack
         className={styles.settingsPaper}
         sx={{ flexDirection: { mobile: "column", laptop: "row" } }}
       >
         <Stack
           className={styles.tabsLaptopUp}
-          sx={{ backgroundColor: "blue.dark", display: { mobile: "none", laptop: "flex" } }}
+          sx={{
+            backgroundColor: "background.tertiary",
+            display: { mobile: "none", laptop: "flex" },
+          }}
         >
           <Tabs
             orientation="vertical"
-            value={tab}
+            value={tab || "profile"}
             tabs={[
-              { label: "PROFILE", value: "profile", icon: <PickAvatarIcon size={18} /> },
-              { label: "ACCOUNT", value: "account", icon: <SettingsIcon size={18} /> },
-              { label: "WALLET", value: "wallet", icon: <WalletIcon size={18} /> },
+              { label: "PROFILE", value: "profile", icon: <Icon icon="avatar" size={18} /> },
+              { label: "ACCOUNT", value: "account", icon: <Icon icon="settings" size={18} /> },
+              { label: "WALLET", value: "wallet", icon: <Icon icon="wallet" size={18} /> },
             ]}
             onChange={(value) => handleTabChange(value)}
           />
         </Stack>
         <Stack
           className={styles.tabsMobileUp}
-          sx={{ backgroundColor: "blue.dark", display: { mobile: "flex", laptop: "none" } }}
+          sx={{
+            backgroundColor: "background.tertiary",
+            display: { mobile: "flex", laptop: "none" },
+          }}
         >
           <Tabs
             variant="fullWidth"
-            value={tab}
+            value={tab || "profile"}
             tabs={[
               { label: "PROFILE", value: "profile" },
               { label: "ACCOUNT", value: "account" },
@@ -95,7 +94,13 @@ export default function Settings() {
             className={styles.tabPanel}
             sx={{ padding: { mobile: "12px 0 20px", laptop: "24px 42px 42px" } }}
           >
-            <Button startIcon={<ArrowLeftIcon />}>BACK TO PROFILE</Button>
+            <Button
+              variant="clearGreen"
+              startIcon={<Icon icon="arrowLeft" />}
+              sx={{ alignSelf: "flex-start" }}
+            >
+              BACK TO PROFILE
+            </Button>
             <Stack className={styles.tabPanelContent}>
               {tab === "profile" && <SettingsProfile />}
               {tab === "account" && <SettingsAccount />}

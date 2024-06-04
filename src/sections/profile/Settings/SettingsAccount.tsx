@@ -1,89 +1,69 @@
 // packages
-import { useEffect, useState } from "react";
-import { Alert, Button, Snackbar, SnackbarContent, Stack, Switch, Typography } from "@mui/material";
-import { REGEX } from "@/utils/regex";
+import { useState } from "react";
+import { Alert, Button, Snackbar, Stack, Switch, Typography } from "@mui/material";
 
 // styles
 import styles from "./Settings.module.css";
 
 // components
-import { Modal, PasswordInput } from "@/components";
-import { AlertIcon, CheckIcon, InfoIcon } from "@/elements/icons";
+import { Icon, Modal, PasswordInput } from "@/components";
 
 export default function SettingsAccount() {
-  const [openModal, setOpenModal] = useState();
+  const [openModal, setOpenModal] = useState<"updatePassword" | "deleteAccount" | null>();
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [passwordInput, setPasswordInput] = useState({ current: "", new: "", match: "" });
   const [changePasswordVerified, setChangePasswordVerified] = useState(false);
-  const [deletePasswordVerified, setDeletePasswordVerified] = useState(false);
-  const [errors, setErrors] = useState({
-    passwordIncorrect: false,
-    passwordInvalid: false,
-    passwordNotMatched: false,
-  });
+  const [deletePasswordInput, setDeletePasswordInput] = useState<string | undefined>("");
 
   const handleVerifyPassword = () => {
+    // verify password
     setChangePasswordVerified(true);
-    setErrors({ ...errors, passwordIncorrect: false });
   };
-  const handleEnterPassword = (e) => {
-    setPasswordInput({ ...passwordInput, new: e.target.value });
-  };
-  const handleReEnterPassword = (e) => {
-    setPasswordInput({ ...passwordInput, match: e.target.value });
-  };
+
   const handleCancelChangePassword = () => {
-    setPasswordInput({ current: "", new: "", match: "" });
+    // reset current password input
     setChangePasswordVerified(false);
   };
   const handleUpdatePassword = () => {
     setOpenModal("updatePassword");
   };
   const handleConfirmUpdatePassword = () => {
-    setOpenModal();
-    setPasswordInput({ current: "", new: "", match: "" });
+    // update password
+    setOpenModal(null);
     setChangePasswordVerified(false);
     setOpenSnackbar(true);
   };
-  const handleDeletePassword = () => {
+  const handleDeleteAccount = () => {
     setOpenModal("deleteAccount");
   };
   const handleConfirmDeleteAccount = () => {
-    setOpenModal();
-    setDeletePasswordVerified(false);
+    // delete account, redirect to login?
   };
-
-  useEffect(() => {
-    setErrors({
-      ...errors,
-      passwordInvalid: passwordInput.new && !REGEX.password.test(passwordInput.new),
-      passwordNotMatched: passwordInput.match && passwordInput.new !== passwordInput.match,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [passwordInput.match, passwordInput.new]);
 
   return (
     <>
-      <Typography typography={{ mobile: "h5", tablet: "h4-desktop" }}>ACCOUNT SETTINGS</Typography>
+      <Typography variant="h4">ACCOUNT SETTINGS</Typography>
       <Stack className={styles.accountContents}>
         <Stack className={styles.accountChangePassword}>
           <Stack gap="4px">
-            <Typography variant="label">CHANGE PASSWORD</Typography>
+            <Typography variant="h5">CHANGE PASSWORD</Typography>
             <Typography>Enter your current password to create a new one.</Typography>
           </Stack>
           <PasswordInput
-            value={passwordInput.current}
             label="Current Password"
-            onChange={(e) => setPasswordInput({ ...passwordInput, current: e.target.value })}
+            required
+            placeholder=""
+            // value=""
             disabled={changePasswordVerified}
-            error={errors.passwordIncorrect}
-            helperText="Incorrect password."
+            error={false}
+            alert="Incorrect password."
+            AlertProps={{ visible: false }}
           />
           {!changePasswordVerified ? (
             <Button
               variant="solidGreen"
-              disabled={!passwordInput.current}
+              disabled={false} // can be true if input is empty
               onClick={handleVerifyPassword}
+              sx={{ alignSelf: "flex-start" }}
             >
               CHANGE PASSWORD
             </Button>
@@ -91,16 +71,22 @@ export default function SettingsAccount() {
             <>
               <PasswordInput
                 label="New Password"
-                onChange={handleEnterPassword}
-                error={errors.passwordInvalid}
-                helperText="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
+                required
+                placeholder=""
+                // value=""
+                error={false}
+                alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
                 and 1 special character."
+                AlertProps={{ visible: false }}
               />
               <PasswordInput
                 label="Re-enter New Password"
-                onChange={handleReEnterPassword}
-                error={errors.passwordNotMatched}
-                helperText="Passwords didn't match."
+                required
+                placeholder=""
+                // value=""
+                error={false}
+                alert="Passwords didn't match."
+                AlertProps={{ visible: false }}
               />
               <Stack
                 className={styles.changePasswordButtons}
@@ -112,12 +98,7 @@ export default function SettingsAccount() {
                 <Button
                   variant="solidGreen"
                   onClick={handleUpdatePassword}
-                  disabled={
-                    !passwordInput.new ||
-                    !passwordInput.match ||
-                    errors.passwordInvalid ||
-                    errors.passwordNotMatched
-                  }
+                  disabled={false} // change
                 >
                   UPDATE PASSWORD
                 </Button>
@@ -127,20 +108,20 @@ export default function SettingsAccount() {
         </Stack>
         <Stack className={styles.accountAutoAddNft}>
           <Stack className={styles.autoAddNftText}>
-            <Typography variant="label">AUTO-ADD NFTs TO iPFi</Typography>
+            <Typography variant="h5">AUTO-ADD NFTs TO iPFi</Typography>
             <Typography>Enable auto-adding of NFTs to the platform.</Typography>
           </Stack>
           <Switch defaultChecked focusVisibleClassName=".Mui-focusVisible" />
         </Stack>
         <Stack className={styles.accountDelete}>
           <Stack gap="4px">
-            <Typography variant="label">DELETE ACCOUNT</Typography>
+            <Typography variant="h5">DELETE ACCOUNT</Typography>
             <Typography>
               Deleting your account will remove all your information from our database. This cannot
               be undone.
             </Typography>
           </Stack>
-          <Button variant="solidGreen" color="white" onClick={handleDeletePassword}>
+          <Button variant="solidWhite" onClick={handleDeleteAccount}>
             DELETE
           </Button>
         </Stack>
@@ -148,12 +129,12 @@ export default function SettingsAccount() {
 
       <Modal
         title="UPDATE PASSWORD"
-        titleIcon={<InfoIcon />}
+        titleIcon={<Icon icon="info" />}
         open={openModal === "updatePassword"}
-        onClose={() => setOpenModal(false)}
+        onClose={() => setOpenModal(null)}
         actions={
           <>
-            <Button variant="outlineGreen" onClick={() => setOpenModal(false)}>
+            <Button variant="outlineGreen" onClick={() => setOpenModal(null)}>
               CANCEL
             </Button>
             <Button variant="solidGreen" onClick={handleConfirmUpdatePassword}>
@@ -166,18 +147,18 @@ export default function SettingsAccount() {
       </Modal>
       <Modal
         title="DELETE ACCOUNT"
-        titleIcon={<AlertIcon />}
+        titleIcon={<Icon icon="alert" />}
         open={openModal === "deleteAccount"}
-        onClose={() => setOpenModal(false)}
+        onClose={() => setOpenModal(null)}
         actions={
           <>
-            <Button variant="outlineGreen" onClick={() => setOpenModal(false)}>
+            <Button variant="outlineGreen" onClick={() => setOpenModal(null)}>
               CANCEL
             </Button>
             <Button
               variant="solidGreen"
               onClick={handleConfirmDeleteAccount}
-              disabled={!deletePasswordVerified}
+              disabled={!deletePasswordInput}
             >
               YES, DELETE ACCOUNT
             </Button>
@@ -191,9 +172,10 @@ export default function SettingsAccount() {
         <Stack gap="8px">
           <Typography>Enter Password</Typography>
           <PasswordInput
-            onChange={() => setDeletePasswordVerified(true)}
-            // error={errors.passwordIncorrect}
-            // helperText="Incorrect password."
+            onChange={(event) => setDeletePasswordInput(event?.target?.value)}
+            error={false}
+            alert="Incorrect password."
+            AlertProps={{ visible: false }}
           />
         </Stack>
       </Modal>
@@ -205,7 +187,7 @@ export default function SettingsAccount() {
         onClose={() => setOpenSnackbar(false)}
       >
         <Alert
-          icon={<CheckIcon />}
+          icon={<Icon icon="check" size={18} />}
           severity="success"
           variant="filled"
           onClose={() => setOpenSnackbar(false)}
@@ -218,10 +200,10 @@ export default function SettingsAccount() {
               alignItems: { tablet: "center" },
             }}
           >
-            <Typography variant="h4-unbounded" textTransform="none">
+            <Typography variant="label2" textTransform="none">
               Success
             </Typography>
-            <Typography>Password successfully updated!</Typography>
+            <Typography variant="body2">Password successfully updated!</Typography>
           </Stack>
         </Alert>
       </Snackbar>

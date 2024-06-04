@@ -12,7 +12,7 @@ import { SignupBackground } from ".";
 import { StepUsername } from "..";
 
 // types
-import { UserSignupData } from "../types";
+import { UserSignupData } from "../../types";
 
 export default function Signup() {
   const [step, setStep] = useState(0);
