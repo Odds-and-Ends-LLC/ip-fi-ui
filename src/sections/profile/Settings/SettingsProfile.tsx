@@ -11,17 +11,17 @@ import { Icon, ProfilePicture, TextField } from "@/components";
 import { IconType } from "@/components/Icon";
 
 export default function SettingsProfile() {
-  const renderLinkLabel = (icon: IconType, label: string) => ({
+  const renderLinkLabel = (icon: IconType, label?: string) => ({
     InputProps: {
       startAdornment: (
         <Stack className={styles.linkLabel} sx={{ minWidth: { tablet: "160px" } }}>
           <Icon icon={icon} />
           <Typography
             variant="label1"
-            textTransform="none"
+            textTransform="capitalize"
             sx={{ display: { mobile: "none", tablet: "flex" } }}
           >
-            {label}
+            {label || icon}
           </Typography>
         </Stack>
       ),
@@ -52,17 +52,20 @@ export default function SettingsProfile() {
           Links
         </Typography>
         <Stack gap="16px">
-          <TextField {...renderLinkLabel("website", "Website")} value="example.com" />
+          <TextField {...renderLinkLabel("website")} value="example.com" />
           <TextField {...renderLinkLabel("twitterX", "Twitter")} value="twitter.com/example" />
-          <TextField {...renderLinkLabel("instagram", "Instagram")} value="instagram.com/example" />
-          <TextField {...renderLinkLabel("discord", "Discord")} value="discord.gg/example" />
-          <TextField {...renderLinkLabel("openSea", "OpenSea")} value="opensea.io/example" />
-          <TextField {...renderLinkLabel("looksRare", "LooksRare")} value="looksrare.org/sample" />
+          <TextField {...renderLinkLabel("instagram")} value="instagram.com/example" />
+          <TextField {...renderLinkLabel("discord")} value="discord.gg/example" />
+          <TextField {...renderLinkLabel("openSea")} value="opensea.io/example" />
+          <TextField {...renderLinkLabel("looksRare")} value="looksrare.org/sample" />
         </Stack>
       </Stack>
-      <Stack className={styles.profileActionButtons} sx={{ flexDirection: { tablet: "row" } }}>
-        <Button variant="outlineGreen">DISCARD</Button>
+      <Stack
+        className={styles.profileActionButtons}
+        sx={{ flexDirection: { tablet: "row-reverse" } }}
+      >
         <Button variant="solidGreen">SAVE CHANGES </Button>
+        <Button variant="outlineGreen">DISCARD</Button>
       </Stack>
     </>
   );
