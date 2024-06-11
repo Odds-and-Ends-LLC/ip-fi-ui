@@ -5,7 +5,13 @@ export type ResponsiveCssProp<T> =
       [K in Breakpoint]?: T;
     }
   | T;
-export type JustifyType = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | string;
+export type JustifyType =
+  | "flex-start"
+  | "center"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | string;
 export type AlignType = "start" | "center" | "left" | "right" | string;
 
 export interface User {
@@ -15,18 +21,35 @@ export interface User {
   pfp: string;
   walletAddress: string;
   // add more details here
-};
+}
 
 export interface Session {
   userId: string;
   email: string;
   username: string;
   walletAddress: string;
-};
+}
 
 export interface LandingUpdate {
   date: number;
   type: "blog" | string;
   title: string;
   image: string;
-};
+}
+
+// check - used in catalog purchaser
+export interface Nft {
+  id: string;
+  name: string;
+  image: any;
+  collectionName: string;
+  price: number;
+  exclusiveLicense: boolean;
+  usersWithExclusiveLicense?: Pick<User, "id">[];
+}
+
+export interface Catalog {
+  id: string;
+  name: string;
+  nfts?: Nft[];
+}

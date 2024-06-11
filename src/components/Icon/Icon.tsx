@@ -24,6 +24,7 @@ const icons = {
   camera: <Svg.Camera />,
   check: <Svg.Check />,
   close: <Svg.Close />,
+  delete: <Svg.Delete />,
   discord: <Svg.Discord />,
   ended: <Svg.Ended />,
   ethereum: <Svg.Ethereum />,

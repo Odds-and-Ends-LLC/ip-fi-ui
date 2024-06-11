@@ -119,6 +119,7 @@ declare module "@mui/material/styles" {
     one?: string;
     two?: string;
     three?: string;
+    linearProgress?: string;
   }
 
   interface TypeCatalog {
@@ -360,6 +361,7 @@ export const theme = createTheme({
       one: `linear-gradient(90deg, ${colors.purple[500]} 0%, ${colors.green[1200]} 100%)`,
       two: `linear-gradient(90deg, ${colors.green[1200]} 0%, ${colors.purple[500]} 100%)`,
       three: `linear-gradient(90deg, ${colors.green[1000]}80 0%, ${colors.purple[100]}80 100%)`,
+      linearProgress: `linear-gradient(to right, ${colors.purple[700]} 0%, ${colors.purple[600]} 25%, ${colors.green[1100]} 50%, ${colors.purple[600]} 75%, ${colors.green[1100]} 100%)`,
     },
   },
   breakpoints: {
@@ -740,6 +742,7 @@ theme.components = {
       disableRipple: true,
       disableFocusRipple: true,
       fullWidth: false,
+      size: "medium",
     },
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
@@ -753,6 +756,14 @@ theme.components = {
         "&:hover": {
           boxShadow: "none",
         },
+      }),
+      sizeSmall: ({ theme }) => ({
+        ...theme.typography.graph,
+        borderRadius: 4,
+        height: "24px",
+        fontWeight: 400,
+        textTransform: "none",
+        padding: "2px 4px",
       }),
     },
     variants: [
@@ -1611,6 +1622,18 @@ theme.components = {
       },
       labelContainer: {
         color: theme.palette.text.disabledBlue,
+      },
+    },
+  },
+  MuiStepIcon: {
+    styleOverrides: {
+      root: {
+        "&.Mui-active": {
+          color: theme.palette.secondary.main,
+        },
+      },
+      text: {
+        fill: theme.palette.text.dark,
       },
     },
   },

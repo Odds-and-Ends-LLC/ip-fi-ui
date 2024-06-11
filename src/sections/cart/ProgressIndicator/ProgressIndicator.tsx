@@ -4,11 +4,11 @@ import { LinearProgress, Stack, Step, StepLabel, Stepper, Typography } from "@mu
 
 // styles
 import styles from "./ProgressIndicator.module.css";
+import { Icon } from "@/components";
 
 // components
-import { ArrowHeadRightIcon } from "public/icons";
 
-export default function ProgressIndicator({ activeStepIndex }) {
+export default function ProgressIndicator({ activeStepIndex }: { activeStepIndex: number }) {
   const STEPS = ["Catalog Cart", "Order Summary", "Payment", "Sign Contract"];
   const stepProgress = useMemo(() => Math.floor(25 * (activeStepIndex + 1)), [activeStepIndex]);
 
@@ -18,12 +18,11 @@ export default function ProgressIndicator({ activeStepIndex }) {
         variant="determinate"
         value={stepProgress}
         className={styles.progressIndicatorBar}
-        sx={{
+        sx={(theme) => ({
           "& .MuiLinearProgress-bar1Determinate": {
-            background:
-              "linear-gradient(to right, #995AFF 0%, #A771FF 25%, #67E67A 50%, #A771FF 75%, #67E67A 100%)",
+            background: theme.palette.gradient.linearProgress,
           },
-        }}
+        })}
       />
       <Stack
         className={styles.progressIndicatorHeader}
@@ -32,12 +31,12 @@ export default function ProgressIndicator({ activeStepIndex }) {
         <Stepper
           nonLinear
           activeStep={activeStepIndex}
-          connector={<ArrowHeadRightIcon />}
+          connector={<Icon icon="arrowHeadRight" />}
           sx={{ gap: { mobile: "4px", tablet: "12px" } }}
         >
           {STEPS.map((step, index) => {
             return (
-              <Step key={index} sx={styles.progressIndicatorStep}>
+              <Step key={index} className={styles.progressIndicatorStep}>
                 <StepLabel
                   sx={{
                     "& .MuiStepLabel-iconContainer": {
@@ -47,7 +46,7 @@ export default function ProgressIndicator({ activeStepIndex }) {
                   }}
                 >
                   <Typography
-                    variant="link"
+                    variant="link1"
                     color="inherit"
                     sx={{
                       fontSize: { mobile: "12px", tablet: "14px" },

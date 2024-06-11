@@ -14,6 +14,7 @@ export { default as Calendar } from "./Calendar";
 export { default as Camera } from "./Camera";
 export { default as Check } from "./Check";
 export { default as Close } from "./Close";
+export { default as Delete } from "./Delete";
 export { default as Discord } from "./Discord";
 export { default as Ended } from "./Ended";
 export { default as Ethereum } from "./Ethereum";
