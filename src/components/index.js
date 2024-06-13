@@ -24,7 +24,6 @@ export { default as ShareButton } from "./ShareButton";
 export { default as InfoList } from "./InfoList";
 export { default as Catalog, CatalogCover } from "./Catalog";
 export { TextField, PasswordInput } from "./Input";
-export { BackgroundCircles } from "./Background";
 export { default as Circle } from "./Circle";
 export { default as Select } from "./Select";
 export { default as GlassCoverImage } from "./GlassCoverImage";

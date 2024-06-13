@@ -13,18 +13,18 @@ import {
 import styles from "./Modal.module.css";
 
 // components
-import { CloseIcon } from "@/elements/icons";
+import { Icon } from "@/components";
 
 export default function Modal({ title, titleIcon, children, actions, open, onClose }) {
   return (
     <Dialog scroll="paper" open={open} onClose={onClose}>
       <DialogTitle>
-        <Stack className={styles.modalTitle} color="text.secondary">
+        <Stack className={styles.modalTitle} color="text.brandSecondary">
           {titleIcon}
           <Typography variant="h6">{title}</Typography>
         </Stack>
-        <Button variant="unstyled" onClick={onClose}>
-          <CloseIcon size={18} />
+        <Button variant="unstyled" size="small" onClick={onClose}>
+          <Icon icon="close" size={18} />
         </Button>
       </DialogTitle>
       <DialogContent>{children}</DialogContent>

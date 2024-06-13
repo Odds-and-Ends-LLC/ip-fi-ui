@@ -1,27 +1,30 @@
 // packages
 import { Fragment, useState } from "react";
-import { Button, IconButton, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 // styles
 import styles from "./Settings.module.css";
 
 // components
-import { AlertIcon, CloseIcon, PlusIcon } from "@/elements/icons";
-import { Modal, WalletDisplay } from "@/components";
+import { Icon, Modal, WalletDisplay } from "@/components";
 
-export default function SettingsWallet({ data }) {
+// types
+import { UserSignupData } from "../../types";
+
+export default function SettingsWallet({ data }: { data: Partial<UserSignupData> | undefined }) {
   const [openModal, setOpenModal] = useState(false);
-  const handleRemoveWallet = (walletAddress) => {
+  const handleRemoveWallet = () => {
     setOpenModal(true);
   };
-  const handleConfirmRemoveWallet = (walletAddress) => {
+  const handleConfirmRemoveWallet = (walletAddress: string) => {
+    // remove wallet
     setOpenModal(false);
   };
   const handleAddWallet = () => {};
   return (
     <>
       <Stack gap="4px">
-        <Typography typography={{ mobile: "h5", tablet: "h4-desktop" }}>WALLET SETTINGS</Typography>
+        <Typography variant="h4">WALLET SETTINGS</Typography>
         <Typography>
           Explain why we encourage users to connect their wallet on iPFi. Lorem ipsum dolor sit
           amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -29,20 +32,26 @@ export default function SettingsWallet({ data }) {
         </Typography>
       </Stack>
       <Stack className={styles.accountWalletList}>
-        {data?.walletAddresses?.map((walletAddress, i) => (
-          <Fragment key={i}>
+        {data?.walletAddresses?.map((walletAddress, index) => (
+          <Fragment key={index}>
             <WalletDisplay
+              key={index}
               fullWidth
               walletAddress={walletAddress}
-              endIcon={<></>
-                // <IconButton color="error" onClick={() => handleRemoveWallet(walletAddress)}>
-                //   <CloseIcon color="currentColor" />
-                // </IconButton>
+              endIcon={
+                <Button
+                  variant="unstyled"
+                  sx={{ color: "catalog.red" }}
+                  onClick={() => handleRemoveWallet()}
+                >
+                  <Icon icon="close" />
+                </Button>
               }
             />
+
             <Modal
               title="REMOVE WALLET?"
-              titleIcon={<AlertIcon />}
+              titleIcon={<Icon icon="alert" />}
               open={openModal}
               onClose={() => setOpenModal(false)}
               actions={
@@ -66,8 +75,12 @@ export default function SettingsWallet({ data }) {
           </Fragment>
         ))}
       </Stack>
-      <Button fullWidth variant="outlineGreen" onClick={handleAddWallet}>
-        <PlusIcon />
+      <Button
+        fullWidth
+        variant="outlineGreen"
+        startIcon={<Icon icon="add" />}
+        onClick={handleAddWallet}
+      >
         ADD WALLET
       </Button>
     </>

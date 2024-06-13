@@ -259,6 +259,7 @@ declare module "@mui/material/Button" {
     clearRed: true;
     clearPurpleUnderline: true;
     clearWhiteUnderline: true;
+    unstyled: true;
     scrollToTop: true;
   }
 }
@@ -757,6 +758,25 @@ theme.components = {
     },
     variants: [
       {
+        props: { variant: "unstyled" },
+        style: {
+          aspectRatio: 1,
+          color: "inherit",
+          padding: 0,
+          "&:hover": {
+            background: "transparent",
+          },
+        },
+      },
+      {
+        props: { variant: "unstyled", size: "small" },
+        style: {
+          height: "24px",
+          minWidth: 0,
+          width: "24px",
+        },
+      },
+      {
         props: { variant: "solidGradient" },
         style: {
           background: theme.palette.gradient.one,
@@ -1138,6 +1158,9 @@ theme.components = {
             },
             "&.Mui-disabled": {
               opacity: 0.5,
+              "&::before": {
+                borderBottomStyle: "none",
+              },
             },
           },
           "& .MuiInputBase-adornedEnd": {
@@ -1283,7 +1306,12 @@ theme.components = {
   },
   MuiAlert: {
     styleOverrides: {
+      filled: {
+        padding: "12px",
+      },
       icon: {
+        alignItems: "center",
+        height: "24px",
         marginRight: "8px",
         padding: 0,
       },
@@ -1293,10 +1321,14 @@ theme.components = {
       },
       action: {
         padding: 0,
-        "& .MuiButtonBase-root": {
-          marginLeft: "16px",
-          marginRight: 0,
-          padding: "0 8px",
+        marginRight: 0,
+        marginLeft: "24px",
+        "& [aria-label='Close']": {
+          padding: 0,
+          " .MuiSvgIcon-root": {
+            height: "18px",
+            width: "18px",
+          },
         },
       },
     },
