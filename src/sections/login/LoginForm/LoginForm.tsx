@@ -1,7 +1,8 @@
 // packages
 import { useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
 import { Alert, Button, Divider, InputAdornment, Link, Stack, Typography } from "@mui/material";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
 
 // actions
 import { signin } from "@/lib/actions/auth";
@@ -15,18 +16,20 @@ import { LoadingButton } from "@mui/lab";
 import { useForm } from "react-hook-form";
 import { LoginForm } from "@/types";
 
+const schema = z.object({
+  email: z.string().regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Please enter a valid email."),
+  password: z.number().min(8),
+});
+
 export default function LoginForm() {
+  const [openConnectWallet, setOpenConnectWallet] = useState(false);
   const {
     handleSubmit,
     control,
-    formState: { isSubmitting, isValid }
-  } = useForm<LoginForm>({
-    defaultValues: {
-      email: "",
-      password: "",
-    }
-  })
-  const [openConnectWallet, setOpenConnectWallet] = useState(false);
+    formState: { isSubmitting, isValid },
+  } = useForm({
+    resolver: schema
+  });
 
   const handleConnectWallet = () => {
     console.log("connect wallet");

@@ -9,7 +9,7 @@ import { Icon } from "@/components";
 
 // types
 import { type TextFieldProps } from "./types";
-import { FieldValues, FieldPath, UseControllerProps, useController } from "react-hook-form";
+import { useController, FieldValues, FieldPath, UseControllerProps } from "react-hook-form";
 
 export default function TextField <
   TFieldValues extends FieldValues,
@@ -21,8 +21,19 @@ export default function TextField <
   caption,
   alert,
   AlertProps = { visible: true, status: "error", icon: <Icon icon="info" /> },
+  control,
+  defaultValue,
+  rules,
+  name,
   ...props
 }: TextFieldProps & UseControllerProps<TFieldValues, TName>) {
+  const { field: { onChange, value, ref } } = useController({
+    control,
+    name,
+    defaultValue,
+    rules,
+  });
+
   return (
     <Stack className={styles.textField}>
       {label && (
@@ -35,7 +46,7 @@ export default function TextField <
           )}
         </Typography>
       )}
-      <MuiTextField {...props} variant="filled" label={description} helperText={caption} />
+      <MuiTextField {...props} onChange={onChange} value={value} inputRef={ref} variant="filled" label={description} helperText={caption} />
       {alert && AlertProps.visible && (
         <Alert icon={AlertProps.icon} severity={AlertProps.status} variant="input">
           {alert}
