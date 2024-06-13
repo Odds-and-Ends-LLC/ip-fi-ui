@@ -3,7 +3,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { Container, CssBaseline, ThemeProvider } from "@mui/material";
 
 // components
-import { Navbar } from "@/components";
+import { Navbar } from "@/sections/global";
 
 // styles
 import { theme } from "@/styles/theme";
@@ -13,7 +13,9 @@ export const metadata = {
   description: "Intellectual Property Finance",
 };
 
-export default async function RootLayout({ children }) {
+export default async function RootLayout({ children } : Readonly<{
+  children: React.ReactNode;
+}>) {
 
   return (
     <html lang="en">
@@ -22,7 +24,9 @@ export default async function RootLayout({ children }) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <Navbar />
-            <Container>{children}</Container>
+            <Container>
+              {children}
+            </Container>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

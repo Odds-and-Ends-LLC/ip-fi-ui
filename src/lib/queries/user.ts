@@ -2,14 +2,17 @@
 
 // packages
 import "server-only";
-import { cache } from "react";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
 // session
 import { decrypt } from "../session";
 
 // temp data
 import { user } from "@/data";
+
+// types
+import { User } from "@/types";
 
 export const verifySession = cache(async () => {
   const cookie = cookies().get("session")?.value;
@@ -22,7 +25,7 @@ export const verifySession = cache(async () => {
   return { userId: session.userId };
 });
 
-export const getUser = cache(async () => {
+export const getCurrentUser = cache(async () => {
   const session = await verifySession();
   if (!session) return null;
 
@@ -30,7 +33,7 @@ export const getUser = cache(async () => {
     // get user data here
     // this is mock for now
     const { password, ...userDetails } = user;
-    const data = { ...userDetails };
+    const data = { ...userDetails } as User;
 
     return data;
   } catch (error) {

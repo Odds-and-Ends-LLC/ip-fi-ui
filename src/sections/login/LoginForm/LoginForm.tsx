@@ -1,7 +1,8 @@
 // packages
 import { useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
 import { Alert, Button, Divider, InputAdornment, Link, Stack, Typography } from "@mui/material";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
 
 // actions
 import { signin } from "@/lib/actions/auth";
@@ -12,23 +13,26 @@ import styles from "./LoginForm.module.css";
 // components
 import { Icon, Modal, PasswordInput, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
+import { useForm } from "react-hook-form";
+import { LoginForm } from "@/types";
+
+const schema = z.object({
+  email: z.string().regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Please enter a valid email."),
+  password: z.number().min(8),
+});
 
 export default function LoginForm() {
-  const [state, action] = useFormState(signin, null);
   const [openConnectWallet, setOpenConnectWallet] = useState(false);
+  const {
+    handleSubmit,
+    control,
+    formState: { isSubmitting, isValid },
+  } = useForm({
+    resolver: schema
+  });
 
   const handleConnectWallet = () => {
     console.log("connect wallet");
-  };
-
-  const LoginButton = () => {
-    const status = useFormStatus();
-
-    return (
-      <LoadingButton variant="solidGreen" type="submit" loading={status.pending}>
-        LOGIN
-      </LoadingButton>
-    );
   };
 
   return (
@@ -65,7 +69,9 @@ export default function LoginForm() {
               </Alert>
             )}
           </Stack>
-          <LoginButton />
+          <LoadingButton variant="solidGreen" type="submit" loading={status.pending}>
+            LOGIN
+          </LoadingButton>
           <Divider sx={{ "&::before, &::after": { borderTopColor: "dividers.default" } }}>
             <Typography variant="link2" color="text.brandSecondary">
               or

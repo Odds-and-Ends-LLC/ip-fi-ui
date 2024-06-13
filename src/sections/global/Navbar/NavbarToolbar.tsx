@@ -1,3 +1,5 @@
+"use client";
+
 // packages
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -17,7 +19,7 @@ import Image from "next/image";
 
 // components
 import { DiscordIcon, InstagramIcon, Linkedin, LogoutIcon, Twitter, WarningIcon } from "@/elements/icons";
-import { Avatar, Modal } from "..";
+import { Avatar, Modal } from "../../../components";
 
 // styles
 import styles from "./Navbar.module.css";
@@ -28,10 +30,10 @@ import { logout } from "@/lib/actions/auth";
 // types
 import { User } from "@/types";
 
-export default function Navbar({
+export default function NavbarToolbar({
   user,
 } : {
-  user?: User;
+  user: User | null;
 }) {
   const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
