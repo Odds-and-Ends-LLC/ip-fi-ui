@@ -46,7 +46,6 @@ export default function OrderSummary({
           <Button
             variant="solidGreen"
             endIcon={<Icon icon="arrowRight" />}
-            disabled={true}
             {...ContinueBtnProps}
           >
             CONTINUE

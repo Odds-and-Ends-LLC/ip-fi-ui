@@ -15,11 +15,13 @@ export default function ItemDetail({
   value,
   valueIcon,
   valueTextVariant = "body1",
+  valueNoWrap = true
 }: {
   label: string;
   value?: string | number;
   valueIcon?: ReactNode;
   valueTextVariant?: Variant;
+  valueNoWrap?: boolean;
 }) {
   return (
     <Stack className={styles.itemDetail}>
@@ -28,10 +30,9 @@ export default function ItemDetail({
       </Typography>
       <Stack
         className={styles.itemValue}
-        sx={{ maxWidth: { laptop: "160px", desktop: "256px" } }}
       >
         {valueIcon}
-        <Typography variant={valueTextVariant} noWrap>
+        <Typography variant={valueTextVariant} noWrap={valueNoWrap}>
           {value}
         </Typography>
       </Stack>

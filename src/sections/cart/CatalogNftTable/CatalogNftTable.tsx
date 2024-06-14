@@ -10,7 +10,7 @@ import styles from "./CatalogNftTable.module.css";
 import { Icon, Table } from "@/components";
 
 // types
-import { Nft } from "@/types";
+import { NFT } from "@/types";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 // data
@@ -20,11 +20,11 @@ export default function CatalogNftTable({
   data = [],
   isEditable,
 }: {
-  data?: Nft[];
+  data?: NFT[];
   isEditable?: boolean;
 }) {
   const [selectedNfts, setSelectedNfts] = useState<GridRowSelectionModel>([]);
-  const hasBoughtExclusiveLicense = (users: { id: string }[] | undefined) => {
+  const hasBoughtwithExclusiveLicense = (users: { id: string }[] | undefined) => {
     return users?.find((user) => user.id === currentUserId);
   };
   const handleSelectNfts = (ids: GridRowSelectionModel) => {
@@ -38,7 +38,7 @@ export default function CatalogNftTable({
       minWidth: 280,
       flex: 1,
       sortable: true,
-      renderCell: ({ row }: { row: Nft }) => (
+      renderCell: ({ row }: { row: NFT }) => (
         <Stack sx={{ flexDirection: "row", gap: "16px", flex: 1 }}>
           <Image src={row.image} alt="nft" width={80} height={80} style={{ borderRadius: "8px" }} />
           <Stack
@@ -58,21 +58,21 @@ export default function CatalogNftTable({
                 {row?.collectionName}
               </Typography>
             </Typography>
-            {row?.exclusiveLicense &&
-              !hasBoughtExclusiveLicense(row?.usersWithExclusiveLicense) && (
-                <Button variant="outlineGreen" size="small">
-                  Buy with Exclusive License
-                </Button>
-              )}
-            {row?.exclusiveLicense && hasBoughtExclusiveLicense(row?.usersWithExclusiveLicense) && (
+            {/* CHECK CONDITION for Buy with Exclusive License & with Exclusive License(UNCOMMENT) */}
+            {row?.withExclusiveLicense && (
+              <Button variant="outlineGreen" size="small">
+                Buy with Exclusive License
+              </Button>
+            )}
+            {/* {row?.withExclusiveLicense && (
               <Typography
-                className={styles.nftExclusiveLicense}
+                className={styles.nftwithExclusiveLicense}
                 variant="graph"
                 color="text.brandSecondary"
               >
                 <Icon icon="check" size={18} /> with Exclusive License
               </Typography>
-            )}
+            )} */}
           </Stack>
         </Stack>
       ),
@@ -88,11 +88,11 @@ export default function CatalogNftTable({
       maxWidth: 192,
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: Nft }) => (
+      renderCell: ({ row }: { row: NFT }) => (
         <Stack className={styles.tableColumnPrice}>
           <Icon icon="ethereum" />
           <Typography color="text.secondary">{row?.price?.toString()}</Typography>
-          {row.exclusiveLicense && ( // update condition and value
+          {row.withExclusiveLicense && ( // update condition and value
             <Typography color="text.disabledBlue" sx={{ textDecoration: "line-through" }}>
               {row?.price?.toString()}
             </Typography>
@@ -115,7 +115,7 @@ export default function CatalogNftTable({
       ),
       minWidth: 104,
       sortable: false,
-      renderCell: ({ row }: { row: Nft }) => (
+      renderCell: ({ row }: { row: NFT }) => (
         <Button aria-label="delete nft" variant="clearRed" mode="icon">
           <Icon icon="delete" />
         </Button>

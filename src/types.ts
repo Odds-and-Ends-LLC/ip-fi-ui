@@ -122,24 +122,6 @@ export interface LandingUpdate {
   image: string;
 }
 
-// check - used in catalog purchaser
-
-// export interface Nft {
-//   id: string;
-//   name: string;
-//   image: any;
-//   collectionName: string;
-//   price: number;
-//   exclusiveLicense: boolean;
-//   usersWithExclusiveLicense?: Pick<User, "id">[];
-// }
-
-// export interface Catalog {
-//   id: string;
-//   name: string;
-//   nfts?: Nft[];
-// };
-
 export interface SignupPayload {
   username: string;
   email: string;

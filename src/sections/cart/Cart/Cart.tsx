@@ -11,8 +11,9 @@ import {
   CatalogNftTable,
   OrderSummary,
   PaymentMethod,
-  PaymentSummary,
+  PaymentForm,
   ProgressIndicator,
+  ConfirmationForm,
 } from "..";
 
 // types
@@ -25,86 +26,10 @@ interface RenderedCatalog {
 }
 
 // data
-const catalogs: Catalog[] = [
-  {
-    id: "catalog1",
-    name: "uMANILA/eth",
-    nfts: [
-      {
-        id: "nft1",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: false,
-      },
-      {
-        id: "nft2",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: true,
-      },
-      {
-        id: "nft3",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: true,
-        usersWithExclusiveLicense: [{ id: "user1" }],
-      },
-      {
-        id: "nft4",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: false,
-      },
-      {
-        id: "nft5",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: true,
-        usersWithExclusiveLicense: [{ id: "user2" }],
-      },
-      {
-        id: "nft6",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: false,
-      },
-    ],
-  },
-  {
-    id: "catalog2",
-    name: "CloneX Col.",
-    nfts: [
-      {
-        id: "nft7",
-        name: "NFT_NAME",
-        image: "/images/image_4.png",
-        collectionName: "CloneX",
-        price: 29.76,
-        exclusiveLicense: false,
-      },
-    ],
-  },
-  {
-    id: "catalog3",
-    name: "Test",
-    nfts: [],
-  },
-];
+import { catalogs } from "../tempData";
+const purchased = false;
 
 export default function Cart() {
-  const STEPS = ["Catalog Cart", "Order Summary", "Payment", "Sign Contract"];
   const [activeStep, setActiveStep] = useState<number>(2);
   const [activeCatalog, setActiveCatalog] = useState<Catalog | undefined>(undefined);
   const [catalogsList, setCatalogsList] = useState<RenderedCatalog[]>([]);
@@ -118,6 +43,11 @@ export default function Cart() {
 
   const handleCreateCatalog = () => {
     // create catalog
+  };
+
+  const handlePurchaseCatalog = () => {
+    // purchase catalog
+    setActiveStep(3);
   };
 
   useEffect(() => {
@@ -156,120 +86,143 @@ export default function Cart() {
         height: { laptop: "100vh" },
       }}
     >
-      <ProgressIndicator activeStepIndex={activeStep} />
-      <Stack
-        className={styles.catalogCartContents}
-        sx={{ height: { laptop: "calc(100vh - 160px)" } }}
-      >
-        <Stack
-          className={styles.catalogCartSection}
-          sx={{ padding: { mobile: "0 24px", tablet: "0 64px" } }}
-        >
-          <Stack className={styles.catalogHeader}>
-            {activeStep === 2 && (
+      {purchased ? (
+        <ConfirmationForm />
+      ) : (
+        <>
+          <ProgressIndicator activeStepIndex={activeStep} />
+          <Stack
+            className={styles.catalogCartContents}
+            sx={{ height: { laptop: "calc(100vh - 160px)" } }}
+          >
+            <Stack
+              className={styles.catalogCartSection}
+              sx={{ padding: { mobile: "0 24px", tablet: "0 64px" } }}
+            >
+              <Stack className={styles.catalogHeader}>
+                {activeStep === 2 && (
+                  <Button
+                    variant="clearGreen"
+                    startIcon={<Icon icon="arrowLeft" />}
+                    onClick={() => setActiveStep(1)}
+                  >
+                    BACK TO ORDER SUMMARY
+                  </Button>
+                )}
+                {activeStep === 1 && (
+                  <>
+                    <Button
+                      variant="clearGreen"
+                      startIcon={<Icon icon="arrowLeft" />}
+                      onClick={() => setActiveStep(0)}
+                    >
+                      BACK TO CATALOG CART
+                    </Button>
+                    <ItemsSectionHeader
+                      title={activeCatalog?.name || ""}
+                      count={activeCatalog?.nfts?.length || 0}
+                    />
+                  </>
+                )}
+                {activeStep === 0 && (
+                  <Stack className={styles.catalogTabs}>
+                    <Tabs
+                      value={activeCatalog?.id || ""}
+                      tabStyle={{ padding: "0 16px", "& .MuiTab-iconWrapper": { margin: 0 } }}
+                      tabs={catalogsList}
+                      onChange={(catalogId) =>
+                        setActiveCatalog(catalogs.find((catalog) => catalog?.id === catalogId))
+                      }
+                    />
+                    <Button
+                      variant="clearWhite"
+                      aria-label="add catalog"
+                      onClick={handleAddCatalog}
+                    >
+                      <Icon icon="add" />
+                    </Button>
+                  </Stack>
+                )}
+              </Stack>
+              {activeStep < 2 && (
+                <Stack
+                  className={styles.catalogTableAndSummary}
+                  sx={{ flexDirection: { laptop: "row" } }}
+                >
+                  <Stack
+                    className={styles.catalogCartTable}
+                    sx={{
+                      maxWidth: { laptop: "calc(100% - 392px)", desktop: "calc(100% - 488px)" },
+                    }}
+                  >
+                    <Paper
+                      variant="translucent"
+                      component={Stack}
+                      className={styles.catalogNftTable}
+                    >
+                      <CatalogNftTable data={activeCatalog?.nfts} isEditable={activeStep === 0} />
+                    </Paper>
+                  </Stack>
+                  <Stack
+                    className={styles.catalogOrderDetails}
+                    sx={{
+                      maxWidth: { laptop: "368px", desktop: "464px" },
+                      flexShrink: 0,
+                    }}
+                  >
+                    <OrderSummary
+                      data={activeCatalog}
+                      hideSubtotal={activeStep === 1}
+                      ContinueBtnProps={{
+                        disabled: !activeCatalog?.nfts?.length,
+                        onClick: () => setActiveStep(1),
+                      }}
+                    />
+                    {activeStep === 1 && (
+                      <PaymentMethod
+                        onChangePaymentMethod={(paymentOption) => setPaymentMethod(paymentOption)}
+                      />
+                    )}
+                  </Stack>
+                </Stack>
+              )}
+              {activeStep === 2 && (
+                <Stack>
+                  <PaymentForm data={activeCatalog} onPurchaseCatalog={handlePurchaseCatalog} />
+                </Stack>
+              )}
+            </Stack>
+            {activeStep === 0 && (
               <Button
                 variant="clearGreen"
                 startIcon={<Icon icon="arrowLeft" />}
-                onClick={() => setActiveStep(1)}
+                href="/"
+                sx={{ marginLeft: { mobile: "24px", tablet: "64px" }, marginBottom: "32px" }}
               >
-                BACK TO ORDER SUMMARY
+                CONTINUE SHOPPING
               </Button>
             )}
             {activeStep === 1 && (
-              <>
+              <Stack
+                className={styles.footerSubtotal}
+                sx={{ backgroundColor: "background.tertiary" }}
+              >
+                <Stack alignItems="end">
+                  <Typography color="text.disabled">Subtotal</Typography>
+                  <Typography variant="h4">{`$ ${512}`}</Typography>
+                </Stack>
                 <Button
-                  variant="clearGreen"
-                  startIcon={<Icon icon="arrowLeft" />}
-                  onClick={() => setActiveStep(0)}
+                  variant="solidGreen"
+                  disabled={!paymentMethod}
+                  onClick={() => setActiveStep(2)}
                 >
-                  BACK TO CATALOG CART
-                </Button>
-                <ItemsSectionHeader
-                  title={activeCatalog?.name || ""}
-                  count={activeCatalog?.nfts?.length || 0}
-                />
-              </>
-            )}
-            {activeStep === 0 && (
-              <Stack className={styles.catalogTabs}>
-                <Tabs
-                  value={activeCatalog?.id || ""}
-                  tabStyle={{ padding: "0 16px", "& .MuiTab-iconWrapper": { margin: 0 } }}
-                  tabs={catalogsList}
-                  onChange={(catalogId) =>
-                    setActiveCatalog(catalogs.find((catalog) => catalog?.id === catalogId))
-                  }
-                />
-                <Button variant="clearWhite" aria-label="add catalog" onClick={handleAddCatalog}>
-                  <Icon icon="add" />
+                  PLACE ORDER
                 </Button>
               </Stack>
             )}
           </Stack>
-          {activeStep < 2 && (
-            <Stack
-              className={styles.catalogTableAndSummary}
-              sx={{ flexDirection: { laptop: "row" } }}
-            >
-              <Stack
-                className={styles.catalogCartTable}
-                sx={{ maxWidth: { laptop: "calc(100% - 392px)", desktop: "calc(100% - 488px)" } }}
-              >
-                <Paper variant="translucent" component={Stack} className={styles.catalogNftTable}>
-                  <CatalogNftTable data={activeCatalog?.nfts} isEditable={activeStep === 0} />
-                </Paper>
-              </Stack>
-              <Stack
-                className={styles.catalogOrderDetails}
-                sx={{
-                  maxWidth: { laptop: "368px", desktop: "464px" },
-                  flexShrink: 0,
-                }}
-              >
-                <OrderSummary
-                  data={activeCatalog}
-                  hideSubtotal={activeStep === 1}
-                  ContinueBtnProps={{
-                    disabled: !activeCatalog?.nfts?.length,
-                    onClick: () => setActiveStep(1),
-                  }}
-                />
-                {activeStep === 1 && (
-                  <PaymentMethod
-                    onChangePaymentMethod={(paymentOption) => setPaymentMethod(paymentOption)}
-                  />
-                )}
-              </Stack>
-            </Stack>
-          )}
-          {activeStep === 2 && (
-            <Stack>
-              <PaymentSummary />
-            </Stack>
-          )}
-        </Stack>
-        {activeStep === 0 && (
-          <Button
-            variant="clearGreen"
-            startIcon={<Icon icon="arrowLeft" />}
-            href="/"
-            sx={{ marginLeft: { mobile: "24px", tablet: "64px" }, marginBottom: "32px" }}
-          >
-            CONTINUE SHOPPING
-          </Button>
-        )}
-        {activeStep === 1 && (
-          <Stack className={styles.footerSubtotal} sx={{ backgroundColor: "background.tertiary" }}>
-            <Stack alignItems="end">
-              <Typography color="text.disabled">Subtotal</Typography>
-              <Typography variant="h4">{`$ ${512}`}</Typography>
-            </Stack>
-            <Button variant="solidGreen" disabled={!paymentMethod} onClick={() => setActiveStep(2)}>
-              PLACE ORDER
-            </Button>
-          </Stack>
-        )}
-      </Stack>
+        </>
+      )}
 
       {/* // MODAL // */}
       <Modal
@@ -289,11 +242,11 @@ export default function Cart() {
         }
       >
         <Typography>
-          You are about to create a new catalog in iP-Fi. Please enter a Catalog name.{" "}
+          You are about to create a new catalog in iP-Fi. Please enter a Catalog name.
         </Typography>
         <Stack gap="8px">
           <Typography>Catalog Name</Typography>
-          <TextField id="catalog-name" />
+          <TextField id="catalog-name" name="catalogName" />
         </Stack>
       </Modal>
     </Stack>

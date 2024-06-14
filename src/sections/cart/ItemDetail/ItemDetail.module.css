@@ -15,4 +15,6 @@
   align-items: center;
   flex-direction: row;
   gap: 8px;
+  max-width: 256px;
+  text-align: right;
 }
