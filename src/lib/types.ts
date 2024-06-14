@@ -1,11 +1,4 @@
-import { Session } from "@/types";
+import { UserSession } from "@/types";
 
-export type SessionCreatePayload = {
-  userId: string;
-  email: string;
-  username: string;
-  walletAddress: string;
-};
-
-export type SessionEncryptPayload = SessionCreatePayload & { expiresAt: Date; };
+export type SessionEncryptPayload = UserSession & { expiresAt: Date; };
 

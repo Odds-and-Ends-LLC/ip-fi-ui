@@ -3,7 +3,7 @@ import { Avatar, Box, Button, IconButton, Stack } from "@mui/material";
 import { useState } from "react";
 
 // components
-import { Modal } from "..";
+import { Icon, Modal } from "..";
 
 // styles
 import styles from "./ProfilePicture.module.css";
@@ -100,15 +100,17 @@ export default function ProfilePicture({
       >
         {letters}
       </Avatar>
-      {upload && <></>
-        // <IconButton
-        //   className={styles.profilePictureUpload}
-        //   onClick={() => setOpenUploadModal(true)}
-        //   color="gray"
-        //   sx={getIconStyle()}
-        // >
-        //   <CameraIcon />
-        // </IconButton>
+      {upload &&
+        <Button
+          mode="icon"
+          variant="solidWhite"
+          className={styles.profilePictureUpload}
+          onClick={() => setOpenUploadModal(true)}
+          sx={getIconStyle()}
+          color="text.disabledBlue"
+        >
+          <Icon size="full" icon="camera" color="#808198" />
+        </Button>
       }
       <Modal
         title="Choose Profile Picture"

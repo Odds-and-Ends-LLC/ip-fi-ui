@@ -1,6 +1,7 @@
 // packages
-import { MouseEvent, useState } from "react";
+import { useController, FieldValues, FieldPath, UseControllerProps } from "react-hook-form";
 import { Button, InputAdornment } from "@mui/material";
+import { MouseEvent, useState } from "react";
 
 // components
 import { Icon } from "@/components";
@@ -9,12 +10,19 @@ import { TextField } from "..";
 // types
 import { type TextFieldProps } from "./types";
 
-export default function PasswordInput({
+export default function PasswordInput<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>
+>({
   placeholder = "Password",
   AlertProps,
+  name,
+  defaultValue,
   ...props
-}: TextFieldProps) {
+}: TextFieldProps & UseControllerProps<TFieldValues, TName>) {
+
   const [showPassword, setShowPassword] = useState(false);
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseEvent = (event: MouseEvent | undefined) => {
     event?.preventDefault();
@@ -22,6 +30,8 @@ export default function PasswordInput({
 
   return (
     <TextField
+      name={name}
+      defaultValue={defaultValue}
       placeholder={placeholder}
       type={showPassword ? "text" : "password"}
       AlertProps={{ status: "error", icon: <Icon icon="info" />, ...AlertProps }}

@@ -1,5 +1,8 @@
+"use client";
+
 // packages
 import { useEffect, useState } from "react";
+import { useAtom } from "jotai";
 import { usePathname } from "next/navigation";
 import {
   AppBar,
@@ -17,23 +20,18 @@ import Image from "next/image";
 
 // components
 import { DiscordIcon, InstagramIcon, Linkedin, LogoutIcon, Twitter, WarningIcon } from "@/elements/icons";
-import { Avatar, Modal } from "..";
+import { Avatar, Modal } from "@/components";
 
 // styles
 import styles from "./Navbar.module.css";
 
 // actions
 import { logout } from "@/lib/actions/auth";
+import { userSessionAtom } from "@/atoms";
 
-// types
-import { User } from "@/types";
-
-export default function Navbar({
-  user,
-} : {
-  user?: User;
-}) {
+export default function Navbar() {
   const pathname = usePathname();
+  const [userSession, setUserSession] = useAtom(userSessionAtom);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<string>("transparent");
@@ -58,8 +56,9 @@ export default function Navbar({
     };
   }, [pathname]);
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
+    setUserSession(null);
     setLogoutOpen(false);
   };
 
@@ -73,26 +72,28 @@ export default function Navbar({
           Explore
         </Button>
       </Stack>
-      <Stack className={styles.navbarLinksDesktop}>
-        {user && (
-          <>
-            <Link href="/profile" className={styles.navbarLogo} rel="" target="">
-              <Avatar image={user.pfp} size="s" />
-            </Link>
-            <Button variant="clearWhite" mode="icon" onClick={() => setLogoutOpen(true)}>
-              <LogoutIcon />
+      {pathname !== "/login" &&
+        <Stack className={styles.navbarLinksDesktop}>
+          {userSession && (
+            <>
+              <Link href="/profile" className={styles.navbarLogo} rel="" target="">
+                <Avatar image={userSession.pfp} size="s" />
+              </Link>
+              <Button variant="clearWhite" mode="icon" onClick={() => setLogoutOpen(true)}>
+                <LogoutIcon />
+              </Button>
+            </>
+          )}
+          {!userSession && (
+            <Button
+              variant="solidGradient"
+              href="/login"
+            >
+              Login
             </Button>
-          </>
-        )}
-        {(!user && pathname !== "/login") && (
-          <Button
-            variant="solidGradient"
-            href="/login"
-          >
-            Login
-          </Button>
-        )}
-      </Stack>
+          )}
+        </Stack>
+      }
     </Stack>
   );
 

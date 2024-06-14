@@ -1,24 +1,21 @@
 // packages
 import { Box, Button, Stack, Typography } from "@mui/material";
+import { useAtom } from "jotai";
 
 // styles
 import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { Icon, ProfilePicture } from "@/components";
-import { UserSignupData } from "../types";
-
-// data
+import { signupPayloadAtom } from "@/atoms";
 
 export default function StepProfilePhoto({
-  data,
   onBack,
-  onCreateAccount,
 }: {
-  data: Partial<UserSignupData> | undefined;
   onBack: () => void;
-  onCreateAccount: () => void;
 }) {
+  const [signupPayload, setSignupPayload] = useAtom(signupPayloadAtom);
+
   return (
     <>
       <Stack className={styles.createAccountContent}>
@@ -36,9 +33,9 @@ export default function StepProfilePhoto({
               <ProfilePicture size="m" upload image={undefined} />
               {/* todo: add photo to user data for component ProfilePicture */}
               <Stack>
-                <Typography variant="h5">{data?.username}</Typography>
+                <Typography variant="h5">{signupPayload.username}</Typography>
                 <Typography variant="body2" color="text.disabled">
-                  {data?.email}
+                  {signupPayload.email}
                 </Typography>
               </Stack>
             </Stack>
@@ -50,7 +47,7 @@ export default function StepProfilePhoto({
         <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={onBack}>
           BACK
         </Button>
-        <Button variant="solidGreen" onClick={onCreateAccount} disabled={false}>
+        <Button variant="solidGreen" disabled={false}>
           CREATE ACCOUNT
         </Button>
       </Stack>

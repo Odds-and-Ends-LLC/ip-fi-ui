@@ -1,19 +1,9 @@
 // packages
 import { Box, Divider, Stack } from "@mui/material";
+import { ReactNode } from "react";
 
 // styles
 import styles from "./DataContainer.module.css";
-
-/**
- *
- * @param {{
- *  headerLeftComponent: any,
- *  headerRightComponent: any,
- *  hasBackground: Boolean,
- *  bordered: Boolean,
- *  children: any }} props
- *
- */
 
 export default function DataContainer({
   headerLeftComponent,
@@ -21,6 +11,12 @@ export default function DataContainer({
   bordered = true,
   hasBackground = true,
   children,
+} : {
+  headerLeftComponent?: any;
+  headerRightComponent?: any;
+  bordered?: boolean;
+  hasBackground?: boolean;
+  children?: ReactNode;
 }) {
   return (
     <Stack className={styles.dataContainer}
@@ -39,7 +35,7 @@ export default function DataContainer({
             sx={{
               padding: { tablet: "24px 32px", mobile: "16px" },
               ...hasBackground && {
-                bgcolor: "background.default",
+                bgcolor: "background.secondary",
                 borderRadius: "8px",
               },
             }}

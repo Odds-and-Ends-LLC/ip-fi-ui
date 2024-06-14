@@ -18,6 +18,7 @@ export default function WalletDisplay({
   type = "expanded",
   mode,
   withBackground,
+  onClick,
 }: {
   walletAddress?: string;
   walletList?: string[];
@@ -26,6 +27,7 @@ export default function WalletDisplay({
   type?: "truncated" | "expanded";
   mode?: "select" | undefined;
   withBackground?: boolean;
+  onClick?: () => void;
 }) {
   const walletDisplayRef = useRef<HTMLDivElement>(null);
   const [walletAddressDisplay, setWalletAddressDisplay] = useState<string | undefined>("");
@@ -66,9 +68,10 @@ export default function WalletDisplay({
       className={styles.walletDisplay}
       sx={{
         backgroundColor: setBackgroundColor(),
-        width: fullWidth ? "100%" : "fit-content",
+        cursor: endIcon ? "default" : "pointer",
         padding: endIcon || mode === "select" ? "0 0 0 8px" : "0 8px",
-        pointerEvents: mode !== "select" ? "none" : "auto",
+        pointerEvents: !!onClick || !!mode || !!endIcon ? "auto" : "none",
+        width: fullWidth ? "100%" : "fit-content",
         "&:hover": {
           backgroundColor:
             (withBackground && mode === "select") || mode === "select"
