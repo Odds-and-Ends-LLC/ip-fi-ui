@@ -31,16 +31,18 @@ export default function PaymentForm({
     >
       <CatalogListName name={"uManila/eth"} />
       <Divider flexItem />
-      <ItemDetail label="Total NFTs" value={0} />
-      <ItemDetail label="Total NFTs with Exclusive License" value={0} />
+      <ItemDetail justify label="Total NFTs" value={0} />
+      <ItemDetail justify label="Total NFTs with Exclusive License" value={0} />
       <Divider flexItem />
 
       <ItemDetail
+        justify
         label="Payment Method"
         valueIcon={<Image src={"/images/payment_usdc.png"} alt={"usdc"} height={24} width={24} />}
         value={"USDC"}
       />
       <ItemDetail
+        justify
         label="Subtotal in ETH"
         valueIcon={<Icon icon="ethereum" size={18} />}
         value={0}
@@ -59,7 +61,7 @@ export default function PaymentForm({
         </Stack>
       )}
       <Divider flexItem />
-      <ItemDetail label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
+      <ItemDetail justify label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
       <Button variant="solidGreen" onClick={onPurchaseCatalog}>
         PURCHASE CATALOG
       </Button>

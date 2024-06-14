@@ -15,22 +15,27 @@ export default function ItemDetail({
   value,
   valueIcon,
   valueTextVariant = "body1",
-  valueNoWrap = true
+  valueNoWrap = true,
+  justify,
+  gap = "16px",
 }: {
   label: string;
   value?: string | number;
   valueIcon?: ReactNode;
   valueTextVariant?: Variant;
   valueNoWrap?: boolean;
+  justify?: boolean;
+  gap?: string | number;
 }) {
   return (
-    <Stack className={styles.itemDetail}>
+    <Stack
+      className={styles.itemDetail}
+      sx={{ justifyContent: justify ? "space-between" : "start", gap: gap }}
+    >
       <Typography color="text.disabledBlue" className={styles.itemLabel}>
         {label}
       </Typography>
-      <Stack
-        className={styles.itemValue}
-      >
+      <Stack className={styles.itemValue}>
         {valueIcon}
         <Typography variant={valueTextVariant} noWrap={valueNoWrap}>
           {value}

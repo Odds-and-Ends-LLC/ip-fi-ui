@@ -30,11 +30,12 @@ export default function OrderSummary({
       <Typography variant="h5" textTransform="none">
         Order Summary
       </Typography>
-      <ItemDetail label="Catalog Name" value={data?.name} />
-      <ItemDetail label="Total NFTs" value={data?.nfts?.length} />
-      <ItemDetail label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
+      <ItemDetail justify label="Catalog Name" value={data?.name} />
+      <ItemDetail justify label="Total NFTs" value={data?.nfts?.length} />
+      <ItemDetail justify label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
       {/* update Total NFTs with Exclusive License value */}
       <ItemDetail
+        justify
         label="Subtotal in ETH"
         valueIcon={<Icon icon="ethereum" size={18} />}
         value={0}
@@ -42,12 +43,8 @@ export default function OrderSummary({
       {!hideSubtotal && (
         <>
           <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
-          <ItemDetail label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
-          <Button
-            variant="solidGreen"
-            endIcon={<Icon icon="arrowRight" />}
-            {...ContinueBtnProps}
-          >
+          <ItemDetail justify label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
+          <Button variant="solidGreen" endIcon={<Icon icon="arrowRight" />} {...ContinueBtnProps}>
             CONTINUE
           </Button>
         </>

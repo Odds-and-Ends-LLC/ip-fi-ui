@@ -14,6 +14,7 @@ import {
   PaymentForm,
   ProgressIndicator,
   ConfirmationForm,
+  SignContract,
 } from "..";
 
 // types
@@ -30,7 +31,7 @@ import { catalogs } from "../tempData";
 const purchased = false;
 
 export default function Cart() {
-  const [activeStep, setActiveStep] = useState<number>(2);
+  const [activeStep, setActiveStep] = useState<number>(3); // set back to 0
   const [activeCatalog, setActiveCatalog] = useState<Catalog | undefined>(undefined);
   const [catalogsList, setCatalogsList] = useState<RenderedCatalog[]>([]);
   const [paymentMethod, setPaymentMethod] = useState<string | undefined>(undefined);
@@ -187,10 +188,9 @@ export default function Cart() {
                 </Stack>
               )}
               {activeStep === 2 && (
-                <Stack>
-                  <PaymentForm data={activeCatalog} onPurchaseCatalog={handlePurchaseCatalog} />
-                </Stack>
+                <PaymentForm data={activeCatalog} onPurchaseCatalog={handlePurchaseCatalog} />
               )}
+              {activeStep === 3 && <SignContract />}
             </Stack>
             {activeStep === 0 && (
               <Button

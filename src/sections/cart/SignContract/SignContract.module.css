@@ -1,0 +1,20 @@
+.signContract {
+  flex: 1;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.signContractContents {
+  flex: 1;
+  gap: 32px;
+  overflow: auto;
+}
+
+.signContractActionBtns {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.signContractDetails {
+  gap: 8px;
+}

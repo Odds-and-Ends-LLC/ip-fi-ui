@@ -27,8 +27,9 @@ export default function ConfirmationForm({ data }: { data?: Catalog }) {
       >
         <CatalogListName name={"uManila/eth"} description={"8 NFTs"} />
         <Divider flexItem />
-        <ItemDetail label="Purchase ID" value={"#1324"} />
+        <ItemDetail justify label="Purchase ID" value={"#1324"} />
         <ItemDetail
+          justify
           label="Purchase Date"
           value={format(1718385368927, "MM-dd-yyyy hh:mm:ss aa")}
           valueNoWrap={false}
@@ -36,17 +37,19 @@ export default function ConfirmationForm({ data }: { data?: Catalog }) {
         <Divider flexItem />
 
         <ItemDetail
+          justify
           label="Payment Method"
           valueIcon={<Image src={"/images/payment_usdc.png"} alt={"usdc"} height={24} width={24} />}
           value={"USDC"}
         />
         <ItemDetail
+          justify
           label="Subtotal in ETH"
           valueIcon={<Icon icon="ethereum" size={18} />}
           value={0}
         />
         <Divider flexItem />
-        <ItemDetail label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
+        <ItemDetail justify label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
         <Button variant="outlineWhite" endIcon={<Icon icon="download" />}>
           DOWNLOAD CONTRACT
         </Button>

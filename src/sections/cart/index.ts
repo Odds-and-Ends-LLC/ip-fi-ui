@@ -8,3 +8,4 @@ export { default as OrderSummary } from "./OrderSummary";
 export { default as PaymentMethod } from "./PaymentMethod";
 export { default as PaymentForm } from "./PaymentForm";
 export { default as ConfirmationForm } from "./ConfirmationForm";
+export { default as SignContract } from "./SignContract";
