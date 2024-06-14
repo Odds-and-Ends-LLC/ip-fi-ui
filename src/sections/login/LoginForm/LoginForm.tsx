@@ -1,77 +1,100 @@
 // packages
-import { useState } from "react";
 import { Alert, Button, Divider, InputAdornment, Link, Stack, Typography } from "@mui/material";
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+
+// components
+import { Icon, PasswordInput, TextField } from "@/components";
+import { LoadingButton } from "@mui/lab";
+import { LoginPayload } from "@/types";
+import { useSetAtom } from "jotai";
+import { connectWalletModalOpen, userSessionAtom } from "@/atoms";
 
 // actions
-import { signin } from "@/lib/actions/auth";
+import { login } from "@/lib/actions/auth";
 
 // styles
 import styles from "./LoginForm.module.css";
-
-// components
-import { Icon, Modal, PasswordInput, TextField } from "@/components";
-import { LoadingButton } from "@mui/lab";
-import { useForm } from "react-hook-form";
-import { LoginForm } from "@/types";
-
 const schema = z.object({
-  email: z.string().regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Please enter a valid email."),
-  password: z.number().min(8),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email."),
+  password: z
+    .string()
+    .min(1, "Please enter a password."),
 });
 
 export default function LoginForm() {
-  const [openConnectWallet, setOpenConnectWallet] = useState(false);
-  const {
-    handleSubmit,
-    control,
-    formState: { isSubmitting, isValid },
-  } = useForm({
-    resolver: schema
+  const router = useRouter();
+  const setConnectWalletModalOpen = useSetAtom(connectWalletModalOpen);
+  const setUserSession = useSetAtom(userSessionAtom);
+  const [error, setError] = useState("");
+  const form = useForm<LoginPayload>({
+    resolver: zodResolver(schema),
+    mode: "onSubmit",
+    defaultValues: {
+      email: "",
+      password: "",
+    }
   });
+  const { isSubmitting } = form.formState;
 
-  const handleConnectWallet = () => {
-    console.log("connect wallet");
+  const onSubmit: SubmitHandler<LoginPayload> = async (data) => {
+    setError("");
+    const res = await login(data);
+
+    if (res?.error) {
+      setError(res.error);
+      return;
+    }
+
+    if (res?.data) {
+      setUserSession(res.data);
+      router.push("/explore");
+    }
   };
 
   return (
-    <>
-      <Stack className={styles.loginForm}>
-        <Typography variant="h5">LOGIN TO GET STARTED</Typography>
-        <Stack component="form" className={styles.loginFormForm} action={action}>
-          <TextField
-            placeholder="Email"
-            name="email"
-            error={!!state?.error}
-            alert={state?.error}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Icon icon="message" />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Stack gap="8px">
-            <PasswordInput
-              placeholder="Password"
-              name="password"
-              error={!!state?.error}
-              alert={state?.error}
+    <Stack className={styles.loginForm}>
+      <Typography variant="h5">LOGIN TO GET STARTED</Typography>
+        <FormProvider {...form}>
+          <Stack component="form" className={styles.loginFormForm} onSubmit={form.handleSubmit(onSubmit)}>
+            <TextField
+              placeholder="Email"
+              name="email"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Icon icon="message" />
+                  </InputAdornment>
+                ),
+              }}
             />
-            <Link href="/login/forgot-password" variant="link2" color="text.brandSecondary">
-              Forgot Password?
-            </Link>
-            {state?.error && (
+            <Stack gap="8px">
+              <PasswordInput
+                placeholder="Password"
+                name="password"
+              />
+              <Link href="/login/forgot-password" variant="link2" color="text.brandSecondary">
+                Forgot Password?
+              </Link>
+            </Stack>
+            {error && (
               <Alert icon={<Icon icon="info" />} severity="error" variant="input">
-                {state?.error}
+                {error}
               </Alert>
             )}
-          </Stack>
-          <LoadingButton variant="solidGreen" type="submit" loading={status.pending}>
-            LOGIN
-          </LoadingButton>
+            <LoadingButton
+              variant="solidGreen"
+              type="submit"
+              loading={isSubmitting}
+            >
+              LOGIN
+            </LoadingButton>
           <Divider sx={{ "&::before, &::after": { borderTopColor: "dividers.default" } }}>
             <Typography variant="link2" color="text.brandSecondary">
               or
@@ -80,31 +103,18 @@ export default function LoginForm() {
           <Button
             variant="outlineWhite"
             startIcon={<Icon icon="wallet" />}
-            onClick={() => setOpenConnectWallet(true)}
+            onClick={() => setConnectWalletModalOpen(true)}
           >
             Connect to wallet
           </Button>
         </Stack>
-        <Stack className={styles.loginFormSignup}>
-          <Typography variant="body2">Don&apos;t have an account?</Typography>&nbsp;
-          <Link href="/signup" variant="body2" color="text.brandSecondary">
-            Create an account
-          </Link>
-        </Stack>
+      </FormProvider>
+      <Stack className={styles.loginFormSignup}>
+        <Typography variant="body2">Don&apos;t have an account?</Typography>&nbsp;
+        <Link href="/signup" variant="body2" color="text.brandSecondary">
+          Create an account
+        </Link>
       </Stack>
-
-      <Modal
-        title="Connect Wallet"
-        open={openConnectWallet}
-        onClose={() => setOpenConnectWallet(false)}
-        titleIcon={undefined} //to be removed
-        actions={undefined} //to be removed
-      >
-        <Typography>Let&apos;s start by connecting your wallet!</Typography>
-        <Button fullWidth variant="solidGreen" onClick={handleConnectWallet}>
-          CONNECT
-        </Button>
-      </Modal>
-    </>
+    </Stack>
   );
 }

@@ -11,7 +11,7 @@ import { Carousel } from "@/components";
 import styles from "./Updates.module.css";
 
 // lib
-import { getBlogs } from "@/lib/queries/blog";
+import { getBlogs } from "@/lib/server/blog";
 
 const GetUpdates = async () => {
   const updates = await getBlogs();

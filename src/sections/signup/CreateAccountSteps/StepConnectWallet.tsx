@@ -1,46 +1,39 @@
 // packages
-import { Dispatch, SetStateAction } from "react";
 import { Button, Stack, Typography } from "@mui/material";
+import { useAtom } from "jotai";
 
 // styles
 import styles from "./CreateAccountSteps.module.css";
 
 // components
 import { Icon, WalletDisplay } from "@/components";
-
-// types
-import { UserSignupData } from "../../types";
+import { signupPayloadAtom } from "@/atoms";
 
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5";
 
 export default function StepConnectWallet({
-  data,
-  setUserData,
   onBack,
   onNext,
 }: {
-  data: Partial<UserSignupData> | undefined;
-  setUserData: Dispatch<SetStateAction<Partial<UserSignupData> | undefined>>;
   onBack: () => void;
   onNext: () => void;
 }) {
+  const [signupPayload, setSignupPayload] = useAtom(signupPayloadAtom);
   const handleConnectWallet = () => {
-    const walletAddresses = data?.walletAddresses || [];
-    walletAddresses.push(`${userWalletA}${Math.floor(Math.random() * 10)}`); // temporary data
-    setUserData({ ...data, walletAddresses: walletAddresses });
+    setSignupPayload((data) => ({ ...data, walletAddresses: data.walletAddresses.concat([`${userWalletA}${Math.floor(Math.random() * 10)}`]) }));
   };
   const handleRemoveWallet = (walletAddress: string) => {
-    const walletAddresses = data?.walletAddresses || [];
+    const walletAddresses = [...signupPayload.walletAddresses];
     const walletAddressIndex = walletAddresses.indexOf(walletAddress);
     walletAddresses.splice(walletAddressIndex, 1);
-    setUserData({ ...data, walletAddresses: walletAddresses });
+    setSignupPayload((data) => ({ ...data, walletAddresses }));
   };
 
   return (
     <>
       <Stack className={styles.createAccountContent}>
-        {!data?.walletAddresses || data?.walletAddresses?.length === 0 ? (
+        {signupPayload.walletAddresses.length === 0 ? (
           <Stack gap="42px">
             <Stack className={styles.createAccountInput}>
               <Typography variant="h4" color="text.brandSecondary">
@@ -67,7 +60,7 @@ export default function StepConnectWallet({
               </Typography>
             </Stack>
             <Stack gap="16px">
-              {data?.walletAddresses?.map((walletAddress, index) => (
+              {signupPayload.walletAddresses.map((walletAddress, index) => (
                 <WalletDisplay
                   key={index}
                   fullWidth
@@ -102,7 +95,7 @@ export default function StepConnectWallet({
           variant="clearGreen"
           endIcon={<Icon icon="arrowRight" />}
           onClick={onNext}
-          disabled={!data?.walletAddresses || data?.walletAddresses?.length === 0}
+          disabled={signupPayload.walletAddresses.length === 0}
         >
           NEXT
         </Button>

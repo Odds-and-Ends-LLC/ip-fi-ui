@@ -1,28 +1,42 @@
 // components
 import { CatalogCover, ItemsCarousel } from "@/components";
+import { getFeaturedCatalogs } from "@/lib/client/catalog";
+import { Catalog } from "@/types";
 import { Box} from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Catalogs() {
-  const catalogs = [
-    <CatalogCover catalogName="CATALOG1" key={1} image="images/image_1.png" nftCount={12} creatorName="Markiplier" creatorUserId="1" />,
-    <CatalogCover catalogName="CATALOG2" key={2} image="images/image_2.png" nftCount={12} creatorName="Markiplier" creatorUserId="1" />,
-    <CatalogCover catalogName="CATALOG3" key={3} image="images/image_3.png" nftCount={12} creatorName="Markiplier" creatorUserId="1" />,
-    <CatalogCover catalogName="CATALOG4" key={4} image="images/image_4.png" nftCount={12} creatorName="Markiplier" creatorUserId="1" />,
-    <CatalogCover catalogName="CATALOG5" key={5} image="images/image_1.png" nftCount={12} creatorName="Markiplier" creatorUserId="1" />,
-  ];
+  const { data: catalogs, isFetching } = useQuery({
+    queryKey: ["featured-catalogs"],
+    queryFn: () => getFeaturedCatalogs()
+  });
 
-  const items = catalogs.map((catalog, i) => (
-    <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>
-      {catalog}
-    </Box>
-  ));
+  const renderCatalog = (catalog: Catalog ) => (
+    <CatalogCover
+      catalogName={catalog.name}
+      key={catalog.id}
+      image={catalog.coverImage}
+      nftCount={catalog.nfts?.length || 0}
+      creatorName={catalog.creatorName}
+      creatorUserId={catalog.creatorUserId}
+      backgroundColor={catalog.coverColor}
+    />
+  );
+
+  if (isFetching || !catalogs) return;
 
   return (
     <ItemsCarousel
       title="CATALOGS"
       count={33}
       viewAllUrl="/"
-      items={items}
+      items={
+        catalogs.map((catalog, i) => (
+          <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>
+            {renderCatalog(catalog)}
+          </Box>
+        ))
+      }
     />
   )
 }

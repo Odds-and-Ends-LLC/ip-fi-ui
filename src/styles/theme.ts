@@ -1,5 +1,7 @@
 "use client";
 // packages
+
+import type {} from '@mui/x-data-grid/themeAugmentation';
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
@@ -176,6 +178,7 @@ declare module "@mui/material/styles" {
   }
 
   interface TypeText {
+    red: string;
     dark: string;
     brandPrimary: string;
     brandSecondary: string;
@@ -340,6 +343,7 @@ export const theme = createTheme({
       brandSecondary: colors.green[1000],
       disabled: colors.gray[1200],
       disabledBlue: colors.blue[500],
+      red: colors.red,
     },
     status: {
       success: colors.green[1200],
@@ -622,8 +626,8 @@ theme.components = {
       root: {
         border: "none",
         "& .MuiDataGrid-withBorderColor": {
-          border: "1px solid",
-          borderImageSource: theme.palette.gradient.three,
+          borderBottom: "1px solid",
+          borderImageSource: theme.palette.dividers.default,
         },
         "& .MuiDataGrid-columnHeader": {
           ...theme.typography.label3,
@@ -687,6 +691,8 @@ theme.components = {
         border-radius: 8px;
         background-color: #4D4E6F;
       }
+
+      input::-ms-reveal { display: none; }
     `,
   },
   MuiContainer: {

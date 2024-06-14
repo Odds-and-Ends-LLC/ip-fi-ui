@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { cache } from "react";
 
 // session
-import { decrypt } from "../session";
+import { decrypt, verifySession } from "../session";
 
 // temp data
 import { user } from "@/data";
@@ -14,16 +14,20 @@ import { user } from "@/data";
 // types
 import { User } from "@/types";
 
-export const verifySession = cache(async () => {
-  const cookie = cookies().get("session")?.value;
-  const session = await decrypt(cookie);
+export const getUserSession = cache(async () => {
+  try {
+    const session = await verifySession();
+    if (!session) return null;
+    // get user data here
+    // this is mock for now
 
-  if (!session?.userId) {
-    return null;
+    return session;
+  } catch (error) {
+    console.log("failed to fetch user");
+    return null
   }
-
-  return { userId: session.userId };
 });
+
 
 export const getCurrentUser = cache(async () => {
   const session = await verifySession();

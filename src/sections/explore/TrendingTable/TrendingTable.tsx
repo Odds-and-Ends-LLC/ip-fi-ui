@@ -1,28 +1,30 @@
 // packages
 import { Grid, Stack, Typography } from "@mui/material";
+import { GridRowModel } from "@mui/x-data-grid";
+import { useQuery } from "@tanstack/react-query";
+import { useAtomValue } from "jotai";
 
 // components
 import { Avatar, Table } from "@/components";
 import { EthIcon } from "@/elements/icons";
+import { getTrendingCatalogs } from "@/lib/client/catalog";
+import { exploreTimeFilterAtom } from "@/atoms";
+import { CatalogTrendingData } from "@/types";
 
 // styles
 import styles from "./TrendingTable.module.css";
-import { GridRowModel } from "@mui/x-data-grid";
-
-interface Row {
-  id: string;
-  rank: number;
-  catalogName: string;
-  totalNfts: number;
-  price: number;
-  volume: number;
-  volumeDelta: number;
-}
 
 export default function TrendingTable() {
-  const renderRank = (rank: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
+  const time = useAtomValue(exploreTimeFilterAtom);
 
-  const renderCatalog = (row: GridRowModel<Row>, showPrice?: boolean) => (
+  const { data: rows, isFetching } = useQuery({
+    queryKey: ["trending-catalogs", time],
+    queryFn: () => getTrendingCatalogs(time)
+  });
+
+  const renderRank = (rank: number) => <Typography color="text.secondary" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
+
+  const renderCatalog = (row: GridRowModel<CatalogTrendingData>, showPrice?: boolean) => (
     <Stack
       className={styles.trendingTableCatalog}
       sx={{
@@ -32,7 +34,7 @@ export default function TrendingTable() {
         },
       }}
     >
-      <Avatar size="s" image="/images/image_1.png" />
+      <Avatar size="s" image={row.catalog.coverImage} />
       <Stack className={styles.trendingTableCatalogName}>
         <Typography
           className={styles.trendingTableCatalogName}
@@ -41,15 +43,15 @@ export default function TrendingTable() {
             width: { mobile: "calc(100%)", desktop: "unset" },
           }}
         >
-          {row.catalogName}
+          {row.catalog.name}
         </Typography>
-        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.totalNfts} Total NFTS</Typography>
+        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.catalog.nfts?.length || 0} Total NFTS</Typography>
         {showPrice &&
           <Stack flexDirection="row" alignItems="center">
             <Typography sx={{ typography: { desktop: "body1", mobile: "body3" }}}>Price: </Typography>
             <Stack justifyContent="center" sx={{ display: { desktop: "flex", mobile: "none" }}}><EthIcon /></Stack>
             <Stack justifyContent="center" sx={{ display: { desktop: "none", mobile: "flex" }}}><EthIcon size={16} /></Stack>
-            <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{row.price}</Typography>
+            <Typography color="text.secondary" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{row.price}</Typography>
           </Stack>
         }
       </Stack>
@@ -59,15 +61,15 @@ export default function TrendingTable() {
   const renderPrice = (price: number) => (
     <Stack className={styles.trendingTablePrice}>
       <EthIcon />
-      <Typography variant="body1" color="text.gray">{price}</Typography>
+      <Typography variant="body1" color="text.secondary">{price}</Typography>
     </Stack>
   );
 
-  const renderVolume = (volume: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body2" }}}>{volume} eth</Typography>;
+  const renderVolume = (volume: number) => <Typography color="text.secondary" sx={{ typography: { desktop: "body1", mobile: "body2" }}}>{volume} eth</Typography>;
 
-  const renderVolumeDelta = (volumeDelta: number) => (
-    <Typography color={volumeDelta < 0 ? "text.red" : "text.secondary"} sx={{ typography: { desktop: "body2", mobile: "body3" }}}>
-      {volumeDelta > 0 && "+"} {volumeDelta} %
+  const renderVolumeChange = (change: number) => (
+    <Typography color={change < 0 ? "text.red" : "text.brandSecondary"} sx={{ typography: { desktop: "body2", mobile: "body3" }}}>
+      {change > 0 && "+"} {change} %
     </Typography>
   );
 
@@ -77,31 +79,31 @@ export default function TrendingTable() {
       headerName: "Rank",
       width: 96,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderCatalog(row),
     },
     {
       field: "price",
       headerName: "Price",
       width: 111,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderPrice(row.price),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => (
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
-          {renderVolumeDelta(row.volumeDelta)}
+          {renderVolumeChange(row.volumeChange)}
         </Stack>
       ),
     },
@@ -113,24 +115,24 @@ export default function TrendingTable() {
       headerName: "#",
       width: 64,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row, true),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => (
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
-          {renderVolumeDelta(row.volumeDelta)}
+          {renderVolumeChange(row.volumeChange)}
         </Stack>
       ),
     },
@@ -143,7 +145,7 @@ export default function TrendingTable() {
       minWidth: 24,
       width: 24,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
@@ -151,45 +153,38 @@ export default function TrendingTable() {
       minWidth: 156,
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => renderCatalog(row, true),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<Row> }) => (
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
-          {renderVolumeDelta(row.volumeDelta)}
+          {renderVolumeChange(row.volumeChange)}
         </Stack>
       ),
     },
   ];
 
-  const rows: Row[] = [
-    { id: "1", rank: 1, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "2", rank: 2, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "3", rank: 3, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "4", rank: 4, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "5", rank: 5, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "6", rank: 6, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "7", rank: 7, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "8", rank: 8, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "9", rank: 9, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-    { id: "10", rank: 10, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, volume: 2200, volumeDelta: 135 },
-  ];
+  if (isFetching || !rows) return;
 
   return (
     <>
       <Grid
         container
         className={styles.trendingTable}
-        sx={{ display: { desktop: "flex", mobile: "none"} }}
+        sx={{
+          display: { desktop: "flex", mobile: "none"},
+          background: "linear-gradient(139deg, rgba(1, 2, 44, 1) 0%, rgba(1, 2, 44, 0.60) 100%)",
+        }}
       >
         <Grid item mobile={6} minWidth="690px">
           <Table
             bordered={false}
             columns={desktopColumns}
+            hasBackground={false}
             rows={rows.slice(0, 5)}
             dataGridProps={{
               rowHeight: 70,
@@ -202,6 +197,7 @@ export default function TrendingTable() {
             bordered={false}
             rows={rows.slice(5)}
             columns={desktopColumns}
+            hasBackground={false}
             dataGridProps={{
               rows: rows.slice(5),
               rowHeight: 70,
@@ -215,6 +211,7 @@ export default function TrendingTable() {
           <Table
             bordered={false}
             columns={tabletColumns}
+            hasBackground={false}
             rows={rows.slice(0, 5)}
             dataGridProps={{
               rowHeight: 96,
@@ -226,6 +223,7 @@ export default function TrendingTable() {
           <Table
             bordered={false}
             columns={tabletColumns}
+            hasBackground={false}
             rows={rows.slice(5)}
             dataGridProps={{
               rowHeight: 96,
@@ -245,6 +243,7 @@ export default function TrendingTable() {
           <Table
             bordered={false}
             columns={mobileColumns}
+            hasBackground={false}
             rows={rows.slice(0, 5)}
             dataGridProps={{
               rowHeight: 96,
@@ -256,6 +255,7 @@ export default function TrendingTable() {
           <Table
             bordered={false}
             columns={mobileColumns}
+            hasBackground={false}
             rows={rows.slice(5)}
             dataGridProps={{
               rowHeight: 96,

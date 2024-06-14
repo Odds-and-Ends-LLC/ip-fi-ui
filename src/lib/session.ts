@@ -4,7 +4,8 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 // types
-import { SessionCreatePayload, SessionEncryptPayload } from "./types";
+import { SessionEncryptPayload } from "./types";
+import { UserSession } from "@/types";
 
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -28,7 +29,7 @@ export async function decrypt(session: string | undefined = "") {
   }
 }
 
-export async function createSession(payload: SessionCreatePayload) {
+export async function createSession(payload: UserSession) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const session = await encrypt({ ...payload, expiresAt });
 
@@ -40,6 +41,25 @@ export async function createSession(payload: SessionCreatePayload) {
     path: "/",
   });
 }
+
+export const verifySession = async () => {
+  const cookie = cookies().get("session")?.value;
+  const session = await decrypt(cookie);
+
+  if (!session?.userId) {
+    return null;
+  }
+
+  const userSession: UserSession = {
+    userId: session.userId?.toString() ?? "",
+    email: session.email?.toString() ?? "",
+    username: session.username?.toString() ?? "",
+    walletAddress: session.walletAddress?.toString() ?? "",
+    pfp: session.pfp?.toString() ?? "",
+  };
+
+  return userSession;
+};
 
 export function deleteSession() {
   cookies().delete("session");
