@@ -35,7 +35,7 @@ export default function CatalogNftTable({
     {
       field: "nft",
       renderHeader: () => <Typography variant="label3">NFT</Typography>,
-      minWidth: 128,
+      minWidth: 280,
       flex: 1,
       sortable: true,
       renderCell: ({ row }: { row: Nft }) => (
@@ -127,7 +127,7 @@ export default function CatalogNftTable({
       className={styles.nftTableWrapper}
       sx={{
         maxHeight: { mobile: "406px", laptop: "100%" },
-        minWidth: { mobile: "598px", tablet: "none" },
+        minWidth: { mobile: "672px", laptop: "none" },
       }}
     >
       <Table

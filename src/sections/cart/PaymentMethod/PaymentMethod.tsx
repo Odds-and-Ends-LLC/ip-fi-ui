@@ -1,24 +1,14 @@
 // packages
-import { ReactNode, useEffect, useState } from "react";
-import {
-  Button,
-  Stack,
-  Typography,
-  Divider,
-  ButtonProps,
-  FormControl,
-  FormControlLabel,
-  Radio,
-} from "@mui/material";
+import { useEffect, useState } from "react";
+import { Stack, Typography, Radio, Paper } from "@mui/material";
 
 // styles
 import styles from "./PaymentMethod.module.css";
 
 // components
-import { Avatar, Icon } from "@/components";
+import { Avatar } from "@/components";
 
 // types
-import { Catalog } from "@/types";
 
 export default function PaymentMethod({
   onChangePaymentMethod,
@@ -72,7 +62,9 @@ export default function PaymentMethod({
   };
 
   return (
-    <Stack
+    <Paper
+      component={Stack}
+      variant="translucent"
       className={styles.paymentMethod}
       sx={{ padding: { mobile: "24px", laptop: "24px 32px" } }}
     >
@@ -99,6 +91,6 @@ export default function PaymentMethod({
           description="Pay under Stripe"
         />
       </Stack>
-    </Stack>
+    </Paper>
   );
 }

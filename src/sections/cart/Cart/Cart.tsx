@@ -7,7 +7,13 @@ import styles from "./Cart.module.css";
 
 // components
 import { Icon, ItemsSectionHeader, Modal, Tabs, TextField } from "@/components";
-import { CatalogNftTable, OrderSummary, PaymentMethod, ProgressIndicator } from "..";
+import {
+  CatalogNftTable,
+  OrderSummary,
+  PaymentMethod,
+  PaymentSummary,
+  ProgressIndicator,
+} from "..";
 
 // types
 import { Catalog } from "@/types";
@@ -99,7 +105,7 @@ const catalogs: Catalog[] = [
 
 export default function Cart() {
   const STEPS = ["Catalog Cart", "Order Summary", "Payment", "Sign Contract"];
-  const [activeStep, setActiveStep] = useState<number>(0);
+  const [activeStep, setActiveStep] = useState<number>(2);
   const [activeCatalog, setActiveCatalog] = useState<Catalog | undefined>(undefined);
   const [catalogsList, setCatalogsList] = useState<RenderedCatalog[]>([]);
   const [paymentMethod, setPaymentMethod] = useState<string | undefined>(undefined);
@@ -236,7 +242,11 @@ export default function Cart() {
               </Stack>
             </Stack>
           )}
-          {activeStep === 2 && <Stack>payment summary</Stack>}
+          {activeStep === 2 && (
+            <Stack>
+              <PaymentSummary />
+            </Stack>
+          )}
         </Stack>
         {activeStep === 0 && (
           <Button

@@ -1,0 +1,18 @@
+.itemDetail {
+  align-items: start;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.itemLabel {
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
+
+.itemValue {
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+}

@@ -1,16 +1,15 @@
 // packages
-import { ReactNode } from "react";
-import { Button, Stack, Typography, Divider, ButtonProps } from "@mui/material";
+import { Button, Stack, Typography, Divider, ButtonProps, Paper } from "@mui/material";
 
 // styles
 import styles from "./OrderSummary.module.css";
 
 // components
 import { Icon } from "@/components";
+import { ItemDetail } from "..";
 
 // types
 import { Catalog } from "@/types";
-import { Variant } from "@mui/material/styles/createTypography";
 
 export default function OrderSummary({
   data,
@@ -21,48 +20,21 @@ export default function OrderSummary({
   hideSubtotal?: boolean;
   ContinueBtnProps?: ButtonProps;
 }) {
-  const SummaryDetail = ({
-    label,
-    value,
-    valueIcon,
-    valueTextVariant = "body1",
-  }: {
-    label: string;
-    value?: string | number;
-    valueIcon?: ReactNode;
-    valueTextVariant?: Variant;
-  }) => {
-    return (
-      <Stack className={styles.orderSummaryDetail}>
-        <Typography color="text.disabledBlue" className={styles.detailLabel}>
-          {label}
-        </Typography>
-        <Stack
-          className={styles.detailValue}
-          sx={{ maxWidth: { laptop: "160px", desktop: "256px" } }}
-        >
-          {valueIcon}
-          <Typography variant={valueTextVariant} noWrap>
-            {value}
-          </Typography>
-        </Stack>
-      </Stack>
-    );
-  };
-
   return (
-    <Stack
+    <Paper
+      component={Stack}
+      variant="translucent"
       className={styles.orderSummary}
       sx={{ padding: { mobile: "24px", laptop: "24px 32px" } }}
     >
       <Typography variant="h5" textTransform="none">
         Order Summary
       </Typography>
-      <SummaryDetail label="Catalog Name" value={data?.name} />
-      <SummaryDetail label="Total NFTs" value={data?.nfts?.length} />
-      <SummaryDetail label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
+      <ItemDetail label="Catalog Name" value={data?.name} />
+      <ItemDetail label="Total NFTs" value={data?.nfts?.length} />
+      <ItemDetail label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
       {/* update Total NFTs with Exclusive License value */}
-      <SummaryDetail
+      <ItemDetail
         label="Subtotal in ETH"
         valueIcon={<Icon icon="ethereum" size={18} />}
         value={0}
@@ -70,7 +42,7 @@ export default function OrderSummary({
       {!hideSubtotal && (
         <>
           <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
-          <SummaryDetail label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
+          <ItemDetail label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
           <Button
             variant="solidGreen"
             endIcon={<Icon icon="arrowRight" />}
@@ -81,6 +53,6 @@ export default function OrderSummary({
           </Button>
         </>
       )}
-    </Stack>
+    </Paper>
   );
 }
