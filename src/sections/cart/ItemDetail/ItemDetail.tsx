@@ -30,7 +30,10 @@ export default function ItemDetail({
   return (
     <Stack
       className={styles.itemDetail}
-      sx={{ justifyContent: justify ? "space-between" : "start", gap: gap }}
+      sx={{
+        justifyContent: { mobile: "space-between", tablet: justify ? "space-between" : "start" },
+        gap: gap,
+      }}
     >
       <Typography color="text.disabledBlue" className={styles.itemLabel}>
         {label}

@@ -21,34 +21,36 @@ export default function OrderSummary({
   ContinueBtnProps?: ButtonProps;
 }) {
   return (
-    <Paper
-      component={Stack}
-      variant="translucent"
-      className={styles.orderSummary}
-      sx={{ padding: { mobile: "24px", laptop: "24px 32px" } }}
-    >
-      <Typography variant="h5" textTransform="none">
-        Order Summary
-      </Typography>
-      <ItemDetail justify label="Catalog Name" value={data?.name} />
-      <ItemDetail justify label="Total NFTs" value={data?.nfts?.length} />
-      <ItemDetail justify label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
-      {/* update Total NFTs with Exclusive License value */}
-      <ItemDetail
-        justify
-        label="Subtotal in ETH"
-        valueIcon={<Icon icon="ethereum" size={18} />}
-        value={0}
-      />
-      {!hideSubtotal && (
-        <>
-          <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
-          <ItemDetail justify label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
-          <Button variant="solidGreen" endIcon={<Icon icon="arrowRight" />} {...ContinueBtnProps}>
-            CONTINUE
-          </Button>
-        </>
-      )}
-    </Paper>
+    <Stack>
+      <Paper
+        component={Stack}
+        variant="translucent"
+        className={styles.orderSummary}
+        sx={{ padding: { mobile: "24px", laptop: "24px 32px" } }}
+      >
+        <Typography variant="h5" textTransform="none">
+          Order Summary
+        </Typography>
+        <ItemDetail justify label="Catalog Name" value={data?.name} />
+        <ItemDetail justify label="Total NFTs" value={data?.nfts?.length} />
+        <ItemDetail justify label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
+        {/* update Total NFTs with Exclusive License value */}
+        <ItemDetail
+          justify
+          label="Subtotal in ETH"
+          valueIcon={<Icon icon="ethereum" size={18} />}
+          value={0}
+        />
+        {!hideSubtotal && (
+          <>
+            <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
+            <ItemDetail justify label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
+            <Button variant="solidGreen" endIcon={<Icon icon="arrowRight" />} {...ContinueBtnProps}>
+              CONTINUE
+            </Button>
+          </>
+        )}
+      </Paper>
+    </Stack>
   );
 }

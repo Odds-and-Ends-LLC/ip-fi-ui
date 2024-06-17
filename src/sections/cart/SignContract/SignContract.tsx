@@ -15,7 +15,15 @@ import { LicenseTerms, NftTable } from ".";
 // types
 import { NFT } from "@/types";
 
-export default function SignContract({ onCancel, data }: { onCancel: () => void; data?: NFT[] }) {
+export default function SignContract({
+  data,
+  onCancel,
+  onSignContract,
+}: {
+  data?: NFT[];
+  onCancel: () => void;
+  onSignContract: () => void;
+}) {
   const [openSignaturePad, setOpenSignaturePad] = useState(false);
 
   const handleUndoSignature = () => {
@@ -23,6 +31,10 @@ export default function SignContract({ onCancel, data }: { onCancel: () => void;
   };
   const handleSignContract = () => {
     console.log("sign");
+    setOpenSignaturePad(false);
+  };
+  const handleCompleteSignContract = () => {
+    onSignContract();
   };
 
   return (
@@ -30,9 +42,9 @@ export default function SignContract({ onCancel, data }: { onCancel: () => void;
       component={Stack}
       variant="translucent"
       className={styles.signContract}
-      sx={{ padding: { mobile: "24px", tablet: "42px 72px 24px" } }}
+      sx={{ padding: { mobile: "24px 0", tablet: "24px", laptop: "42px 72px 24px" } }}
     >
-      <Typography variant="h4">
+      <Typography variant="h4" sx={{ margin: { mobile: "0 24px", tablet: 0 } }}>
         CONTRACT&nbsp;
         <Typography component="span" variant="h4" color="text.brandSecondary">
           #{"09102"}
@@ -42,7 +54,7 @@ export default function SignContract({ onCancel, data }: { onCancel: () => void;
         className={styles.signContractContents}
         sx={{
           backgroundColor: "background.tertiary",
-          padding: { mobile: "24px", tablet: "32px 64px" },
+          padding: { mobile: "24px", laptop: "32px 64px" },
         }}
       >
         <Stack className={styles.signContractDetails}>
@@ -76,6 +88,7 @@ export default function SignContract({ onCancel, data }: { onCancel: () => void;
           component={Stack}
           variant="outlinedGreen"
           className={styles.signContractLicenseTerms}
+          sx={{ padding: { mobile: "16px", tablet: "32px" } }}
         >
           <Typography variant="h5">LICENSE TERMS</Typography>
           <LicenseTerms />
@@ -104,11 +117,14 @@ export default function SignContract({ onCancel, data }: { onCancel: () => void;
           </Stack>
         </Stack>
       </Stack>
-      <Stack className={styles.signContractActionBtns}>
+      <Stack
+        className={styles.signContractActionBtns}
+        sx={{ margin: { mobile: "0 24px", tablet: 0 } }}
+      >
         <Button variant="clearGreen" onClick={onCancel}>
           CANCEL
         </Button>
-        <Button variant="solidGreen" disabled={true}>
+        <Button variant="solidGreen" disabled={false} onClick={handleCompleteSignContract}>
           SIGN CONTRACT
         </Button>
       </Stack>

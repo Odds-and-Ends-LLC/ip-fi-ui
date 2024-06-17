@@ -166,11 +166,15 @@ export default function CatalogNftTable({
             },
             "& .MuiDataGrid-columnHeaders": {
               backgroundColor: "unset",
+              borderBottomStyle: "solid",
+              borderBottomWidth: "1px",
+              borderBottomColor: "dividers.default",
+              display: isEditable ? "block" : "none",
             },
-            "& .MuiDataGrid-row": {
-              borderTopStyle: "solid",
-              borderTopWidth: "1px",
-              borderTopColor: "dividers.default",
+            "& .MuiDataGrid-row:not(:last-child)": {
+              borderBottomStyle: "solid",
+              borderBottomWidth: "1px",
+              borderBottomColor: "dividers.default",
             },
             "& .MuiDataGrid-columnHeaderCheckbox": {
               minWidth: "56px !important",
@@ -194,10 +198,25 @@ export default function CatalogNftTable({
             },
             "& .MuiDataGrid-virtualScroller": {
               overflow: "hidden",
+              "& .MuiDataGrid-overlayWrapper": {
+                display: "none",
+              },
             },
           },
         }}
       />
+      {data?.length === 0 && (
+        <Stack className={styles.nftTableEmpty}>
+          <Image
+            src="/images/empty_box.png"
+            alt="empty box"
+            height={100}
+            width={100}
+            style={{ opacity: 0.5 }}
+          />
+          <Typography color="text.disabledBlue">Add items in this Catalog</Typography>
+        </Stack>
+      )}
     </Stack>
   );
 }

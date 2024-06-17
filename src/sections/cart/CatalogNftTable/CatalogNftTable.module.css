@@ -14,3 +14,11 @@
   gap: 4px;
   height: 20px;
 }
+
+.nftTableEmpty {
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 50px;
+}

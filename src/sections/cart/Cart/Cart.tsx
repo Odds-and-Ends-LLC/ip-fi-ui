@@ -28,14 +28,15 @@ interface RenderedCatalog {
 
 // data
 import { catalogs } from "../tempData";
-const purchased = false;
+// const purchased = false;
 
 export default function Cart() {
-  const [activeStep, setActiveStep] = useState<number>(3); // set back to 0
+  const [activeStep, setActiveStep] = useState<number>(0); // set back to 0
   const [activeCatalog, setActiveCatalog] = useState<Catalog | undefined>(undefined);
   const [catalogsList, setCatalogsList] = useState<RenderedCatalog[]>([]);
   const [paymentMethod, setPaymentMethod] = useState<string | undefined>(undefined);
   const [openModal, setOpenModal] = useState("");
+  const [purchased, setPurchased] = useState(false)
 
   const handleAddCatalog = () => {
     // add catalog
@@ -96,11 +97,21 @@ export default function Cart() {
             className={styles.catalogCartContents}
             sx={{ height: { laptop: "calc(100vh - 160px)" } }}
           >
-            <Stack
-              className={styles.catalogCartSection}
-              sx={{ padding: { mobile: "0 24px", tablet: "0 64px" } }}
-            >
-              <Stack className={styles.catalogHeader}>
+            {/* // HEADER // */}
+            {(activeStep === 1 || activeStep === 2) && (
+              <Stack
+                className={styles.catalogHeaders}
+                sx={{ padding: { mobile: "0 24px", tablet: "0 64px" } }}
+              >
+                {activeStep === 1 && (
+                  <Button
+                    variant="clearGreen"
+                    startIcon={<Icon icon="arrowLeft" />}
+                    onClick={() => setActiveStep(0)}
+                  >
+                    BACK TO CATALOG CART
+                  </Button>
+                )}
                 {activeStep === 2 && (
                   <Button
                     variant="clearGreen"
@@ -110,41 +121,34 @@ export default function Cart() {
                     BACK TO ORDER SUMMARY
                   </Button>
                 )}
-                {activeStep === 1 && (
-                  <>
-                    <Button
-                      variant="clearGreen"
-                      startIcon={<Icon icon="arrowLeft" />}
-                      onClick={() => setActiveStep(0)}
-                    >
-                      BACK TO CATALOG CART
-                    </Button>
-                    <ItemsSectionHeader
-                      title={activeCatalog?.name || ""}
-                      count={activeCatalog?.nfts?.length || 0}
-                    />
-                  </>
-                )}
-                {activeStep === 0 && (
-                  <Stack className={styles.catalogTabs}>
-                    <Tabs
-                      value={activeCatalog?.id || ""}
-                      tabStyle={{ padding: "0 16px", "& .MuiTab-iconWrapper": { margin: 0 } }}
-                      tabs={catalogsList}
-                      onChange={(catalogId) =>
-                        setActiveCatalog(catalogs.find((catalog) => catalog?.id === catalogId))
-                      }
-                    />
-                    <Button
-                      variant="clearWhite"
-                      aria-label="add catalog"
-                      onClick={handleAddCatalog}
-                    >
-                      <Icon icon="add" />
-                    </Button>
-                  </Stack>
-                )}
               </Stack>
+            )}
+            {/* // MAIN // */}
+            <Stack
+              className={styles.catalogMainSection}
+              sx={{ padding: { mobile: "0 24px", tablet: "0 64px" } }}
+            >
+              {activeStep === 0 && (
+                <Stack className={styles.catalogTabs}>
+                  <Tabs
+                    value={activeCatalog?.id || ""}
+                    tabStyle={{ padding: "0 16px", "& .MuiTab-iconWrapper": { margin: 0 } }}
+                    tabs={catalogsList}
+                    onChange={(catalogId) =>
+                      setActiveCatalog(catalogs.find((catalog) => catalog?.id === catalogId))
+                    }
+                  />
+                  <Button variant="clearWhite" aria-label="add catalog" onClick={handleAddCatalog}>
+                    <Icon icon="add" />
+                  </Button>
+                </Stack>
+              )}
+              {activeStep === 1 && (
+                <ItemsSectionHeader
+                  title={activeCatalog?.name || ""}
+                  count={activeCatalog?.nfts?.length || 0}
+                />
+              )}
               {activeStep < 2 && (
                 <Stack
                   className={styles.catalogTableAndSummary}
@@ -160,16 +164,14 @@ export default function Cart() {
                       variant="translucent"
                       component={Stack}
                       className={styles.catalogNftTable}
+                      sx={{ padding: activeStep === 0 ? "8px 16px" : 0 }}
                     >
                       <CatalogNftTable data={activeCatalog?.nfts} isEditable={activeStep === 0} />
                     </Paper>
                   </Stack>
                   <Stack
                     className={styles.catalogOrderDetails}
-                    sx={{
-                      maxWidth: { laptop: "368px", desktop: "464px" },
-                      flexShrink: 0,
-                    }}
+                    sx={{ maxWidth: { laptop: "368px", desktop: "464px" } }}
                   >
                     <OrderSummary
                       data={activeCatalog}
@@ -190,36 +192,42 @@ export default function Cart() {
               {activeStep === 2 && (
                 <PaymentForm data={activeCatalog} onPurchaseCatalog={handlePurchaseCatalog} />
               )}
-              {activeStep === 3 && <SignContract  data={activeCatalog?.nfts} onCancel={() => setActiveStep(2)} />}
+              {activeStep === 3 && (
+                <SignContract data={activeCatalog?.nfts} onCancel={() => setActiveStep(2)} onSignContract={() => setPurchased(true)} />
+              )}
             </Stack>
-            {activeStep === 0 && (
-              <Button
-                variant="clearGreen"
-                startIcon={<Icon icon="arrowLeft" />}
-                href="/"
-                sx={{ marginLeft: { mobile: "24px", tablet: "64px" }, marginBottom: "32px" }}
-              >
-                CONTINUE SHOPPING
-              </Button>
-            )}
-            {activeStep === 1 && (
-              <Stack
-                className={styles.footerSubtotal}
-                sx={{ backgroundColor: "background.tertiary" }}
-              >
-                <Stack alignItems="end">
-                  <Typography color="text.disabled">Subtotal</Typography>
-                  <Typography variant="h4">{`$ ${512}`}</Typography>
-                </Stack>
+
+            {/* // FOOTER // */}
+            <Stack className={styles.catalogFooters}>
+              {activeStep === 0 && (
                 <Button
-                  variant="solidGreen"
-                  disabled={!paymentMethod}
-                  onClick={() => setActiveStep(2)}
+                  variant="clearGreen"
+                  startIcon={<Icon icon="arrowLeft" />}
+                  href="/"
+                  sx={{ marginLeft: { mobile: "24px", tablet: "64px" }, marginBottom: "32px" }}
                 >
-                  PLACE ORDER
+                  CONTINUE SHOPPING
                 </Button>
-              </Stack>
-            )}
+              )}
+              {activeStep === 1 && (
+                <Stack
+                  className={styles.footerSubtotal}
+                  sx={{ backgroundColor: "background.tertiary" }}
+                >
+                  <Stack alignItems="end">
+                    <Typography color="text.disabled">Subtotal</Typography>
+                    <Typography variant="h4">{`$ ${512}`}</Typography>
+                  </Stack>
+                  <Button
+                    variant="solidGreen"
+                    disabled={!paymentMethod}
+                    onClick={() => setActiveStep(2)}
+                  >
+                    PLACE ORDER
+                  </Button>
+                </Stack>
+              )}
+            </Stack>
           </Stack>
         </>
       )}
