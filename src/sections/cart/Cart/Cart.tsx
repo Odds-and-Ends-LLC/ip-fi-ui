@@ -7,6 +7,7 @@ import styles from "./Cart.module.css";
 
 // components
 import { Icon, ItemsSectionHeader, Modal, Tabs, TextField } from "@/components";
+import { CartBackground } from ".";
 import {
   CatalogNftTable,
   OrderSummary,
@@ -36,7 +37,7 @@ export default function Cart() {
   const [catalogsList, setCatalogsList] = useState<RenderedCatalog[]>([]);
   const [paymentMethod, setPaymentMethod] = useState<string | undefined>(undefined);
   const [openModal, setOpenModal] = useState("");
-  const [purchased, setPurchased] = useState(false)
+  const [purchased, setPurchased] = useState(false);
 
   const handleAddCatalog = () => {
     // add catalog
@@ -88,6 +89,9 @@ export default function Cart() {
         height: { laptop: "100vh" },
       }}
     >
+      <CartBackground
+        containerStyles={activeStep < 2 ? { filter: "blur(20px)", opacity: "20%" } : {}}
+      />
       {purchased ? (
         <ConfirmationForm />
       ) : (
@@ -193,7 +197,11 @@ export default function Cart() {
                 <PaymentForm data={activeCatalog} onPurchaseCatalog={handlePurchaseCatalog} />
               )}
               {activeStep === 3 && (
-                <SignContract data={activeCatalog?.nfts} onCancel={() => setActiveStep(2)} onSignContract={() => setPurchased(true)} />
+                <SignContract
+                  data={activeCatalog?.nfts}
+                  onCancel={() => setActiveStep(2)}
+                  onSignContract={() => setPurchased(true)}
+                />
               )}
             </Stack>
 
