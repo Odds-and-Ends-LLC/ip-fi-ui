@@ -18,6 +18,15 @@ export default function CatalogLeaf({
   frontContent,
   backContent,
   hasExpanded,
+} : {
+  leafNumber: number;
+  currentLeaf: number;
+  pageMode: number;
+  width: number;
+  height: number;
+  frontContent?: any;
+  backContent?: any;
+  hasExpanded?: boolean;
 }) {
   const ry = useMotionValue(0);
   const opacity = useTransform(ry, [-180, -120, -60, 0], [1, 0, 0, 1]);
@@ -70,13 +79,13 @@ export default function CatalogLeaf({
       component={motion.div}
       ref={scope}
       className={styles.catalogLeaf}
-      style={{ rotateY: ry, ...pageMode === 1 }}
+      style={{ rotateY: ry }}
     >
       <Stack
         className={styles.catalogLeafFront}
         sx={{ width, height, overflow: hasExpanded ? "visible" : "hidden" }}
       >
-        <Box className={styles.catalogLeafFrontEdge} sx={{ bgcolor: "background.darkBlue" }}>
+        <Box className={styles.catalogLeafFrontEdge} sx={{ bgcolor: "background.tertiary" }}>
           <Box
             component={motion.div}
             style={{ opacity }}
@@ -101,7 +110,7 @@ export default function CatalogLeaf({
         >
           {backContent}
         </Box>
-        <Box className={styles.catalogLeafBackEdge} sx={{ bgcolor: "background.darkBlue" }}>
+        <Box className={styles.catalogLeafBackEdge} sx={{ bgcolor: "background.tertiary" }}>
           <Box
             component={motion.div}
             style={{ opacity }}

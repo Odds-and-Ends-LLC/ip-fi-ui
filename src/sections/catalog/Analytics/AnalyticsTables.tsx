@@ -3,11 +3,12 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 
 // components
-import { Tabs } from "@/components";
 import { NFTMarketTable, CatalogSalesTable } from "..";
+import { TimeFilter } from "@/types";
+import { Tabs } from "@/components";
 
 export default function AnalyticsTables() {
-  const [durationTab, setDurationTab] = useState("all");
+  const [durationTab, setDurationTab] = useState<TimeFilter>("all");
 
   return (
     <Stack sx={{ p: { tablet: "16px", mobile: 0 }, gap: { mobile: "24px" } }}>
@@ -18,9 +19,9 @@ export default function AnalyticsTables() {
           { label: "1h", value: "1h" },
           { label: "6h", value: "6h" },
           { label: "24h", value: "24h" },
-          { label: "7d", value: "1d" },
+          { label: "7d", value: "7d" },
         ]}
-        onChange={setDurationTab}
+        onChange={(duration) => setDurationTab(duration as TimeFilter)}
         tabsStyle={{
           ["@media (max-width:980px)"]: {
             width: "100%",

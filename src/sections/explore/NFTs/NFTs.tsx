@@ -28,14 +28,8 @@ export default function NFTs() {
         nfts.map((nft, i) => (
           <Box key={i} sx={{ aspectRatio: "1/1.29", width: "100%", maxHeight: "426px" }}>
             <NFT
+              nft={nft}
               variant="card"
-              id={nft.id}
-              nftName={nft.name}
-              collectionName={nft.collectionName}
-              image={nft.image}
-              price={nft.price}
-              earnings={nft.amountEarned}
-
             />
           </Box>
         ))

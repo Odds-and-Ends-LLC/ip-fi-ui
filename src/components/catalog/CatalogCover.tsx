@@ -8,28 +8,21 @@ import Link from "next/link";
 
 // styles
 import styles from "./Catalog.module.css";
+import { Catalog } from "@/types";
 
 // This component is fluid and just follows the dimensions of its parent
 // so that it can be used on different grid configurations
 
 export default function CatalogCover({
-  catalogName = "CATALOG_NAME",
-  nftCount = 20,
-  creatorName = "Creator",
-  creatorUserId = "user1",
-  backgroundColor = "#eda73d",
-  image = "/images/image_3.png",
+  catalog,
   badge,
   cover,
+  hideDetails,
 } : {
-  catalogName: string;
-  nftCount: number;
-  creatorName: string;
-  creatorUserId: string;
-  backgroundColor?: string;
-  image: string;
+  catalog: Catalog;
   badge?: string;
   cover?: boolean;
+  hideDetails?: boolean;
 }) {
   const theme = useTheme();
   const [ref, { height }] = useMeasure();
@@ -40,14 +33,14 @@ export default function CatalogCover({
       component={motion.div}
       ref={ref}
       whileHover={{ backgroundColor: theme.palette.background.greenOverlay }}
-      animate={{ backgroundColor: backgroundColor || theme.palette.background.greenOverlay }}
-      initial={{ backgroundColor: backgroundColor || theme.palette.background.greenOverlay }}
+      animate={{ backgroundColor: catalog.coverColor || theme.palette.background.greenOverlay }}
+      initial={{ backgroundColor: catalog.coverColor || theme.palette.background.greenOverlay }}
       sx={{ cursor: cover ? "default" : "pointer" }}
     >
       <CardActionArea
         LinkComponent={Link}
         className={styles.catalogCoverActionArea}
-        {...!cover && { href: "/catalog/catalog1" }}
+        {...!cover && { href: `/catalog/${catalog.uid}` }}
       >
         <CardHeader
           className={styles.catalogCoverHeader}
@@ -74,7 +67,7 @@ export default function CatalogCover({
         />
         <CardMedia
           className={styles.catalogCoverMedia}
-          image={image}
+          image={catalog.coverImage}
         />
         {height &&
           <>
@@ -90,7 +83,7 @@ export default function CatalogCover({
                 lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
               }}
             >
-              {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
+              {`${catalog.name} ${catalog.name} ${catalog.name} ${catalog.name} ${catalog.name} ${catalog.name}`}
             </Typography>
             <Typography
               className={styles.catalogCoverOverlay}
@@ -103,53 +96,39 @@ export default function CatalogCover({
                 lineHeight: `${clamp(56 / (475 / height), 0, 56)}px`,
               }}
             >
-              {`${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName} ${catalogName}`}
+              {`${catalog.name} ${catalog.name} ${catalog.name} ${catalog.name} ${catalog.name} ${catalog.name}`}
             </Typography>
           </>
         }
-
-        {/* {!cover &&
-          <Box
-            className={styles.catalogCoverFlip}
-            sx={{
-              width: { desktop: "120px", tablet: "64px", mobile: "32px" },
-              height: { desktop: "120px", tablet: "80px", mobile: "32px" }
-            }}
-          >
-            <Image
-              src="/images/catalog_flip.png"
-              alt="catalog flip"
-              fill
-            />
-          </Box>
-        } */}
       </CardActionArea>
-      <Box
-        className={styles.catalogCoverDetails}
-        sx={{
-          bgcolor: "background.default",
-        }}
-      >
-        <Stack
-          className={styles.catalogCoverDetailsContent}
+      {!hideDetails &&
+        <Box
+          className={styles.catalogCoverDetails}
           sx={{
-            bgcolor: "background.tertiary",
-            p: {
-              mobile: "16px",
-            }
+            bgcolor: "background.default",
           }}
         >
-          <Typography variant="h6">
-            {catalogName}
-          </Typography>
-          <Typography variant="body2">
-            {creatorName}
-          </Typography>
-          <Typography variant="body2" color="text.disabled">
-            {nftCount} NFTS
-          </Typography>
-        </Stack>
-      </Box>
+          <Stack
+            className={styles.catalogCoverDetailsContent}
+            sx={{
+              bgcolor: "background.tertiary",
+              p: {
+                mobile: "16px",
+              }
+            }}
+          >
+            <Typography variant="h6">
+              {catalog.name}
+            </Typography>
+            <Typography variant="body2">
+              {catalog.creatorName}
+            </Typography>
+            <Typography variant="body2" color="text.disabled">
+              {catalog.nfts?.length || 0} NFTS
+            </Typography>
+          </Stack>
+        </Box>
+      }
     </Card>
   )
 };

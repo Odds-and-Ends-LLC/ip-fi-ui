@@ -3,17 +3,21 @@ import { Box, Button, Divider, Stack, Typography, useTheme } from "@mui/material
 import { usePathname } from "next/navigation";
 
 // components
-import { Avatar, GlassCoverImage, InfoList, WalletDisplay } from "@/components";
+import { Avatar, GlassCoverImage, Icon, InfoList, WalletDisplay } from "@/components";
 import { NFTBackground } from "@/sections/nft";
-import { EthIcon, SettingsIcon, ShareIcon } from "@/elements/icons";
 import { CatalogTabs } from "..";
 
 // styles
 import styles from "./CatalogView.module.css";
+import { Catalog } from "@/types";
+import { formatDistanceToNow } from "date-fns";
 
-export default function CatalogView() {
+export default function CatalogView({
+  catalog
+} : {
+  catalog: Catalog;
+}) {
   const pathname = usePathname();
-  const theme = useTheme();
 
   return (
     <Stack
@@ -24,7 +28,7 @@ export default function CatalogView() {
     >
       <GlassCoverImage />
       <Box className={styles.catalogViewCircles}>
-        <NFTBackground/>
+        <NFTBackground />
       </Box>
       <Stack
         className={styles.catalogViewSection}
@@ -34,27 +38,26 @@ export default function CatalogView() {
       >
         <Stack className={styles.catalogViewHeader} sx={{ flexDirection: { tablet: "row", mobile: "column" } }}>
           <Stack className={styles.catalogViewHeaderLeft}>
-            <Avatar image="/images/image_2.png" size="m" icon={<EthIcon color={theme.palette.blue.main} />} />
+            <Avatar image="/images/image_2.png" size="m" icon={<Icon icon="ethereum" />} />
             <Stack className={styles.catalogViewTitle}>
-              <Typography variant="h4-desktop">uMANILA/eth</Typography>
+              <Typography variant="h4">{catalog.name}</Typography>
               <Stack className={styles.catalogViewTitleDetails}>
-                <Typography variant="body2" color="text.disabledBlue">Owner:</Typography>
-                <Typography variant="body2" color="text.white">Markiplier</Typography>
+                <Typography variant="body2" color="text.disabledBlue">Created by:</Typography>
+                <Typography variant="body2" color="text.white">{catalog.creatorName}</Typography>
               </Stack>
             </Stack>
           </Stack>
           <Stack className={styles.catalogViewHeaderRight}>
             <WalletDisplay
-              truncated
               withBackground
               walletAddress="5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C"
             />
             <Button variant="outlineWhite" href={`${pathname}/settings`}>
-              <SettingsIcon />
+              <Icon icon="settings" />
             </Button>
             <Button
               variant="outlineWhite"
-              startIcon={<ShareIcon />}
+              startIcon={<Icon icon="share" />}
             >
               SHARE
             </Button>
@@ -63,13 +66,13 @@ export default function CatalogView() {
         <InfoList
           info={
             [
-              { label: "Created", value: <Typography variant="body2" color="text.primary">100 Days ago</Typography> },
-              { label: "Additional Info", value: <Typography variant="body2" color="text.primary">Data here</Typography> },
+              { label: "Created", value: <Typography variant="body2" color="text.primary">{formatDistanceToNow(catalog.createdAt)}</Typography> },
+              { label: "Owners", value: <Typography variant="body2" color="text.primary">{catalog.owners?.length || 0}</Typography> },
             ]
           }
         />
-        <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
-        <CatalogTabs />
+        <Divider flexItem />
+        <CatalogTabs catalog={catalog} />
       </Stack>
     </Stack>
   );

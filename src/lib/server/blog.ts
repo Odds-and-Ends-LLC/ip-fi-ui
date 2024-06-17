@@ -25,9 +25,11 @@ export const getBlogs = cache(async () => {
 
     await new Promise(resolve => setTimeout(resolve, 5000));
 
-    return data;
+    return { data };
   } catch (error) {
     console.log("failed to fetch blogs");
-    return null;
+    return {
+      error: "Failed to fetch blogs at this time.",
+    };
   }
 });

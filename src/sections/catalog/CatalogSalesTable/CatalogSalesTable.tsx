@@ -1,19 +1,26 @@
 // packages
 import { Box, Stack, Typography } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { GridRowModel } from "@mui/x-data-grid";
+import { format } from "date-fns";
 
 // components
+import { getCatalogSales } from "@/lib/client/catalog";
+import styles from "./CatalogSalesTable.module.css";
 import { Avatar, Table } from "@/components";
+import { CatalogSalesData } from "@/types";
 import { EthIcon } from "@/elements/icons";
 
-// styles
-import styles from "./CatalogSalesTable.module.css";
+export default function CatalogSalesTable({
+  catalogId
+} : {
+  catalogId: string;
+}) {
+  const renderRank = (rank: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
 
-export default function CatalogSalesTable() {
-  const renderRank = (rank) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
+  const renderNumber = (rank: string | number) => <Typography color="text.gray" variant="body1">{rank}</Typography>;
 
-  const renderNumber = (rank) => <Typography color="text.gray" variant="body1">{rank}</Typography>;
-
-  const renderCatalog = (row, showPrice) => (
+  const renderCatalog = (row: CatalogSalesData, showPrice?: boolean) => (
     <Stack
       className={styles.catalogSalesTableCatalog}
       sx={{
@@ -32,9 +39,9 @@ export default function CatalogSalesTable() {
             width: { mobile: "calc(100%)", desktop: "unset" },
           }}
         >
-          {row.catalogName}
+          {row.catalog.name}
         </Typography>
-        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.totalNfts} Total NFTS</Typography>
+        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.catalog.nfts?.length || 0} Total NFTS</Typography>
         {showPrice &&
           <Stack flexDirection="row" alignItems="center">
             <Typography sx={{ typography: { desktop: "body1", mobile: "body3" }}}>Price: </Typography>
@@ -47,14 +54,14 @@ export default function CatalogSalesTable() {
     </Stack>
   );
 
-  const renderPrice = (price) => (
+  const renderPrice = (price: number) => (
     <Stack className={styles.catalogSalesTablePrice}>
       <EthIcon />
       <Typography variant="body1" color="text.gray">{price}</Typography>
     </Stack>
   );
 
-  const renderBuyer = (image, name) => (
+  const renderBuyer = (image: string, name: string) => (
     <Stack className={styles.catalogSalesTableBuyer}>
       <Avatar size="s" image={image || "/images/image_1.png"} />
       <Typography variant="body1" color="text.gray">{name}</Typography>
@@ -79,14 +86,14 @@ export default function CatalogSalesTable() {
     {
       width: 24,
       sortable: false,
-      renderCell: ({ row }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderCatalog(row),
     },
     {
       field: "price",
@@ -95,7 +102,7 @@ export default function CatalogSalesTable() {
       sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderPrice(row.price),
     },
     {
       field: "quantity",
@@ -104,7 +111,7 @@ export default function CatalogSalesTable() {
       sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row }) => renderNumber(row.quantity),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderNumber(row.quantity),
     },
     {
       field: "subtotal",
@@ -113,14 +120,14 @@ export default function CatalogSalesTable() {
       sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row }) => renderPrice(row.subtotal),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderPrice(row.subtotal),
     },
     {
       field: "buyer",
       headerName: "Buyer",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }) => renderBuyer(row.buyerImage, row.buyerName),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderBuyer(row.buyer.pfp, row.buyer.username),
     },
     {
       field: "purchaseDate",
@@ -129,20 +136,8 @@ export default function CatalogSalesTable() {
       sortable: false,
       align: "right",
       headerAlign: "left",
-      renderCell: ({ row }) => renderNumber(row.purchaseDate),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderNumber(format(row.purchasedAt, "MM/dd/yyyy HH:mm a")),
     },
-  ];
-
-  const rows = [
-    { id: 1, rank: 1, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 2, rank: 2, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 3, rank: 3, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 4, rank: 4, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 5, rank: 5, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 6, rank: 6, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 7, rank: 7, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 8, rank: 8, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
-    { id: 9, rank: 9, catalogName: "CATALOG_NAME", totalNfts: 9, price: 29.76, quantity: 135, subtotal: 29.76, buyerName: "Markiplier", purchaseDate: "10/11/2023 9:55 am" },
   ];
 
   return (
@@ -151,11 +146,11 @@ export default function CatalogSalesTable() {
       minWidth="1280px"
       minHeight="480px"
       maxHeight="480px"
+      columns={columns}
       dataGridProps={{
         rows: rows,
         rowHeight: 60,
         hideFooter: true,
-        columns,
       }}
     />
   );

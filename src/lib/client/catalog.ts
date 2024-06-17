@@ -1,5 +1,5 @@
-import { catalogs, marketCatalogs, trendingCatalogs } from "@/data";
-import { ExploreTimeFilter, PriceVolumeData, TopCatalog } from "@/types";
+import { catalogSalesData, catalogs, marketCatalogs, trendingCatalogs } from "@/data";
+import { TimeFilter, PriceVolumeData, TopCatalog } from "@/types";
 
 
 export const getTopCatalogs = async () => {
@@ -9,32 +9,44 @@ export const getTopCatalogs = async () => {
     const raw = catalogs.slice(0, 5);
     const topCatalogs: TopCatalog[] = raw.map((catalog, i) => ({ rank: i + 1, catalog }));
 
-    return topCatalogs;
+    return {
+      data: topCatalogs,
+    };
   } catch (error) {
     console.log("failed to fetch top catalogs");
-    return null;
+    return {
+      error: "Failed to fetch top catalogs at this time."
+    }
   }
 };
 
-export const getTrendingCatalogs = async (time?: ExploreTimeFilter) => {
+export const getTrendingCatalogs = async (time?: TimeFilter) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    return trendingCatalogs;
+    return {
+      data: trendingCatalogs,
+    };
   } catch (error) {
     console.log("failed to fetch trending catalogs");
-    return null;
+    return {
+      error: "Failed to fetch trending catalogs at this time."
+    }
   }
 };
 
-export const getMarketCatalogs = async (time?: ExploreTimeFilter) => {
+export const getMarketCatalogs = async (time?: TimeFilter) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    return marketCatalogs;
+    return {
+      data: marketCatalogs,
+    };
   } catch (error) {
     console.log("failed to fetch market catalogs");
-    return null;
+    return {
+      error: "Failed to fetch market catalogs at this time."
+    }
   }
 };
 
@@ -57,10 +69,14 @@ export const getPriceVolumeHistory = async () => {
       { month: "Dec", price: 329, volume: 319 },
     ];
 
-    return history;
+    return {
+      data: history,
+    }
   } catch (error) {
     console.log("failed to fetch price volume history");
-    return null;
+    return {
+      error: "Failed to fetch price volume history at this time."
+    }
   }
 };
 
@@ -68,9 +84,30 @@ export const getFeaturedCatalogs = async () => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    return catalogs.slice(0, 12);
+    return {
+      data: catalogs.slice(0, 12)
+    }
   } catch (error) {
     console.log("failed to fetch featured catalogs");
-    return null;
+    return {
+      error: "Failed to fetch featured catalogs at this time."
+    }
+  }
+};
+
+export const getCatalogSales = async (id: string) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    const sales = catalogSalesData.find((sale) => sale.catalog.id === id);
+
+    return {
+      data: sales
+    }
+  } catch (error) {
+    console.log("failed to fetch featured catalogs");
+    return {
+      error: "Failed to fetch featured catalogs at this time."
+    }
   }
 };

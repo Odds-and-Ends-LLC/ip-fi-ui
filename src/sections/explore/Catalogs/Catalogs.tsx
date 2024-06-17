@@ -14,13 +14,8 @@ export default function Catalogs() {
 
   const renderCatalog = (catalog: Catalog ) => (
     <CatalogCover
-      catalogName={catalog.name}
       key={catalog.id}
-      image={catalog.coverImage}
-      nftCount={catalog.nfts?.length || 0}
-      creatorName={catalog.creatorName}
-      creatorUserId={catalog.creatorUserId}
-      backgroundColor={catalog.coverColor}
+      catalog={catalog}
     />
   );
 

@@ -21,10 +21,14 @@ export const getUserSession = cache(async () => {
     // get user data here
     // this is mock for now
 
-    return session;
+    return {
+      data: session
+    };
   } catch (error) {
     console.log("failed to fetch user");
-    return null
+    return {
+      error: "Failed to fetch session at this time.",
+    };
   }
 });
 
@@ -42,7 +46,9 @@ export const getCurrentUser = cache(async () => {
     return data;
   } catch (error) {
     console.log("failed to fetch user");
-    return null
+    return {
+      error: "Failed to fetch user at this time.",
+    };
   }
 });
 

@@ -3,10 +3,15 @@ import { Stack } from "@mui/material";
 import { useState } from "react";
 
 // components
-import { Tabs } from "@/components";
-import { Analytics, Binder } from "..";
+import { Catalog, Tabs } from "@/components";
+import { Analytics } from "..";
+import { Catalog as CatalogType } from "@/types";
 
-export default function CatalogTables() {
+export default function CatalogTables({
+  catalog
+} : {
+  catalog: CatalogType;
+}) {
   const [catalogTab, setCatalogTab] = useState("nft");
 
   return (
@@ -24,8 +29,10 @@ export default function CatalogTables() {
           }
         }}
       />
-      {catalogTab === "nft" && <Binder catalogName={"YES"} coverImage={"/images/image_1.png"} />}
-      {catalogTab === "analytics" && <Analytics />}
+      {catalogTab === "nft" &&
+        <Catalog catalog={catalog} />
+      }
+      {catalogTab === "analytics" && <Analytics  />}
     </Stack>
   );
 }

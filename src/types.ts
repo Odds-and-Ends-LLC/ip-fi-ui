@@ -8,7 +8,7 @@ export type ResponsiveCssProp<T> =
 export type JustifyType = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | string;
 export type AlignType = "start" | "center" | "left" | "right" | string;
 
-export type ExploreTimeFilter = "all" | "1h" | "6h" | "24h" | "7d";
+export type TimeFilter = "all" | "1h" | "6h" | "24h" | "7d";
 
 export interface User {
   id: string;
@@ -71,6 +71,7 @@ export interface NFT {
 
 export interface Catalog {
   id: string;
+  uid: string; // this is a unique generated id to be used on url like https://opensea.io/collection/the-narrator-1
   name: string;
   creatorName: string;
   creatorUserId: string;
@@ -107,6 +108,17 @@ export interface PriceVolumeData {
   month: string;
   price: number;
   volume: number;
+};
+
+export interface CatalogSalesData {
+  id: string;
+  rank: number;
+  catalog: Catalog;
+  price: number;
+  quantity: number;
+  subtotal: number;
+  buyer: User;
+  purchasedAt: Date;
 };
 
 export interface LandingUpdate {

@@ -1,15 +1,16 @@
 import { atom } from "jotai";
-import { ExploreTimeFilter, SignupPayload, UserSession } from "./types";
+import { TimeFilter, NFT, SignupPayload, UserSession } from "./types";
 
 export const userSessionAtom = atom<UserSession | null>(null);
-export const exploreTimeFilterAtom = atom<ExploreTimeFilter>("all");
+export const exploreTimeFilterAtom = atom<TimeFilter>("all");
 export const signupPayloadAtom = atom<SignupPayload>({
   username: "",
   email: "",
   password: "",
   walletAddresses: [],
   pfp: null,
-})
+});
+export const expandedNFTAtom = atom<NFT | null>(null);
 
 // Modal Atoms
 export const connectWalletModalOpen = atom(false);

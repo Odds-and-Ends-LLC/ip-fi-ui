@@ -9,15 +9,10 @@ import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "@/elements/icons";
 
 // styles
 import styles from "./NFT.module.css";
+import { NFT as NFTType } from "@/types";
 
 export default function NFT({
-  id = "",
-  collectionName = "Collection Name",
-  image,
-  nftName,
-  catalogs,
-  earnings,
-  price,
+  nft,
   action,
   headerAction,
   visible = true,
@@ -25,18 +20,12 @@ export default function NFT({
   onExpand = () => {},
   variant = "profile"
 } : {
-  id: string;
-  collectionName?: string;
-  image: string;
-  nftName?: string;
-  catalogs?: number;
-  earnings?: number;
-  price: number;
+  nft: NFTType;
   action?: "view" | "add";
   headerAction?: "visibility" | "expand";
   visible?: boolean;
   onVisibilityChange?: (state: boolean) => void;
-  onExpand?: (id: string) => void;
+  onExpand?: (nft: NFTType) => void;
   variant?: "profile" | "card";
 }) {
   const theme = useTheme();
@@ -47,7 +36,7 @@ export default function NFT({
       setVisibleState(!visibleState);
       onVisibilityChange(!visibleState);
     } else if (headerAction === "expand") {
-      onExpand(id);
+      onExpand(nft);
     }
   };
 
@@ -83,7 +72,7 @@ export default function NFT({
         {...variant !== "profile" && { href: "/nft" }}
       >
         <CardMedia
-          image={image}
+          image={nft.image}
           className={styles.nftMedia}
           sx={{
             borderRadius: (variant === "profile" && !action) ? "8px" : "8px 8px 0px 0px",
@@ -98,15 +87,17 @@ export default function NFT({
               }}
             />
           }
-          <Chip
-            className={styles.nftPrice}
-            icon={<Image src="/icons/eth.svg" alt="eth" width={18} height={18} />}
-            label={price}
-            sx={{
-              bgcolor: "background.greenOverlay",
-              typography: "button1"
-            }}
-          />
+          {nft.price &&
+            <Chip
+              className={styles.nftPrice}
+              icon={<Image src="/icons/eth.svg" alt="eth" width={18} height={18} />}
+              label={nft.price}
+              sx={{
+                bgcolor: "background.greenOverlay",
+                typography: "button1"
+              }}
+            />
+          }
           {!visibleState &&
             <>
               <Box
@@ -131,10 +122,10 @@ export default function NFT({
               <Grid key="name" item mobile={12}>
                 <Stack className={styles.nftItem}>
                   <Typography variant="body2" color="text.disabled">
-                    {collectionName}
+                    {nft.collectionName}
                   </Typography>
                   <Typography variant="h6">
-                    {nftName}
+                    {nft.name}
                   </Typography>
                 </Stack>
               </Grid>
@@ -144,7 +135,7 @@ export default function NFT({
                     Catalogs
                   </Typography>
                   <Typography variant="h6">
-                    {catalogs}
+                    {nft.catalogCount}
                   </Typography>
                 </Stack>
               </Grid>
@@ -154,7 +145,7 @@ export default function NFT({
                     Earnings
                   </Typography>
                   <Typography variant="h6">
-                    {earnings}
+                    {nft.amountEarned}
                   </Typography>
                 </Stack>
               </Grid>

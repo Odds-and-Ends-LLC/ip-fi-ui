@@ -41,7 +41,6 @@ export async function signup(formData: FormData) {
     await createSession(session);
 
     return {
-      success: true,
       data: session,
     };
   } catch(e) {
@@ -76,7 +75,6 @@ export async function login(data: LoginPayload) {
     await createSession(session);
 
     return {
-      success: true,
       data: session,
     }
   } catch (error) {

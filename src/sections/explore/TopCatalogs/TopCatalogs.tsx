@@ -16,14 +16,9 @@ export default function TopCatalogs() {
 
   const renderTopCatalog = (topCatalog: TopCatalog) => (
     <CatalogCover
-      catalogName={topCatalog.catalog.name}
       key={topCatalog.catalog.id}
-      image={topCatalog.catalog.coverImage}
+      catalog={topCatalog.catalog}
       badge={`🥇 TOP ${topCatalog.rank}`}
-      nftCount={topCatalog.catalog.nfts?.length || 0}
-      creatorName={topCatalog.catalog.creatorName}
-      creatorUserId={topCatalog.catalog.creatorUserId}
-      backgroundColor={topCatalog.catalog.coverColor}
     />
   );
 
