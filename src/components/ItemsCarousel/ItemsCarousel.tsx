@@ -10,12 +10,12 @@ import styles from "./ItemsCarousel.module.css";
 
 export default function ItemsCarousel({
   title,
-  count = 0,
+  count,
   items,
   viewAllUrl,
 } : {
   title: string;
-  count: number;
+  count?: number;
   items: any[];
   viewAllUrl?: string;
 }) {

@@ -4,6 +4,7 @@ import { getFeaturedCatalogs } from "@/lib/client/catalog";
 import { Catalog } from "@/types";
 import { Box} from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import CatalogsSkeleton from "./CatalogsSkeleton";
 
 export default function Catalogs() {
   const { data: catalogs, isFetching } = useQuery({
@@ -23,7 +24,13 @@ export default function Catalogs() {
     />
   );
 
-  if (isFetching || !catalogs) return;
+  if (isFetching) {
+    return <CatalogsSkeleton />
+  }
+
+  if (!catalogs) {
+    return;
+  }
 
   return (
     <ItemsCarousel

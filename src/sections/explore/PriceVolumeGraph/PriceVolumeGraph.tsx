@@ -9,6 +9,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import styles from "./PriceVolumeGraph.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getPriceVolumeHistory } from "@/lib/client/catalog";
+import PriceVolumeGraphSkeleton from "./PriceVolumeGraphSkeleton";
 
 export default function Table() {
   const { data, isFetching } = useQuery({
@@ -30,7 +31,13 @@ export default function Table() {
     </Stack>
   );
 
-  if (isFetching || !data) return;
+  if (isFetching) {
+    return (<PriceVolumeGraphSkeleton />)
+  }
+
+  if (!data) {
+    return;
+  }
 
   return (
     <DataContainer

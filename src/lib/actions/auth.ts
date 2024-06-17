@@ -10,18 +10,44 @@ import { user } from "@/data";
 // lib
 import { createSession, deleteSession } from "../session";
 import { LoginPayload, UserSession } from "@/types";
+import { revalidatePath } from "next/cache";
 
 export async function signup(formData: FormData) {
-  // create user here
-  // then create session
-  await createSession({
-    userId: user.id,
-    email: user.email,
-    username: user.username,
-    walletAddress: user.walletAddress,
-  });
-  // redirect
-  redirect("/explore");
+  try {
+    // create user here
+    // then create session
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('');
+      }, 3000);
+    });
+
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const username = formData.get("username") as string;
+    const pfp = formData.get("pfp") as Blob;
+    const about = formData.get("about") as string;
+    const walletAddresses = JSON.parse(formData.get("walletAddresses") as string) as string[];
+
+    const session = {
+      userId: user.id,
+      email: email,
+      username: username,
+      walletAddresses: walletAddresses,
+      pfp: "/images/image_2.png",
+    };
+
+    await createSession(session);
+
+    return {
+      success: true,
+      data: session,
+    };
+  } catch(e) {
+    console.log(e);
+    return { error: "Failed to signup. Try again." };
+  }
 }
 
 export async function login(data: LoginPayload) {
@@ -42,7 +68,7 @@ export async function login(data: LoginPayload) {
       userId: user.id,
       email: user.email,
       username: user.username,
-      walletAddress: user.walletAddress,
+      walletAddresses: user.walletAddresses,
       pfp: "/images/image_2.png",
     };
 

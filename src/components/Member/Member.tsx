@@ -11,13 +11,24 @@ import { motion } from "framer-motion";
 
 export default function Member({
   memberName = "Member",
+  pfp,
   lastActive = "4 hours ago",
-  collections = 84,
-  contracts = 10,
+  catalogs = 0,
+  contracts = 0,
   joinedDate = "2 months ago",
   responseTime = "Within Hours",
-  responseRate = 84,
-  variant = "card"
+  responseRate,
+  variant = "card",
+} : {
+  memberName: string;
+  pfp?: string;
+  lastActive: string;
+  catalogs: number;
+  contracts: number;
+  joinedDate: string;
+  responseTime?: string;
+  responseRate?: string;
+  variant?: "card" | "list";
 }) {
   const theme = useTheme();
 
@@ -27,14 +38,14 @@ export default function Member({
         className={styles.memberCard}
         component={motion.div}
         whileHover={{
-          background: theme.palette.background.translucentStrongGray,
+          background: theme.palette.background.grayOverlay,
         }}
         animate={{
-          background: theme.palette.background.translucentGray,
+          background: theme.palette.background.grayOverlay,
         }}
       >
         <Box className={styles.memberCardProfilePicture}>
-          <ProfilePicture />
+          <ProfilePicture image={pfp} />
         </Box>
         <CardHeader
           className={styles.memberCardHeader}
@@ -58,10 +69,10 @@ export default function Member({
             <Stack className={styles.memberCardNumbers}>
               <Stack className={styles.memberCardItem}>
                 <Typography variant="body2" color="text.disabled">
-                  Collections
+                  Catalogs
                 </Typography>
                 <Typography variant="h6">
-                  {collections}
+                  {catalogs}
                 </Typography>
               </Stack>
               <Stack className={styles.memberCardItem}>

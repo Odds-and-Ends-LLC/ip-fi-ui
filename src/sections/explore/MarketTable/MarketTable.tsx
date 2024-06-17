@@ -13,12 +13,13 @@ import { exploreTimeFilterAtom } from "@/atoms";
 import { useQuery } from "@tanstack/react-query";
 import { getMarketCatalogs } from "@/lib/client/catalog";
 import { CatalogMarketData } from "@/types";
+import MarketTableSkeleton from "./MarketTableSkeleton";
 
 export default function MarketTable() {
   const time = useAtomValue(exploreTimeFilterAtom);
 
   const { data: rows, isFetching } = useQuery({
-    queryKey: ["trending-catalogs", time],
+    queryKey: ["catalogs-market", time],
     queryFn: () => getMarketCatalogs(time)
   });
 
@@ -103,14 +104,16 @@ export default function MarketTable() {
     },
   ];
 
-  if (isFetching || !rows) return;
+  if (isFetching) {
+    return <MarketTableSkeleton />
+  }
 
   return (
     <Table
       headerLeftComponent={renderHeaderLeft()}
       minWidth="640px"
       maxHeight="420px"
-      rows={rows}
+      rows={rows || []}
       columns={columns}
       dataGridProps={{
         rowHeight: 60,

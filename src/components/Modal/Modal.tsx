@@ -14,8 +14,23 @@ import styles from "./Modal.module.css";
 
 // components
 import { Icon } from "@/components";
+import { ReactNode } from "react";
 
-export default function Modal({ title, titleIcon, children, actions, open, onClose }) {
+export default function Modal({
+  title,
+  titleIcon,
+  children,
+  actions,
+  open = false,
+  onClose
+} : {
+  open?: boolean;
+  title: string;
+  titleIcon?: any;
+  children: ReactNode;
+  actions?: ReactNode;
+  onClose: () => void;
+}) {
   return (
     <Dialog scroll="paper" open={open} onClose={onClose}>
       <DialogTitle>

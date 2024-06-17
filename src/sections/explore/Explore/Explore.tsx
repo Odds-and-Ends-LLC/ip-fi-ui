@@ -89,9 +89,9 @@ export default function Explore() {
         <Box ref={nftsRef}>
           <NFTs />
         </Box>
-        {/* <Box ref={membersRef}>
+        <Box ref={membersRef}>
           <Members />
-        </Box> */}
+        </Box>
       </Stack>
       <Footer />
     </Stack>
