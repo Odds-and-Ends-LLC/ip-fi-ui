@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   Stack,
+  SxProps,
   Typography,
 } from "@mui/material";
 
@@ -14,15 +15,24 @@ import styles from "./Modal.module.css";
 
 // components
 import { Icon } from "@/components";
+import { ReactNode } from "react";
 
 export default function Modal({
   title,
   titleIcon,
   children,
   actions,
-  open,
+  open = false,
   onClose,
   contentStyles,
+}: {
+  open?: boolean;
+  title: string;
+  titleIcon?: any;
+  children: ReactNode;
+  actions?: ReactNode;
+  onClose: () => void;
+  contentStyles?: SxProps;
 }) {
   return (
     <Dialog scroll="paper" open={open} onClose={onClose}>

@@ -13,6 +13,7 @@ import { CatalogTrendingData } from "@/types";
 
 // styles
 import styles from "./TrendingTable.module.css";
+import TrendingTableSkeleton from "./TrendingTableSkeleton";
 
 export default function TrendingTable() {
   const time = useAtomValue(exploreTimeFilterAtom);
@@ -168,7 +169,9 @@ export default function TrendingTable() {
     },
   ];
 
-  if (isFetching || !rows) return;
+  if (isFetching) {
+    return <TrendingTableSkeleton />
+  }
 
   return (
     <>
@@ -185,7 +188,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={desktopColumns}
             hasBackground={false}
-            rows={rows.slice(0, 5)}
+            rows={rows?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 70,
               hideFooter: true,
@@ -195,24 +198,29 @@ export default function TrendingTable() {
         <Grid item mobile={6}  minWidth="690px">
           <Table
             bordered={false}
-            rows={rows.slice(5)}
+            rows={rows?.slice(0, 5) || []}
             columns={desktopColumns}
             hasBackground={false}
             dataGridProps={{
-              rows: rows.slice(5),
               rowHeight: 70,
               hideFooter: true,
             }}
           />
         </Grid>
       </Grid>
-      <Grid container className={styles.trendingTable} sx={{ display: { desktop: "none", tablet: "flex", mobile: "none"} }}>
+      <Grid
+        container className={styles.trendingTable}
+        sx={{
+          display: { desktop: "none", tablet: "flex", mobile: "none"},
+          background: "linear-gradient(139deg, rgba(1, 2, 44, 1) 0%, rgba(1, 2, 44, 0.60) 100%)",
+        }}
+      >
         <Grid item mobile={6} minWidth="480px">
           <Table
             bordered={false}
             columns={tabletColumns}
             hasBackground={false}
-            rows={rows.slice(0, 5)}
+            rows={rows?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,
@@ -224,7 +232,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={tabletColumns}
             hasBackground={false}
-            rows={rows.slice(5)}
+            rows={rows?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,
@@ -237,6 +245,7 @@ export default function TrendingTable() {
         className={styles.trendingTable}
         sx={{
           display: { tablet: "none", mobile: "flex"},
+          background: "linear-gradient(139deg, rgba(1, 2, 44, 1) 0%, rgba(1, 2, 44, 0.60) 100%)",
         }}
       >
         <Grid item mobile={6} minWidth="80vw">
@@ -244,7 +253,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={mobileColumns}
             hasBackground={false}
-            rows={rows.slice(0, 5)}
+            rows={rows?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,
@@ -256,7 +265,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={mobileColumns}
             hasBackground={false}
-            rows={rows.slice(5)}
+            rows={rows?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,

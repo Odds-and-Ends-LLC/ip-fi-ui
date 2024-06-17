@@ -45,7 +45,6 @@ export default function Tabs({
           value={tab.value}
           icon={tab.icon}
           iconPosition={tab.iconPosition}
-          sx={{ typography: { tablet: "button1", mobile: "button2" }, ...tabStyle }}
         />
       ))}
     </MuiTabs>

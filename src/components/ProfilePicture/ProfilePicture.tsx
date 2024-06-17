@@ -1,31 +1,41 @@
 // packages
 import { Avatar, Box, Button, IconButton, Stack } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // components
 import { Icon, Modal } from "..";
 
 // styles
 import styles from "./ProfilePicture.module.css";
-import { CameraIcon, PickAvatarIcon, RemoveIcon, UploadIcon } from "@/elements/icons";
+import { PickAvatarIcon, RemoveIcon, UploadIcon } from "@/elements/icons";
 
 export default function ProfilePicture({
   image,
   letters = "",
   upload = false,
   size = "base",
+  onImageSelect,
+} : {
+  image?: string;
+  letters?: string;
+  upload?: boolean;
+  size?: "xs" | "s" | "m" | "base";
+  onImageSelect?: (image: File) => void;
 }) {
+  const uploadRef = useRef<HTMLInputElement | null>(null)
+  const [avatarSrc, setAvatarSrc] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>();
   const [openUploadModal, setOpenUploadModal] = useState(false);
-  const getAvatarSrc = () => {
-    const props = {};
 
-    if (image) {
-      props.src = image;
-    } else if (!letters) {
-      props.src = "/images/default_pfp.svg";
+  const handleChangeFile = (files: FileList | null) => {
+    if (files) {
+      const image = files.item(0);
+      if (image) {
+        const src = URL.createObjectURL(image);
+        setAvatarSrc(src);
+        setImageFile(image);
+      }
     }
-
-    return props;
   };
 
   const getAvatarDesign = () => {
@@ -75,7 +85,7 @@ export default function ProfilePicture({
       case "s": return { width: "22px", height: "22px", p: "4px" };
       case "base": return { width: "32px", height: "32px", p: "9px" };
       case "m": return { width: "50px", height: "50px", p: "9px" };
-      default: return { width: "32px", height: "32px", p: "4px" };
+      default: return { width: "32px", height: "32px", p: "9px" };
     }
   };
 
@@ -87,8 +97,15 @@ export default function ProfilePicture({
         height: getAvatarSize(),
       }}
     >
+      <input
+        type="file"
+        accept="image/png, image/jpeg"
+        style={{ display: "none" }}
+        ref={uploadRef}
+        onChange={(e) => handleChangeFile(e.target.files)}
+      />
       <Avatar
-        {...getAvatarSrc()}
+        src={avatarSrc || image || "/images/default_pfp.svg"}
         alt="profile picture"
         sx={{
           color: "text.primary",
@@ -107,7 +124,6 @@ export default function ProfilePicture({
           className={styles.profilePictureUpload}
           onClick={() => setOpenUploadModal(true)}
           sx={getIconStyle()}
-          color="text.disabledBlue"
         >
           <Icon size="full" icon="camera" color="#808198" />
         </Button>
@@ -118,17 +134,32 @@ export default function ProfilePicture({
         onClose={() => setOpenUploadModal(false)}
       >
         <Stack className={styles.profilePictureModal}>
-          <Button variant="outlineWhite" className={styles.profilePictureModalButton}>
-            <UploadIcon />
+          <Button
+            variant="outlineWhite"
+            className={styles.profilePictureModalButton}
+            onClick={() => {
+              uploadRef.current?.click();
+              setOpenUploadModal(false);
+            }}
+          >
+            <Icon icon="upload" />
             UPLOAD PHOTO
           </Button>
           <Button variant="outlineWhite" className={styles.profilePictureModalButton}>
-            <PickAvatarIcon />
+            <Icon icon="avatar" />
             CHOOSE AN AVATAR
           </Button>
-          {image &&
-            <Button variant="outlineWhite" className={styles.profilePictureModalButton}>
-              <RemoveIcon />
+          {imageFile &&
+            <Button
+              variant="outlineWhite"
+              className={styles.profilePictureModalButton}
+              onClick={() => {
+                setAvatarSrc("");
+                setImageFile(null);
+                setOpenUploadModal(false);
+              }}
+            >
+              <Icon icon="remove" />
               REMOVE PHOTO
             </Button>
           }

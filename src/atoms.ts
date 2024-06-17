@@ -8,6 +8,7 @@ export const signupPayloadAtom = atom<SignupPayload>({
   email: "",
   password: "",
   walletAddresses: [],
+  pfp: null,
 })
 
 // Modal Atoms

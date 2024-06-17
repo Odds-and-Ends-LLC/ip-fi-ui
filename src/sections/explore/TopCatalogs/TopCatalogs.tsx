@@ -1,11 +1,12 @@
 // packages
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Skeleton, Stack } from "@mui/material";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 // components
 import { Carousel, CatalogCover } from "@/components";
 import { getTopCatalogs } from "@/lib/client/catalog";
 import { TopCatalog } from "@/types";
+import TopCatalogsSkeleton from "./TopCatalogsSkeleton";
 
 export default function TopCatalogs() {
   const { data, isFetching } = useQuery({
@@ -13,9 +14,7 @@ export default function TopCatalogs() {
     queryFn: () => getTopCatalogs(),
   });
 
-  if (isFetching || !data) return;
-
-  const renderTopCatalog = (topCatalog: TopCatalog ) => (
+  const renderTopCatalog = (topCatalog: TopCatalog) => (
     <CatalogCover
       catalogName={topCatalog.catalog.name}
       key={topCatalog.catalog.id}
@@ -27,6 +26,14 @@ export default function TopCatalogs() {
       backgroundColor={topCatalog.catalog.coverColor}
     />
   );
+
+  if (isFetching) {
+    return <TopCatalogsSkeleton />
+  }
+
+  if (!data) {
+    return;
+  }
 
   return (
     <>

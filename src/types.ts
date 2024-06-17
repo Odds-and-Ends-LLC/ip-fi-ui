@@ -20,10 +20,10 @@ export interface User {
   id: string;
   email: string;
   username: string;
-  name: string;
   pfp: string;
-  walletAddress: string;
+  walletAddresses: string[];
   joinedAt: Date;
+  lastActiveAt?: Date;
   responseTime: number;
   responseRate: string;
   website?: string;
@@ -41,7 +41,7 @@ export type UserSession = {
   userId: string;
   email: string;
   username: string;
-  walletAddress: string;
+  walletAddresses: string[];
   pfp?: string;
 };
 
@@ -128,7 +128,7 @@ export interface SignupPayload {
   password: string;
   about?: string;
   walletAddresses: string[];
-  pfp?: File;
+  pfp?: File | null;
 }
 
 export interface LoginPayload {

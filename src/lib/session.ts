@@ -54,7 +54,7 @@ export const verifySession = async () => {
     userId: session.userId?.toString() ?? "",
     email: session.email?.toString() ?? "",
     username: session.username?.toString() ?? "",
-    walletAddress: session.walletAddress?.toString() ?? "",
+    walletAddresses: session.walletAddresses as string[] ?? [],
     pfp: session.pfp?.toString() ?? "",
   };
 

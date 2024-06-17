@@ -3,6 +3,7 @@ import { NFT, ItemsCarousel } from "@/components";
 import { getFeaturedNFTs } from "@/lib/client/nft";
 import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+import NFTsSkeleton from "./NFTsSkeleton";
 
 export default function NFTs() {
   const { data: nfts, isFetching } = useQuery({
@@ -10,7 +11,13 @@ export default function NFTs() {
     queryFn: () => getFeaturedNFTs()
   });
 
-  if (isFetching || !nfts) return;
+  if (isFetching) {
+    return <NFTsSkeleton />
+  }
+
+  if (!nfts) {
+    return;
+  }
 
   return (
     <ItemsCarousel
