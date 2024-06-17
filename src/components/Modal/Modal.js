@@ -15,7 +15,15 @@ import styles from "./Modal.module.css";
 // components
 import { Icon } from "@/components";
 
-export default function Modal({ title, titleIcon, children, actions, open, onClose }) {
+export default function Modal({
+  title,
+  titleIcon,
+  children,
+  actions,
+  open,
+  onClose,
+  contentStyles,
+}) {
   return (
     <Dialog scroll="paper" open={open} onClose={onClose}>
       <DialogTitle>
@@ -27,7 +35,7 @@ export default function Modal({ title, titleIcon, children, actions, open, onClo
           <Icon icon="close" size={18} />
         </Button>
       </DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent sx={{ ...contentStyles }}>{children}</DialogContent>
       {actions && (
         <DialogActions>
           <Stack

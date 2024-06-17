@@ -40,6 +40,7 @@ export { default as Settings } from "./Settings";
 export { default as Share } from "./Share";
 export { default as Twitter } from "./Twitter";
 export { default as TwitterX } from "./TwitterX";
+export { default as Undo } from "./Undo";
 export { default as Upload } from "./Upload";
 export { default as Wallet } from "./Wallet";
 export { default as Website } from "./Website";

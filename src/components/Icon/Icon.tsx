@@ -50,6 +50,7 @@ const icons = {
   share: <Svg.Share />,
   twitter: <Svg.Twitter />,
   twitterX: <Svg.TwitterX />,
+  undo: <Svg.Undo />,
   upload: <Svg.Upload />,
   wallet: <Svg.Wallet />,
   website: <Svg.Website />,

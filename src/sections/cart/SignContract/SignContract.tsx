@@ -1,4 +1,5 @@
 // packages
+import { useState } from "react";
 import { Button, Divider, Paper, Stack, Typography } from "@mui/material";
 import { format } from "date-fns";
 import Image from "next/image";
@@ -7,9 +8,23 @@ import Image from "next/image";
 import styles from "./SignContract.module.css";
 
 // components
-import ItemDetail from "../ItemDetail";
+import { Icon, Modal } from "@/components";
+import { ItemDetail } from "..";
+import { LicenseTerms, NftTable } from ".";
 
-export default function SignContract() {
+// types
+import { NFT } from "@/types";
+
+export default function SignContract({ onCancel, data }: { onCancel: () => void; data?: NFT[] }) {
+  const [openSignaturePad, setOpenSignaturePad] = useState(false);
+
+  const handleUndoSignature = () => {
+    console.log("undo");
+  };
+  const handleSignContract = () => {
+    console.log("sign");
+  };
+
   return (
     <Paper
       component={Stack}
@@ -36,6 +51,7 @@ export default function SignContract() {
             gap="8px"
             label="Purchase Date:"
             value={format(1718385368927, "MM-dd-yyyy hh:mm:ss aa")}
+            valueNoWrap={false}
           />
           <ItemDetail
             gap="8px"
@@ -48,16 +64,86 @@ export default function SignContract() {
           <ItemDetail gap="8px" label="Subtotal:" value={`$ ${0}`} valueTextVariant="h4" />
         </Stack>
         <Divider flexItem />
-        <Typography variant="h5" textTransform="none">
-          NFTs
-        </Typography>
+        <Stack gap="24px">
+          <Typography variant="h5" textTransform="none">
+            NFTs
+          </Typography>
+          <Paper component={Stack} variant="translucent" className={styles.signContractNFTTable}>
+            <NftTable data={data} />
+          </Paper>
+        </Stack>
+        <Paper
+          component={Stack}
+          variant="outlinedGreen"
+          className={styles.signContractLicenseTerms}
+        >
+          <Typography variant="h5">LICENSE TERMS</Typography>
+          <LicenseTerms />
+        </Paper>
+        <Stack className={styles.signContractSignature}>
+          <Typography variant="h5" textAlign="end">
+            SIGNED BY:
+          </Typography>
+          <Stack className={styles.signContractSignatureBox}>
+            <Stack height="40px" className={styles.signContractAddSignatureBox}>
+              <Stack
+                className={styles.signContractAddSignatureBtn}
+                sx={{ color: "text.disabledBlue" }}
+                onClick={() => setOpenSignaturePad(true)}
+              >
+                <Icon icon="add" size={18} />
+                <Typography variant="link2">Add Signature</Typography>
+              </Stack>
+            </Stack>
+            <Divider flexItem />
+            <Typography color="text.disabled">Name & Signature</Typography>
+          </Stack>
+          <Stack className={styles.signContractSignatureDate}>
+            <Typography color="text.disabledBlue">Date:</Typography>
+            <Typography>{format(1718385368927, "MM-dd-yyyy hh:mm:ss aa")}</Typography>
+          </Stack>
+        </Stack>
       </Stack>
       <Stack className={styles.signContractActionBtns}>
-        <Button variant="clearGreen">CANCEL</Button>
+        <Button variant="clearGreen" onClick={onCancel}>
+          CANCEL
+        </Button>
         <Button variant="solidGreen" disabled={true}>
           SIGN CONTRACT
         </Button>
       </Stack>
+
+      {/* // MODAL // */}
+      <Modal
+        title="ADD SIGNATURE"
+        titleIcon={undefined}
+        open={openSignaturePad}
+        onClose={() => setOpenSignaturePad(false)}
+        actions={
+          <>
+            <Button variant="clearWhite" onClick={() => setOpenSignaturePad(false)}>
+              CANCEL
+            </Button>
+            <Stack className={styles.signaturePadButtons} sx={{ flexDirection: { tablet: "row" } }}>
+              <Button
+                variant="outlineWhite"
+                startIcon={<Icon icon="undo" />}
+                onClick={handleUndoSignature}
+              >
+                UNDO
+              </Button>
+              <Button variant="solidGreen" onClick={handleSignContract}>
+                SUBMIT
+              </Button>
+            </Stack>
+          </>
+        }
+        contentStyles={{ padding: "24px !important" }}
+      >
+        <Stack className={styles.signaturePad} sx={{ backgroundColor: "background.tertiary" }}>
+          {/* signature pad */}
+        </Stack>
+      </Modal>
     </Paper>
   );
 }

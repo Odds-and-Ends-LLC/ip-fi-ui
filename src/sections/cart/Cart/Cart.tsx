@@ -190,7 +190,7 @@ export default function Cart() {
               {activeStep === 2 && (
                 <PaymentForm data={activeCatalog} onPurchaseCatalog={handlePurchaseCatalog} />
               )}
-              {activeStep === 3 && <SignContract />}
+              {activeStep === 3 && <SignContract  data={activeCatalog?.nfts} onCancel={() => setActiveStep(2)} />}
             </Stack>
             {activeStep === 0 && (
               <Button
@@ -240,6 +240,7 @@ export default function Cart() {
             </Button>
           </>
         }
+        contentStyles={undefined}
       >
         <Typography>
           You are about to create a new catalog in iP-Fi. Please enter a Catalog name.

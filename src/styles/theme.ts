@@ -1,7 +1,7 @@
 "use client";
 // packages
 
-import type {} from '@mui/x-data-grid/themeAugmentation';
+import type {} from "@mui/x-data-grid/themeAugmentation";
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
@@ -293,6 +293,7 @@ declare module "@mui/material/TextField" {
 declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
     translucent: true;
+    outlinedGreen: true;
   }
 }
 
@@ -1468,6 +1469,19 @@ theme.components = {
           flex: 1,
           overflow: "auto",
           padding: "16px",
+        },
+      },
+      {
+        props: {
+          variant: "outlinedGreen",
+        },
+        style: {
+          backgroundColor: "transparent",
+          borderColor: `${colors.green[1000]}33`,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          borderRadius: "8px",
+          flex: 1,
         },
       },
     ],
