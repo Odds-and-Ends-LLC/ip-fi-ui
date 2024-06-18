@@ -1,6 +1,6 @@
 // components
 import { ProfileSettings } from "@/sections/profile";
 
-export default async function ProfileSettingsPage() {
+export default function ProfileSettingsPage() {
   return <ProfileSettings />;
 }
