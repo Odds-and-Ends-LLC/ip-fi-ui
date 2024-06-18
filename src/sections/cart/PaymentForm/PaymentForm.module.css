@@ -1,0 +1,23 @@
+.paymentForm {
+  align-self: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  max-width: 560px;
+  width: 100%;
+}
+
+.paymentFormViewNFT {
+  align-items: center;
+  align-self: end;
+  cursor: pointer;
+  flex-direction: row;
+  gap: 12px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.paymentFormNFTList {
+  overflow: auto;
+  max-height: 480px;
+}

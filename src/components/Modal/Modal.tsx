@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   Stack,
+  SxProps,
   Typography,
 } from "@mui/material";
 
@@ -22,14 +23,16 @@ export default function Modal({
   children,
   actions,
   open = false,
-  onClose
-} : {
+  onClose,
+  contentStyles,
+}: {
   open?: boolean;
   title: string;
   titleIcon?: any;
   children: ReactNode;
   actions?: ReactNode;
   onClose: () => void;
+  contentStyles?: SxProps;
 }) {
   return (
     <Dialog scroll="paper" open={open} onClose={onClose}>
@@ -42,7 +45,7 @@ export default function Modal({
           <Icon icon="close" size={18} />
         </Button>
       </DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent sx={{ ...contentStyles }}>{children}</DialogContent>
       {actions && (
         <DialogActions>
           <Stack

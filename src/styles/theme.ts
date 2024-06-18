@@ -1,7 +1,7 @@
 "use client";
 // packages
 
-import type {} from '@mui/x-data-grid/themeAugmentation';
+import type {} from "@mui/x-data-grid/themeAugmentation";
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
@@ -121,6 +121,7 @@ declare module "@mui/material/styles" {
     one?: string;
     two?: string;
     three?: string;
+    linearProgress?: string;
   }
 
   interface TypeCatalog {
@@ -296,6 +297,7 @@ declare module "@mui/material/TextField" {
 declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
     translucent: true;
+    outlinedGreen: true;
   }
 }
 
@@ -369,6 +371,7 @@ export const theme = createTheme({
       one: `linear-gradient(90deg, ${colors.purple[500]} 0%, ${colors.green[1200]} 100%)`,
       two: `linear-gradient(90deg, ${colors.green[1200]} 0%, ${colors.purple[500]} 100%)`,
       three: `linear-gradient(90deg, ${colors.green[1000]}80 0%, ${colors.purple[100]}80 100%)`,
+      linearProgress: `linear-gradient(to right, ${colors.purple[700]} 0%, ${colors.purple[600]} 25%, ${colors.green[1100]} 50%, ${colors.purple[600]} 75%, ${colors.green[1100]} 100%)`,
     },
   },
   breakpoints: {
@@ -766,6 +769,7 @@ theme.components = {
       disableRipple: true,
       disableFocusRipple: true,
       fullWidth: false,
+      size: "medium",
     },
     styleOverrides: {
       root: ({ theme, ownerState }) => ({
@@ -779,6 +783,14 @@ theme.components = {
         "&:hover": {
           boxShadow: "none",
         },
+      }),
+      sizeSmall: ({ theme }) => ({
+        ...theme.typography.graph,
+        borderRadius: 4,
+        height: "24px",
+        fontWeight: 400,
+        textTransform: "none",
+        padding: "2px 4px",
       }),
     },
     variants: [
@@ -1478,6 +1490,19 @@ theme.components = {
           padding: "16px",
         },
       },
+      {
+        props: {
+          variant: "outlinedGreen",
+        },
+        style: {
+          backgroundColor: "transparent",
+          borderColor: `${colors.green[1000]}33`,
+          borderStyle: "solid",
+          borderWidth: "1px",
+          borderRadius: "8px",
+          flex: 1,
+        },
+      },
     ],
   },
   MuiChip: {
@@ -1669,6 +1694,18 @@ theme.components = {
       },
       labelContainer: {
         color: theme.palette.text.disabledBlue,
+      },
+    },
+  },
+  MuiStepIcon: {
+    styleOverrides: {
+      root: {
+        "&.Mui-active": {
+          color: theme.palette.secondary.main,
+        },
+      },
+      text: {
+        fill: theme.palette.text.dark,
       },
     },
   },

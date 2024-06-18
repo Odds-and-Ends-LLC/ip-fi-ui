@@ -1,0 +1,13 @@
+.catalogListName {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  flex-direction: row;
+  gap: 24px;
+  padding: 8px;
+}
+
+.catalogListNameText {
+  gap: 2px;
+  justify-content: center;
+}

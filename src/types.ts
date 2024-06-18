@@ -5,7 +5,13 @@ export type ResponsiveCssProp<T> =
       [K in Breakpoint]?: T;
     }
   | T;
-export type JustifyType = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | string;
+export type JustifyType =
+  | "flex-start"
+  | "center"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | string;
 export type AlignType = "start" | "center" | "left" | "right" | string;
 
 export type TimeFilterType = "all" | "1h" | "6h" | "24h" | "7d";
@@ -29,7 +35,7 @@ export interface UserType {
   catalogCount: number;
   contractCount: number;
   // add more details here
-};
+}
 
 export type UserSessionType = {
   userId: string;
@@ -141,7 +147,7 @@ export interface LandingUpdateType {
   type: "blog" | string;
   title: string;
   image: string;
-};
+}
 
 export interface SignupPayloadType {
   username: string;

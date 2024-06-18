@@ -1,33 +1,5 @@
-.history {
+.nftTableWrapper {
   flex: 1;
-  gap: 16px;
-  overflow: auto;
-  width: 100%;
-}
-
-.historyHeader {
-  gap: 8px 32px;
-  justify-content: space-between;
-}
-
-.historyHeaderOptions {
-  flex-direction: row;
-  gap: 12px;
-  justify-content: space-between;
-}
-
-.historyContent {
-  flex-wrap: nowrap;
-  flex: 1;
-  gap: 16px;
-  overflow-y: auto;
-  padding: 8px 16px;
-  width: 100%;
-}
-
-.historyTableWrapper {
-  flex: 1;
-  padding: 8px 16px;
   width: 100%;
 }
 
@@ -36,9 +8,17 @@
   gap: 8px;
 }
 
-.tableColumnFrom,
-.tableColumnTo {
+.nftWithExclusiveLicense {
   align-items: center;
-  flex-direction: row;
-  gap: 16px;
+  display: flex;
+  gap: 4px;
+  height: 20px;
+}
+
+.nftTableEmpty {
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 50px;
 }

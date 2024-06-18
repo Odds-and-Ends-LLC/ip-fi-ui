@@ -27,3 +27,4 @@ export { default as Circle } from "./Circle";
 export { default as Select } from "./Select";
 export { default as GlassCoverImage } from "./GlassCoverImage";
 export { default as Icon } from "./Icon";
+export { default as CatalogListName } from "./CatalogListName";
