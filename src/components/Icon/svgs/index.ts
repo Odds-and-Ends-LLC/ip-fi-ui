@@ -27,7 +27,7 @@ export { default as Facebook } from "./Facebook";
 export { default as Info } from "./Info";
 export { default as Instagram } from "./Instagram";
 export { default as Link } from "./Link";
-export { default as LinkedIn } from "./LinkedIn";
+export { default as LinkedIn } from "./LinkedInIcon";
 export { default as Logout } from "./Logout";
 export { default as LooksRare } from "./LooksRare";
 export { default as Message } from "./Message";

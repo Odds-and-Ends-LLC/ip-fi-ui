@@ -1,4 +1,4 @@
-export default function LinkedIn() {
+export default function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none">
       <path
