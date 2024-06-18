@@ -75,7 +75,7 @@ export default function Profile() {
                 minWidth: { mobile: "40px" }
               }}
             >
-              <SettingsIcon />
+              <Icon icon="settings" />
             </Button>
             <ShareButton title="SHARE PROFILE" link="" />
           </Stack>

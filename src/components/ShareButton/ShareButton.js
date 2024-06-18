@@ -51,7 +51,7 @@ export default function ShareButton({
         onClick={() => setOpenShareModal(true)}
         sx={{ display: { mobile: "flex", tablet: "none" }, minWidth: { mobile: "40px" }}}
       >
-        <ShareIcon />
+        <Icon icon="share" />
       </Button>
       <Modal
         open={openShareModal}
