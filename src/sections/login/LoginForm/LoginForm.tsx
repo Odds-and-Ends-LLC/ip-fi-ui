@@ -9,7 +9,7 @@ import { z } from "zod";
 // components
 import { Icon, PasswordInput, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
-import { LoginPayload } from "@/types";
+import { LoginPayloadType } from "@/types";
 import { useSetAtom } from "jotai";
 import { connectWalletModalOpen, userSessionAtom } from "@/atoms";
 
@@ -33,7 +33,7 @@ export default function LoginForm() {
   const setConnectWalletModalOpen = useSetAtom(connectWalletModalOpen);
   const setUserSession = useSetAtom(userSessionAtom);
   const [error, setError] = useState("");
-  const form = useForm<LoginPayload>({
+  const form = useForm<LoginPayloadType>({
     resolver: zodResolver(schema),
     mode: "onSubmit",
     defaultValues: {
@@ -43,7 +43,7 @@ export default function LoginForm() {
   });
   const { isSubmitting } = form.formState;
 
-  const onSubmit: SubmitHandler<LoginPayload> = async (data) => {
+  const onSubmit: SubmitHandler<LoginPayloadType> = async (data) => {
     setError("");
     const res = await login(data);
 

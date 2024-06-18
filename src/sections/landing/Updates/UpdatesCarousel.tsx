@@ -13,12 +13,12 @@ import { Carousel } from "@/components";
 import styles from "./Updates.module.css";
 
 // types
-import { LandingUpdate } from "@/types";
+import { LandingUpdateType } from "@/types";
 
 export default function UpdatesCarousel({
   updates
 } : {
-  updates: LandingUpdate[];
+  updates: LandingUpdateType[];
 }) {
   const renderBlogs = () => (
     updates?.map((update, index) => (

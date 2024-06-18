@@ -15,7 +15,7 @@ export default function NFTs() {
     return <NFTsSkeleton />
   }
 
-  if (!nfts) {
+  if (!nfts?.data) {
     return;
   }
 
@@ -25,7 +25,7 @@ export default function NFTs() {
       count={33}
       viewAllUrl="/"
       items={
-        nfts.map((nft, i) => (
+        nfts.data.map((nft, i) => (
           <Box key={i} sx={{ aspectRatio: "1/1.29", width: "100%", maxHeight: "426px" }}>
             <NFT
               nft={nft}

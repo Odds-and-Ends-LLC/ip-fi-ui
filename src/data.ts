@@ -1,6 +1,6 @@
-import { Catalog, CatalogMarketData, CatalogSalesData, CatalogTrendingData, NFT, Trait, User } from "./types";
+import { CatalogType, CatalogMarketDataType, CatalogSalesDataType, CatalogTrendingDataType, NFTType, TraitType, UserType, NFTMarketDataType } from "./types";
 
-export const user : User & { password: string; } = {
+export const user : UserType & { password: string; } = {
   id: "1",
   email: "user@email.com",
   password: "password",
@@ -25,7 +25,7 @@ export const user : User & { password: string; } = {
   contractCount: 3,
 };
 
-const traits: Trait[] = [
+const traits: TraitType[] = [
   { traitType: "Background", value: "Gradient 2" },
   { traitType: "Head", value: "Purple" },
   { traitType: "Hair", value: "Brown Bushcut" },
@@ -33,7 +33,7 @@ const traits: Trait[] = [
   { traitType: "Body", value: "Gradient 2" },
 ];
 
-export const nfts: NFT[] = [
+export const nfts: NFTType[] = [
   {
     id: "item1",
     name: "Artwork 1",
@@ -756,7 +756,7 @@ export const nfts: NFT[] = [
   }
 ]
 
-export const users: User[] = [
+export const users: UserType[] = [
   {
     id: "1",
     email: "user1@example.com",
@@ -1329,7 +1329,7 @@ export const users: User[] = [
   }
 ];
 
-export const catalogs: Catalog[] = [
+export const catalogs: CatalogType[] = [
   {
     id: "1",
     uid: "catalog-1",
@@ -1692,7 +1692,7 @@ export const catalogs: Catalog[] = [
   }
 ];
 
-export const trendingCatalogs: CatalogTrendingData[] = [
+export const trendingCatalogs: CatalogTrendingDataType[] = [
   {
     id: "item1",
     rank: 1,
@@ -1775,7 +1775,7 @@ export const trendingCatalogs: CatalogTrendingData[] = [
   }
 ];
 
-export const marketCatalogs: CatalogMarketData[] = [
+export const marketCatalogs: CatalogMarketDataType[] = [
   {
     id: "item1",
     price: 10.5,
@@ -1838,7 +1838,70 @@ export const marketCatalogs: CatalogMarketData[] = [
   }
 ];
 
-export const catalogSalesData: CatalogSalesData[] = [
+export const marketNFTs: NFTMarketDataType[] = [
+  {
+    id: "item1",
+    price: 10.5,
+    priceChange: 0.2,
+    nft: nfts[0],
+  },
+  {
+    id: "item2",
+    price: 9.8,
+    priceChange: -0.1,
+    nft: nfts[1],
+  },
+  {
+    id: "item3",
+    price: 11.2,
+    priceChange: 0.3,
+    nft: nfts[2],
+  },
+  {
+    id: "item4",
+    price: 9.5,
+    priceChange: -0.2,
+    nft: nfts[3],
+  },
+  {
+    id: "item5",
+    price: 12.1,
+    priceChange: 0.1,
+    nft: nfts[4],
+  },
+  {
+    id: "item6",
+    price: 8.9,
+    priceChange: -0.3,
+    nft: nfts[5],
+  },
+  {
+    id: "item7",
+    price: 11.5,
+    priceChange: 0.4,
+    nft: nfts[6],
+  },
+  {
+    id: "item8",
+    price: 9.3,
+    priceChange: -0.15,
+    nft: nfts[7],
+  },
+  {
+    id: "item9",
+    price: 10.8,
+    priceChange: 0.25,
+    nft: nfts[8],
+  },
+  {
+    id: "item10",
+    price: 9.7,
+    priceChange: -0.05,
+    nft: nfts[9],
+  }
+];
+
+export const catalogSalesData: CatalogSalesDataType[] = [
   {
     id: "1",
     rank: 1,

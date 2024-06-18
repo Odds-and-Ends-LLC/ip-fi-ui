@@ -1,5 +1,5 @@
 import { catalogSalesData, catalogs, marketCatalogs, trendingCatalogs } from "@/data";
-import { TimeFilter, PriceVolumeData, TopCatalog } from "@/types";
+import { TimeFilterType, PriceVolumeDataType, TopCatalogType, CatalogStatisticsType } from "@/types";
 
 
 export const getTopCatalogs = async () => {
@@ -7,7 +7,7 @@ export const getTopCatalogs = async () => {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     const raw = catalogs.slice(0, 5);
-    const topCatalogs: TopCatalog[] = raw.map((catalog, i) => ({ rank: i + 1, catalog }));
+    const topCatalogs: TopCatalogType[] = raw.map((catalog, i) => ({ rank: i + 1, catalog }));
 
     return {
       data: topCatalogs,
@@ -20,12 +20,12 @@ export const getTopCatalogs = async () => {
   }
 };
 
-export const getTrendingCatalogs = async (time?: TimeFilter) => {
+export const getTrendingCatalogs = async (time?: TimeFilterType) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     return {
-      data: trendingCatalogs,
+      data: trendingCatalogs.slice(0, 10),
     };
   } catch (error) {
     console.log("failed to fetch trending catalogs");
@@ -35,7 +35,7 @@ export const getTrendingCatalogs = async (time?: TimeFilter) => {
   }
 };
 
-export const getMarketCatalogs = async (time?: TimeFilter) => {
+export const getCatalogsMarket = async (time?: TimeFilterType) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
@@ -43,18 +43,18 @@ export const getMarketCatalogs = async (time?: TimeFilter) => {
       data: marketCatalogs,
     };
   } catch (error) {
-    console.log("failed to fetch market catalogs");
+    console.log("failed to fetch catalogs market");
     return {
-      error: "Failed to fetch market catalogs at this time."
+      error: "Failed to fetch catalogs market at this time."
     }
   }
 };
 
-export const getPriceVolumeHistory = async () => {
+export const getPriceVolumeHistory = async (catalogId: string) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    const history: PriceVolumeData[] = [
+    const history: PriceVolumeDataType[] = [
       { month: "Jan", price: 300, volume: 344 },
       { month: "Feb", price: 282, volume: 320 },
       { month: "Mar", price: 225, volume: 301 },
@@ -99,10 +99,33 @@ export const getCatalogSales = async (id: string) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    const sales = catalogSalesData.find((sale) => sale.catalog.id === id);
+    const sales = catalogSalesData.filter((sale) => sale.catalog.id === id);
 
     return {
       data: sales
+    }
+  } catch (error) {
+    console.log("failed to fetch featured catalogs");
+    return {
+      error: "Failed to fetch featured catalogs at this time."
+    }
+  }
+};
+
+export const getCatalogStatistics = async (id: string) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    const stats: CatalogStatisticsType = {
+      price: 23.1,
+      priceDayChange: -2.4,
+      priceDayHigh: 46.12,
+      priceDayLow: 0.55,
+      volumeDay: 277.01,
+    };
+
+    return {
+      data: stats
     }
   } catch (error) {
     console.log("failed to fetch featured catalogs");

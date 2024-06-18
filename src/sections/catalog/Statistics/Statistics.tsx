@@ -1,27 +1,35 @@
 // packages
-import { Divider, Stack, Typography } from "@mui/material";
+import { Divider, Skeleton, Stack, Typography } from "@mui/material";
 
 // components
 import { EthIcon } from "@/elements/icons";
 
 // styles
 import styles from "./Statistics.module.css";
-import { Fragment } from "react";
+import { Fragment, ReactNode, useContext } from "react";
+import { CatalogViewContext } from "../CatalogView/CatalogView";
+import { useQuery } from "@tanstack/react-query";
+import { getCatalogStatistics } from "@/lib/client/catalog";
 
 export default function Statistics() {
+  const catalog = useContext(CatalogViewContext);
+  const { data: stats, isFetching } = useQuery({
+    queryKey: ["catalog-statistics", catalog.id, catalog.uid],
+    queryFn: () => getCatalogStatistics(catalog.id)
+  })
 
-  const renderChange = (value) => (
+  const renderChange = (value: number) => (
     <Typography variant="h5" color={value >= 0 ? "text.secondary" : "text.red"}>{value > 0 && "+"} {value}%</Typography>
   );
 
-  const renderEth = (value) => (
+  const renderEth = (value: number) => (
     <Stack className={styles.statisticsItemEth}>
       <EthIcon />
       <Typography variant="h5" color="text.white">{value}</Typography>
     </Stack>
   );
 
-  const renderItem = (title, children) => (
+  const renderItem = (title: string, children: ReactNode) => (
     <Stack
       className={styles.statisticsItem}
       sx={{
@@ -34,11 +42,11 @@ export default function Statistics() {
   );
 
   const items = [
-    renderItem("Price", <Typography variant="h5" color="text.white">$ 123</Typography>),
-    renderItem("24H Change", renderChange(6.7)),
-    renderItem("24H High", renderEth(29.76)),
-    renderItem("24H Low", renderEth(29.76)),
-    renderItem("24H Volume", renderEth(29.76)),
+    renderItem("Price", isFetching ? <Skeleton variant="rectangular" width="120px" height="24px" /> : <Typography variant="h5" color="text.white">$ {stats?.data?.price || 0}</Typography>),
+    renderItem("24H Change", isFetching ? <Skeleton variant="rectangular" width="120px" height="24px" /> : renderChange(stats?.data?.priceDayChange || 0)),
+    renderItem("24H High", isFetching ? <Skeleton variant="rectangular" width="120px" height="24px" /> : renderEth(stats?.data?.priceDayHigh || 0)),
+    renderItem("24H Low", isFetching ? <Skeleton variant="rectangular" width="120px" height="24px" /> : renderEth(stats?.data?.priceDayLow || 0)),
+    renderItem("24H Volume", isFetching ? <Skeleton variant="rectangular" width="120px" height="24px" /> : renderEth(stats?.data?.volumeDay || 0)),
   ];
 
   return (
@@ -69,27 +77,6 @@ export default function Statistics() {
           </Fragment>
         ))}
       </Stack>
-      {/* <Stack
-        className={styles.statistics}
-        sx={{
-          gap: "24px",
-          display: { tablet: "none", mobile: "flex" }
-        }}
-      >
-        {renderItem("Price", <Typography variant="h5" color="text.white">$ 123</Typography>)}
-        {items.slice(1).map((item, i) => (
-          <Fragment key={i}>
-            {item}
-            {(i < items.length - 1) &&
-              <Divider
-                className={styles.statisticsItemDividerVertical}
-                orientation="vertical"
-                sx={{ borderColor: "dividerGray.main"}}
-              />
-            }
-          </Fragment>
-        ))}
-      </Stack> */}
     </>
   );
 }

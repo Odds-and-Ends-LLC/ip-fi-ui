@@ -209,6 +209,8 @@ declare module "@mui/material/styles" {
     button3: React.CSSProperties;
     button4: React.CSSProperties;
     graph: React.CSSProperties;
+    h7: React.CSSProperties;
+    body3: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
@@ -222,6 +224,8 @@ declare module "@mui/material/styles" {
     button3?: React.CSSProperties;
     button4?: React.CSSProperties;
     graph?: React.CSSProperties;
+    h7?: React.CSSProperties;
+    body3?: React.CSSProperties;
   }
 }
 
@@ -390,6 +394,12 @@ export const theme = createTheme({
       fontSize: "16px",
       lineHeight: "20px",
     },
+    body3: {
+      fontFamily: workSans.style.fontFamily,
+      fontWeight: 400,
+      fontSize: "14px",
+      lineHeight: "16px",
+    },
     label1: {
       fontFamily: unbounded.style.fontFamily,
       fontWeight: 500,
@@ -543,6 +553,15 @@ theme.typography.h6 = {
   fontFamily: unbounded.style.fontFamily,
   fontWeight: 700,
   fontSize: "16px",
+  lineHeight: "20px",
+  textTransform: "uppercase",
+  letterSpacing: "0.04em",
+};
+
+theme.typography.h7 = {
+  fontFamily: unbounded.style.fontFamily,
+  fontWeight: 700,
+  fontSize: "14px",
   lineHeight: "20px",
   textTransform: "uppercase",
   letterSpacing: "0.04em",

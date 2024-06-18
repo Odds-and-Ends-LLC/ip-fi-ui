@@ -8,24 +8,26 @@ import { useAtomValue } from "jotai";
 import { Avatar, Table } from "@/components";
 import { EthIcon } from "@/elements/icons";
 import { getTrendingCatalogs } from "@/lib/client/catalog";
-import { exploreTimeFilterAtom } from "@/atoms";
-import { CatalogTrendingData } from "@/types";
+import { CatalogTrendingDataType, TimeFilterType } from "@/types";
 
 // styles
 import styles from "./TrendingTable.module.css";
 import TrendingTableSkeleton from "./TrendingTableSkeleton";
 
-export default function TrendingTable() {
-  const time = useAtomValue(exploreTimeFilterAtom);
+export default function TrendingTable({
+  time
+} : {
+  time: TimeFilterType,
+}) {
 
-  const { data: rows, isFetching } = useQuery({
+  const { data: trendingCatalogs, isFetching } = useQuery({
     queryKey: ["trending-catalogs", time],
     queryFn: () => getTrendingCatalogs(time)
   });
 
   const renderRank = (rank: number) => <Typography color="text.secondary" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
 
-  const renderCatalog = (row: GridRowModel<CatalogTrendingData>, showPrice?: boolean) => (
+  const renderCatalog = (row: GridRowModel<CatalogTrendingDataType>, showPrice?: boolean) => (
     <Stack
       className={styles.trendingTableCatalog}
       sx={{
@@ -80,28 +82,28 @@ export default function TrendingTable() {
       headerName: "Rank",
       width: 96,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderCatalog(row),
     },
     {
       field: "price",
       headerName: "Price",
       width: 111,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderPrice(row.price),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => (
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
           {renderVolumeChange(row.volumeChange)}
@@ -116,21 +118,21 @@ export default function TrendingTable() {
       headerName: "#",
       width: 64,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderCatalog(row, true),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       width: 120,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => (
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
           {renderVolumeChange(row.volumeChange)}
@@ -146,7 +148,7 @@ export default function TrendingTable() {
       minWidth: 24,
       width: 24,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
@@ -154,13 +156,13 @@ export default function TrendingTable() {
       minWidth: 156,
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => renderCatalog(row, true),
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => renderCatalog(row, true),
     },
     {
       field: "volume",
       headerName: "Volume",
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingData> }) => (
+      renderCell: ({ row } : { row: GridRowModel<CatalogTrendingDataType> }) => (
         <Stack className={styles.trendingTableVolume}>
           {renderVolume(row.volume)}
           {renderVolumeChange(row.volumeChange)}
@@ -188,7 +190,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={desktopColumns}
             hasBackground={false}
-            rows={rows?.slice(0, 5) || []}
+            rows={trendingCatalogs?.data?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 70,
               hideFooter: true,
@@ -198,7 +200,7 @@ export default function TrendingTable() {
         <Grid item mobile={6}  minWidth="690px">
           <Table
             bordered={false}
-            rows={rows?.slice(0, 5) || []}
+            rows={trendingCatalogs?.data?.slice(0, 5) || []}
             columns={desktopColumns}
             hasBackground={false}
             dataGridProps={{
@@ -220,7 +222,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={tabletColumns}
             hasBackground={false}
-            rows={rows?.slice(0, 5) || []}
+            rows={trendingCatalogs?.data?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,
@@ -232,7 +234,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={tabletColumns}
             hasBackground={false}
-            rows={rows?.slice(0, 5) || []}
+            rows={trendingCatalogs?.data?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,
@@ -253,7 +255,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={mobileColumns}
             hasBackground={false}
-            rows={rows?.slice(0, 5) || []}
+            rows={trendingCatalogs?.data?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,
@@ -265,7 +267,7 @@ export default function TrendingTable() {
             bordered={false}
             columns={mobileColumns}
             hasBackground={false}
-            rows={rows?.slice(0, 5) || []}
+            rows={trendingCatalogs?.data?.slice(0, 5) || []}
             dataGridProps={{
               rowHeight: 96,
               hideFooter: true,

@@ -8,9 +8,9 @@ export type ResponsiveCssProp<T> =
 export type JustifyType = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | string;
 export type AlignType = "start" | "center" | "left" | "right" | string;
 
-export type TimeFilter = "all" | "1h" | "6h" | "24h" | "7d";
+export type TimeFilterType = "all" | "1h" | "6h" | "24h" | "7d";
 
-export interface User {
+export interface UserType {
   id: string;
   email: string;
   username: string;
@@ -31,7 +31,7 @@ export interface User {
   // add more details here
 };
 
-export type UserSession = {
+export type UserSessionType = {
   userId: string;
   email: string;
   username: string;
@@ -39,12 +39,12 @@ export type UserSession = {
   pfp?: string;
 };
 
-export interface Trait {
+export interface TraitType {
   traitType: string;
   value: string;
 };
 
-export interface NFT {
+export interface NFTType {
   id: string;
   name: string;
   image: string;
@@ -53,7 +53,7 @@ export interface NFT {
   ownerName: string;
   ownerUserId: string;
   ownerLastActive: Date;
-  traits: Trait[];
+  traits: TraitType[];
   contractAddress: string;
   tokenId: string;
   tokenStandard: string;
@@ -69,66 +69,81 @@ export interface NFT {
   price: number;
 };
 
-export interface Catalog {
+export interface CatalogType {
   id: string;
   uid: string; // this is a unique generated id to be used on url like https://opensea.io/collection/the-narrator-1
   name: string;
   creatorName: string;
   creatorUserId: string;
   createdAt: Date;
-  nfts?: NFT[];
-  owners?: User[];
+  nfts?: NFTType[];
+  owners?: UserType[];
   coverImage: string;
   coverColor: string;
   allowExclusiveLicense: boolean;
 };
 
-export interface TopCatalog {
+export interface CatalogStatisticsType {
+  price: number;
+  priceDayChange: number;
+  priceDayHigh: number;
+  priceDayLow: number;
+  volumeDay: number;
+}
+
+export interface TopCatalogType {
   rank: number;
-  catalog: Catalog;
+  catalog: CatalogType;
 };
 
-export interface CatalogTrendingData {
+export interface CatalogTrendingDataType {
   id: string;
   rank: number;
   price: number;
   volume: number;
   volumeChange: number;
-  catalog: Catalog;
+  catalog: CatalogType;
 };
 
-export interface CatalogMarketData {
+export interface CatalogMarketDataType {
   id: string;
   price: number;
   priceChange: number;
-  catalog: Catalog;
+  catalog: CatalogType;
 };
 
-export interface PriceVolumeData {
+export interface NFTMarketDataType {
+  id: string;
+  price: number;
+  priceChange: number;
+  nft: NFTType;
+};
+
+export interface PriceVolumeDataType {
   month: string;
   price: number;
   volume: number;
 };
 
-export interface CatalogSalesData {
+export interface CatalogSalesDataType {
   id: string;
   rank: number;
-  catalog: Catalog;
+  catalog: CatalogType;
   price: number;
   quantity: number;
   subtotal: number;
-  buyer: User;
+  buyer: UserType;
   purchasedAt: Date;
 };
 
-export interface LandingUpdate {
+export interface LandingUpdateType {
   date: number;
   type: "blog" | string;
   title: string;
   image: string;
 };
 
-export interface SignupPayload {
+export interface SignupPayloadType {
   username: string;
   email: string;
   password: string;
@@ -137,7 +152,7 @@ export interface SignupPayload {
   pfp?: File | null;
 }
 
-export interface LoginPayload {
+export interface LoginPayloadType {
   email: string;
   password: string;
 }

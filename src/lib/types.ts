@@ -1,4 +1,4 @@
-import { UserSession } from "@/types";
+import { UserSessionType } from "@/types";
 
-export type SessionEncryptPayload = UserSession & { expiresAt: Date; };
+export type SessionEncryptPayload = UserSessionType & { expiresAt: Date; };
 

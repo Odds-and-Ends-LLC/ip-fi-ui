@@ -12,7 +12,7 @@ import { decrypt, verifySession } from "../session";
 import { user } from "@/data";
 
 // types
-import { User } from "@/types";
+import { UserType } from "@/types";
 
 export const getUserSession = cache(async () => {
   try {
@@ -41,7 +41,7 @@ export const getCurrentUser = cache(async () => {
     // get user data here
     // this is mock for now
     const { password, ...userDetails } = user;
-    const data = { ...userDetails } as User;
+    const data = { ...userDetails } as UserType;
 
     return data;
   } catch (error) {

@@ -1,18 +1,15 @@
 // packages
 import { Stack } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // components
 import { Catalog, Tabs } from "@/components";
 import { Analytics } from "..";
-import { Catalog as CatalogType } from "@/types";
+import { CatalogViewContext } from "../CatalogView/CatalogView";
 
-export default function CatalogTables({
-  catalog
-} : {
-  catalog: CatalogType;
-}) {
+export default function CatalogTables() {
   const [catalogTab, setCatalogTab] = useState("nft");
+  const catalog = useContext(CatalogViewContext)
 
   return (
     <Stack position="relative" sx={{ gap: { mobile: "24px"} }}>

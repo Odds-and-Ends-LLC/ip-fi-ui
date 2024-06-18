@@ -6,12 +6,12 @@ import { format } from "date-fns";
 import styles from "./Updates.module.css";
 
 // types
-import { LandingUpdate } from "@/types";
+import { LandingUpdateType } from "@/types";
 
 export default function UpdatesCard({
   update,
 } : {
-  update: LandingUpdate
+  update: LandingUpdateType
 }) {
   return (
     <Card className={styles.updatesCard} sx={{ borderColor: "dividers.brand" }}>

@@ -1,24 +1,22 @@
 // packages
 import { Stack, Button, Typography, LinearProgress, useTheme, useMediaQuery, Grid, Box, Dialog } from "@mui/material";
-import { useMeasure } from "@uidotdev/usehooks";
-import { useEffect, useState } from "react";
 import {  AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useMeasure } from "@uidotdev/usehooks";
+import { useAtom } from "jotai";
 
 // components
 import { ArrowRightIcon } from "@/elements/icons";
-import { Icon, NFT } from "@/components";
-import CatalogLeaf from "./CatalogLeaf";
-import CatalogRings from "./CatalogRings";
-import CatalogCover from "./CatalogCover";
-import { Catalog as CatalogType } from "@/types";
-import { clamp } from "@/utils/clamp";
-import CatalogNFTs from "./CatalogNFTs";
 import CatalogPockets from "./CatalogPockets";
-
-import styles from "./Catalog.module.css";
-import { useAtom } from "jotai";
+import CatalogCover from "./CatalogCover";
+import CatalogRings from "./CatalogRings";
 import { expandedNFTAtom } from "@/atoms";
-
+import CatalogNFTs from "./CatalogNFTs";
+import CatalogLeaf from "./CatalogLeaf";
+import { clamp } from "@/utils/clamp";
+import { Icon, NFT } from "@/components";
+import styles from "./Catalog.module.css";
+import { CatalogType } from "@/types";
 
 interface Pagination {
   leaf: number;
@@ -31,16 +29,13 @@ export default function Catalog({
   catalog: CatalogType
 }) {
   const theme = useTheme();
-  const [pagination, setPagination] = useState<Pagination>({
-    leaf: 0,
-    page: 0,
-  });
+  const [expandedNFT, setExpandedNFT] = useAtom(expandedNFTAtom);
   const isBase = useMediaQuery(theme.breakpoints.down('large'));
   const isMedium = useMediaQuery(theme.breakpoints.down('laptop'));
   const isSmall = useMediaQuery(theme.breakpoints.down('tablet'));
+  const [pagination, setPagination] = useState<Pagination>({ leaf: 0, page: 0, });
   const [ref, { width }] = useMeasure();
   const height = 766 * ((width || 0) / 1384) * (isSmall ? 1.9 : isMedium ? 1.1 : isBase ? .65 : .9);
-  const [expandedNFT, setExpandedNFT] = useAtom(expandedNFTAtom);
 
   const solvePageDivisor = () => {
     if (isSmall || isMedium) {
@@ -59,12 +54,8 @@ export default function Catalog({
     setPagination({ leaf: newLeaf });
   };
 
-  const reset = () => {
-    setPagination({ leaf: 1 });
-  };
-
   useEffect(() => {
-    reset();
+    setPagination({ leaf: 1 });
   }, [isBase, isMedium, isSmall]);
 
   const CoverComponent = () => (
@@ -77,7 +68,7 @@ export default function Catalog({
   );
 
   const pages =
-    [<CoverComponent />].concat(
+    [<CoverComponent key="front" />].concat(
       CatalogNFTs({ nfts: catalog.nfts || [] })
       .concat(
         CatalogPockets({ nftCount: catalog.nfts?.length || 0 })
@@ -94,7 +85,7 @@ export default function Catalog({
       ))
     ).concat(
       <></>,
-      <CoverComponent />
+      <CoverComponent key="back" />
     );
 
   return (

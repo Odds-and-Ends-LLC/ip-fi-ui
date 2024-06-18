@@ -1,7 +1,7 @@
 // components
 import { CatalogCover, ItemsCarousel } from "@/components";
 import { getFeaturedCatalogs } from "@/lib/client/catalog";
-import { Catalog } from "@/types";
+import { CatalogType } from "@/types";
 import { Box} from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import CatalogsSkeleton from "./CatalogsSkeleton";
@@ -12,7 +12,7 @@ export default function Catalogs() {
     queryFn: () => getFeaturedCatalogs()
   });
 
-  const renderCatalog = (catalog: Catalog ) => (
+  const renderCatalog = (catalog: CatalogType ) => (
     <CatalogCover
       key={catalog.id}
       catalog={catalog}
@@ -23,7 +23,7 @@ export default function Catalogs() {
     return <CatalogsSkeleton />
   }
 
-  if (!catalogs) {
+  if (!catalogs?.data) {
     return;
   }
 
@@ -33,7 +33,7 @@ export default function Catalogs() {
       count={33}
       viewAllUrl="/"
       items={
-        catalogs.map((catalog, i) => (
+        catalogs.data.map((catalog, i) => (
           <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>
             {renderCatalog(catalog)}
           </Box>

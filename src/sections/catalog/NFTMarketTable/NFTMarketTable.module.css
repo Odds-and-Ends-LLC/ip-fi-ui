@@ -10,7 +10,7 @@
   width: 50%;
 }
 
-.nftMarketTableCatalog {
+.nftMarketTableNFT {
   flex-direction: row;
   align-items: center;
   overflow: hidden;
@@ -18,7 +18,7 @@
   white-space: nowrap;
 }
 
-.nftMarketTableCatalogName {
+.nftMarketTableNFTName {
   overflow: hidden;
   text-overflow: ellipsis;
 }

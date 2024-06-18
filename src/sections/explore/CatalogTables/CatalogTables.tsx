@@ -1,20 +1,22 @@
 // packages
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Box, Grid, Stack } from "@mui/material";
 import { useAtom } from "jotai";
 
 // components
 import { Tabs } from "@/components";
-import { MarketTable, PriceVolumeGraph, TrendingTable } from "..";
-import { exploreTimeFilterAtom } from "@/atoms";
+import { MarketTable, TrendingTable } from "..";
 
 // styles
 import styles from "./CatalogTables.module.css";
-import { ExploreTimeFilter } from "@/types";
+import { TimeFilterType } from "@/types";
+import { PriceVolumeGraph } from "@/sections/global";
+import { CatalogViewContext } from "@/sections/catalog/CatalogView/CatalogView";
 
 export default function CatalogTables() {
   const [catalogTab, setCatalogTab] = useState("trending");
-  const [time, setTime] = useAtom(exploreTimeFilterAtom);
+  const [time, setTime] = useState<TimeFilterType>("all");
+  const catalog = useContext(CatalogViewContext);
 
   return (
     <>
@@ -61,7 +63,7 @@ export default function CatalogTables() {
             { label: "24h", value: "24h" },
             { label: "7d", value: "1d" },
           ]}
-          onChange={(value) => setTime(value as ExploreTimeFilter)}
+          onChange={(value) => setTime(value as TimeFilterType)}
           tabsStyle={{
             px: { mobile: "24px", tablet: "0px" },
             ["@media (max-width:980px)"]: {
@@ -74,14 +76,14 @@ export default function CatalogTables() {
       <Box
         sx={{ px: { mobile: "24px", tablet: "0px" }, }}
       >
-        {catalogTab === "trending" && <TrendingTable />}
+        {catalogTab === "trending" && <TrendingTable time={time} />}
         {catalogTab === "market" &&
           <Grid container spacing={3}>
             <Grid item mobile={12} laptop={6}>
-              <MarketTable />
+              <MarketTable time={time} />
             </Grid>
             <Grid item mobile={12} laptop={6}>
-              <PriceVolumeGraph />
+              <PriceVolumeGraph catalogId={catalog.id} />
             </Grid>
           </Grid>
         }

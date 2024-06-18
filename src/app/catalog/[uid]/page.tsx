@@ -12,7 +12,7 @@ export default async function CatalogViewPage({
 
   const catalog = await getCatalogByUid(uid);
 
-  if (!catalog || !catalog.success || !catalog.data) {
+  if (!catalog || !catalog || !catalog.data) {
     notFound();
   }
 

@@ -1,26 +1,30 @@
 // packages
 import { Box, Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { GridRowModel } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel } from "@mui/x-data-grid";
 import { format } from "date-fns";
 
 // components
 import { getCatalogSales } from "@/lib/client/catalog";
 import styles from "./CatalogSalesTable.module.css";
 import { Avatar, Table } from "@/components";
-import { CatalogSalesData } from "@/types";
+import { CatalogSalesDataType } from "@/types";
 import { EthIcon } from "@/elements/icons";
+import { useContext } from "react";
+import { CatalogViewContext } from "../CatalogView/CatalogView";
 
-export default function CatalogSalesTable({
-  catalogId
-} : {
-  catalogId: string;
-}) {
+export default function CatalogSalesTable() {
+  const catalog = useContext(CatalogViewContext);
+  const { data: catalogSales, isFetching } = useQuery({
+    queryKey: ["catalogs-sales", catalog.id, catalog.uid],
+    queryFn: () => getCatalogSales(catalog.id),
+  });
+
   const renderRank = (rank: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
 
   const renderNumber = (rank: string | number) => <Typography color="text.gray" variant="body1">{rank}</Typography>;
 
-  const renderCatalog = (row: CatalogSalesData, showPrice?: boolean) => (
+  const renderCatalog = (row: CatalogSalesDataType, showPrice?: boolean) => (
     <Stack
       className={styles.catalogSalesTableCatalog}
       sx={{
@@ -70,7 +74,9 @@ export default function CatalogSalesTable({
 
   const renderHeaderLeft = () => (
     <Stack>
-      <Typography color="text.disabled" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>uMANILA/eth&apos;s</Typography>
+      <Typography color="text.disabled" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>
+        {catalog.name}&apos;s
+      </Typography>
       <Typography
         sx={{
           typography: { desktop: "h6", mobile: "label3" },
@@ -82,61 +88,57 @@ export default function CatalogSalesTable({
     </Stack>
   );
 
-  const columns = [
+  const columns: GridColDef[] = [
     {
+      field: "rank",
+      headerName: "",
       width: 24,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderRank(row.rank),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderRank(row.rank),
     },
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
-      sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderCatalog(row),
     },
     {
       field: "price",
       headerName: "Price",
       width: 120,
-      sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderPrice(row.price),
     },
     {
       field: "quantity",
       headerName: "Quantity",
       flex: 1,
-      sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderNumber(row.quantity),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderNumber(row.quantity),
     },
     {
       field: "subtotal",
       headerName: "Subtotal",
       width: 120,
-      sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderPrice(row.subtotal),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderPrice(row.subtotal),
     },
     {
       field: "buyer",
       headerName: "Buyer",
       flex: 1,
-      sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderBuyer(row.buyer.pfp, row.buyer.username),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderBuyer(row.buyer.pfp, row.buyer.username),
     },
     {
-      field: "purchaseDate",
+      field: "purchaseAt",
       headerName: "Purchase Date",
       width: 188,
-      sortable: false,
       align: "right",
       headerAlign: "left",
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesData> }) => renderNumber(format(row.purchasedAt, "MM/dd/yyyy HH:mm a")),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderNumber(format(row.purchasedAt, "MM/dd/yyyy HH:mm a")),
     },
   ];
 
@@ -147,8 +149,8 @@ export default function CatalogSalesTable({
       minHeight="480px"
       maxHeight="480px"
       columns={columns}
+      rows={catalogSales?.data || []}
       dataGridProps={{
-        rows: rows,
         rowHeight: 60,
         hideFooter: true,
       }}

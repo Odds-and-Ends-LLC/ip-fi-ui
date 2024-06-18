@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 // types
 import { SessionEncryptPayload } from "./types";
-import { UserSession } from "@/types";
+import { UserSessionType } from "@/types";
 
 const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -29,7 +29,7 @@ export async function decrypt(session: string | undefined = "") {
   }
 }
 
-export async function createSession(payload: UserSession) {
+export async function createSession(payload: UserSessionType) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const session = await encrypt({ ...payload, expiresAt });
 
@@ -50,7 +50,7 @@ export const verifySession = async () => {
     return null;
   }
 
-  const userSession: UserSession = {
+  const userSession: UserSessionType = {
     userId: session.userId?.toString() ?? "",
     email: session.email?.toString() ?? "",
     username: session.username?.toString() ?? "",

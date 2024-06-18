@@ -1,4 +1,4 @@
-import { NFT as NFTType } from "@/types";
+import { NFTType } from "@/types";
 import { Box, Dialog, Stack } from "@mui/material";
 import styles from "./Catalog.module.css";
 import { AnimatePresence, motion } from "framer-motion";

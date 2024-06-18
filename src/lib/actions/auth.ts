@@ -9,7 +9,7 @@ import { user } from "@/data";
 
 // lib
 import { createSession, deleteSession } from "../session";
-import { LoginPayload, UserSession } from "@/types";
+import { LoginPayloadType, UserSessionType } from "@/types";
 import { revalidatePath } from "next/cache";
 
 export async function signup(formData: FormData) {
@@ -49,7 +49,7 @@ export async function signup(formData: FormData) {
   }
 }
 
-export async function login(data: LoginPayload) {
+export async function login(data: LoginPayloadType) {
   try {
     // check if user exists
     await new Promise((resolve) => {
@@ -63,7 +63,7 @@ export async function login(data: LoginPayload) {
       return { error: "Email or password is invalid." };
     }
 
-    const session: UserSession = {
+    const session: UserSessionType = {
       userId: user.id,
       email: user.email,
       username: user.username,

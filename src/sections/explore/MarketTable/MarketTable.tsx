@@ -9,21 +9,23 @@ import { EthIcon } from "@/elements/icons";
 // styles
 import styles from "./MarketTable.module.css";
 import { GridColDef, GridRowModel } from "@mui/x-data-grid";
-import { exploreTimeFilterAtom } from "@/atoms";
 import { useQuery } from "@tanstack/react-query";
-import { getMarketCatalogs } from "@/lib/client/catalog";
-import { CatalogMarketData } from "@/types";
+import { getCatalogsMarket } from "@/lib/client/catalog";
+import { CatalogMarketDataType, TimeFilterType } from "@/types";
 import MarketTableSkeleton from "./MarketTableSkeleton";
 
-export default function MarketTable() {
-  const time = useAtomValue(exploreTimeFilterAtom);
+export default function MarketTable({
+  time
+} : {
+  time: TimeFilterType;
+}) {
 
-  const { data: rows, isFetching } = useQuery({
+  const { data: catalogMarket, isFetching } = useQuery({
     queryKey: ["catalogs-market", time],
-    queryFn: () => getMarketCatalogs(time)
+    queryFn: () => getCatalogsMarket(time)
   });
 
-  const renderCatalog = (row: GridRowModel<CatalogMarketData>) => (
+  const renderCatalog = (row: GridRowModel<CatalogMarketDataType>) => (
     <Stack
       className={styles.marketTableCatalog}
       sx={{
@@ -82,7 +84,7 @@ export default function MarketTable() {
       headerName: "Catalog",
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogMarketData> }) => renderCatalog(row),
+      renderCell: ({ row } : { row: GridRowModel<CatalogMarketDataType> }) => renderCatalog(row),
     },
     {
       field: "price",
@@ -91,7 +93,7 @@ export default function MarketTable() {
       sortable: false,
       align: "center",
       headerAlign: "center",
-      renderCell: ({ row } : { row: GridRowModel<CatalogMarketData> }) => renderPrice(row.price),
+      renderCell: ({ row } : { row: GridRowModel<CatalogMarketDataType> }) => renderPrice(row.price),
     },
     {
       field: "priceChange",
@@ -100,7 +102,7 @@ export default function MarketTable() {
       sortable: false,
       align: "right",
       headerAlign: "right",
-      renderCell: ({ row } : { row: GridRowModel<CatalogMarketData> }) => renderVolumeDelta(row.priceChange),
+      renderCell: ({ row } : { row: GridRowModel<CatalogMarketDataType> }) => renderVolumeDelta(row.priceChange),
     },
   ];
 
@@ -113,7 +115,7 @@ export default function MarketTable() {
       headerLeftComponent={renderHeaderLeft()}
       minWidth="640px"
       maxHeight="420px"
-      rows={rows || []}
+      rows={catalogMarket?.data || []}
       columns={columns}
       dataGridProps={{
         rowHeight: 60,

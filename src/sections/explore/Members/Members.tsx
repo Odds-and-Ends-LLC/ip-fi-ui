@@ -21,7 +21,7 @@ export default function Members() {
     return <MembersSkeleton />
   }
 
-  if (!members) {
+  if (!members?.data) {
     return;
   }
 
@@ -53,7 +53,7 @@ export default function Members() {
         count={33}
         viewAllUrl="/"
         items={
-          members.map((member, i) => (
+          members.data.map((member, i) => (
             <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "340px", maxHeight: "356px" }}>
               <Member
                 key={i}

@@ -8,7 +8,7 @@ import Link from "next/link";
 
 // styles
 import styles from "./Catalog.module.css";
-import { Catalog } from "@/types";
+import { CatalogType } from "@/types";
 
 // This component is fluid and just follows the dimensions of its parent
 // so that it can be used on different grid configurations
@@ -19,7 +19,7 @@ export default function CatalogCover({
   cover,
   hideDetails,
 } : {
-  catalog: Catalog;
+  catalog: CatalogType;
   badge?: string;
   cover?: boolean;
   hideDetails?: boolean;
@@ -102,32 +102,26 @@ export default function CatalogCover({
         }
       </CardActionArea>
       {!hideDetails &&
-        <Box
+        <Stack
           className={styles.catalogCoverDetails}
           sx={{
-            bgcolor: "background.default",
+            background: "linear-gradient(0deg, rgba(1,2,40,1) 0%, rgba(0,212,255,0) 100%)",
+            p: {
+              mobile: "8px",
+              tablet: "16px",
+            }
           }}
         >
-          <Stack
-            className={styles.catalogCoverDetailsContent}
-            sx={{
-              bgcolor: "background.tertiary",
-              p: {
-                mobile: "16px",
-              }
-            }}
-          >
-            <Typography variant="h6">
-              {catalog.name}
-            </Typography>
-            <Typography variant="body2">
-              {catalog.creatorName}
-            </Typography>
-            <Typography variant="body2" color="text.disabled">
-              {catalog.nfts?.length || 0} NFTS
-            </Typography>
-          </Stack>
-        </Box>
+          <Typography sx={{ typography: { mobile: "h7", tablet: "h6" } }}>
+            {catalog.name.toUpperCase()}
+          </Typography>
+          <Typography sx={{ typography: { mobile: "body3", tablet: "body2" } }}>
+            {catalog.creatorName}
+          </Typography>
+          <Typography sx={{ typography: { mobile: "body3", tablet: "body2" } }} color="text.disabled">
+            {catalog.nfts?.length || 0} NFTS
+          </Typography>
+        </Stack>
       }
     </Card>
   )

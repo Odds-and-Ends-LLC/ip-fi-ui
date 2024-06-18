@@ -11,10 +11,14 @@ import { useQuery } from "@tanstack/react-query";
 import { getPriceVolumeHistory } from "@/lib/client/catalog";
 import PriceVolumeGraphSkeleton from "./PriceVolumeGraphSkeleton";
 
-export default function Table() {
-  const { data, isFetching } = useQuery({
-    queryKey: ["price-volume-history"],
-    queryFn: () => getPriceVolumeHistory(),
+export default function PriceVolumeGraph({
+  catalogId,
+} : {
+  catalogId: string;
+}) {
+  const { data: priceVolume, isFetching } = useQuery({
+    queryKey: ["price-volume-history", catalogId],
+    queryFn: () => getPriceVolumeHistory(catalogId),
   })
 
   const renderHeaderLeft = () => (
@@ -35,7 +39,7 @@ export default function Table() {
     return (<PriceVolumeGraphSkeleton />)
   }
 
-  if (!data) {
+  if (!priceVolume?.data) {
     return;
   }
 
@@ -59,7 +63,7 @@ export default function Table() {
         }}
       >
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart data={priceVolume.data}>
             <XAxis dataKey="month" axisLine={false} tickLine={false} hide />
             <YAxis orientation="right" axisLine={false} tickLine={false} width={32} />
             <CartesianGrid stroke="#1A1B46" strokeWidth={.5} />

@@ -1,7 +1,7 @@
 "use client";
 
 import { userSessionAtom } from "@/atoms";
-import { UserSession } from "@/types";
+import { UserSessionType } from "@/types";
 import { useHydrateAtoms } from "jotai/utils";
 import { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,7 +18,7 @@ export default function ClientProviders({
   user,
   children,
 }: {
-  user: UserSession | null;
+  user: UserSessionType | null;
   children: ReactNode;
 }) {
   useHydrateAtoms([[userSessionAtom, user]]);

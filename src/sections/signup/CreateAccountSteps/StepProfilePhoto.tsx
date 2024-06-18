@@ -1,7 +1,7 @@
 // packages
 import { Alert, Box, Button, Stack, Typography } from "@mui/material";
 import { useAtom, useSetAtom } from "jotai";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { LoadingButton } from "@mui/lab";
 import { useState } from "react";
 
@@ -12,7 +12,7 @@ import styles from "./CreateAccountSteps.module.css";
 import { signupPayloadAtom, userSessionAtom } from "@/atoms";
 import { Icon, ProfilePicture } from "@/components";
 import { signup } from "@/lib/actions/auth";
-import { SignupPayload } from "@/types";
+import { SignupPayloadType } from "@/types";
 
 export default function StepProfilePhoto({
   onBack,
@@ -52,14 +52,14 @@ export default function StepProfilePhoto({
       return;
     }
 
-    if (res.success && res.data) {
+    if (res.data) {
       setUserSession(res.data)
       router.replace("/explore");
     }
   };
 
   const handleImageSelect = (imageFile: File) => {
-    setSignupPayload((payload: SignupPayload) => ({ ...payload, pfp: imageFile }));
+    setSignupPayload((payload: SignupPayloadType) => ({ ...payload, pfp: imageFile }));
   };
 
   return (

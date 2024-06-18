@@ -5,16 +5,16 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 // components
 import { Carousel, CatalogCover } from "@/components";
 import { getTopCatalogs } from "@/lib/client/catalog";
-import { TopCatalog } from "@/types";
+import { TopCatalogType } from "@/types";
 import TopCatalogsSkeleton from "./TopCatalogsSkeleton";
 
 export default function TopCatalogs() {
-  const { data, isFetching } = useQuery({
+  const { data: topCatalogs, isFetching } = useQuery({
     queryKey: ["top-catalogs"],
     queryFn: () => getTopCatalogs(),
   });
 
-  const renderTopCatalog = (topCatalog: TopCatalog) => (
+  const renderTopCatalog = (topCatalog: TopCatalogType) => (
     <CatalogCover
       key={topCatalog.catalog.id}
       catalog={topCatalog.catalog}
@@ -26,7 +26,7 @@ export default function TopCatalogs() {
     return <TopCatalogsSkeleton />
   }
 
-  if (!data) {
+  if (!topCatalogs?.data) {
     return;
   }
 
@@ -35,21 +35,21 @@ export default function TopCatalogs() {
       {/* Desktop Grid */}
       <Grid container spacing={3} height="40vw" maxHeight="540px" sx={{ display: { desktop: "flex", mobile: "none" } }}>
         <Grid item mobile={6}>
-          {renderTopCatalog(data[0])}
+          {renderTopCatalog(topCatalogs.data[0])}
         </Grid>
         <Grid item mobile={6}>
           <Grid container spacing={3} height="40vw" maxHeight="540px">
             <Grid item mobile={6}>
-              {renderTopCatalog(data[1])}
+              {renderTopCatalog(topCatalogs.data[1])}
             </Grid>
             <Grid item mobile={6}>
-              {renderTopCatalog(data[2])}
+              {renderTopCatalog(topCatalogs.data[2])}
             </Grid>
             <Grid item mobile={6}>
-              {renderTopCatalog(data[3])}
+              {renderTopCatalog(topCatalogs.data[3])}
             </Grid>
             <Grid item mobile={6}>
-              {renderTopCatalog(data[4])}
+              {renderTopCatalog(topCatalogs.data[4])}
             </Grid>
           </Grid>
         </Grid>
@@ -59,32 +59,32 @@ export default function TopCatalogs() {
         <Grid item mobile={6}>
           <Grid container spacing={2} height="100%" maxHeight="540px">
             <Grid item mobile={12}>
-              {renderTopCatalog(data[0])}
+              {renderTopCatalog(topCatalogs.data[0])}
             </Grid>
             <Grid item mobile={12}>
-              {renderTopCatalog(data[1])}
+              {renderTopCatalog(topCatalogs.data[1])}
             </Grid>
           </Grid>
         </Grid>
         <Grid item mobile={6}>
           <Grid container spacing={2} height="100%"  maxHeight="540px">
             <Grid item mobile={12}>
-              {renderTopCatalog(data[2])}
+              {renderTopCatalog(topCatalogs.data[2])}
             </Grid>
             <Grid item mobile={12}>
-              {renderTopCatalog(data[3])}
+              {renderTopCatalog(topCatalogs.data[3])}
             </Grid>
             <Grid item mobile={12}>
-              {renderTopCatalog(data[4])}
+              {renderTopCatalog(topCatalogs.data[4])}
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       {/* Mobile Grid */}
-      <Stack height="45vw" sx={{ display: { tablet: "none", mobile: "flex" } }}>
+      <Stack height="fit-content" sx={{ display: { tablet: "none", mobile: "flex" } }}>
         <Carousel
           slides={
-            data?.map((topCatalog, i) => (
+            topCatalogs.data.map((topCatalog, i) => (
               <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>
                 {renderTopCatalog(topCatalog)}
               </Box>

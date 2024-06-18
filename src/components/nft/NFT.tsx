@@ -9,7 +9,7 @@ import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "@/elements/icons";
 
 // styles
 import styles from "./NFT.module.css";
-import { NFT as NFTType } from "@/types";
+import { NFTType } from "@/types";
 
 export default function NFT({
   nft,

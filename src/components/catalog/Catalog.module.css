@@ -174,13 +174,11 @@
 }
 
 .catalogCoverDetails{
-  width: 100%;
-  height: 100px;
   z-index: 3;
-}
-
-.catalogCoverDetailsContent {
-  gap: 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .catalogExpandedBackdrop {

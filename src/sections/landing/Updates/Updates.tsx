@@ -17,7 +17,7 @@ const GetUpdates = async () => {
   const updates = await getBlogs();
 
   return updates ?
-    <UpdatesCarousel updates={updates} /> :
+    <UpdatesCarousel updates={updates.data || []} /> :
     <Stack sx={{ bgcolor: "text.brandPrimary", p: "32px" }}>
       <Typography variant="h3" textAlign="center">Check back soon for the latest iP-Fi updates!</Typography>
     </Stack>

@@ -47,7 +47,7 @@ export default function TopCatalogsSkeleton() {
         </Grid>
       </Grid>
       {/* Mobile Grid */}
-      <Stack height="45vw" sx={{ display: { tablet: "none", mobile: "flex" } }}>
+      <Stack height="fit-content" sx={{ display: { tablet: "none", mobile: "flex" } }}>
         <Carousel
           slides={
             Array(4).fill("").map((_, i) => (
