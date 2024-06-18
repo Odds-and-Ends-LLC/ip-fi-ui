@@ -1,0 +1,11 @@
+.textField {
+  flex-grow: 1;
+  gap: 8px;
+  text-align: start;
+}
+
+.textFieldMessage {
+  flex-direction: row;
+  gap: 8px;
+  padding: 8px;
+}

@@ -1,0 +1,8 @@
+.selectLabel {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  left: 2px;
+  top: -9px;
+  width: 100%;
+}

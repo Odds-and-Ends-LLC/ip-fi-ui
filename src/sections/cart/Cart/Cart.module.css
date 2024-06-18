@@ -1,0 +1,105 @@
+.catalogCart {
+  align-items: start;
+  flex: 1;
+  gap: 24px;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 72px;
+  position: relative;
+  width: 100%;
+}
+
+.catalogCartContents {
+  align-items: start;
+  flex: 1;
+  gap: 24px;
+  width: 100%;
+}
+
+.catalogHeaders {
+  align-items: start;
+  gap: 24px;
+  width: 100%;
+}
+
+.catalogMainSection {
+  flex: 1 0;
+  gap: 24px;
+  overflow: auto;
+  width: 100%;
+  align-self: center;
+  max-width: 1920px;
+}
+
+.catalogCartProgressBar {
+  height: 8px;
+  width: 100%;
+}
+
+.catalogCartStepper {
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.catalogTableAndSummary {
+  flex: 1;
+  gap: 24px;
+  overflow: auto;
+  width: 100%;
+}
+
+.catalogCartTable {
+  align-items: start;
+  gap: 16px;
+  width: 100%;
+}
+
+.catalogOrderDetails {
+  flex: 1;
+  gap: 24px;
+  overflow: auto;
+  width: 100%;
+}
+
+.catalogTabs {
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
+}
+
+.catalogNftCount {
+  align-items: center;
+  border-radius: 33px;
+  justify-content: center;
+  padding: 8px;
+  min-width: 36px;
+}
+
+.catalogNftTable {
+  flex: 1;
+  height: 100%;
+  min-height: 320px;
+  width: 100%;
+}
+
+.catalogFooters {
+  align-items: start;
+  width: 100%;
+}
+
+.footerSubtotal {
+  align-items: center;
+  flex-direction: row;
+  gap: 32px;
+  justify-content: end;
+  padding: 32px;
+  width: 100%;
+}
+
+.bgContainer {
+  align-self: center;
+  flex-shrink: 0;
+  height: 672px;
+  width: 880px;
+}

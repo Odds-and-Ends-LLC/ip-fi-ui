@@ -1,0 +1,21 @@
+.analytics {
+  flex: 1;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.analyticsContent {
+  flex: 1;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.analyticsSection {
+  gap: 16px;
+}
+
+.analyticsContracts,
+.analyticsPerformance {
+  column-gap: 24px;
+  row-gap: 16px;
+}

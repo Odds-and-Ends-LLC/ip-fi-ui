@@ -1,0 +1,63 @@
+/* Navbar */
+
+.navbarLinksContainer {
+  width: 100%;
+}
+
+.navbarLogo {
+  align-items: center;
+  display: flex;
+}
+
+.navbarLinks {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.navbarLinksDesktop {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.navbarMobileMenu {
+  min-width: 40px;
+  min-height: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.navbarMobileDrawer {
+  width: 100%;
+  z-index: 2;
+  padding: 24px;
+  gap: 24px;
+}
+
+.navbarMobileDrawerHeader {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbarMobileDrawerContent {
+  gap: 24px;
+}
+
+.navbarMobileDrawerFooter {
+  margin-top: auto;
+  gap: 16px;
+}
+
+.navbarMobileDrawerSocials {
+  flex-direction: row;
+  gap: 16px;
+}
+
+/* NavbarAvatar */
+
+.navbarAvatarMenu {
+  margin-top: 8px;
+}
+
+.navbarAvatarProfile {
+  gap: 16px;
+}

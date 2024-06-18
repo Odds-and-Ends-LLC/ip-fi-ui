@@ -1,0 +1,21 @@
+/* Share Modal */
+
+.shareButton {
+  text-align: start;
+  width: 100%;
+}
+
+.shareButtonModalCopyButton {
+  align-items: center;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  gap: 8px;
+  padding-bottom: 16px;
+}
+
+.shareButtonModalCopyLink {
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+}

@@ -1,0 +1,10 @@
+.baseTerms {
+  flex: 1;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.baseTermsRow {
+  column-gap: 24px;
+  row-gap: 16px;
+}

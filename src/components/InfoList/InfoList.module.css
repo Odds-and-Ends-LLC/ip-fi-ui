@@ -1,0 +1,10 @@
+.infoList {
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.infoListItem {
+  gap: 8px;
+  align-items: center;
+}

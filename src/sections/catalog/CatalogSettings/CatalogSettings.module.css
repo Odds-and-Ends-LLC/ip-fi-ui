@@ -1,0 +1,43 @@
+.catalogSettings {
+  min-height: 100vh;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.catalogSettingsSection {
+  flex: 1;
+  max-width: 1512px;
+  width: 100%;
+}
+
+.catalogSettingsPaper {
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.catalogSettingsWrapper {
+  gap: 24px 48px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.catalogSettingsName {
+  gap: 8px;
+}
+
+.catalogSettingsNameInput {
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+.catalogSettingsCover {
+  max-width: 428px;
+  height: 326px;
+}
+
+.catalogSettingsContent {
+  gap: 4px;
+  max-width: 824px;
+}

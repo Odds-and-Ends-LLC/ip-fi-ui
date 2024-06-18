@@ -1,0 +1,28 @@
+.paymentMethod {
+  border-radius: 12px 0px 0px 12px;
+  background: linear-gradient(118deg, rgba(1, 2, 44, 0.3) 0%, rgba(1, 2, 44, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  gap: 24px;
+  overflow: visible;
+}
+
+.paymentOptions {
+  gap: 4px;
+}
+
+.paymentOption {
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.paymentOptionLabel {
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.paymentOptionLabelText {
+  gap: 2px;
+}

@@ -1,0 +1,25 @@
+.profilePicture {
+  position: relative;
+  overflow: visible;
+}
+
+.profilePictureUpload {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+}
+
+.profilePictureUploadWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.profilePictureModal {
+  gap: 12px;
+}
+
+.profilePictureModalButton {
+  gap: 8px;
+}

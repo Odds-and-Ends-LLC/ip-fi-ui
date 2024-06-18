@@ -1,0 +1,14 @@
+.confirmationFormContainer {
+  align-items: center;
+  gap: 42px;
+  justify-content: center;
+  padding: 32px 24px;
+  width: 100%;
+}
+
+.confirmationForm {
+  flex: none;
+  gap: 24px;
+  max-width: 560px;
+  width: 100%;
+}

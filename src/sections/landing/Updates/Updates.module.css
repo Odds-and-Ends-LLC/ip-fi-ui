@@ -1,0 +1,45 @@
+.updates,
+.updatesContainer {
+  width: 100%;
+}
+
+.updates {
+  align-self: center;
+}
+
+.updatesCarouselHeaderButtons,
+.updatesCarouselHeaderPrevNextButtons {
+  flex-direction: row;
+}
+
+.updatesCarouselHeader {
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.updatesCarouselHeaderButtons {
+  gap: 32px;
+}
+
+.updatesCarouselHeaderPrevNextButtons {
+  gap: 16px;
+  height: 40px;
+}
+
+.updatesCard {
+  background: none;
+  border-radius: 0;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+.updatesCardTitle {
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.updatesCardMedia {
+  flex-shrink: 0;
+  height: 240px;
+  width: 100%;
+}
