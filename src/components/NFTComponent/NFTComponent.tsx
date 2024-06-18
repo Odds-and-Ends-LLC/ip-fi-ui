@@ -9,7 +9,7 @@ import styles from "./NFT.module.css";
 import { NFTType } from "@/types";
 import { Icon } from "..";
 
-export default function NFT({
+export default function NFTComponent({
   nft,
   action,
   headerAction,
