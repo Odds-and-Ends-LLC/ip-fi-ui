@@ -27,7 +27,7 @@ export default async function RootLayout({ children } : Readonly<{
           <ThemeProvider theme={theme}>
             <Provider>
               <CssBaseline />
-              <ClientProviders user={userSession}>
+              <ClientProviders user={userSession?.data || null}>
                 <Navbar />
                 <Container>
                   {children}
