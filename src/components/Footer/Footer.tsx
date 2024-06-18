@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // styles
 import styles from "./Footer.module.css";
-import { DiscordIcon, InstagramIcon, Linkedin, Twitter } from "@/elements/icons";
+import { Icon } from "..";
 
 // components
 
@@ -62,16 +62,16 @@ export default function Footer() {
           <Link href="/" color="text.brandSecondary">Terms</Link>
         </Stack>
         <Stack className={styles.footerSocials}>
-          <SocialLink icon={<Twitter />} href="/">
+          <SocialLink icon={<Icon icon="twitterX" />} href="/">
             TWITTER
           </SocialLink>
-          <SocialLink icon={<InstagramIcon />} href="/">
+          <SocialLink icon={<Icon icon="instagram" />} href="/">
             INSTAGRAM
           </SocialLink>
-          <SocialLink icon={<DiscordIcon />} href="/">
+          <SocialLink icon={<Icon icon="discord" />} href="/">
             DISCORD
           </SocialLink>
-          <SocialLink icon={<Linkedin />} href="/">
+          <SocialLink icon={<Icon icon="linkedIn" />} href="/">
             LINKEDIN
           </SocialLink>
         </Stack>

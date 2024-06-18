@@ -4,9 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // components
-import { CatalogCover } from "@/components";
+import { CatalogCover, Icon } from "@/components";
 import { NFTBackground } from "@/sections/nft";
-import { ArrowLeftIcon } from "@/elements/icons";
 import { CoverPicker, ColorPicker } from "..";
 
 // styles
@@ -84,7 +83,7 @@ export default function CatalogSettings() {
           className={styles.catalogSettingsPaper}
           sx={{ padding: { tablet: "24px 40px" } }}
         >
-          <Button startIcon={<ArrowLeftIcon />} onClick={handleBack}>
+          <Button startIcon={<Icon icon="arrowLeft" />} onClick={handleBack}>
             BACK
           </Button>
           <Stack

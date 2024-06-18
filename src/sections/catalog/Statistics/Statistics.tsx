@@ -1,15 +1,13 @@
 // packages
 import { Divider, Skeleton, Stack, Typography } from "@mui/material";
-
-// components
-import { EthIcon } from "@/elements/icons";
+import { Fragment, ReactNode, useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // styles
-import styles from "./Statistics.module.css";
-import { Fragment, ReactNode, useContext } from "react";
 import { CatalogViewContext } from "../CatalogView/CatalogView";
-import { useQuery } from "@tanstack/react-query";
 import { getCatalogStatistics } from "@/lib/client/catalog";
+import styles from "./Statistics.module.css";
+import { Icon } from "@/components";
 
 export default function Statistics() {
   const catalog = useContext(CatalogViewContext);
@@ -24,7 +22,7 @@ export default function Statistics() {
 
   const renderEth = (value: number) => (
     <Stack className={styles.statisticsItemEth}>
-      <EthIcon />
+      <Icon icon="ethereum" />
       <Typography variant="h5" color="text.white">{value}</Typography>
     </Stack>
   );

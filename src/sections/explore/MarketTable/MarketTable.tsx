@@ -1,10 +1,8 @@
 // packages
 import { Stack, Typography } from "@mui/material";
-import { useAtomValue } from "jotai";
 
 // components
-import { Avatar, Table } from "@/components";
-import { EthIcon } from "@/elements/icons";
+import { Avatar, Icon, Table } from "@/components";
 
 // styles
 import styles from "./MarketTable.module.css";
@@ -53,7 +51,7 @@ export default function MarketTable({
 
   const renderPrice = (price: number) => (
     <Stack className={styles.marketTablePrice}>
-      <EthIcon />
+      <Icon icon="ethereum" />
       <Typography variant="body1" color="text.secondary">{price}</Typography>
     </Stack>
   );

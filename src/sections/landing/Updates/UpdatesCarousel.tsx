@@ -5,9 +5,8 @@ import { Button, Stack, Typography } from "@mui/material";
 import { ArrowOutward } from "@mui/icons-material";
 
 // component
-import { ArrowHeadLeftIcon, ArrowHeadRightIcon } from "@/elements";
 import UpdatesCard from "./UpdatesCard";
-import { Carousel } from "@/components";
+import { Carousel, Icon } from "@/components";
 
 // styles
 import styles from "./Updates.module.css";
@@ -49,10 +48,10 @@ export default function UpdatesCarousel({
             >
               <Stack className={styles.updatesCarouselHeaderPrevNextButtons}>
                 <Button variant="clearWhite" mode="icon" aria-label="previous blogs" {...prev}>
-                  <ArrowHeadLeftIcon />
+                  <Icon icon="arrowHeadLeft" />
                 </Button>
                 <Button variant="clearWhite" mode="icon" aria-label="next blogs" {...next}>
-                  <ArrowHeadRightIcon />
+                  <Icon icon="arrowHeadRight" />
                 </Button>
               </Stack>
               <Button variant="solidGreen" endIcon={<ArrowOutward />}>

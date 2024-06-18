@@ -7,7 +7,6 @@ import { Icon, Modal } from "..";
 
 // styles
 import styles from "./ProfilePicture.module.css";
-import { PickAvatarIcon, RemoveIcon, UploadIcon } from "@/elements/icons";
 
 export default function ProfilePicture({
   image,

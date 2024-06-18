@@ -4,12 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// components
-import { ExpandIcon, EyeOffIcon, EyeOnIcon } from "@/elements/icons";
-
 // styles
 import styles from "./NFT.module.css";
 import { NFTType } from "@/types";
+import { Icon } from "..";
 
 export default function NFT({
   nft,
@@ -53,8 +51,8 @@ export default function NFT({
           variant="solidWhite"
           onClick={handleHeaderActionClick}
         >
-          {headerAction === "visibility" && (visibleState ? <EyeOnIcon color={theme.palette.background.default} /> : <EyeOffIcon color={theme.palette.background.default} />)}
-          {headerAction === "expand" && <ExpandIcon color={theme.palette.background.default} />}
+          {headerAction === "visibility" && (visibleState ? <Icon icon="eyeOn" color={theme.palette.background.default} /> : <Icon icon="eyeOff" color={theme.palette.background.default} />)}
+          {headerAction === "expand" && <Icon icon="arrowExpand" color={theme.palette.background.default} />}
         </Button>
       }
       <CardActionArea

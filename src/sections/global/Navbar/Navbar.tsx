@@ -19,8 +19,7 @@ import {
 import Image from "next/image";
 
 // components
-import { DiscordIcon, InstagramIcon, Linkedin, LogoutIcon, Twitter, WarningIcon } from "@/elements/icons";
-import { Avatar, Modal } from "@/components";
+import { Avatar, Icon, Modal } from "@/components";
 
 // styles
 import styles from "./Navbar.module.css";
@@ -80,7 +79,7 @@ export default function Navbar() {
                 <Avatar image={userSession.pfp} size="s" />
               </Link>
               <Button variant="clearWhite" mode="icon" onClick={() => setLogoutOpen(true)}>
-                <LogoutIcon />
+                <Icon icon="logout" />
               </Button>
             </>
           )}
@@ -142,16 +141,16 @@ export default function Navbar() {
             <Stack className={styles.navbarMobileDrawerFooter}>
               <Stack className={styles.navbarMobileDrawerSocials}>
                 <Button variant="solidGreen" mode="icon" href="/">
-                  <Twitter />
+                  <Icon icon="twitterX" />
                 </Button>
                 <Button variant="solidGreen" mode="icon" href="/">
-                  <InstagramIcon />
+                  <Icon icon="instagram" />
                 </Button>
                 <Button variant="solidGreen" mode="icon" href="/">
-                  <DiscordIcon />
+                  <Icon icon="discord" />
                 </Button>
                 <Button variant="solidGreen" mode="icon" href="/">
-                  <Linkedin />
+                  <Icon icon="linkedIn" />
                 </Button>
               </Stack>
               <Typography variant="label1">
@@ -163,7 +162,7 @@ export default function Navbar() {
       </Toolbar>
       <Modal
         title="Logout"
-        titleIcon={<WarningIcon />}
+        titleIcon={<Icon icon="info" />}
         open={logoutOpen}
         onClose={() => setLogoutOpen(false)}
         actions={

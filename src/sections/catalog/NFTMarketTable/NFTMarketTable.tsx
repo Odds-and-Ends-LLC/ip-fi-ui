@@ -5,8 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 
 // components
-import { Avatar, Table } from "@/components";
-import { EthIcon } from "@/elements/icons";
+import { Avatar, Icon, Table } from "@/components";
 import { NFTMarketDataType, TimeFilterType } from "@/types";
 import { CatalogViewContext } from "../CatalogView/CatalogView";
 import styles from "./NFTMarketTable.module.css";
@@ -52,7 +51,7 @@ export default function NFTMarketTable({
 
   const renderPrice = (price: number) => (
     <Stack className={styles.nftMarketTablePrice}>
-      <EthIcon />
+      <Icon icon="ethereum" />
       <Typography variant="body1" color="text.gray">{price}</Typography>
     </Stack>
   );

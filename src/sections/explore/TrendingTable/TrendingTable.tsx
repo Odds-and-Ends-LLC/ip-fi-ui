@@ -2,11 +2,9 @@
 import { Grid, Stack, Typography } from "@mui/material";
 import { GridRowModel } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
-import { useAtomValue } from "jotai";
 
 // components
-import { Avatar, Table } from "@/components";
-import { EthIcon } from "@/elements/icons";
+import { Avatar, Icon, Table } from "@/components";
 import { getTrendingCatalogs } from "@/lib/client/catalog";
 import { CatalogTrendingDataType, TimeFilterType } from "@/types";
 
@@ -52,8 +50,8 @@ export default function TrendingTable({
         {showPrice &&
           <Stack flexDirection="row" alignItems="center">
             <Typography sx={{ typography: { desktop: "body1", mobile: "body3" }}}>Price: </Typography>
-            <Stack justifyContent="center" sx={{ display: { desktop: "flex", mobile: "none" }}}><EthIcon /></Stack>
-            <Stack justifyContent="center" sx={{ display: { desktop: "none", mobile: "flex" }}}><EthIcon size={16} /></Stack>
+            <Stack justifyContent="center" sx={{ display: { desktop: "flex", mobile: "none" }}}><Icon icon="ethereum" /></Stack>
+            <Stack justifyContent="center" sx={{ display: { desktop: "none", mobile: "flex" }}}><Icon icon="ethereum" size={18} /></Stack>
             <Typography color="text.secondary" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{row.price}</Typography>
           </Stack>
         }
@@ -63,7 +61,7 @@ export default function TrendingTable({
 
   const renderPrice = (price: number) => (
     <Stack className={styles.trendingTablePrice}>
-      <EthIcon />
+      <Icon icon="ethereum" />
       <Typography variant="body1" color="text.secondary">{price}</Typography>
     </Stack>
   );

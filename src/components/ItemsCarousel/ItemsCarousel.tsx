@@ -1,9 +1,8 @@
 // packages
-import { Button, IconButton, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 
 // components
-import { Carousel, ItemsSectionHeader } from "..";
-import { ArrowHeadLeftIcon, ArrowHeadRightIcon } from "@/elements/icons";
+import { Carousel, Icon, ItemsSectionHeader } from "..";
 
 // styles
 import styles from "./ItemsCarousel.module.css";
@@ -47,10 +46,10 @@ export default function ItemsCarousel({
               }
               <Stack className={styles.itemsCarouselPaginationArrows}>
                 <Button variant="clearWhite" mode="icon" {...prev}>
-                  <ArrowHeadLeftIcon />
+                  <Icon icon="arrowHeadLeft" />
                 </Button>
                 <Button variant="clearWhite" mode="icon" {...next}>
-                  <ArrowHeadRightIcon  />
+                  <Icon icon="arrowHeadRight" />
                 </Button>
               </Stack>
             </Stack>

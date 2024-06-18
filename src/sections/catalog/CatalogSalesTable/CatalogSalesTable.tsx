@@ -1,5 +1,5 @@
 // packages
-import { Box, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { GridColDef, GridRowModel } from "@mui/x-data-grid";
 import { format } from "date-fns";
@@ -7,9 +7,8 @@ import { format } from "date-fns";
 // components
 import { getCatalogSales } from "@/lib/client/catalog";
 import styles from "./CatalogSalesTable.module.css";
-import { Avatar, Table } from "@/components";
+import { Avatar, Icon, Table } from "@/components";
 import { CatalogSalesDataType } from "@/types";
-import { EthIcon } from "@/elements/icons";
 import { useContext } from "react";
 import { CatalogViewContext } from "../CatalogView/CatalogView";
 
@@ -49,8 +48,8 @@ export default function CatalogSalesTable() {
         {showPrice &&
           <Stack flexDirection="row" alignItems="center">
             <Typography sx={{ typography: { desktop: "body1", mobile: "body3" }}}>Price: </Typography>
-            <Stack justifyContent="center" sx={{ display: { desktop: "flex", mobile: "none" }}}><EthIcon /></Stack>
-            <Stack justifyContent="center" sx={{ display: { desktop: "none", mobile: "flex" }}}><EthIcon size={16} /></Stack>
+            <Stack justifyContent="center" sx={{ display: { desktop: "flex", mobile: "none" }}}><Icon icon="ethereum" /></Stack>
+            <Stack justifyContent="center" sx={{ display: { desktop: "none", mobile: "flex" }}}><Icon icon="ethereum" size={18} /></Stack>
             <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{row.price}</Typography>
           </Stack>
         }
@@ -60,7 +59,7 @@ export default function CatalogSalesTable() {
 
   const renderPrice = (price: number) => (
     <Stack className={styles.catalogSalesTablePrice}>
-      <EthIcon />
+      <Icon icon="ethereum" />
       <Typography variant="body1" color="text.gray">{price}</Typography>
     </Stack>
   );

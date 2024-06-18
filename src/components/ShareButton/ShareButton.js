@@ -1,11 +1,10 @@
 // packages
-import { FacebookIcon, LinkIcon, ShareIcon, XTwitterIcon } from "@/elements";
 import { Button, Stack, Typography } from "@mui/material";
 import copy from "copy-to-clipboard";
 import { useState } from "react";
 
 // components
-import { Modal } from "..";
+import { Icon, Modal } from "..";
 
 // styles
 import styles from "./ShareButton.module.css";
@@ -28,7 +27,7 @@ export default function ShareButton({
         href={href}
         sx={{ color: "text.secondary" }}
         startIcon={icon}
-        endIcon={<ShareIcon />}
+        endIcon={<Icon icon="share" />}
       >
         <Typography variant="button" className={styles.shareButton} color="text.primary">
           {label}
@@ -40,7 +39,7 @@ export default function ShareButton({
   return (
     <>
       <Button
-        startIcon={<ShareIcon />}
+        startIcon={<Icon icon="share" />}
         variant="outlineWhite"
         onClick={() => setOpenShareModal(true)}
         sx={{ display: { mobile: "none", tablet: "flex" } }}
@@ -59,14 +58,14 @@ export default function ShareButton({
         onClose={() => setOpenShareModal(false)}
         title={title}
       >
-        <SocialShareButton label="FACEBOOK" icon={<FacebookIcon />} href="/" />
-        <SocialShareButton label="TWITTER" icon={<XTwitterIcon />} href="/" />
+        <SocialShareButton label="FACEBOOK" icon={<Icon icon="facebook" />} href="/" />
+        <SocialShareButton label="TWITTER" icon={<Icon icon="twitterX" />} href="/" />
         <Stack
           className={styles.shareButtonModalCopyButton}
           sx={{ borderColor: "dividerGray.main", flexDirection: { tablet: "row" } }}
         >
           <Stack className={styles.shareButtonModalCopyLink}>
-            <LinkIcon />
+            <Icon icon="link" />
             <Typography noWrap>{link}</Typography>
           </Stack>
           <Button

@@ -4,8 +4,7 @@ import { useRef } from "react";
 
 // components
 import { CatalogTables, Catalogs, Members, NFTs, TopCatalogs } from "..";
-import { Footer, GlassCoverImage, Tabs } from "@/components";
-import { PlusIcon } from "@/elements/icons";
+import { Footer, GlassCoverImage, Icon, Tabs } from "@/components";
 
 // styles
 import styles from "./Explore.module.css";
@@ -76,7 +75,7 @@ export default function Explore() {
           </Stack>
           <Button
             variant="outlineWhite"
-            startIcon={<PlusIcon />}
+            startIcon={<Icon icon="add" />}
           >
             CREATE CATALOG
           </Button>

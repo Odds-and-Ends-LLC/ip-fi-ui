@@ -3,8 +3,7 @@ import { Box, Button, Divider, IconButton, Stack, Typography } from "@mui/materi
 import Image from "next/image";
 
 // components
-import { DiscordIcon, InstagramIcon, LooksRareIcon, OpenSeaIcon, SettingsIcon, ShareIcon, Twitter, WebIcon } from "@/elements";
-import { CollapsibleText, InfoList, ProfilePicture, ShareButton, WalletDisplay } from "@/components";
+import { CollapsibleText, Icon, InfoList, ProfilePicture, ShareButton, WalletDisplay } from "@/components";
 import { ProfileStats } from ".";
 
 // styles
@@ -59,7 +58,7 @@ export default function Profile() {
           </Stack>
           <Stack className={styles.profileSectionButtons}>
             <Button
-              startIcon={<SettingsIcon />}
+              startIcon={<Icon icon="settings" />}
               variant="outlineWhite"
               href="/profile/settings"
               sx={{

@@ -6,7 +6,6 @@ import { useMeasure } from "@uidotdev/usehooks";
 import { useAtom } from "jotai";
 
 // components
-import { ArrowRightIcon } from "@/elements/icons";
 import CatalogPockets from "./CatalogPockets";
 import CatalogCover from "./CatalogCover";
 import CatalogRings from "./CatalogRings";
@@ -166,7 +165,7 @@ export default function Catalog({
               <Typography>{`${(pagination.leaf * (!isSmall ? 2 : 1)) + (isSmall ? 0 : -1)} ${!isSmall ? "-" : ""} ${!isSmall ? pagination.leaf  * 2 : ""}`}</Typography>
             </Stack>
           }
-          <Button variant="clearWhite" endIcon={<ArrowRightIcon />} onClick={() => handleControls(1)}>NEXT</Button>
+          <Button variant="clearWhite" endIcon={<Icon icon="arrowRight" />} onClick={() => handleControls(1)}>NEXT</Button>
         </Stack>
       </Stack>
       <AnimatePresence>
