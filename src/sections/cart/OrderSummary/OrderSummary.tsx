@@ -9,14 +9,14 @@ import { Icon } from "@/components";
 import { ItemDetail } from "..";
 
 // types
-import { Catalog } from "@/types";
+import { CatalogType } from "@/types";
 
 export default function OrderSummary({
   data,
   hideSubtotal,
   ContinueBtnProps,
 }: {
-  data?: Catalog;
+  data?: CatalogType;
   hideSubtotal?: boolean;
   ContinueBtnProps?: ButtonProps;
 }) {

@@ -11,9 +11,9 @@ import { CatalogListName, Icon } from "@/components";
 import { ItemDetail } from "..";
 
 // types
-import { Catalog } from "@/types";
+import { CatalogType } from "@/types";
 
-export default function ConfirmationForm({ data }: { data?: Catalog }) {
+export default function ConfirmationForm({ data }: { data?: CatalogType }) {
   return (
     <Stack className={styles.confirmationFormContainer}>
       <Typography variant="h4" textAlign="center">

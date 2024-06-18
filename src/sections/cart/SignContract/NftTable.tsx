@@ -10,7 +10,7 @@ import styles from "./SignContract.module.css";
 import { Icon, Table } from "@/components";
 
 // types
-import { NFT } from "@/types";
+import { NFTType } from "@/types";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 // data
@@ -20,7 +20,7 @@ export default function NftTable({
   data = [],
   isEditable,
 }: {
-  data?: NFT[];
+  data?: NFTType[];
   isEditable?: boolean;
 }) {
   const [selectedNfts, setSelectedNfts] = useState<GridRowSelectionModel>([]);
@@ -34,7 +34,7 @@ export default function NftTable({
       renderHeader: () => null,
       minWidth: 72,
       sortable: false,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Stack sx={{ flex: 1 , alignItems: "center"}}>
           <Image
             src="/icons_png/Favorite_Selected_40x40.png"
@@ -51,7 +51,7 @@ export default function NftTable({
       minWidth: 280,
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Stack sx={{ flexDirection: "row", gap: "16px", flex: 1 }}>
           <Image src={row.image} alt="nft" width={80} height={80} style={{ borderRadius: "8px" }} />
           <Stack
@@ -91,7 +91,7 @@ export default function NftTable({
       minWidth: 280,
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Stack sx={{ gap: "4px", flex: 1 }}>
           <Typography variant="body2" color="text.disabled" noWrap>
             NFT Owner:&nbsp;
@@ -119,7 +119,7 @@ export default function NftTable({
       maxWidth: 192,
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Stack className={styles.tableColumnPrice}>
           <Icon icon="ethereum" />
           <Typography color="text.secondary">{row?.price?.toString()}</Typography>

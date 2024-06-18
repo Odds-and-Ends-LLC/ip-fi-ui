@@ -10,7 +10,7 @@ import styles from "./CatalogNftTable.module.css";
 import { Icon, Table } from "@/components";
 
 // types
-import { NFT } from "@/types";
+import { NFTType } from "@/types";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 
 // data
@@ -20,7 +20,7 @@ export default function CatalogNftTable({
   data = [],
   isEditable,
 }: {
-  data?: NFT[];
+  data?: NFTType[];
   isEditable?: boolean;
 }) {
   const [selectedNfts, setSelectedNfts] = useState<GridRowSelectionModel>([]);
@@ -38,7 +38,7 @@ export default function CatalogNftTable({
       minWidth: 280,
       flex: 1,
       sortable: true,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Stack sx={{ flexDirection: "row", gap: "16px", flex: 1 }}>
           <Image src={row.image} alt="nft" width={80} height={80} style={{ borderRadius: "8px" }} />
           <Stack
@@ -88,7 +88,7 @@ export default function CatalogNftTable({
       maxWidth: 192,
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Stack className={styles.tableColumnPrice}>
           <Icon icon="ethereum" />
           <Typography color="text.secondary">{row?.price?.toString()}</Typography>
@@ -115,7 +115,7 @@ export default function CatalogNftTable({
       ),
       minWidth: 104,
       sortable: false,
-      renderCell: ({ row }: { row: NFT }) => (
+      renderCell: ({ row }: { row: NFTType }) => (
         <Button aria-label="delete nft" variant="clearRed" mode="icon">
           <Icon icon="delete" />
         </Button>

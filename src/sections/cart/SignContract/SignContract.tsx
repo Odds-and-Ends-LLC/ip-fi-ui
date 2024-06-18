@@ -13,14 +13,14 @@ import { ItemDetail } from "..";
 import { LicenseTerms, NftTable } from ".";
 
 // types
-import { NFT } from "@/types";
+import { NFTType } from "@/types";
 
 export default function SignContract({
   data,
   onCancel,
   onSignContract,
 }: {
-  data?: NFT[];
+  data?: NFTType[];
   onCancel: () => void;
   onSignContract: () => void;
 }) {

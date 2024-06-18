@@ -50,13 +50,13 @@ export default function SettingsAccount() {
           </Stack>
           <PasswordInput
             label="Current Password"
+            name="password"
             required
             placeholder=""
             // value=""
             disabled={changePasswordVerified}
             error={false}
-            alert="Incorrect password."
-            AlertProps={{ visible: false }}
+            // alert="Incorrect password."
           />
           {!changePasswordVerified ? (
             <Button
@@ -71,22 +71,22 @@ export default function SettingsAccount() {
             <>
               <PasswordInput
                 label="New Password"
+                name="newpassword"
                 required
                 placeholder=""
                 // value=""
                 error={false}
-                alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
-                and 1 special character."
-                AlertProps={{ visible: false }}
+                // alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
+                // and 1 special character."
               />
               <PasswordInput
                 label="Re-enter New Password"
+                name="retype"
                 required
                 placeholder=""
                 // value=""
                 error={false}
-                alert="Passwords didn't match."
-                AlertProps={{ visible: false }}
+                // alert="Passwords didn't match."
               />
               <Stack
                 className={styles.changePasswordButtons}
@@ -174,8 +174,9 @@ export default function SettingsAccount() {
           <PasswordInput
             onChange={(event) => setDeletePasswordInput(event?.target?.value)}
             error={false}
-            alert="Incorrect password."
-            AlertProps={{ visible: false }}
+            name="password"
+            // alert="Incorrect password."
+            // AlertProps={{ visible: false }}
           />
         </Stack>
       </Modal>

@@ -19,7 +19,7 @@ import {
 } from "..";
 
 // types
-import { Catalog } from "@/types";
+import { CatalogType } from "@/types";
 interface RenderedCatalog {
   label: string;
   value: string;
@@ -28,12 +28,12 @@ interface RenderedCatalog {
 }
 
 // data
-import { catalogs } from "../tempData";
+import { catalogs } from "@/data";
 // const purchased = false;
 
 export default function Cart() {
   const [activeStep, setActiveStep] = useState<number>(0); // set back to 0
-  const [activeCatalog, setActiveCatalog] = useState<Catalog | undefined>(undefined);
+  const [activeCatalog, setActiveCatalog] = useState<CatalogType | undefined>(undefined);
   const [catalogsList, setCatalogsList] = useState<RenderedCatalog[]>([]);
   const [paymentMethod, setPaymentMethod] = useState<string | undefined>(undefined);
   const [openModal, setOpenModal] = useState("");
@@ -58,7 +58,7 @@ export default function Cart() {
   }, []);
 
   useEffect(() => {
-    const renderCatalogs = (catalogs: Catalog[]): RenderedCatalog[] => {
+    const renderCatalogs = (catalogs: CatalogType[]): RenderedCatalog[] => {
       const catalogArray: RenderedCatalog[] = [];
       catalogs?.map((catalog) =>
         catalogArray.push({

@@ -12,6 +12,7 @@ import { Analytics, BaseTerms, Catalogs, Details, History, NFTBackground } from 
 
 // types
 import { NftDetails } from "../types";
+import { nfts } from "@/data";
 
 // data
 const link = "https://www.hypersona12133.com";
@@ -84,9 +85,7 @@ export default function NFT() {
                 visible
                 variant="profile"
                 action={undefined}
-                id={""}
-                image={nft?.image}
-                price={0}
+                nft={nfts[0]}
               />
             </Stack>
             <Stack className={styles.nftProfileColumn}>
@@ -118,7 +117,7 @@ export default function NFT() {
               </Stack>
               <Stack className={styles.nftProfileOwner}>
                 <Typography variant="body2">Owner:</Typography>
-                <Member variant="" memberName={nft?.owner} />
+                <Member lastActive="" catalogs={1} contracts={1} joinedDate="" memberName={nft?.owner} />
               </Stack>
             </Stack>
           </Stack>

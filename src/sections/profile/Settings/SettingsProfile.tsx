@@ -43,21 +43,21 @@ export default function SettingsProfile() {
         className={styles.profileUsernameEmailContainer}
         sx={{ flexDirection: { tablet: "row" } }}
       >
-        <TextField fullWidth label="Username" />
-        <TextField fullWidth label="Email" />
+        <TextField name="username" fullWidth label="Username" />
+        <TextField name="email" fullWidth label="Email" />
       </Stack>
-      <TextField label="About" multiline rows={3} />
+      <TextField name="about" label="About" multiline rows={3} />
       <Stack className={styles.profileTextFieldContainer}>
         <Typography variant="label1" textTransform="none">
           Links
         </Typography>
         <Stack gap="16px">
-          <TextField {...renderLinkLabel("website")} value="example.com" />
-          <TextField {...renderLinkLabel("twitterX", "Twitter")} value="twitter.com/example" />
-          <TextField {...renderLinkLabel("instagram")} value="instagram.com/example" />
-          <TextField {...renderLinkLabel("discord")} value="discord.gg/example" />
-          <TextField {...renderLinkLabel("openSea")} value="opensea.io/example" />
-          <TextField {...renderLinkLabel("looksRare")} value="looksrare.org/sample" />
+          <TextField name="website" {...renderLinkLabel("website")} value="example.com" />
+          <TextField name="twitterX" {...renderLinkLabel("twitterX", "Twitter")} value="twitter.com/example" />
+          <TextField name="instagram" {...renderLinkLabel("instagram")} value="instagram.com/example" />
+          <TextField name="discord" {...renderLinkLabel("discord")} value="discord.gg/example" />
+          <TextField name="openSea" {...renderLinkLabel("openSea")} value="opensea.io/example" />
+          <TextField name="looksRare" {...renderLinkLabel("looksRare")} value="looksrare.org/sample" />
         </Stack>
       </Stack>
       <Stack

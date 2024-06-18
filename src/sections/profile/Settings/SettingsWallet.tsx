@@ -9,9 +9,11 @@ import styles from "./Settings.module.css";
 import { Icon, Modal, WalletDisplay } from "@/components";
 
 // types
-import { UserSignupData } from "../../types";
+// import { UserSignupData } from "@/types";
 
-export default function SettingsWallet({ data }: { data: Partial<UserSignupData> | undefined }) {
+export default function SettingsWallet(
+  // { data }: { data: Partial<UserSignupData> | undefined }
+) {
   const [openModal, setOpenModal] = useState(false);
   const handleRemoveWallet = () => {
     setOpenModal(true);
@@ -32,7 +34,7 @@ export default function SettingsWallet({ data }: { data: Partial<UserSignupData>
         </Typography>
       </Stack>
       <Stack className={styles.accountWalletList}>
-        {data?.walletAddresses?.map((walletAddress, index) => (
+        {/* {data?.walletAddresses?.map((walletAddress, index) => (
           <Fragment key={index}>
             <WalletDisplay
               key={index}
@@ -73,7 +75,7 @@ export default function SettingsWallet({ data }: { data: Partial<UserSignupData>
               </Typography>
             </Modal>
           </Fragment>
-        ))}
+        ))} */}
       </Stack>
       <Button
         fullWidth

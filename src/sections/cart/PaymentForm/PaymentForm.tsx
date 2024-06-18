@@ -11,13 +11,13 @@ import { CatalogListName, Icon } from "@/components";
 import { CatalogNftTable, ItemDetail } from "..";
 
 // types
-import { Catalog } from "@/types";
+import { CatalogType } from "@/types";
 
 export default function PaymentForm({
   data,
   onPurchaseCatalog,
 }: {
-  data?: Catalog;
+  data?: CatalogType;
   onPurchaseCatalog: () => void;
 }) {
   const [showNFTs, setShowNFTs] = useState(false);

@@ -41,20 +41,20 @@ export default function ResetPassword() {
           <Stack gap="24px">
             <PasswordInput
               label="New Password"
+              name="password"
               required
               onChange={handleEnterPassword}
               error={passwordIncorrect}
-              alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
-                and 1 special character."
-              AlertProps={{ visible: passwordIncorrect }}
+              // alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
+              //   and 1 special character."
             />
             <PasswordInput
               label="Re-enter New Password"
+              name="retype"
               required
               onChange={handleReEnterPassword}
               error={!!passwords.match && passwordDoNotMatch}
-              alert="Passwords didn't match."
-              AlertProps={{ visible: !!passwords.match && passwordDoNotMatch }}
+              // alert="Passwords didn't match."
             />
             <Button
               variant="solidGreen"

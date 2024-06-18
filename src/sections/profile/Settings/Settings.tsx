@@ -104,7 +104,7 @@ export default function Settings() {
             <Stack className={styles.tabPanelContent}>
               {tab === "profile" && <SettingsProfile />}
               {tab === "account" && <SettingsAccount />}
-              {tab === "wallet" && <SettingsWallet data={data} />}
+              {tab === "wallet" && <SettingsWallet />}
             </Stack>
           </Stack>
         </Stack>
