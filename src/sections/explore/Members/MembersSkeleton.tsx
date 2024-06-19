@@ -14,7 +14,7 @@ export default function MembersSkeleton() {
       title="MEMBERS"
       items={
         Array(4).fill("").map((_, i) => (
-          <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "340px", maxHeight: "356px" }}>
+          <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "232px", maxHeight: "232px" }}>
             <SkeletonComponent />
           </Box>
         ))

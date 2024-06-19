@@ -263,7 +263,7 @@ export default function Cart() {
         </Typography>
         <Stack gap="8px">
           <Typography>Catalog Name</Typography>
-          <TextField id="catalog-name" name="catalogName" />
+          {/* <TextField id="catalog-name" name="catalogName" /> */}
         </Stack>
       </Modal>
     </Stack>

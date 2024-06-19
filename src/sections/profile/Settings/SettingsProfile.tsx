@@ -1,5 +1,6 @@
 // packages
 import { Button, Stack, Typography } from "@mui/material";
+import { FormProvider, useForm } from "react-hook-form";
 
 // styles
 import styles from "./Settings.module.css";
@@ -10,7 +11,23 @@ import { Icon, ProfilePicture, TextField } from "@/components";
 // types
 import { IconType } from "@/components/Icon";
 
+type SettingsForm = Partial<{
+  username: string;
+  email: string;
+  about: string;
+  website: string;
+  twitter: string;
+  instagram: string
+  discord: string;
+  opensea: string;
+  looksrare: string;
+}>
+
 export default function SettingsProfile() {
+  const form = useForm<SettingsForm>({
+    mode: "onSubmit",
+  });
+
   const renderLinkLabel = (icon: IconType, label?: string) => ({
     InputProps: {
       startAdornment: (
@@ -29,7 +46,7 @@ export default function SettingsProfile() {
   });
 
   return (
-    <>
+    <FormProvider {...form}>
       <Typography variant="h4">PROFILE SETTINGS</Typography>
       <Stack
         width="100%"
@@ -67,6 +84,6 @@ export default function SettingsProfile() {
         <Button variant="solidGreen">SAVE CHANGES </Button>
         <Button variant="outlineGreen">DISCARD</Button>
       </Stack>
-    </>
+    </FormProvider>
   );
 }

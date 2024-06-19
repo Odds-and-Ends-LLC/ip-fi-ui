@@ -54,15 +54,15 @@ export default function Members() {
         viewAllUrl="/"
         items={
           members.data.map((member, i) => (
-            <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "340px", maxHeight: "356px" }}>
+            <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "232px", maxHeight: "232px" }}>
               <Member
                 key={i}
                 memberName={member.username}
                 pfp={member.pfp}
-                lastActive={member.lastActiveAt ? formatDistanceToNow(member.lastActiveAt) : ""}
+                lastActive={member.lastActiveAt}
                 catalogs={member.catalogCount}
                 contracts={member.contractCount}
-                joinedDate={formatDistanceToNow(member.joinedAt)}
+                joinedDate={member.joinedAt}
               />
             </Box>
           ))

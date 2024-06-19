@@ -6,21 +6,27 @@ import { Avatar, Icon, Table } from "@/components";
 
 // styles
 import styles from "./MarketTable.module.css";
-import { GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import { getCatalogsMarket } from "@/lib/client/catalog";
 import { CatalogMarketDataType, TimeFilterType } from "@/types";
 import MarketTableSkeleton from "./MarketTableSkeleton";
+import { useRef, useState } from "react";
+
+const sortMapping: Record<string, string> = {
+  // database field name: query field name
+  catalog: "catalog",
+};
 
 export default function MarketTable({
   time
 } : {
   time: TimeFilterType;
 }) {
-
-  const { data: catalogMarket, isFetching } = useQuery({
-    queryKey: ["catalogs-market", time],
-    queryFn: () => getCatalogsMarket(time)
+  const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
+  const { data: catalogMarket, isPending, isFetching} = useQuery({
+    queryKey: ["catalogs-market", time, query.toString()],
+    queryFn: () => getCatalogsMarket(time),
   });
 
   const renderCatalog = (row: GridRowModel<CatalogMarketDataType>) => (
@@ -76,12 +82,28 @@ export default function MarketTable({
     </Stack>
   );
 
+  const handleSort = (model: GridSortModel) => {
+    if (!model || !model[0]) {
+      return;
+    }
+
+    const { field, sort } = model[0];
+    const params = new URLSearchParams(query.toString());
+    params.set("sort", `${sortMapping[field]}`);
+    sort === "asc" ?
+      params.set("asc", "true") :
+      params.delete("asc");
+
+    console.log(params.toString());
+
+    setQuery(params);
+  };
+
   const columns : GridColDef[] = [
     {
       field: "catalog",
       headerName: "Catalog",
       flex: 1,
-      sortable: false,
       renderCell: ({ row } : { row: GridRowModel<CatalogMarketDataType> }) => renderCatalog(row),
     },
     {
@@ -104,10 +126,6 @@ export default function MarketTable({
     },
   ];
 
-  if (isFetching) {
-    return <MarketTableSkeleton />
-  }
-
   return (
     <Table
       headerLeftComponent={renderHeaderLeft()}
@@ -118,6 +136,17 @@ export default function MarketTable({
       dataGridProps={{
         rowHeight: 60,
         hideFooter: true,
+        rowCount: catalogMarket?.data?.length,
+        onSortModelChange: handleSort,
+        loading: isFetching,
+        slots: {
+          loadingOverlay: MarketTableSkeleton
+        },
+        sx: {
+          "& .MuiDataGrid-overlayWrapper": {
+            height: "360px !important",
+          },
+        }
       }}
     />
   );

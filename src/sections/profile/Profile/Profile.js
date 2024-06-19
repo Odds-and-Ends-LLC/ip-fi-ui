@@ -123,7 +123,7 @@ export default function Profile() {
           </IconButton> */}
         </Stack>
         <Divider
-          sx={{ borderColor: "dividerWhite.main" }}
+          sx={{ borderColor: "dividers.default" }}
         />
       </Stack>
     </Stack>

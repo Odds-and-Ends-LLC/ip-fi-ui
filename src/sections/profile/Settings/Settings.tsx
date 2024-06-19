@@ -1,14 +1,19 @@
+"use client";
+
 // packages
-import { useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button, Stack } from "@mui/material";
+import { useEffect } from "react";
 
 // styles
 import styles from "./Settings.module.css";
 
 // components
+import SettingsProfile from "./SettingsProfile";
+import SettingsAccount from "./SettingsAccount";
+import SettingsWallet from "./SettingsWallet";
+import SettingsBackground from "./SettingsBackground";
 import { Icon, Tabs } from "@/components";
-import { SettingsProfile, SettingsAccount, SettingsWallet, SettingsBackground } from ".";
 
 const data = {
   walletAddresses: [

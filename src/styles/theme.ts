@@ -643,48 +643,74 @@ theme.components = {
       disableColumnMenu: true,
       sortingMode: "server",
       filterMode: "server",
+      rowSelection: false,
     },
     styleOverrides: {
+      main: {
+        // remove overflow hidden overwise sticky does not work
+        overflow: "unset",
+      },
+      columnSeparator: {
+        display: "none",
+      },
+      virtualScroller: {
+        // remove the space left for the header
+        marginTop: "0 !important",
+        borderRadius: "0 !important",
+      },
+      columnHeaders: {
+        borderRadius: "0 !important",
+        position: "sticky",
+        top: 0,
+        zIndex: 1,
+      },
+      columnHeader: {
+        ...theme.typography.label3,
+        outline: "none !important",
+
+        [theme.breakpoints.down("tablet")]: {
+          fontSize: "12px",
+          padding: "0px 8px",
+        },
+      },
+      overlayWrapper: {
+        position: "relative",
+        top: 0,
+        zIndex: 0,
+      },
+      iconButtonContainer: {
+        visibility: "visible",
+        width: "fit-content",
+        order: 1,
+      },
+      sortIcon: {
+        color: theme.palette.text.primary,
+        opacity: "1 !important",
+      },
+      row: {
+        transition: "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+
+        "&:hover": {
+          backgroundColor: `${theme.palette.background.grayOverlay} !important`,
+        },
+      },
+      cell: {
+        border: "none",
+        padding: "0px 16px",
+        outline: "none !important",
+        [theme.breakpoints.down("tablet")]: {
+          padding: "0px 8px",
+        },
+      },
+      footerContainer: {
+        border: "none",
+      },
       root: {
         border: "none",
-        "& .MuiDataGrid-withBorderColor": {
-          borderBottom: "1px solid",
-          borderImageSource: theme.palette.dividers.default,
-        },
-        "& .MuiDataGrid-columnHeader": {
-          ...theme.typography.label3,
-          [theme.breakpoints.down("tablet")]: {
-            fontSize: "12px",
-            padding: "0px 8px",
-          },
-        },
-        "[class^=MuiDataGrid-cell]": {
-          border: "none",
-          padding: "0px 16px",
-          [theme.breakpoints.down("tablet")]: {
-            padding: "0px 8px",
-          },
-        },
-        "& .MuiDataGrid-columnHeader .MuiDataGrid-columnSeparator": {
-          display: "none",
-        },
-        "& .MuiDataGrid-columnHeader:focus, .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within":
-          {
-            outline: "none",
-          },
-        "& .MuiDataGrid-main": {
-          // remove overflow hidden overwise sticky does not work
-          overflow: "unset",
-        },
-        "& .MuiDataGrid-columnHeaders": {
-          position: "sticky",
-          top: 0,
-          zIndex: 1,
-        },
-        "& .MuiDataGrid-virtualScroller": {
-          // remove the space left for the header
-          marginTop: "0 !important",
-        },
+        // "& .MuiDataGrid-withBorderColor": {
+        //   borderBottom: "1px solid",
+        //   borderImageSource: theme.palette.dividers.default,
+        // },
       },
     },
   },

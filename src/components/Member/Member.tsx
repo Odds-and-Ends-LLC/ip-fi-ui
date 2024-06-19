@@ -1,5 +1,5 @@
 // packages
-import { Box, Card, CardContent, CardHeader, IconButton, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 
 // components
@@ -8,24 +8,25 @@ import { ProfilePicture } from "..";
 // styles
 import styles from "./Member.module.css";
 import { motion } from "framer-motion";
+import { formatDistanceToNow } from "date-fns";
 
 export default function Member({
   memberName = "Member",
   pfp,
-  lastActive = "4 hours ago",
+  lastActive,
   catalogs = 0,
   contracts = 0,
-  joinedDate = "2 months ago",
+  joinedDate,
   responseTime = "Within Hours",
   responseRate,
   variant = "card",
 } : {
   memberName: string;
   pfp?: string;
-  lastActive: string;
+  lastActive?: Date;
   catalogs: number;
   contracts: number;
-  joinedDate: string;
+  joinedDate: Date;
   responseTime?: string;
   responseRate?: string;
   variant?: "card" | "list";
@@ -47,24 +48,17 @@ export default function Member({
         <Box className={styles.memberCardProfilePicture}>
           <ProfilePicture image={pfp} />
         </Box>
-        <CardHeader
-          className={styles.memberCardHeader}
-          action={
-            <IconButton>
-              <Image src="/icons/arrow_up_right.svg" alt="arrow up right" width={18} height={18} />
-            </IconButton>
-          }
-        >
-        </CardHeader>
         <CardContent className={styles.memberCardContent}>
           <Stack className={styles.memberCardTopDetails}>
             <Stack className={styles.memberCardItem}>
               <Typography variant="h6">
                 {memberName}
               </Typography>
-              <Typography variant="body2" color="text.disabledBlue">
-                Active {lastActive}
-              </Typography>
+              {lastActive &&
+                <Typography variant="body2" color="text.disabledBlue">
+                  Active {formatDistanceToNow(lastActive, { addSuffix: true })}
+                </Typography>
+              }
             </Stack>
             <Stack className={styles.memberCardNumbers}>
               <Stack className={styles.memberCardItem}>
@@ -91,10 +85,10 @@ export default function Member({
                 Joined
               </Typography>
               <Typography variant="body2">
-                {joinedDate}
+                {formatDistanceToNow(joinedDate, { addSuffix: true })}
               </Typography>
             </Stack>
-            <Stack className={styles.memberCardRow}>
+            {/* <Stack className={styles.memberCardRow}>
               <Typography variant="body2" color="text.disabledBlue">
                 Response Time
               </Typography>
@@ -109,7 +103,7 @@ export default function Member({
               <Typography variant="body2">
                 {responseRate}
               </Typography>
-            </Stack>
+            </Stack> */}
           </Stack>
         </CardContent>
       </Card> :
@@ -117,7 +111,7 @@ export default function Member({
         <ProfilePicture size="xs" />
         <Stack>
           <Typography variant="body1">{memberName}</Typography>
-          <Typography variant="body2" color="text.disabledBlue">Active {lastActive}</Typography>
+          {lastActive && <Typography variant="body2" color="text.disabledBlue">Active {formatDistanceToNow(lastActive, { addSuffix: true })}</Typography>}
         </Stack>
       </Stack>
   )

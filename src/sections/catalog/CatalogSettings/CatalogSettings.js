@@ -1,6 +1,7 @@
 // packages
 import { Button, Stack, Typography, Paper, TextField, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { FormProvider, useForm } from "react-hook-form";
 import { useState } from "react";
 
 // components
@@ -12,6 +13,10 @@ import { CoverPicker, ColorPicker } from "..";
 import styles from "./CatalogSettings.module.css";
 
 export default function CatalogSettings() {
+  const form = useForm<{ name: string }>({
+    mode: "onSubmit",
+  });
+
   const router = useRouter();
   const [name, setName] = useState("uMANILA/eth");
   const [isNameValid, setIsNameValid] = useState(false);
@@ -98,20 +103,23 @@ export default function CatalogSettings() {
                 Catalog Name
               </Typography>
               <Stack className={styles.catalogSettingsNameInput}>
-                <TextField
-                  variant="filled"
-                  defaultValue={name || ""}
-                  onChange={(e) => handleNameChange(e.target.value)}
-                  sx={{
-                    "& .MuiFilledInput-root": {
-                      height: "40px",
-                      padding: "8px",
-                    },
-                  }}
-                />
-                <Button variant="solidGreen" disabled={!isNameValid}>
-                  UPDATE
-                </Button>
+                <FormProvider {...form}>
+                  <TextField
+                    variant="filled"
+                    name="name"
+                    defaultValue={name || ""}
+                    onChange={(e) => handleNameChange(e.target.value)}
+                    sx={{
+                      "& .MuiFilledInput-root": {
+                        height: "40px",
+                        padding: "8px",
+                      },
+                    }}
+                  />
+                  <Button variant="solidGreen" disabled={!isNameValid}>
+                    UPDATE
+                  </Button>
+                </FormProvider>
               </Stack>
             </Stack>
             <Typography variant="h5">
