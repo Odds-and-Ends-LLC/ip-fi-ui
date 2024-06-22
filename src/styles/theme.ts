@@ -480,10 +480,10 @@ theme.palette.catalog = {
   blue2: colors.blue[700],
   blue3: colors.blue[800],
   blue4: colors.blue[1000],
-  green1: colors.blue[400],
-  green2: colors.blue[700],
-  green3: colors.blue[1100],
-  green4: colors.blue[1300],
+  green1: colors.green[400],
+  green2: colors.green[700],
+  green3: colors.green[1100],
+  green4: colors.green[1300],
   red: colors.red,
   orange: colors.orange,
   yellow: colors.yellow,
@@ -644,6 +644,7 @@ theme.components = {
       sortingMode: "server",
       filterMode: "server",
       rowSelection: false,
+      sortingOrder: ["desc", "asc"],
     },
     styleOverrides: {
       main: {
@@ -1354,17 +1355,7 @@ theme.components = {
   MuiSnackbar: {
     styleOverrides: {
       root: {
-        position: "absolute",
-        width: "100%",
-      },
-      anchorOriginTopRight: {
-        top: "-24px",
-        right: "-24px",
-        [theme.breakpoints.down("tablet")]: {
-          top: "-8px",
-          right: 0,
-          left: 0,
-        },
+        position: "fixed",
       },
     },
   },

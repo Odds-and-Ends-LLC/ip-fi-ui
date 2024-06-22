@@ -88,7 +88,7 @@ export default function NFTComponent({
           {nft.price &&
             <Chip
               className={styles.nftPrice}
-              icon={<Image src="/icons/eth.svg" alt="eth" width={18} height={18} />}
+              icon={<Icon icon="ethereum" />}
               label={nft.price}
               sx={{
                 bgcolor: "background.greenOverlay",

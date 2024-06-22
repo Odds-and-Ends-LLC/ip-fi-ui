@@ -1,7 +1,7 @@
 // packages
 import { Skeleton, Stack } from "@mui/material";
 
-export default function NFTMarketTableSkeleton() {
+export default function CatalogSalesTableSkeleton() {
 
   return (
     <Stack sx={{ gap: 1, width: "100%", maxHeight: "100%", padding: "8px" }}>

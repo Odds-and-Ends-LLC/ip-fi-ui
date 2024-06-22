@@ -17,7 +17,7 @@
 }
 
 .catalogSettingsWrapper {
-  gap: 24px 48px;
+  gap: 24px;
   justify-content: space-between;
   width: 100%;
 }
@@ -27,9 +27,9 @@
 }
 
 .catalogSettingsNameInput {
-  flex-direction: row;
   gap: 12px;
-  align-items: center;
+  max-width: 494px;
+  width: 100%;
 }
 
 .catalogSettingsCover {

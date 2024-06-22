@@ -35,7 +35,7 @@ export const getTrendingCatalogs = async (time?: TimeFilterType) => {
   }
 };
 
-export const getCatalogsMarket = async (time?: TimeFilterType) => {
+export const getCatalogsMarket = async (time?: TimeFilterType, query?: URLSearchParams) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
@@ -95,11 +95,11 @@ export const getFeaturedCatalogs = async () => {
   }
 };
 
-export const getCatalogSales = async (id: string) => {
+export const getCatalogSales = async (id: string, query?: URLSearchParams) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    const sales = catalogSalesData.filter((sale) => sale.catalog.id === id);
+    const sales = catalogSalesData;
 
     return {
       data: sales

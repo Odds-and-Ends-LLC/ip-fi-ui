@@ -24,9 +24,9 @@ export default function MarketTable({
   time: TimeFilterType;
 }) {
   const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
-  const { data: catalogMarket, isPending, isFetching} = useQuery({
+  const { data: catalogMarket, isFetching} = useQuery({
     queryKey: ["catalogs-market", time, query.toString()],
-    queryFn: () => getCatalogsMarket(time),
+    queryFn: () => getCatalogsMarket(time, query),
   });
 
   const renderCatalog = (row: GridRowModel<CatalogMarketDataType>) => (
@@ -93,8 +93,6 @@ export default function MarketTable({
     sort === "asc" ?
       params.set("asc", "true") :
       params.delete("asc");
-
-    console.log(params.toString());
 
     setQuery(params);
   };

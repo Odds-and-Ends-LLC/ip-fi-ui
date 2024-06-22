@@ -1,8 +1,8 @@
 // packages
-import { GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 // components
 import { Avatar, Icon, Table } from "@/components";
@@ -12,15 +12,21 @@ import styles from "./NFTMarketTable.module.css";
 import { getNFTsMarket } from "@/lib/client/nft";
 import NFTMarketTableSkeleton from "./NFTMarketTableSkeleton";
 
+const sortMapping: Record<string, string> = {
+  // database field name: query field name
+  nft: "nft",
+};
+
 export default function NFTMarketTable({
   time
 } : {
   time: TimeFilterType;
 }) {
+  const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
   const catalog = useContext(CatalogViewContext);
-  const { data: catalogSales, isFetching } = useQuery({
-    queryKey: ["nft-market", catalog.id, catalog.uid, time],
-    queryFn: () => getNFTsMarket(catalog.id, time),
+  const { data: nftMarket, isFetching } = useQuery({
+    queryKey: ["nft-market", catalog.id, catalog.uid, time, query.toString()],
+    queryFn: () => getNFTsMarket(catalog.id, time, query),
   });
 
   const renderNFT = (row: NFTMarketDataType) => (
@@ -76,16 +82,26 @@ export default function NFTMarketTable({
     </Stack>
   );
 
-  if (isFetching) {
-    return <NFTMarketTableSkeleton />
-  }
+  const handleSort = (model: GridSortModel) => {
+    if (!model || !model[0]) {
+      return;
+    }
+
+    const { field, sort } = model[0];
+    const params = new URLSearchParams(query.toString());
+    params.set("sort", `${sortMapping[field]}`);
+    sort === "asc" ?
+      params.set("asc", "true") :
+      params.delete("asc");
+
+    setQuery(params);
+  };
 
   const columns: GridColDef[] = [
     {
       field: "nft",
       headerName: "NFT",
       flex: 1,
-      sortable: false,
       renderCell: ({ row } : { row: GridRowModel<NFTMarketDataType> }) => renderNFT(row),
     },
     {
@@ -114,10 +130,21 @@ export default function NFTMarketTable({
       minWidth="640px"
       maxHeight="420px"
       columns={columns}
-      rows={catalogSales?.data || []}
+      rows={nftMarket?.data || []}
       dataGridProps={{
         rowHeight: 60,
         hideFooter: true,
+        loading: isFetching,
+        rowCount: nftMarket?.data?.length,
+        onSortModelChange: handleSort,
+        slots: {
+          loadingOverlay: NFTMarketTableSkeleton
+        },
+        sx: {
+          "& .MuiDataGrid-overlayWrapper": {
+            height: "362px !important",
+          },
+        }
       }}
     />
   );

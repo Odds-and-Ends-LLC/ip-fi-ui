@@ -5,11 +5,18 @@ import Image from "next/image";
 
 // styles
 import styles from "./CoverPicker.module.css";
+import { NFTType } from "@/types";
 
 export default function CoverPicker({
-  nfts = [],
-  selected = 1,
+  nfts,
+  selected,
   onChange = () => {},
+  disabled,
+} : {
+  nfts: NFTType[];
+  selected: string;
+  onChange: (id: string) => void;
+  disabled?: boolean;
 }) {
   return (
     <Grid className={styles.coverPicker} container spacing={1}>
@@ -17,7 +24,7 @@ export default function CoverPicker({
         <Grid className={styles.coverPickerItem} key={id} item desktop={1.2} laptop={1.5} tablet={2} mobile={4} >
           <Box
             className={styles.coverPickerItemImageContainer}
-            onClick={() => onChange(id)}
+            onClick={() => !disabled && onChange(id)}
             sx={{
               ...selected === id && {
                 borderWidth: {
@@ -25,8 +32,10 @@ export default function CoverPicker({
                   mobile: "2px",
                 },
                 borderStyle: "solid",
-                borderColor: "background.green"
-              }
+                borderColor: disabled ? "dividers.default" : "catalog.green4",
+                ...disabled && { opacity: .5 },
+              },
+              cursor: disabled ? "default" : "pointer",
             }}
           >
             <Image

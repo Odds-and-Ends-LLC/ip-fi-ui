@@ -85,8 +85,8 @@ export interface CatalogType {
   nfts?: NFTType[];
   owners?: UserType[];
   coverImage: string;
+  coverImageNFTId: string;
   coverColor: string;
-  allowExclusiveLicense: boolean;
 };
 
 export interface CatalogStatisticsType {
@@ -161,4 +161,11 @@ export interface SignupPayloadType {
 export interface LoginPayloadType {
   email: string;
   password: string;
+}
+
+export interface UpdateCatalogPayloadType {
+  name: string;
+  coverImageNFTId: string;
+  coverColor: string;
+  allowExclusiveLicense: boolean;
 }

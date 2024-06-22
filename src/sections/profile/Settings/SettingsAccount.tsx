@@ -183,7 +183,7 @@ export default function SettingsAccount() {
 
       <Snackbar
         open={openSnackbar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         autoHideDuration={4000}
         onClose={() => setOpenSnackbar(false)}
       >

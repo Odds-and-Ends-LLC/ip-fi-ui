@@ -1,7 +1,7 @@
 // packages
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
 import { format } from "date-fns";
 
 // components
@@ -9,14 +9,22 @@ import { getCatalogSales } from "@/lib/client/catalog";
 import styles from "./CatalogSalesTable.module.css";
 import { Avatar, Icon, Table } from "@/components";
 import { CatalogSalesDataType } from "@/types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CatalogViewContext } from "../CatalogView/CatalogView";
+import CatalogSalesTableSkeleton from "./CatalogSalesTableSkeleton";
+
+const sortMapping: Record<string, string> = {
+  // database field name: query field name
+  catalog: "catalog",
+  purchasedAt: "purchasedAt",
+};
 
 export default function CatalogSalesTable() {
+  const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
   const catalog = useContext(CatalogViewContext);
   const { data: catalogSales, isFetching } = useQuery({
-    queryKey: ["catalogs-sales", catalog.id, catalog.uid],
-    queryFn: () => getCatalogSales(catalog.id),
+    queryKey: ["catalogs-sales", catalog.id, catalog.uid, query.toString()],
+    queryFn: () => getCatalogSales(catalog.id, query),
   });
 
   const renderRank = (rank: number) => <Typography color="text.gray" sx={{ typography: { desktop: "body1", mobile: "body3" }}}>{rank}</Typography>;
@@ -87,6 +95,21 @@ export default function CatalogSalesTable() {
     </Stack>
   );
 
+  const handleSort = (model: GridSortModel) => {
+    if (!model || !model[0]) {
+      return;
+    }
+
+    const { field, sort } = model[0];
+    const params = new URLSearchParams(query.toString());
+    params.set("sort", `${sortMapping[field]}`);
+    sort === "asc" ?
+      params.set("asc", "true") :
+      params.delete("asc");
+
+    setQuery(params);
+  };
+
   const columns: GridColDef[] = [
     {
       field: "rank",
@@ -107,6 +130,7 @@ export default function CatalogSalesTable() {
       width: 120,
       align: "center",
       headerAlign: "center",
+      sortable: false,
       renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderPrice(row.price),
     },
     {
@@ -115,6 +139,7 @@ export default function CatalogSalesTable() {
       flex: 1,
       align: "center",
       headerAlign: "center",
+      sortable: false,
       renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderNumber(row.quantity),
     },
     {
@@ -123,12 +148,14 @@ export default function CatalogSalesTable() {
       width: 120,
       align: "center",
       headerAlign: "center",
+      sortable: false,
       renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderPrice(row.subtotal),
     },
     {
       field: "buyer",
       headerName: "Buyer",
       flex: 1,
+      sortable: false,
       renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderBuyer(row.buyer.pfp, row.buyer.username),
     },
     {
@@ -152,6 +179,16 @@ export default function CatalogSalesTable() {
       dataGridProps={{
         rowHeight: 60,
         hideFooter: true,
+        loading: isFetching,
+        slots: {
+          loadingOverlay: CatalogSalesTableSkeleton,
+        },
+        onSortModelChange: handleSort,
+        sx: {
+          "& .MuiDataGrid-overlayWrapper": {
+            height: "426px !important",
+          },
+        }
       }}
     />
   );

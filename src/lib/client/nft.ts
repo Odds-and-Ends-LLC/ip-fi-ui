@@ -16,7 +16,7 @@ export const getFeaturedNFTs = async () => {
   }
 };
 
-export const getNFTsMarket = async (catalogId: string, time?: TimeFilterType) => {
+export const getNFTsMarket = async (catalogId: string, time?: TimeFilterType, query?: URLSearchParams) => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
 

@@ -1,6 +1,5 @@
 // packages
-import { Box, Button, Divider, Stack, Typography, useTheme } from "@mui/material";
-import { usePathname } from "next/navigation";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 
 // components
 import { Avatar, GlassCoverImage, Icon, InfoList, WalletDisplay } from "@/components";
@@ -20,7 +19,6 @@ export default function CatalogView({
 } : {
   catalog: CatalogType;
 }) {
-  const pathname = usePathname();
 
   return (
     <CatalogViewContext.Provider value={catalog}>
@@ -56,7 +54,7 @@ export default function CatalogView({
                 withBackground
                 walletAddress="5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C"
               />
-              <Button variant="outlineWhite" href={`${pathname}/settings`}>
+              <Button variant="outlineWhite" href={`/catalog/${catalog.uid}/settings`}>
                 <Icon icon="settings" />
               </Button>
               <Button
