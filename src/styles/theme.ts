@@ -675,7 +675,7 @@ theme.components = {
         },
       },
       overlayWrapper: {
-        position: "relative",
+        position: "absolute",
         top: 0,
         zIndex: 0,
       },

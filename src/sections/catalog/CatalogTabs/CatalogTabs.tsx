@@ -1,19 +1,18 @@
 // packages
 import { usePathname } from "next/navigation";
-import { useContext, useState } from "react";
 import { Stack } from "@mui/material";
+import { useAtomValue } from "jotai";
 
 // components
 import { Catalog, Tabs } from "@/components";
+import { catalogViewAtom } from "@/atoms";
 import { Analytics } from "..";
-import { CatalogViewContext } from "../CatalogView/CatalogView";
 
 export default function CatalogTabs() {
-  const catalog = useContext(CatalogViewContext);
+  const catalog = useAtomValue(catalogViewAtom);
   const pathname = usePathname();
 
   const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
-  console.log(fragments);
   const catalogTab = fragments[2] || "nft";
 
   const handleChange = (value: string) => {

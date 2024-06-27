@@ -1,6 +1,7 @@
 // packages
-import { Fragment } from "react";
 import { Divider, Paper, Stack, Typography } from "@mui/material";
+import { Fragment } from "react";
+import { useAtomValue } from "jotai";
 import { capitalize } from "lodash";
 
 // styles
@@ -8,14 +9,12 @@ import styles from "./Details.module.css";
 
 // components
 import { Icon, WalletDisplay } from "@/components";
+import { IconType } from "@/components/Icon";
+import { nftViewAtom } from "@/atoms";
 import { DetailItem } from ".";
 
-// types
-import { NftDetails } from "../types";
-
-export default function Details({ data }: { data: NftDetails }) {
-  const { description, traits, contractAddress, tokenStandard, tokenId, blockchain } = data;
-  const mappedTraits = Object.keys(traits);
+export default function Details() {
+  const nft = useAtomValue(nftViewAtom);
   const DetailDivider = ({ display = { mobile: "none", tablet: "flex" } }) => {
     return (
       <Stack className={styles.detailsDivider} sx={{ display }}>
@@ -28,18 +27,18 @@ export default function Details({ data }: { data: NftDetails }) {
     <Stack className={styles.details}>
       <Typography variant="h4">DETAILS</Typography>
       <Paper variant="translucent" component={Stack} className={styles.detailsContent}>
-        <Typography color="text.gray">{description}</Typography>
+        <Typography color="text.gray">{nft.description}</Typography>
         <Stack
           className={styles.traitsContainer}
           sx={{ gridTemplateColumns: { tablet: "1fr 49px 1fr 49px 1fr" } }}
         >
-          {mappedTraits?.map((trait, i) => (
+          {nft.traits?.map((trait, i) => (
             <Fragment key={i}>
-              <DetailItem label={trait} value={traits[trait]} onClick={() => {}} />
+              <DetailItem label={trait.traitType} value={trait.value} />
               <DetailDivider
                 display={{
                   mobile: "none",
-                  tablet: (i + 1) % 3 === 0 || i === mappedTraits.length - 1 ? "none" : "flex",
+                  tablet: (i + 1) % 3 === 0 || i === nft.traits.length - 1 ? "none" : "flex",
                 }}
               />
             </Fragment>
@@ -51,21 +50,21 @@ export default function Details({ data }: { data: NftDetails }) {
           sx={{ gridTemplateColumns: { tablet: "1fr 49px 1fr" } }}
         >
           <DetailItem label="Contract Address">
-            <WalletDisplay type="truncated" withBackground walletAddress={contractAddress} />
+            <WalletDisplay type="truncated" withBackground walletAddress={nft.contractAddress} />
           </DetailItem>
           <DetailDivider />
           <DetailItem
             label="Token Standard"
-            value={tokenStandard}
+            value={nft.tokenStandard}
             textColor="text.brandSecondary"
           />
-          <DetailItem label="Token ID" value={tokenId} textColor="text.brandSecondary" />
+          <DetailItem label="Token ID" value={nft.tokenId} textColor="text.brandSecondary" />
           <DetailDivider />
           <DetailItem label="Blockchain">
             <Stack className={styles.detailBlockchain} sx={{ color: "text.brandSecondary" }}>
-              <Icon icon={blockchain} size={18} />
+              <Icon icon={nft.blockchain as IconType} size={18} />
               <Typography color="inherit" variant="h5">
-                {capitalize(blockchain)}
+                {capitalize(nft.blockchain)}
               </Typography>
             </Stack>
           </DetailItem>

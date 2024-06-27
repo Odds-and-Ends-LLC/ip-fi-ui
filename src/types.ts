@@ -54,7 +54,9 @@ export interface NFTType {
   id: string;
   name: string;
   image: string;
+  description?: string;
   collectionName: string;
+  collectionAddress: string;
   withExclusiveLicense: boolean;
   ownerName: string;
   ownerUserId: string;
@@ -73,6 +75,36 @@ export interface NFTType {
   averageContractLength: string;
   private: boolean;
   price: number;
+  opensea?: string;
+  looksRare?: string;
+  currentPrice: number;
+  currentTermLength: string;
+  catalogHolderCount: number;
+  currentHolderOwnershipLength: string;
+};
+
+export interface NFTCatalogType {
+  catalogName: string;
+  catalogCoverImage: string;
+  catalogUid: string;
+  // not sure what to call it
+  royalty: string;
+  status: "active" | "ended";
+  nftName: string;
+  collectionName: string;
+  licensorName: string;
+  licenseeName: string;
+};
+
+export interface NFTHistoryType {
+  id: string,
+  event: "transfer" | "sale"; // idk what other transactions event are
+  price: number;
+  fromUserPfp: string;
+  fromUserUsername: string;
+  toUserPfp: string;
+  toUserUsername: string;
+  purchasedAt: Date;
 };
 
 export interface CatalogType {

@@ -1,113 +1,33 @@
 // packages
-import { Button, Paper, Stack } from "@mui/material";
-
-// styles
-import styles from "./Catalogs.module.css";
+import { Button, CircularProgress, Paper, Stack } from "@mui/material";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import { useAtomValue } from "jotai";
 
 // components
 import { ItemsSectionHeader, Select } from "@/components";
+import { getNFTCatalogs } from "@/lib/client/nft";
+import styles from "./Catalogs.module.css";
+import { nftViewAtom } from "@/atoms";
 import { ItemsCatalogs } from ".";
 
-// types
-import { CatalogData } from "../types";
-
-// data
-const catalogs: CatalogData[] = [
-  {
-    id: 1,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "active",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 2,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "active",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 3,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "ended",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 4,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "ended",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 5,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "ended",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 6,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "active",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 7,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "active",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-  {
-    id: 8,
-    name: "CATALOG",
-    image: "/images/checker.png",
-    price: 150,
-    status: "ended",
-    nft_name: "nft_name",
-    collection_name: "collection_name",
-    licensor: "licensorUsername",
-    licensee: "licenseeUsername",
-  },
-];
-
 export default function Catalogs() {
+  const query = useSearchParams();
+  const nft = useAtomValue(nftViewAtom);
+  const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
+    queryKey: ["nft-catalogs", query.toString()],
+    queryFn: ({ pageParam }) => getNFTCatalogs(nft.collectionAddress, nft.tokenId, pageParam, query),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
+    placeholderData: (lastPage) => lastPage,
+  });
+
+  const nftCatalogs = data?.pages.map(({ data: nftCatalogs }) => nftCatalogs || [])?.flat() || [];
+
   return (
     <Stack className={styles.catalogs}>
       <Stack className={styles.catalogsHeader} sx={{ flexDirection: { tablet: "row" } }}>
-        <ItemsSectionHeader title="CATALOGS" count={10} />
+        <ItemsSectionHeader title="CATALOGS" count={nft.catalogCount} />
         <Stack className={styles.catalogsHeaderOptions}>
           <Select
             minWidth="118px"
@@ -119,12 +39,15 @@ export default function Catalogs() {
         </Stack>
       </Stack>
       <Paper variant="translucent" component={Stack} className={styles.catalogsContent}>
-        {catalogs?.map((catalog, i) => (
-          <ItemsCatalogs key={i} data={catalog} />
+        {nftCatalogs?.map((nftCatalog, i) => (
+          <ItemsCatalogs key={i} data={nftCatalog} />
         ))}
-        <Button fullWidth variant="outlineWhite">
-          LOAD MORE
-        </Button>
+        {isFetching ?
+          <CircularProgress size={32} color="secondary" sx={{ mx: "auto" }} /> :
+          hasNextPage && <Button fullWidth variant="outlineWhite" onClick={() => fetchNextPage()}>
+            LOAD MORE
+          </Button>
+        }
       </Paper>
     </Stack>
   );

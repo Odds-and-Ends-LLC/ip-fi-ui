@@ -1,17 +1,18 @@
 // packages
+import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
+import { useAtomValue } from "jotai";
 import { format } from "date-fns";
+import { useState } from "react";
 
 // components
+import CatalogSalesTableSkeleton from "./CatalogSalesTableSkeleton";
 import { getCatalogSales } from "@/lib/client/catalog";
 import styles from "./CatalogSalesTable.module.css";
 import { Avatar, Icon, Table } from "@/components";
 import { CatalogSalesDataType } from "@/types";
-import { useContext, useState } from "react";
-import { CatalogViewContext } from "../CatalogView/CatalogView";
-import CatalogSalesTableSkeleton from "./CatalogSalesTableSkeleton";
+import { catalogViewAtom } from "@/atoms";
 
 const sortMapping: Record<string, string> = {
   // database field name: query field name
@@ -21,7 +22,8 @@ const sortMapping: Record<string, string> = {
 
 export default function CatalogSalesTable() {
   const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
-  const catalog = useContext(CatalogViewContext);
+  const catalog = useAtomValue(catalogViewAtom);
+
   const { data: catalogSales, isFetching } = useQuery({
     queryKey: ["catalogs-sales", catalog.id, catalog.uid, query.toString()],
     queryFn: () => getCatalogSales(catalog.id, query),

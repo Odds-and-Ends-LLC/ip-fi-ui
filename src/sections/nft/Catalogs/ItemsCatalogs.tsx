@@ -7,21 +7,19 @@ import Image from "next/image";
 import styles from "./Catalogs.module.css";
 
 // types
-import { CatalogData } from "../types";
+import { NFTCatalogType } from "@/types";
 
-// components
-
-export default function ItemsCatalogs({ data }: { data: Partial<CatalogData> }) {
+export default function ItemsCatalogs({ data }: { data: Partial<NFTCatalogType> }) {
   const {
-    id,
-    name,
-    image,
-    price,
+    catalogUid,
+    catalogCoverImage,
+    catalogName,
+    royalty,
     status,
-    nft_name: nftName,
-    collection_name: collectionName,
-    licensor,
-    licensee,
+    nftName,
+    collectionName,
+    licensorName,
+    licenseeName,
   } = data;
 
   return (
@@ -39,7 +37,7 @@ export default function ItemsCatalogs({ data }: { data: Partial<CatalogData> }) 
               <Box className={styles.contractImage}>
                 <Image
                   priority
-                  src={image || "/images/checker.png"}
+                  src={catalogCoverImage || "/images/checker.png"}
                   alt="contract"
                   fill
                   sizes="100%"
@@ -48,10 +46,10 @@ export default function ItemsCatalogs({ data }: { data: Partial<CatalogData> }) 
               </Box>
               <Stack px="16px">
                 <Typography variant="h6" color="text.brandSecondary">
-                  {name}
+                  {catalogName}
                 </Typography>
                 <Typography variant="body2" color="text.disabled" noWrap>
-                  {price} $NULL per 5 years
+                  {royalty}
                 </Typography>
               </Stack>
             </Stack>
@@ -93,14 +91,14 @@ export default function ItemsCatalogs({ data }: { data: Partial<CatalogData> }) 
             sx={{ padding: { mobile: "8px 16px", tablet: "16px" } }}
           >
             <Typography variant="body2" color="text.secondary" noWrap>
-              Licensor: {licensor}
+              Licensor: {licensorName}
             </Typography>
             <Typography variant="body2" color="text.secondary" noWrap>
-              Licensee: {licensee}
+              Licensee: {licenseeName}
             </Typography>
           </Grid>
           <Grid item p="16px" mobile={12} tablet="auto">
-            <Button fullWidth variant="outlineGreen">
+            <Button fullWidth variant="outlineGreen" href={`/catalog/${catalogUid}`}>
               VIEW
             </Button>
           </Grid>

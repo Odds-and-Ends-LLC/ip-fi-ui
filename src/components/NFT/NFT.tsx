@@ -1,7 +1,6 @@
 // packages
 import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Grid, Stack, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 // styles
@@ -67,7 +66,7 @@ export default function NFTComponent({
           },
           cursor: variant !== "profile" ? "pointer" : "default",
         }}
-        {...variant !== "profile" && { href: "/nft" }}
+        {...variant !== "profile" && { href: `/nft/${nft.collectionAddress}/${nft.tokenId}` }}
       >
         <CardMedia
           image={nft.image}

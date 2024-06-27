@@ -1,21 +1,18 @@
 // packages
 import { Button, Stack, Typography, Paper, Box, Alert, Snackbar } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useState } from "react";
+import { LoadingButton } from "@mui/lab";
+import { z } from "zod";
 
 // components
+import { CatalogType, UpdateCatalogPayloadType } from "@/types";
 import { CatalogCover, Icon, TextField } from "@/components";
+import { updateCatalog } from "@/lib/actions/catalog";
+import styles from "./CatalogSettings.module.css";
 import { NFTBackground } from "@/sections/nft";
 import { CoverPicker, ColorPicker } from "..";
-
-// styles
-import styles from "./CatalogSettings.module.css";
-import { CatalogType, UpdateCatalogPayloadType } from "@/types";
-import { updateCatalog } from "@/lib/actions/catalog";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoadingButton } from "@mui/lab";
 
 const schema = z.object({
   name: z

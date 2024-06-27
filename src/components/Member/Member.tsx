@@ -1,14 +1,11 @@
 // packages
-import { Box, Button, Card, CardContent, CardHeader, IconButton, Stack, Typography, useTheme } from "@mui/material";
-import Image from "next/image";
+import { Box, Card, CardContent, Stack, Typography, useTheme } from "@mui/material";
+import { formatDistanceToNow } from "date-fns";
+import { motion } from "framer-motion";
 
 // components
-import { ProfilePicture } from "..";
-
-// styles
 import styles from "./Member.module.css";
-import { motion } from "framer-motion";
-import { formatDistanceToNow } from "date-fns";
+import { ProfilePicture } from "..";
 
 export default function Member({
   memberName = "Member",
@@ -24,9 +21,9 @@ export default function Member({
   memberName: string;
   pfp?: string;
   lastActive?: Date;
-  catalogs: number;
-  contracts: number;
-  joinedDate: Date;
+  catalogs?: number;
+  contracts?: number;
+  joinedDate?: Date;
   responseTime?: string;
   responseRate?: string;
   variant?: "card" | "list";
@@ -80,14 +77,16 @@ export default function Member({
             </Stack>
           </Stack>
           <Stack className={styles.memberCardBottomDetails}>
-            <Stack className={styles.memberCardRow}>
-              <Typography variant="body2" color="text.disabledBlue">
-                Joined
-              </Typography>
-              <Typography variant="body2">
-                {formatDistanceToNow(joinedDate, { addSuffix: true })}
-              </Typography>
-            </Stack>
+            {joinedDate &&
+              <Stack className={styles.memberCardRow}>
+                <Typography variant="body2" color="text.disabledBlue">
+                  Joined
+                </Typography>
+                <Typography variant="body2">
+                  {formatDistanceToNow(joinedDate, { addSuffix: true })}
+                </Typography>
+              </Stack>
+            }
             {/* <Stack className={styles.memberCardRow}>
               <Typography variant="body2" color="text.disabledBlue">
                 Response Time

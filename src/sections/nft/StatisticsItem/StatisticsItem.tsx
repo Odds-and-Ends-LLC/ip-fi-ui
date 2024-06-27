@@ -17,7 +17,7 @@ export default function StatisticsItem({
   textColor = "text.brandSecondary",
 }: {
   label: string;
-  value: string;
+  value: number | string;
   icon?: IconType;
   textColor?: string;
 }) {

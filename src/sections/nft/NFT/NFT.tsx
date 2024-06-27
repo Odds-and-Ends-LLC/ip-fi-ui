@@ -1,50 +1,34 @@
-// packages
-import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { Button, Stack, Typography } from "@mui/material";
+"use client";
 
-// styles
-import styles from "./NFT.module.css";
+// packages
+import { Button, Stack, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+import { useHydrateAtoms } from "jotai/utils";
+import { usePathname } from "next/navigation";
 
 // components
-import { Icon, Member, NFT as NFTCard, ShareButton, Tabs } from "@/components";
 import { Analytics, BaseTerms, Catalogs, Details, History, NFTBackground } from "..";
+import { Icon, Member, NFT as NFTCard, ShareButton, Tabs } from "@/components";
+import styles from "./NFT.module.css";
+import { nftViewAtom } from "@/atoms";
+import { NFTType } from "@/types";
 
-// types
-import { NftDetails } from "../types";
-import { nfts } from "@/data";
-
-// data
-const link = "https://www.hypersona12133.com";
-const nft: NftDetails = {
-  id: 123,
-  name: "NFT NAME",
-  image: "/images/image_4.png",
-  collection: "Bored Ape Yacht Club",
-  withExclusiveLicense: true,
-  owner: "Member",
-  description:
-    "Collecting NFTs like stars. This section is up to 240 characters only. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
-  traits: {
-    background: "Gradient 2",
-    head: "Purple",
-    hair: "Brown Bushcut",
-    face: "Straw",
-    body: "Light Blue Puffer",
-  },
-  contractAddress: "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C",
-  tokenStandard: "ERC-721",
-  tokenId: 1957,
-  blockchain: "ethereum",
-};
-
-export default function NFT() {
+export default function NFT({
+  nft,
+} : {
+  nft: NFTType,
+}) {
+  useHydrateAtoms([[nftViewAtom, nft]]);
   const pathname = usePathname();
-  const [mainTab, setMainTab] = useState<
-    "catalogs" | "details" | "baseTerms" | "analytics" | "history" | string
-  >("catalogs");
+  const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
+  const nftTab = fragments[3] || "catalogs";
+
   const [nftProfileWidth, setNftProfileWidth] = useState<number | undefined | null>(null);
   const nftProfileSectionRef = useRef<HTMLDivElement>(null);
+
+  const handleTabChange = (value: string) => {
+    window.history.pushState(null, "", `/nft/${nft.collectionAddress}/${nft.tokenId}/${value}`);
+  }
 
   useEffect(() => {
     setNftProfileWidth(nftProfileSectionRef?.current?.clientWidth);
@@ -85,25 +69,29 @@ export default function NFT() {
                 visible
                 variant="profile"
                 action={undefined}
-                nft={nfts[0]}
+                nft={nft}
               />
             </Stack>
             <Stack className={styles.nftProfileColumn}>
               <Stack className={styles.nftProfileActions}>
-                <Button mode="icon" variant="outlineWhite">
-                  <Icon icon="openSea" />
-                </Button>
-                <Button mode="icon" variant="outlineWhite">
-                  <Icon icon="looksRare" />
-                </Button>
+                {nft.opensea &&
+                  <Button mode="icon" variant="outlineWhite" href={nft.opensea}>
+                    <Icon icon="openSea" />
+                  </Button>
+                }
+                {nft.looksRare &&
+                  <Button mode="icon" variant="outlineWhite" href={nft.looksRare}>
+                    <Icon icon="looksRare" />
+                  </Button>
+                }
                 <Button mode="icon" variant="outlineWhite">
                   <Icon icon="refresh" />
                 </Button>
               </Stack>
               <Stack className={styles.nftProfileDetails}>
-                <Typography variant="h4">{nft?.name}</Typography>
+                <Typography variant="h4">{nft.name}</Typography>
                 <Typography variant="body2" color="text.disabledBlue">
-                  {nft?.collection}
+                  {nft.collectionName}
                 </Typography>
                 {nft?.withExclusiveLicense && (
                   <Typography
@@ -117,7 +105,7 @@ export default function NFT() {
               </Stack>
               <Stack className={styles.nftProfileOwner}>
                 <Typography variant="body2">Owner:</Typography>
-                <Member lastActive="" catalogs={1} contracts={1} joinedDate="" memberName={nft?.owner} />
+                <Member variant="list" lastActive={nft.ownerLastActive} memberName={nft.ownerName} />
               </Stack>
             </Stack>
           </Stack>
@@ -135,21 +123,21 @@ export default function NFT() {
               }}
             >
               <Tabs
-                value={mainTab}
+                value={nftTab}
                 tabs={[
                   { label: "CATALOGS", value: "catalogs" },
                   { label: "DETAILS", value: "details" },
-                  { label: "BASE TERMS", value: "baseTerms" },
+                  { label: "BASE TERMS", value: "base-terms" },
                   { label: "ANALYTICS", value: "analytics" },
                   { label: "HISTORY", value: "history" },
                 ]}
-                onChange={setMainTab}
+                onChange={handleTabChange}
               />
               <Stack className={styles.nftDetailsSettings}>
-                <Button variant="outlineWhite" href={`${pathname}/settings`}>
+                <Button variant="outlineWhite" href={`/nft/${nft.collectionAddress}/${nft.tokenId}/settings`}>
                   <Icon icon="settings" />
                 </Button>
-                <ShareButton title="SHARE NFT" link={link} />
+                <ShareButton title="SHARE NFT" link={`/nft/${nft.collectionAddress}/${nft.tokenId}`} />
               </Stack>
             </Stack>
             {nftProfileWidth && (
@@ -157,11 +145,11 @@ export default function NFT() {
                 className={styles.nftDetailsContents}
                 sx={{ maxWidth: { laptop: `calc(100vw - (152px + ${nftProfileWidth}px))` } }}
               >
-                {mainTab === "catalogs" && <Catalogs />}
-                {mainTab === "details" && <Details data={nft} />}
-                {mainTab === "baseTerms" && <BaseTerms />}
-                {mainTab === "analytics" && <Analytics />}
-                {mainTab === "history" && <History />}
+                {nftTab === "catalogs" && <Catalogs />}
+                {nftTab === "details" && <Details />}
+                {nftTab === "base-terms" && <BaseTerms />}
+                {nftTab === "analytics" && <Analytics />}
+                {nftTab === "history" && <History />}
               </Stack>
             )}
           </Stack>

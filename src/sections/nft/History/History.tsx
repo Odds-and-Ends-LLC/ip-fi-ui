@@ -1,61 +1,43 @@
 // packages
-import { Paper, Stack, Typography } from "@mui/material";
+import { CircularProgress, Paper, Stack, Typography } from "@mui/material";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import { useAtomValue } from "jotai";
 import { startCase } from "lodash";
 import { format } from "date-fns";
+import { useRef } from "react";
 
 // styles
 import styles from "./History.module.css";
 
 // components
 import { Avatar, Icon, Select, Table } from "@/components";
-
-// types
-import { NftHistoryData } from "../types";
-
-// data
-const history: NftHistoryData[] = [
-  {
-    id: 1,
-    event: "transfer",
-    price: 29.76,
-    from: "Ysa Domingo",
-    to: "Ysa Domingo",
-    purchaseDate: 1697086500000,
-  },
-  {
-    id: 2,
-    event: "transfer",
-    price: 29.76,
-    from: "Ysa Domingo",
-    to: "Ysa Domingo",
-    purchaseDate: 1697075700000,
-  },
-  {
-    id: 3,
-    event: "transfer",
-    price: 29.76,
-    from: "Ysa Domingo",
-    to: "Ysa Domingo",
-    purchaseDate: 1697075700000,
-  },
-  {
-    id: 4,
-    event: "transfer",
-    price: 29.76,
-    from: "Ysa Domingo",
-    to: "Ysa Domingo",
-    purchaseDate: 1697075700000,
-  },
-];
+import { getNFTHistory } from "@/lib/client/nft";
+import { NFTHistoryType } from "@/types";
+import { nftViewAtom } from "@/atoms";
 
 export default function History() {
+  const query = useSearchParams();
+  const tableRef = useRef<HTMLDivElement>(null);
+  const nft = useAtomValue(nftViewAtom);
+
+  const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
+    queryKey: ["nft-history", query.toString()],
+    queryFn: ({ pageParam }) => getNFTHistory(nft.collectionAddress, nft.tokenId, pageParam, query),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
+    placeholderData: (lastPage) => lastPage,
+  });
+
+  const nftHistory = data?.pages.map(({ data: transactions }) => transactions || [])?.flat() || [];
+
   const columns = [
     {
       field: "event",
       headerName: "Event",
       minWidth: 128,
       sortable: false,
-      renderCell: ({ row }: { row: NftHistoryData }) => (
+      renderCell: ({ row }: { row: NFTHistoryType }) => (
         <Typography color="text.secondary">{startCase(row?.event)}</Typography>
       ),
     },
@@ -64,7 +46,7 @@ export default function History() {
       headerName: "Price",
       minWidth: 128,
       sortable: false,
-      renderCell: ({ row }: { row: NftHistoryData }) => (
+      renderCell: ({ row }: { row: NFTHistoryType }) => (
         <Stack className={styles.tableColumnPrice}>
           <Icon icon="ethereum" size={18} />
           <Typography color="text.secondary">{row?.price?.toString()}</Typography>
@@ -76,10 +58,10 @@ export default function History() {
       headerName: "From",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: NftHistoryData }) => (
+      renderCell: ({ row }: { row: NFTHistoryType }) => (
         <Stack className={styles.tableColumnFrom}>
-          <Avatar size="s" image="/images/image_1.png" />
-          <Typography>{row?.from}</Typography>
+          <Avatar size="s" image={row.fromUserPfp} />
+          <Typography>{row.fromUserUsername}</Typography>
         </Stack>
       ),
     },
@@ -88,10 +70,10 @@ export default function History() {
       headerName: "To",
       flex: 1,
       sortable: false,
-      renderCell: ({ row }: { row: NftHistoryData }) => (
+      renderCell: ({ row }: { row: NFTHistoryType }) => (
         <Stack className={styles.tableColumnTo}>
-          <Avatar size="s" image="/images/image_1.png" />
-          <Typography>{row?.to}</Typography>
+          <Avatar size="s" image={row.toUserPfp} />
+          <Typography>{row.toUserUsername}</Typography>
         </Stack>
       ),
     },
@@ -100,9 +82,9 @@ export default function History() {
       headerName: "Purchase Date",
       flex: 1,
       sortable: true,
-      renderCell: ({ row }: { row: NftHistoryData }) => (
+      renderCell: ({ row }: { row: NFTHistoryType }) => (
         <Typography color="text.secondary">
-          {format(row?.purchaseDate, "MM/dd/yyyy h:mmaaa")}
+          {format(row?.purchasedAt, "MM/dd/yyyy h:mmaaa")}
         </Typography>
       ),
     },
@@ -121,13 +103,19 @@ export default function History() {
           <Select minWidth="104px" label="SORT" onChange={undefined} hideNone={undefined} />
         </Stack>
       </Stack>
-      <Paper variant="outlined" component={Stack} className={styles.historyContent}>
+      <Paper ref={tableRef} variant="outlined" component={Stack} className={styles.historyContent} onScroll={() => {
+        if (isFetching || !hasNextPage || !tableRef.current?.scrollHeight) return;
+
+        if ((tableRef.current?.scrollHeight - tableRef.current?.scrollTop - tableRef.current?.clientHeight) <= 32) {
+          fetchNextPage();
+        }
+      }}>
         <Stack
           className={styles.historyTableWrapper}
           sx={{ maxHeight: { mobile: "406px", laptop: "100%" } }}
         >
           <Table
-            rows={history}
+            rows={nftHistory}
             columns={columns}
             minWidth="902px"
             minHeight={"0"}
@@ -137,7 +125,11 @@ export default function History() {
             dataGridProps={{
               rowHeight: 60,
               columnHeaderHeight: 50,
-              hideFooter: true,
+              loading: isFetching,
+              slots: {
+                loadingOverlay: () => <></>,
+                footer: () => isFetching && <Stack padding="16px" mx="auto"><CircularProgress color="secondary" /></Stack>
+              },
               sx: {
                 "& .MuiDataGrid-columnHeader": {
                   padding: "0 16px",

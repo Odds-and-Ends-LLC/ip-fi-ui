@@ -2,15 +2,16 @@
 import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
 import { Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useAtomValue } from "jotai";
+import { useState } from "react";
 
 // components
-import { Avatar, Icon, Table } from "@/components";
+import NFTMarketTableSkeleton from "./NFTMarketTableSkeleton";
 import { NFTMarketDataType, TimeFilterType } from "@/types";
-import { CatalogViewContext } from "../CatalogView/CatalogView";
+import { Avatar, Icon, Table } from "@/components";
 import styles from "./NFTMarketTable.module.css";
 import { getNFTsMarket } from "@/lib/client/nft";
-import NFTMarketTableSkeleton from "./NFTMarketTableSkeleton";
+import { catalogViewAtom } from "@/atoms";
 
 const sortMapping: Record<string, string> = {
   // database field name: query field name
@@ -23,7 +24,7 @@ export default function NFTMarketTable({
   time: TimeFilterType;
 }) {
   const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
-  const catalog = useContext(CatalogViewContext);
+  const catalog = useAtomValue(catalogViewAtom);
   const { data: nftMarket, isFetching } = useQuery({
     queryKey: ["nft-market", catalog.id, catalog.uid, time, query.toString()],
     queryFn: () => getNFTsMarket(catalog.id, time, query),

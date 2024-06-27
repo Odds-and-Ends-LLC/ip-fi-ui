@@ -4,14 +4,15 @@ import copy from "copy-to-clipboard";
 import { useState } from "react";
 
 // components
-import { Icon, Modal } from "..";
-
-// styles
 import styles from "./ShareButton.module.css";
+import { Icon, Modal } from "..";
 
 export default function ShareButton({
   title = "SHARE",
   link = "",
+} : {
+  title: string;
+  link: string;
 }) {
   const [openShareModal, setOpenShareModal] = useState(false);
 
@@ -19,11 +20,11 @@ export default function ShareButton({
     copy(link);
   };
 
-  const SocialShareButton = ({ label, icon, href = "/" }) => {
+  const SocialShareButton = ({ label, icon, href = "/" } : { label: string; icon: any; href: string; }) => {
     return (
       <Button
         fullWidth
-        variant="underlined"
+        variant="clearPurpleUnderline"
         href={href}
         sx={{ color: "text.secondary" }}
         startIcon={icon}
@@ -66,7 +67,7 @@ export default function ShareButton({
         >
           <Stack className={styles.shareButtonModalCopyLink}>
             <Icon icon="link" />
-            <Typography noWrap>{link}</Typography>
+            <Typography noWrap maxWidth="300px">{link}</Typography>
           </Stack>
           <Button
             variant="solidGreen"

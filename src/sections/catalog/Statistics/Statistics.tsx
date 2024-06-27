@@ -1,16 +1,17 @@
 // packages
 import { Divider, Skeleton, Stack, Typography } from "@mui/material";
-import { Fragment, ReactNode, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Fragment, ReactNode} from "react";
+import { useAtomValue } from "jotai";
 
 // styles
-import { CatalogViewContext } from "../CatalogView/CatalogView";
 import { getCatalogStatistics } from "@/lib/client/catalog";
 import styles from "./Statistics.module.css";
+import { catalogViewAtom } from "@/atoms";
 import { Icon } from "@/components";
 
 export default function Statistics() {
-  const catalog = useContext(CatalogViewContext);
+  const catalog = useAtomValue(catalogViewAtom);
   const { data: stats, isFetching } = useQuery({
     queryKey: ["catalog-statistics", catalog.id, catalog.uid],
     queryFn: () => getCatalogStatistics(catalog.id)

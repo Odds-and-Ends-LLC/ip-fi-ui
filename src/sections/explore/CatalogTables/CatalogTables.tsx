@@ -11,12 +11,12 @@ import { MarketTable, TrendingTable } from "..";
 import styles from "./CatalogTables.module.css";
 import { TimeFilterType } from "@/types";
 import { PriceVolumeGraph } from "@/sections/global";
-import { CatalogViewContext } from "@/sections/catalog/CatalogView/CatalogView";
+// import { CatalogViewContext } from "@/sections/catalog/CatalogView/CatalogView";
 
 export default function CatalogTables() {
   const [catalogTab, setCatalogTab] = useState("trending");
   const [time, setTime] = useState<TimeFilterType>("all");
-  const catalog = useContext(CatalogViewContext);
+  // const catalog = useContext(CatalogViewContext);
 
   return (
     <>
@@ -83,7 +83,7 @@ export default function CatalogTables() {
               <MarketTable time={time} />
             </Grid>
             <Grid item mobile={12} laptop={6}>
-              <PriceVolumeGraph catalogId={catalog.id} />
+              {/* <PriceVolumeGraph /> */}
             </Grid>
           </Grid>
         }

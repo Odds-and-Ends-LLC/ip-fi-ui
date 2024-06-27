@@ -1,7 +1,9 @@
-// components
-import { getCatalogByUid } from "@/lib/server/catalog";
-import { CatalogSettings, CatalogView } from "@/sections/catalog";
+// packages
 import { notFound } from "next/navigation";
+
+// components
+import { CatalogSettings, CatalogView } from "@/sections/catalog";
+import { getCatalog } from "@/lib/server/catalog";
 
 export default async function CatalogViewPage({
   params
@@ -18,13 +20,11 @@ export default async function CatalogViewPage({
 
   const [uid, page] = params.slug;
 
-  console.log(uid, page);
-
   if (page && !goodSlugs.includes(page)) {
     notFound();
   }
 
-  const catalog = await getCatalogByUid(uid);
+  const catalog = await getCatalog(uid);
 
   if (!catalog || !catalog.data) {
     notFound();

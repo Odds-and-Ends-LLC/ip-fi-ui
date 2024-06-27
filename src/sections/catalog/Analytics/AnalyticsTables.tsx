@@ -1,17 +1,18 @@
 // packages
 import { Grid, Stack } from "@mui/material";
-import { useContext, useState } from "react";
+import { useAtomValue } from "jotai";
+import { useState } from "react";
 
 // components
 import { NFTMarketTable, CatalogSalesTable } from "..";
+import { PriceVolumeGraph } from "@/sections/global";
+import { catalogViewAtom } from "@/atoms";
 import { TimeFilterType } from "@/types";
 import { Tabs } from "@/components";
-import { PriceVolumeGraph } from "@/sections/global";
-import { CatalogViewContext } from "../CatalogView/CatalogView";
 
 export default function AnalyticsTables() {
   const [time, setTime] = useState<TimeFilterType>("all");
-  const catalog = useContext(CatalogViewContext);
+  const catalog = useAtomValue(catalogViewAtom);
 
   return (
     <Stack sx={{ p: { tablet: "16px", mobile: 0 }, gap: { mobile: "24px" } }}>
