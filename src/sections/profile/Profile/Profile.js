@@ -103,24 +103,6 @@ export default function Profile() {
           ]}
         />
         <Stack className={styles.profileSocials}>
-          {/* <IconButton color="primary" href="/">
-            <WebIcon />
-          </IconButton>
-          <IconButton color="primary" href="/">
-            <Twitter />
-          </IconButton>
-          <IconButton color="primary" href="/">
-            <InstagramIcon />
-          </IconButton>
-          <IconButton color="primary" href="/">
-            <DiscordIcon />
-          </IconButton>
-          <IconButton color="primary" href="/">
-            <OpenSeaIcon />
-          </IconButton>
-          <IconButton color="primary" href="/">
-            <LooksRareIcon />
-          </IconButton> */}
         </Stack>
         <Divider
           sx={{ borderColor: "dividers.default" }}

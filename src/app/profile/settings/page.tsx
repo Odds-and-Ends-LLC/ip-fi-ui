@@ -1,6 +1,11 @@
 // components
 import { ProfileSettings } from "@/sections/profile";
+import { Suspense } from "react";
 
 export default function ProfileSettingsPage() {
-  return <ProfileSettings />;
+  return (
+    <Suspense>
+      <ProfileSettings />
+    </Suspense>
+  );
 }

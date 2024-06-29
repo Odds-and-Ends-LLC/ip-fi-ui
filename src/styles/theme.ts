@@ -1,7 +1,7 @@
 "use client";
 // packages
 
-import type {} from "@mui/x-data-grid/themeAugmentation";
+import type { } from "@mui/x-data-grid/themeAugmentation";
 import { Unbounded, Work_Sans } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { Typography } from "@mui/material";
@@ -159,6 +159,9 @@ declare module "@mui/material/styles" {
     dividers?: TypeDividers;
     gradient?: TypeGradients;
     catalog?: TypeCatalog;
+    white: {
+      main: string;
+    }
   }
 
   interface SimplePaletteColorOptions {
@@ -325,6 +328,9 @@ declare module "@mui/material/Divider" {
 
 export const theme = createTheme({
   palette: {
+    white: {
+      main: colors.white
+    },
     primary: {
       main: colors.purple[600],
     },
