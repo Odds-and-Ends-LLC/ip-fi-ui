@@ -1,0 +1,35 @@
+.marketTable {
+  border: 2px solid #72ff8833;
+  border-radius: 12px;
+  width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.marketTableItem {
+  width: 50%;
+}
+
+.marketTableCatalog {
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.marketTableCatalogName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.marketTablePrice {
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.marketTableVolume {
+  gap: 2px;
+}
+

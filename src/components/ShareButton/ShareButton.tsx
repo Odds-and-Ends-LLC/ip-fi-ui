@@ -59,8 +59,8 @@ export default function ShareButton({
         onClose={() => setOpenShareModal(false)}
         title={title}
       >
-        <SocialShareButton label="FACEBOOK" icon={<Icon icon="facebook" />} href="/" />
-        <SocialShareButton label="TWITTER" icon={<Icon icon="twitterX" />} href="/" />
+        {/* <SocialShareButton label="FACEBOOK" icon={<Icon icon="facebook" />} href="/" />
+        <SocialShareButton label="TWITTER" icon={<Icon icon="twitterX" />} href="/" /> */}
         <Stack
           className={styles.shareButtonModalCopyButton}
           sx={{ borderColor: "dividerGray.main", flexDirection: { tablet: "row" } }}

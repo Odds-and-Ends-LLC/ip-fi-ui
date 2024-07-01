@@ -4,14 +4,15 @@ import { Stack, Typography } from "@mui/material";
 // styles
 import styles from "./Profile.module.css";
 
-/**
- * @param {{
-* stats: { label: string; value: string; }[];
-* }} props
-*/
+interface StatsItem {
+  label: string;
+  value: string;
+}
 
 export default function ProfileStats({
   stats
+} : {
+  stats: StatsItem[]
 }) {
   return (
     <Stack
@@ -25,7 +26,7 @@ export default function ProfileStats({
     >
       {stats.map(({ label, value }, i) => (
         <Stack key={i}>
-          <Typography variant="bod2" color="text.disabled">{label}</Typography>
+          <Typography variant="body2" color="text.disabled">{label}</Typography>
           <Typography variant="h6" color="text.primary">{value}</Typography>
         </Stack>
       ))}

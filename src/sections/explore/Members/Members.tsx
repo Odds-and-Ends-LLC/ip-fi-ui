@@ -9,7 +9,6 @@ import { Circle, ItemsCarousel, Member } from "@/components";
 import { getFeaturedUsers } from "@/lib/client/user";
 import MembersSkeleton from "./MembersSkeleton";
 import styles from "./Members.module.css";
-import { formatDistanceToNow } from "date-fns";
 
 export default function Members() {
   const { data: members, isFetching } = useQuery({
@@ -50,7 +49,6 @@ export default function Members() {
       </Box>
       <ItemsCarousel
         title="MEMBERS"
-        count={33}
         viewAllUrl="/"
         items={
           members.data.map((member, i) => (
@@ -60,8 +58,8 @@ export default function Members() {
                 memberName={member.username}
                 pfp={member.pfp}
                 lastActive={member.lastActiveAt}
+                collections={member.collectionCount}
                 catalogs={member.catalogCount}
-                contracts={member.contractCount}
                 joinedDate={member.joinedAt}
               />
             </Box>

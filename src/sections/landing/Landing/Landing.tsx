@@ -2,11 +2,16 @@
 import { Stack } from "@mui/material";
 
 // styles
-import styles from "./page.module.css";
+import styles from "./Landing.module.css";
 
 // components
-import { Hero, ForCollectors, ForBrands, Updates, Toolset, FAQs } from "@/sections/landing";
 import { Footer } from "@/components"
+import Hero from "../Hero";
+import ForCollectors from "../ForCollectors";
+import ForBrands from "../ForBrands";
+import Toolset from "../Toolset";
+import Updates from "../Updates";
+import FAQs from "../FAQs";
 
 export default function Landing() {
   return (

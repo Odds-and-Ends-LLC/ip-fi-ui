@@ -17,10 +17,11 @@ export async function signup(formData: FormData) {
     // create user here
     // then create session
 
+
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('');
-      }, 3000);
+      }, 1500);
     });
 
     const email = formData.get("email") as string;
@@ -55,7 +56,7 @@ export async function login(data: LoginPayloadType) {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('');
-      }, 3000);
+      }, 1500);
     });
 
     // return error if not

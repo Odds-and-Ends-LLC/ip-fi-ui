@@ -105,7 +105,6 @@ export default function CatalogCover({
         <Stack
           className={styles.catalogCoverDetails}
           sx={{
-            background: "linear-gradient(0deg, rgba(1,2,40,1) 0%, rgba(0,212,255,0) 100%)",
             p: {
               mobile: "8px",
               tablet: "16px",

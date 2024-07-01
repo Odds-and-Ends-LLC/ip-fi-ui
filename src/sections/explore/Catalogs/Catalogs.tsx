@@ -30,7 +30,6 @@ export default function Catalogs() {
   return (
     <ItemsCarousel
       title="CATALOGS"
-      count={33}
       viewAllUrl="/"
       items={
         catalogs.data.map((catalog, i) => (

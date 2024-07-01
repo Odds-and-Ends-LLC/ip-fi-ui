@@ -751,7 +751,7 @@ theme.components = {
     },
     styleOverrides: {
       root: {
-        overflowX: "hidden",
+        overflowX: "clip",
       },
     },
   },

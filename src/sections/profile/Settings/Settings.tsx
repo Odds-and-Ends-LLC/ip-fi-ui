@@ -14,6 +14,9 @@ import SettingsAccount from "./SettingsAccount";
 import SettingsWallet from "./SettingsWallet";
 import SettingsBackground from "./SettingsBackground";
 import { Icon, Tabs } from "@/components";
+import { useAtomValue } from "jotai";
+import { userSessionAtom } from "@/atoms";
+import { UserType } from "@/types";
 
 const data = {
   walletAddresses: [
@@ -23,19 +26,18 @@ const data = {
   ],
 };
 
-export default function Settings() {
+export default function Settings({
+  user
+} : {
+  user: UserType;
+}) {
   const pathname = usePathname();
-  const router = useRouter();
-  const urlQuery = useSearchParams();
-  const tab = urlQuery.get("tab");
+  const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
+  const settingsTab = fragments[1] || "profile";
 
   const handleTabChange = (value: string) => {
-    router.replace(pathname + "?tab=" + value);
+    window.history.pushState(null, "", `/settings/${value}`);
   };
-
-  useEffect(() => {
-    if (!tab) router.replace(pathname + "?tab=profile");
-  }, [pathname, router, tab]);
 
   return (
     <Stack
@@ -59,7 +61,7 @@ export default function Settings() {
         >
           <Tabs
             orientation="vertical"
-            value={tab || "profile"}
+            value={settingsTab || "profile"}
             tabs={[
               { label: "PROFILE", value: "profile", icon: <Icon icon="avatar" size={18} /> },
               { label: "ACCOUNT", value: "account", icon: <Icon icon="settings" size={18} /> },
@@ -77,7 +79,7 @@ export default function Settings() {
         >
           <Tabs
             variant="fullWidth"
-            value={tab || "profile"}
+            value={settingsTab}
             tabs={[
               { label: "PROFILE", value: "profile" },
               { label: "ACCOUNT", value: "account" },
@@ -103,13 +105,14 @@ export default function Settings() {
               variant="clearGreen"
               startIcon={<Icon icon="arrowLeft" />}
               sx={{ alignSelf: "flex-start" }}
+              href={`/${user.username}`}
             >
               BACK TO PROFILE
             </Button>
             <Stack className={styles.tabPanelContent}>
-              {tab === "profile" && <SettingsProfile />}
-              {tab === "account" && <SettingsAccount />}
-              {tab === "wallet" && <SettingsWallet />}
+              {settingsTab === "profile" && <SettingsProfile user={user} />}
+              {settingsTab === "account" && <SettingsAccount />}
+              {settingsTab === "wallet" && <SettingsWallet walletAddresses={user.walletAddresses} />}
             </Stack>
           </Stack>
         </Stack>

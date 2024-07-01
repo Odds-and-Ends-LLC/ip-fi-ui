@@ -44,7 +44,7 @@ export default function TextField<
         </Typography>
       )}
       <MuiTextField {...props} onChange={field.onChange} value={field.value} variant="filled" label={description} helperText={caption} />
-      {fieldState.error && (
+      {fieldState.error?.message && (
         <Alert icon={AlertProps.icon} severity={AlertProps.status} variant="input">
           {fieldState.error.message}
         </Alert>

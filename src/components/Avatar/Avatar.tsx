@@ -5,27 +5,23 @@ import Image from "next/image";
 // styles
 import styles from "./Avatar.module.css";
 
-/**
- * @param {{
- * image?: string;
- * icon?: string | import("react").ReactElement;
- * letters?: string;
- * size?: 'xs' | 's' | 'base' | 'm' | 'l';
- * onClick?: () => void;
- * }} props
- */
-
 export default function Avatar({
   image,
   icon,
   letters,
   size = "l",
   onClick,
+} : {
+  image?: string;
+  icon?: any;
+  letters?: string;
+  size: "xs" | "s" | "base" | "m" | "l";
+  onClick?: () => void;
 }) {
   const getAvatarTypography = () => {
     switch (size) {
-      case "m": return "h4-desktop";
-      case "l": return "h3-desktop";
+      case "m": return "h4";
+      case "l": return "h3";
       default: return "h5";
     }
   };
@@ -61,7 +57,7 @@ export default function Avatar({
   };
 
   const getAvatarSrc = () => {
-    const props = {};
+    const props = { src: "" };
 
     if (image) {
       props.src = image;
@@ -75,12 +71,14 @@ export default function Avatar({
   return (
     <Box className={styles.avatar} onClick={onClick}>
       <MuiAvatar
-        imgProps={{
-          className: styles.avatarImage,
+        slotProps={{
+          img: {
+            className: styles.avatarImage,
+          }
         }}
         {...getAvatarSrc()}
         sx={{
-          bgcolor: "text.purple",
+          bgcolor: "background.tertiary",
           color: "text.primary",
           typography: getAvatarTypography(),
           width: getAvatarSize(),

@@ -1,5 +1,5 @@
 // packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, Button, Snackbar, Stack, Switch, Typography } from "@mui/material";
 
 // styles
@@ -7,42 +7,86 @@ import styles from "./Settings.module.css";
 
 // components
 import { Icon, Modal, PasswordInput } from "@/components";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { ResetPasswordPayloadType } from "@/types";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoadingButton } from "@mui/lab";
+import { updateUserPassword } from "@/lib/actions/user";
+
+const schema = z.object({
+  password: z
+    .string()
+    .min(1, "Please provide your current password.")
+    .trim(),
+  newpassword: z
+    .string()
+    .min(8, "Must be at least 8 characters")
+    .trim(),
+  retype: z
+    .string()
+    .min(1, "Please re-type your new password.")
+    .trim(),
+})
 
 export default function SettingsAccount() {
-  const [openModal, setOpenModal] = useState<"updatePassword" | "deleteAccount" | null>();
+  const form = useForm<ResetPasswordPayloadType>({
+    resolver: zodResolver(schema),
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+      newpassword: "",
+      retype: "",
+    }
+  });
+  const { watch, reset, setError, handleSubmit, formState: { isSubmitting, isValid } } = form;
+  const [openModal, setOpenModal] = useState<"deleteAccount" | null>();
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [changePasswordVerified, setChangePasswordVerified] = useState(false);
   const [deletePasswordInput, setDeletePasswordInput] = useState<string | undefined>("");
 
-  const handleVerifyPassword = () => {
-    // verify password
-    setChangePasswordVerified(true);
+  const onSubmit: SubmitHandler<ResetPasswordPayloadType> = async (data) => {
+    const res = await updateUserPassword(data);
+
+    if (res.error) {
+      // todo error
+    }
+
+    if (res.data) {
+      setOpenSnackbar(true);
+      reset({}, { keepDefaultValues: true });
+    }
   };
 
-  const handleCancelChangePassword = () => {
-    // reset current password input
-    setChangePasswordVerified(false);
-  };
-  const handleUpdatePassword = () => {
-    setOpenModal("updatePassword");
-  };
-  const handleConfirmUpdatePassword = () => {
-    // update password
-    setOpenModal(null);
-    setChangePasswordVerified(false);
-    setOpenSnackbar(true);
-  };
   const handleDeleteAccount = () => {
     setOpenModal("deleteAccount");
   };
+
   const handleConfirmDeleteAccount = () => {
     // delete account, redirect to login?
   };
 
+  const newPassword = watch("newpassword");
+  const rePassword = watch("retype");
+
+  useEffect(() => {
+    if (!newPassword && !rePassword) {
+      return;
+    }
+
+    if (newPassword !== rePassword) {
+      setError("newpassword", { message: "Passwords do not match." });
+      setError("retype", { message: "Passwords do not match." });
+    } else {
+      setError("newpassword", {});
+      setError("retype", {});
+    }
+
+  }, [newPassword, rePassword, setError])
+
   return (
-    <>
+    <FormProvider {...form}>
       <Typography variant="h4">ACCOUNT SETTINGS</Typography>
-      <Stack className={styles.accountContents}>
+      <Stack component="form" className={styles.accountContents} onSubmit={handleSubmit(onSubmit)}>
         <Stack className={styles.accountChangePassword}>
           <Stack gap="4px">
             <Typography variant="h5">CHANGE PASSWORD</Typography>
@@ -52,59 +96,30 @@ export default function SettingsAccount() {
             label="Current Password"
             name="password"
             required
-            placeholder=""
-            // value=""
-            disabled={changePasswordVerified}
-            error={false}
-            // alert="Incorrect password."
           />
-          {!changePasswordVerified ? (
-            <Button
+          <PasswordInput
+            label="New Password"
+            name="newpassword"
+            required
+          />
+          <PasswordInput
+            label="Re-enter New Password"
+            name="retype"
+            required
+          />
+          <Stack
+            className={styles.changePasswordButtons}
+            sx={{ flexDirection: { tablet: "row" }, justifyContent: { tablet: "end" } }}
+          >
+            <LoadingButton
+              type="submit"
               variant="solidGreen"
-              disabled={false} // can be true if input is empty
-              onClick={handleVerifyPassword}
-              sx={{ alignSelf: "flex-start" }}
+              loading={isSubmitting}
+              disabled={!isValid} // change
             >
-              CHANGE PASSWORD
-            </Button>
-          ) : (
-            <>
-              <PasswordInput
-                label="New Password"
-                name="newpassword"
-                required
-                placeholder=""
-                // value=""
-                error={false}
-                // alert="Password must be at least 10 characters, must have 1 uppercase and lowercase letters,
-                // and 1 special character."
-              />
-              <PasswordInput
-                label="Re-enter New Password"
-                name="retype"
-                required
-                placeholder=""
-                // value=""
-                error={false}
-                // alert="Passwords didn't match."
-              />
-              <Stack
-                className={styles.changePasswordButtons}
-                sx={{ flexDirection: { tablet: "row" }, justifyContent: { tablet: "end" } }}
-              >
-                <Button variant="outlineGreen" onClick={handleCancelChangePassword}>
-                  CANCEL
-                </Button>
-                <Button
-                  variant="solidGreen"
-                  onClick={handleUpdatePassword}
-                  disabled={false} // change
-                >
-                  UPDATE PASSWORD
-                </Button>
-              </Stack>
-            </>
-          )}
+              UPDATE PASSWORD
+            </LoadingButton>
+          </Stack>
         </Stack>
         <Stack className={styles.accountAutoAddNft}>
           <Stack className={styles.autoAddNftText}>
@@ -113,7 +128,7 @@ export default function SettingsAccount() {
           </Stack>
           <Switch defaultChecked focusVisibleClassName=".Mui-focusVisible" />
         </Stack>
-        <Stack className={styles.accountDelete}>
+        {/* <Stack className={styles.accountDelete}>
           <Stack gap="4px">
             <Typography variant="h5">DELETE ACCOUNT</Typography>
             <Typography>
@@ -124,10 +139,10 @@ export default function SettingsAccount() {
           <Button variant="solidWhite" onClick={handleDeleteAccount}>
             DELETE
           </Button>
-        </Stack>
+        </Stack> */}
       </Stack>
 
-      <Modal
+      {/* <Modal
         title="UPDATE PASSWORD"
         titleIcon={<Icon icon="info" />}
         open={openModal === "updatePassword"}
@@ -144,7 +159,7 @@ export default function SettingsAccount() {
         }
       >
         <Typography>Are you sure you want to update your password?</Typography>
-      </Modal>
+      </Modal> */}
       <Modal
         title="DELETE ACCOUNT"
         titleIcon={<Icon icon="alert" />}
@@ -208,6 +223,6 @@ export default function SettingsAccount() {
           </Stack>
         </Alert>
       </Snackbar>
-    </>
+    </FormProvider>
   );
 }

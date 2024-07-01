@@ -22,7 +22,6 @@ export default function NFTs() {
   return (
     <ItemsCarousel
       title="NFTS"
-      count={33}
       viewAllUrl="/"
       items={
         nfts.data.map((nft, i) => (

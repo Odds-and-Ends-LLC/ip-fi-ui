@@ -1,5 +1,5 @@
 import { catalogSalesData, catalogs, marketCatalogs, trendingCatalogs } from "@/data";
-import { TimeFilterType, PriceVolumeDataType, TopCatalogType, CatalogStatisticsType } from "@/types";
+import { TimeFilterType, PriceVolumeDataType, TopCatalogType, CatalogStatisticsType, TradeHistoryDataType } from "@/types";
 
 
 export const getTopCatalogs = async () => {
@@ -76,6 +76,36 @@ export const getPriceVolumeHistory = async (catalogId: string) => {
     console.log("failed to fetch price volume history");
     return {
       error: "Failed to fetch price volume history at this time."
+    }
+  }
+};
+
+export const getTradeHistory = async (catalogId: string) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const history: TradeHistoryDataType[] = [
+      { month: "Jan", barInfo: 300, lineInfo1: 320, lineInfo2: 200 },
+      { month: "Feb", barInfo: 340, lineInfo1: 330, lineInfo2: 210 },
+      { month: "Mar", barInfo: 360, lineInfo1: 370, lineInfo2: 250 },
+      { month: "Apr", barInfo: 370, lineInfo1: 410, lineInfo2: 300 },
+      { month: "May", barInfo: 380, lineInfo1: 430, lineInfo2: 320 },
+      { month: "Jun", barInfo: 390, lineInfo1: 440, lineInfo2: 310 },
+      { month: "Jul", barInfo: 370, lineInfo1: 420, lineInfo2: 290 },
+      { month: "Aug", barInfo: 350, lineInfo1: 400, lineInfo2: 280 },
+      { month: "Sep", barInfo: 340, lineInfo1: 390, lineInfo2: 270 },
+      { month: "Oct", barInfo: 320, lineInfo1: 370, lineInfo2: 250 },
+      { month: "Nov", barInfo: 310, lineInfo1: 350, lineInfo2: 230 },
+      { month: "Dec", barInfo: 300, lineInfo1: 330, lineInfo2: 210 }
+    ];
+
+    return {
+      data: history,
+    }
+  } catch (error) {
+    console.log("failed to fetch trade history");
+    return {
+      error: "Failed to fetch trade history at this time."
     }
   }
 };

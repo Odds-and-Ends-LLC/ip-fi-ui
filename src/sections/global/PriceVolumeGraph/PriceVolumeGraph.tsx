@@ -64,7 +64,7 @@ export default function PriceVolumeGraph({
       >
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={priceVolume.data}>
-            <XAxis dataKey="month" axisLine={false} tickLine={false} hide />
+            <XAxis dataKey="month" axisLine={false} tickLine={false} />
             <YAxis orientation="right" axisLine={false} tickLine={false} width={32} />
             <CartesianGrid stroke="#1A1B46" strokeWidth={.5} />
             <Tooltip content={(props) => {

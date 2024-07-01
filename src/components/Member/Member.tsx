@@ -11,8 +11,8 @@ export default function Member({
   memberName = "Member",
   pfp,
   lastActive,
+  collections = 0,
   catalogs = 0,
-  contracts = 0,
   joinedDate,
   responseTime = "Within Hours",
   responseRate,
@@ -21,8 +21,8 @@ export default function Member({
   memberName: string;
   pfp?: string;
   lastActive?: Date;
+  collections?: number;
   catalogs?: number;
-  contracts?: number;
   joinedDate?: Date;
   responseTime?: string;
   responseRate?: string;
@@ -60,18 +60,18 @@ export default function Member({
             <Stack className={styles.memberCardNumbers}>
               <Stack className={styles.memberCardItem}>
                 <Typography variant="body2" color="text.disabled">
-                  Catalogs
+                  Collections
                 </Typography>
                 <Typography variant="h6">
-                  {catalogs}
+                  {collections}
                 </Typography>
               </Stack>
               <Stack className={styles.memberCardItem}>
                 <Typography variant="body2" color="text.disabled">
-                  Contracts
+                  Catalogs
                 </Typography>
                 <Typography variant="h6">
-                  {contracts}
+                  {catalogs}
                 </Typography>
               </Stack>
             </Stack>

@@ -2,11 +2,10 @@
 
 // packages
 import "server-only";
-import { cookies } from "next/headers";
 import { cache } from "react";
 
 // session
-import { decrypt, verifySession } from "../session";
+import { verifySession } from "../session";
 
 // temp data
 import { user } from "@/data";
@@ -43,7 +42,7 @@ export const getCurrentUser = cache(async () => {
     const { password, ...userDetails } = user;
     const data = { ...userDetails } as UserType;
 
-    return data;
+    return { data };
   } catch (error) {
     console.log("failed to fetch user");
     return {
@@ -52,3 +51,19 @@ export const getCurrentUser = cache(async () => {
   }
 });
 
+
+export const getUser = cache(async (username: string) => {
+  try {
+    // get user data here
+    // this is mock for now
+    const { password, ...userDetails } = user;
+    const data = { ...userDetails } as UserType;
+
+    return { data };
+  } catch (error) {
+    console.log("failed to fetch user");
+    return {
+      error: "Failed to fetch user at this time.",
+    };
+  }
+});

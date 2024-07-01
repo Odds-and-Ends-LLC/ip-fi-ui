@@ -3,7 +3,10 @@ import { decrypt } from "@/lib/session";
 import { cookies } from "next/headers";
 
 const protectedRoutes = [
-  "/profile"
+  "/settings",
+  "/settings/profile",
+  "/settings/account",
+  "/settings/wallet",
 ];
 
 const publicRoutes = [

@@ -75,7 +75,7 @@ export default function Navbar() {
         <Stack className={styles.navbarLinksDesktop}>
           {userSession && (
             <>
-              <Link href="/profile" className={styles.navbarLogo} rel="" target="">
+              <Link href={`/${userSession.username}`} className={styles.navbarLogo} rel="" target="">
                 <Avatar image={userSession.pfp} size="s" />
               </Link>
               <Button variant="clearWhite" mode="icon" onClick={() => setLogoutOpen(true)}>

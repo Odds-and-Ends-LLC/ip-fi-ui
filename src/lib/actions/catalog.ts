@@ -10,7 +10,7 @@ export async function updateCatalog(data: Partial<UpdateCatalogPayloadType>) {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('');
-      }, 3000);
+      }, 1500);
     });
 
     return {

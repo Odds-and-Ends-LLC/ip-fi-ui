@@ -1,0 +1,9 @@
+.tradeHistoryGraph {
+  width: 100%;
+}
+
+.tradeHistoryGraphTooltip {
+  padding: 12px;
+  border-radius: 4px;
+  gap: 8px;
+}

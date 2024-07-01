@@ -1,11 +1,15 @@
 // packages
 import { Button, Typography, Stack } from "@mui/material";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 //styles
 import styles from "./CollapsibleText.module.css";
 
-export default function CollapsibleText({ children }) {
+export default function CollapsibleText({
+  children
+} : {
+  children: string;
+}) {
   const [collapsed, setCollapsed] = useState(children.length > 150);
 
   return (
@@ -20,8 +24,7 @@ export default function CollapsibleText({ children }) {
       </Typography>
       {(children.length > 150 && collapsed) &&
         <Button
-          variant="text"
-          color="white"
+          variant="clearWhite"
           onClick={()=> setCollapsed(!collapsed)}
         >
           Show more

@@ -1,5 +1,5 @@
 // packages
-import { Avatar, Box, Button, IconButton, Stack } from "@mui/material";
+import { Avatar, Box, Button, CircularProgress, IconButton, Stack } from "@mui/material";
 import { useRef, useState } from "react";
 
 // components
@@ -13,26 +13,36 @@ export default function ProfilePicture({
   letters = "",
   upload = false,
   size = "base",
+  loading,
   onImageSelect,
 } : {
   image?: string;
   letters?: string;
   upload?: boolean;
+  loading?: boolean;
   size?: "xs" | "s" | "m" | "base";
-  onImageSelect?: (image: File) => void;
+  onImageSelect?: (image: File | null) => void;
 }) {
   const uploadRef = useRef<HTMLInputElement | null>(null)
+  const [currentAvatarSrc, setCurrentAvatarSrc] = useState(image);
   const [avatarSrc, setAvatarSrc] = useState("");
   const [imageFile, setImageFile] = useState<File | null>();
   const [openUploadModal, setOpenUploadModal] = useState(false);
 
   const handleChangeFile = (files: FileList | null) => {
+    if (files === null) {
+      setImageFile(null);
+      onImageSelect && onImageSelect(null);
+      return;
+    }
+
     if (files) {
       const image = files.item(0);
       if (image) {
         const src = URL.createObjectURL(image);
         setAvatarSrc(src);
         setImageFile(image);
+        onImageSelect && onImageSelect(image);
       }
     }
   };
@@ -42,13 +52,13 @@ export default function ProfilePicture({
       return {
         borderWidth: "3px",
         borderStyle: "solid",
-        borderColor: "background.darkBlue"
+        borderColor: "background.tertiary"
       }
     }
 
     if (letters) {
       return {
-        bgcolor: "background.darkBlue",
+        bgcolor: "background.tertiary",
       };
     }
 
@@ -94,6 +104,7 @@ export default function ProfilePicture({
       sx={{
         width: getAvatarSize(),
         height: getAvatarSize(),
+        position: "relative"
       }}
     >
       <input
@@ -104,7 +115,7 @@ export default function ProfilePicture({
         onChange={(e) => handleChangeFile(e.target.files)}
       />
       <Avatar
-        src={avatarSrc || image || "/images/default_pfp.svg"}
+        src={avatarSrc || currentAvatarSrc || "/images/default_pfp.svg"}
         alt="profile picture"
         sx={{
           color: "text.primary",
@@ -116,6 +127,11 @@ export default function ProfilePicture({
       >
         {letters}
       </Avatar>
+      {loading &&
+        <Stack sx={{ bgcolor: "background.grayOverlay", borderRadius: "50%", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", alignItems: "center", justifyContent: "center"  }} >
+          <CircularProgress color="secondary"/>
+        </Stack>
+      }
       {upload &&
         <Button
           mode="icon"
@@ -123,6 +139,7 @@ export default function ProfilePicture({
           className={styles.profilePictureUpload}
           onClick={() => setOpenUploadModal(true)}
           sx={getIconStyle()}
+          disabled={loading}
         >
           <Icon size="full" icon="camera" color="#808198" />
         </Button>
@@ -144,18 +161,20 @@ export default function ProfilePicture({
             <Icon icon="upload" />
             UPLOAD PHOTO
           </Button>
-          <Button variant="outlineWhite" className={styles.profilePictureModalButton}>
+          {/* <Button variant="outlineWhite" className={styles.profilePictureModalButton}>
             <Icon icon="avatar" />
             CHOOSE AN AVATAR
-          </Button>
-          {imageFile &&
+          </Button> */}
+          {(imageFile || currentAvatarSrc) &&
             <Button
               variant="outlineWhite"
               className={styles.profilePictureModalButton}
               onClick={() => {
                 setAvatarSrc("");
+                setCurrentAvatarSrc("");
                 setImageFile(null);
                 setOpenUploadModal(false);
+                handleChangeFile(null);
               }}
             >
               <Icon icon="remove" />

@@ -6,6 +6,8 @@ export const user : UserType & { password: string; } = {
   password: "password",
   username: "mrknuckles",
   pfp: "/images/image_1.png",
+  cover: "/images/image_3.png",
+  about: "Collecting NFTs like stars. ",
   walletAddresses: [
     "1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX71",
     "1Lbcfr7sAHTD9CgdQo3HTMTkV8LK4ZnX72",
@@ -20,9 +22,9 @@ export const user : UserType & { password: string; } = {
   instagram: "",
   discord: "",
   opensea: "",
-  looksRare: "",
+  looksRare: "looksRare",
   catalogCount: 12,
-  contractCount: 3,
+  collectionCount: 3,
 };
 
 const traits: TraitType[] = [
@@ -984,7 +986,7 @@ export const users: UserType[] = [
     opensea: "user1_opensea",
     looksRare: "user1_looksRare",
     catalogCount: 5,
-    contractCount: 2
+    collectionCount: 2
   },
   {
     id: "2",
@@ -1003,7 +1005,7 @@ export const users: UserType[] = [
     opensea: "user2_opensea",
     looksRare: "user2_looksRare",
     catalogCount: 6,
-    contractCount: 3
+    collectionCount: 3
   },
   {
     id: "3",
@@ -1022,7 +1024,7 @@ export const users: UserType[] = [
     opensea: "user3_opensea",
     looksRare: "user3_looksRare",
     catalogCount: 7,
-    contractCount: 4
+    collectionCount: 4
   },
   {
     id: "4",
@@ -1041,7 +1043,7 @@ export const users: UserType[] = [
     opensea: "user4_opensea",
     looksRare: "user4_looksRare",
     catalogCount: 8,
-    contractCount: 5
+    collectionCount: 5
   },
   {
     id: "5",
@@ -1060,7 +1062,7 @@ export const users: UserType[] = [
     opensea: "user5_opensea",
     looksRare: "user5_looksRare",
     catalogCount: 9,
-    contractCount: 6
+    collectionCount: 6
   },
   {
     id: "6",
@@ -1079,7 +1081,7 @@ export const users: UserType[] = [
     opensea: "user6_opensea",
     looksRare: "user6_looksRare",
     catalogCount: 10,
-    contractCount: 7
+    collectionCount: 7
   },
   {
     id: "7",
@@ -1098,7 +1100,7 @@ export const users: UserType[] = [
     opensea: "user7_opensea",
     looksRare: "user7_looksRare",
     catalogCount: 11,
-    contractCount: 8
+    collectionCount: 8
   },
   {
     id: "8",
@@ -1117,7 +1119,7 @@ export const users: UserType[] = [
     opensea: "user8_opensea",
     looksRare: "user8_looksRare",
     catalogCount: 12,
-    contractCount: 9
+    collectionCount: 9
   },
   {
     id: "9",
@@ -1136,7 +1138,7 @@ export const users: UserType[] = [
     opensea: "user9_opensea",
     looksRare: "user9_looksRare",
     catalogCount: 13,
-    contractCount: 10
+    collectionCount: 10
   },
   {
     id: "10",
@@ -1155,7 +1157,7 @@ export const users: UserType[] = [
     opensea: "user10_opensea",
     looksRare: "user10_looksRare",
     catalogCount: 14,
-    contractCount: 11
+    collectionCount: 11
   },
   {
     id: "11",
@@ -1174,7 +1176,7 @@ export const users: UserType[] = [
     opensea: "user11_opensea",
     looksRare: "user11_looksRare",
     catalogCount: 15,
-    contractCount: 12
+    collectionCount: 12
   },
   {
     id: "12",
@@ -1193,7 +1195,7 @@ export const users: UserType[] = [
     opensea: "user12_opensea",
     looksRare: "user12_looksRare",
     catalogCount: 16,
-    contractCount: 13
+    collectionCount: 13
   },
   {
     id: "13",
@@ -1212,7 +1214,7 @@ export const users: UserType[] = [
     opensea: "user13_opensea",
     looksRare: "user13_looksRare",
     catalogCount: 17,
-    contractCount: 14
+    collectionCount: 14
   },
   {
     id: "14",
@@ -1231,7 +1233,7 @@ export const users: UserType[] = [
     opensea: "user14_opensea",
     looksRare: "user14_looksRare",
     catalogCount: 18,
-    contractCount: 15
+    collectionCount: 15
   },
   {
     id: "15",
@@ -1250,7 +1252,7 @@ export const users: UserType[] = [
     opensea: "user15_opensea",
     looksRare: "user15_looksRare",
     catalogCount: 19,
-    contractCount: 16
+    collectionCount: 16
   },
   {
     id: "16",
@@ -1269,7 +1271,7 @@ export const users: UserType[] = [
     opensea: "user16_opensea",
     looksRare: "user16_looksRare",
     catalogCount: 20,
-    contractCount: 17
+    collectionCount: 17
   },
   {
     id: "17",
@@ -1288,7 +1290,7 @@ export const users: UserType[] = [
     opensea: "user17_opensea",
     looksRare: "user17_looksRare",
     catalogCount: 21,
-    contractCount: 18
+    collectionCount: 18
   },
   {
     id: "18",
@@ -1307,7 +1309,7 @@ export const users: UserType[] = [
     opensea: "user18_opensea",
     looksRare: "user18_looksRare",
     catalogCount: 22,
-    contractCount: 19
+    collectionCount: 19
   },
   {
     id: "19",
@@ -1326,7 +1328,7 @@ export const users: UserType[] = [
     opensea: "user19_opensea",
     looksRare: "user19_looksRare",
     catalogCount: 23,
-    contractCount: 20
+    collectionCount: 20
   },
   {
     id: "20",
@@ -1345,7 +1347,7 @@ export const users: UserType[] = [
     opensea: "user20_opensea",
     looksRare: "user20_looksRare",
     catalogCount: 24,
-    contractCount: 21
+    collectionCount: 21
   },
   {
     id: "21",
@@ -1364,7 +1366,7 @@ export const users: UserType[] = [
     opensea: "user21_opensea",
     looksRare: "user21_looksRare",
     catalogCount: 25,
-    contractCount: 22
+    collectionCount: 22
   },
   {
     id: "22",
@@ -1383,7 +1385,7 @@ export const users: UserType[] = [
     opensea: "user22_opensea",
     looksRare: "user22_looksRare",
     catalogCount: 26,
-    contractCount: 23
+    collectionCount: 23
   },
   {
     id: "23",
@@ -1402,7 +1404,7 @@ export const users: UserType[] = [
     opensea: "user23_opensea",
     looksRare: "user23_looksRare",
     catalogCount: 27,
-    contractCount: 24
+    collectionCount: 24
   },
   {
     id: "24",
@@ -1421,7 +1423,7 @@ export const users: UserType[] = [
     opensea: "user24_opensea",
     looksRare: "user24_looksRare",
     catalogCount: 28,
-    contractCount: 25
+    collectionCount: 25
   },
   {
     id: "25",
@@ -1440,7 +1442,7 @@ export const users: UserType[] = [
     opensea: "user25_opensea",
     looksRare: "user25_looksRare",
     catalogCount: 29,
-    contractCount: 26
+    collectionCount: 26
   },
   {
     id: "26",
@@ -1459,7 +1461,7 @@ export const users: UserType[] = [
     opensea: "user26_opensea",
     looksRare: "user26_looksRare",
     catalogCount: 30,
-    contractCount: 27
+    collectionCount: 27
   },
   {
     id: "27",
@@ -1478,7 +1480,7 @@ export const users: UserType[] = [
     opensea: "user27_opensea",
     looksRare: "user27_looksRare",
     catalogCount: 31,
-    contractCount: 28
+    collectionCount: 28
   },
   {
     id: "28",
@@ -1497,7 +1499,7 @@ export const users: UserType[] = [
     opensea: "user28_opensea",
     looksRare: "user28_looksRare",
     catalogCount: 32,
-    contractCount: 29
+    collectionCount: 29
   },
   {
     id: "29",
@@ -1516,7 +1518,7 @@ export const users: UserType[] = [
     opensea: "user29_opensea",
     looksRare: "user29_looksRare",
     catalogCount: 33,
-    contractCount: 30
+    collectionCount: 30
   },
   {
     id: "30",
@@ -1535,7 +1537,7 @@ export const users: UserType[] = [
     opensea: "user30_opensea",
     looksRare: "user30_looksRare",
     catalogCount: 34,
-    contractCount: 31
+    collectionCount: 31
   }
 ];
 

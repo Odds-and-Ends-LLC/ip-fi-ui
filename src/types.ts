@@ -20,8 +20,10 @@ export interface UserType {
   id: string;
   email: string;
   username: string;
-  pfp: string;
+  pfp?: string;
+  cover?: string;
   walletAddresses: string[];
+  about?: string;
   joinedAt: Date;
   lastActiveAt?: Date;
   responseTime: number;
@@ -32,8 +34,8 @@ export interface UserType {
   discord?: string;
   opensea?: string;
   looksRare?: string;
+  collectionCount: number;
   catalogCount: number;
-  contractCount: number;
   // add more details here
 }
 
@@ -100,9 +102,9 @@ export interface NFTHistoryType {
   id: string,
   event: "transfer" | "sale"; // idk what other transactions event are
   price: number;
-  fromUserPfp: string;
+  fromUserPfp?: string;
   fromUserUsername: string;
-  toUserPfp: string;
+  toUserPfp?: string;
   toUserUsername: string;
   purchasedAt: Date;
 };
@@ -163,6 +165,13 @@ export interface PriceVolumeDataType {
   volume: number;
 };
 
+export interface TradeHistoryDataType {
+  month: string;
+  barInfo: number;
+  lineInfo1: number;
+  lineInfo2: number;
+};
+
 export interface CatalogSalesDataType {
   id: string;
   rank: number;
@@ -201,3 +210,21 @@ export interface UpdateCatalogPayloadType {
   coverColor: string;
   allowExclusiveLicense: boolean;
 }
+
+export interface EditProfilePayloadType {
+  username?: string;
+  email?: string;
+  about?: string;
+  website?: string;
+  twitter?: string;
+  instagram?: string
+  discord?: string;
+  opensea?: string;
+  looksRare?: string;
+};
+
+export interface ResetPasswordPayloadType {
+  password: string;
+  newpassword: string;
+  retype: string;
+};
