@@ -58,7 +58,7 @@ export default function StepProfilePhoto({
     }
   };
 
-  const handleImageSelect = (imageFile: File) => {
+  const handleImageSelect = (imageFile: File | null) => {
     setSignupPayload((payload: SignupPayloadType) => ({ ...payload, pfp: imageFile }));
   };
 
