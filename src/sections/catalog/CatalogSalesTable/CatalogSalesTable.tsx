@@ -158,7 +158,7 @@ export default function CatalogSalesTable() {
       headerName: "Buyer",
       flex: 1,
       sortable: false,
-      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderBuyer(row.buyer.pfp, row.buyer.username),
+      renderCell: ({ row } : { row: GridRowModel<CatalogSalesDataType> }) => renderBuyer(row.buyer.pfp || "", row.buyer.username),
     },
     {
       field: "purchaseAt",
