@@ -93,7 +93,7 @@ export default function WalletDisplay({
         width="100%"
         sx={{ display: { mobile: "block", laptop: type === "truncated" ? "block" : "none" } }}
       >
-        {truncate(walletAddressDisplay, 8, 4)}
+        {truncate(walletAddressDisplay ?? "", 8, 4)}
       </Typography>
       {endIcon}
       {mode === "select" && (

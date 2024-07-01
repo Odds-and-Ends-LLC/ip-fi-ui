@@ -4,11 +4,14 @@
 
 // components
 import { ForgotPassword, PasswordPageContainer } from "@/sections/login";
+import { Suspense } from "react";
 
 export default function ForgotPasswordPage() {
   return (
-    <PasswordPageContainer>
-      <ForgotPassword />
-    </PasswordPageContainer>
+    <Suspense>
+      <PasswordPageContainer>
+        <ForgotPassword />
+      </PasswordPageContainer>
+    </Suspense>
   );
 }
