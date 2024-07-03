@@ -649,7 +649,6 @@ theme.components = {
       disableColumnMenu: true,
       sortingMode: "server",
       filterMode: "server",
-      rowSelection: false,
       sortingOrder: ["desc", "asc"],
     },
     styleOverrides: {

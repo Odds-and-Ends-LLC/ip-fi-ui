@@ -1,7 +1,7 @@
 // packages
 import { Tabs as MuiTabs, Tab, TabsOwnProps, SxProps, TabOwnProps } from "@mui/material";
 
-interface TabProps {
+export interface TabProps {
   label: string;
   value: string;
   icon?: any;

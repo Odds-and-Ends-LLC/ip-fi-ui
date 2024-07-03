@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { CatalogType, NFTType, SignupPayloadType, UserSessionType, UserType } from "./types";
+import { CatalogType, NFTType, PurchaseCatalogPayloadType, SignupPayloadType, UserSessionType, UserType } from "./types";
 
 export const userSessionAtom = atom<UserSessionType | null>(null);
 export const signupPayloadAtom = atom<SignupPayloadType>({
@@ -16,3 +16,7 @@ export const profileViewAtom = atom<UserType>({} as UserType);
 
 // Modal Atoms
 export const connectWalletModalOpen = atom(false);
+export const createCatalogModalOpen = atom(false);
+
+export const isDeletingNFTsAtom = atom(false);
+export const purchaseCatalogDataAtom = atom<PurchaseCatalogPayloadType>({} as PurchaseCatalogPayloadType);

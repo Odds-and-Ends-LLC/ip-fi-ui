@@ -1,5 +1,6 @@
 import { Breakpoint } from "@mui/material";
 
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 export type ResponsiveCssProp<T> =
   | {
       [K in Breakpoint]?: T;
@@ -15,6 +16,7 @@ export type JustifyType =
 export type AlignType = "start" | "center" | "left" | "right" | string;
 
 export type TimeFilterType = "all" | "1h" | "6h" | "24h" | "7d";
+export type PaymentMethodType = "usdc" | "ethereum" | "credit-card";
 
 export interface UserType {
   id: string;
@@ -152,6 +154,11 @@ export interface CatalogMarketDataType {
   catalog: CatalogType;
 };
 
+export interface CartItemType {
+  id: string;
+  catalog: Optional<CatalogType, "coverColor" | "coverImage" | "coverImageNFTId">;
+}
+
 export interface NFTMarketDataType {
   id: string;
   price: number;
@@ -209,6 +216,30 @@ export interface UpdateCatalogPayloadType {
   coverImageNFTId: string;
   coverColor: string;
   allowExclusiveLicense: boolean;
+}
+
+export interface PurchaseCatalogPayloadType {
+  cartItem: CartItemType;
+  paymentMethod?: PaymentMethodType;
+};
+
+export interface PurchaseDetailsType {
+  id: string;
+  catalog: CatalogType;
+  purchasedAt: string;
+  paymentMethod: PaymentMethodType;
+  subtotal: number;
+};
+
+export interface ContractType {
+  id: string;
+  purchaseDetails: PurchaseDetailsType;
+  user: UserType;
+};
+
+export interface SignContractPayloadType {
+  id: string;
+  signature: File;
 }
 
 export interface EditProfilePayloadType {

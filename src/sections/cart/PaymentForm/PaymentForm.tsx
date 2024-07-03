@@ -11,13 +11,13 @@ import { CatalogListName, Icon } from "@/components";
 import { CatalogNftTable, ItemDetail } from "..";
 
 // types
-import { CatalogType } from "@/types";
+import { CartItemType } from "@/types";
 
 export default function PaymentForm({
   data,
   onPurchaseCatalog,
 }: {
-  data?: CatalogType;
+  data: CartItemType;
   onPurchaseCatalog: () => void;
 }) {
   const [showNFTs, setShowNFTs] = useState(false);
@@ -59,7 +59,7 @@ export default function PaymentForm({
         </Stack>
         {showNFTs && (
           <Stack className={styles.paymentFormNFTList}>
-            <CatalogNftTable data={data?.nfts} />
+            <CatalogNftTable data={data.catalog.nfts} />
           </Stack>
         )}
         <Divider flexItem />

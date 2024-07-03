@@ -16,7 +16,7 @@ export default function NFTs() {
   }
 
   if (!nfts?.data) {
-    return;
+    return <></>;
   }
 
   return (

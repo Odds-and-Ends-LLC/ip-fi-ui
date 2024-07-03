@@ -18,7 +18,6 @@ const schema = z.object({
   name: z
     .string()
     .min(1, "Catalog name is required."),
-
 });
 
 export default function CatalogSettings({

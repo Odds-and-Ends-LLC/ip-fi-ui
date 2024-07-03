@@ -7,6 +7,7 @@ const protectedRoutes = [
   "/settings/profile",
   "/settings/account",
   "/settings/wallet",
+  "/cart",
 ];
 
 const publicRoutes = [
