@@ -1,4 +1,5 @@
 // packages
+import { Suspense } from "react";
 
 // components
 import { getCurrentUserCart } from "@/lib/server/user";
@@ -7,5 +8,9 @@ import { Cart } from "@/sections/cart";
 export default async function CartLayout() {
   const cart = await getCurrentUserCart();
 
-  return <Cart cart={cart.data || []} />;
+  return (
+    <Suspense>
+      <Cart cart={cart.data || []} />;
+    </Suspense>
+  )
 }
