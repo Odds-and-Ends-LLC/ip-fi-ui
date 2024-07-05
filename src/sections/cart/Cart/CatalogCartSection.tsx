@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { CartItemType } from "@/types";
 import { useState } from "react";
 import { CatalogNftTable, OrderSummary } from "..";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { purchaseCatalogDataAtom } from "@/atoms";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,13 +24,15 @@ const schema = z.object({
 });
 
 export default function CatalogCartSection({
-  cart
+  cart,
+  onContinue,
 } : {
   cart: CartItemType[];
+  onContinue: () => void;
 }) {
   const query = useSearchParams();
   const [cartItems, setCartItems] = useState<CartItemType[]>(cart);
-  const [purchaseCatalogData, setPurchaseCatalogData] = useAtom(purchaseCatalogDataAtom);
+  const setPurchaseCatalogData = useSetAtom(purchaseCatalogDataAtom);
   const [createModalOpen, setCreateModalOpen] = useState(query.get("create")?.toString() === "true");
   const [deleting, setDeleting] = useState(false);
 
@@ -85,6 +87,7 @@ export default function CatalogCartSection({
 
   const handleCheckoutCatalog = () => {
     setPurchaseCatalogData((data) => ({ ...data, cartItem: activeCartItem }));
+    onContinue();
   };
 
   const onCreate: SubmitHandler<CreateCatalogPayloadType> = async (data) => {
@@ -140,7 +143,8 @@ export default function CatalogCartSection({
               sx={{ padding: "8px 16px" }}
             >
               <CatalogNftTable
-                data={purchaseCatalogData.cartItem || activeCartItem}
+                data={activeCartItem}
+                isDeleting={deleting}
                 onDeleteNFTs={handleDeleteNFTs}
                 isEditable
               />
@@ -152,7 +156,7 @@ export default function CatalogCartSection({
           >
             {activeCartItem &&
               <OrderSummary
-                data={purchaseCatalogData.cartItem || activeCartItem}
+                data={activeCartItem}
                 ContinueBtnProps={{
                   disabled: !activeCartItem?.catalog.nfts?.length || deleting,
                   onClick: handleCheckoutCatalog,

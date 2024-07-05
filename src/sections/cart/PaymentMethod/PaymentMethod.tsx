@@ -17,7 +17,7 @@ export default function PaymentMethod({
   selected,
   onChange
 } : {
-  selected: PaymentMethodType;
+  selected?: PaymentMethodType;
   onChange: (method: PaymentMethodType) => void;
 }) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +85,7 @@ export default function PaymentMethod({
           description="Pay under Crypto"
         />
         <PaymentOption
-          icon="/images/payment_credit_card.png"
+          icon="/images/payment_credit-card.png"
           value="credit-card"
           label="Credit Card"
           description="Pay under Stripe"

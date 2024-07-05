@@ -70,7 +70,7 @@ export default function Catalog({
     [<CoverComponent key="front" />].concat(
       CatalogNFTs({ nfts: catalog.nfts || [] })
       .concat(
-        CatalogPockets({ nftCount: catalog.nfts?.length || 0 })
+        CatalogPockets({ nftCount: catalog.nfts.length || 0 })
       )
       .flatMap((_, i, a) => i % solvePageDivisor() ? [] : [a.slice(i, i + solvePageDivisor())])
       .map((grid, j) => (

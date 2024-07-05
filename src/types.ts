@@ -118,7 +118,7 @@ export interface CatalogType {
   creatorName: string;
   creatorUserId: string;
   createdAt: Date;
-  nfts?: NFTType[];
+  nfts: NFTType[];
   owners?: UserType[];
   coverImage: string;
   coverImageNFTId: string;
@@ -220,27 +220,19 @@ export interface UpdateCatalogPayloadType {
 
 export interface PurchaseCatalogPayloadType {
   cartItem: CartItemType;
-  paymentMethod?: PaymentMethodType;
+  paymentMethod: PaymentMethodType;
+  signature: string;
 };
 
-export interface PurchaseDetailsType {
+export interface PurchaseCatalogDetailsType {
   id: string;
   catalog: CatalogType;
-  purchasedAt: string;
+  purchasedAt: Date;
   paymentMethod: PaymentMethodType;
+  subtotalEth: number;
   subtotal: number;
+  contractFile: string;
 };
-
-export interface ContractType {
-  id: string;
-  purchaseDetails: PurchaseDetailsType;
-  user: UserType;
-};
-
-export interface SignContractPayloadType {
-  id: string;
-  signature: File;
-}
 
 export interface EditProfilePayloadType {
   username?: string;

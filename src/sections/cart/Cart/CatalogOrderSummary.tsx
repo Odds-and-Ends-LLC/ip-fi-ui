@@ -6,11 +6,17 @@ import styles from "./Cart.module.css";
 import { CatalogNftTable, OrderSummary, PaymentMethod } from "..";
 import { PaymentMethodType } from "@/types";
 
-export default function CatalogOrderSummary() {
+export default function CatalogOrderSummary({
+  onBack,
+  onPlaceOrder,
+} : {
+  onBack: () => void;
+  onPlaceOrder: () => void;
+}) {
   const [purchaseCatalogData, setPurchaseCatalogData] = useAtom(purchaseCatalogDataAtom);
 
   const handleBack = () => {
-
+    onBack();
   };
 
   const handleChangePaymentMethod = (method: PaymentMethodType) => {
@@ -18,7 +24,7 @@ export default function CatalogOrderSummary() {
   };
 
   const handlePlaceOrder = () => {
-
+    onPlaceOrder();
   };
 
   return (
@@ -75,7 +81,7 @@ export default function CatalogOrderSummary() {
               data={purchaseCatalogData.cartItem}
               hideSubtotal
             />
-            <PaymentMethod selected={purchaseCatalogData.paymentMethod || "usdc"} onChange={handleChangePaymentMethod} />
+            <PaymentMethod selected={purchaseCatalogData.paymentMethod} onChange={handleChangePaymentMethod} />
           </Stack>
         </Stack>
       </Stack>

@@ -47,7 +47,7 @@ export default function CatalogSettings({
 
     newCatalog.name = name;
     newCatalog.coverImageNFTId = coverImageNFTId;
-    const nft = newCatalog.nfts?.find(({ id }) => id === newCatalog.coverImageNFTId);
+    const nft = newCatalog.nfts.find(({ id }) => id === newCatalog.coverImageNFTId);
 
     if (nft) {
       newCatalog.coverImage = nft.image;

@@ -1,9 +1,8 @@
 // packages
-import { Box, Card, CardActionArea, CardContent, CardHeader, CardMedia, Stack, Typography, useTheme } from "@mui/material";
+import { Card, CardActionArea, CardHeader, CardMedia, Stack, Typography, useTheme } from "@mui/material";
 import { useMeasure } from "@uidotdev/usehooks";
 import { motion } from "framer-motion";
 import { clamp } from "@/utils/clamp";
-import Image from "next/image";
 import Link from "next/link";
 
 // styles
@@ -118,7 +117,7 @@ export default function CatalogCover({
             {catalog.creatorName}
           </Typography>
           <Typography sx={{ typography: { mobile: "body3", tablet: "body2" } }} color="text.disabled">
-            {catalog.nfts?.length || 0} NFTS
+            {catalog.nfts.length || 0} NFTS
           </Typography>
         </Stack>
       }

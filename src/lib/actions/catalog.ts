@@ -1,7 +1,7 @@
 "use server";
 
-import { catalogs } from "@/data";
-import { CartItemType, UpdateCatalogPayloadType } from "@/types";
+import { CartItemType, CatalogType, PurchaseCatalogDetailsType, PurchaseCatalogPayloadType, UpdateCatalogPayloadType } from "@/types";
+import { catalogs, user } from "@/data";
 
 export async function updateCatalog(data: Partial<UpdateCatalogPayloadType>) {
   try {
@@ -58,5 +58,40 @@ export async function removeNFTsFromCatalogCartItem(cartItemId: string, nftIds: 
   } catch(e) {
     console.log(e);
     return { error: "Failed to update catalog cart item. Try again." };
+  }
+}
+
+export async function purchaseCatalog(data: PurchaseCatalogPayloadType) {
+  try {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('');
+      }, 1500);
+    });
+
+    const newCatalog = data.cartItem.catalog as CatalogType;
+    newCatalog.coverColor = "#c7ffcf";
+    newCatalog.coverImage = newCatalog.nfts[0].image;
+    newCatalog.coverImageNFTId = newCatalog.nfts[0].id;
+    const subtotal = newCatalog.nfts?.reduce((total, nft) => total + nft.currentPrice, 0) || 0;
+
+
+    const purchaseCatalogDetails: PurchaseCatalogDetailsType = {
+      id: "123",
+      catalog: newCatalog,
+      paymentMethod: data.paymentMethod,
+      purchasedAt: new Date(),
+      subtotal,
+      subtotalEth: subtotal,
+      contractFile: "",
+    };
+
+    // return updated cart item
+    return {
+      data: purchaseCatalogDetails,
+    };
+  } catch(e) {
+    console.log(e);
+    return { error: "Failed to purchase catalog. Try again." };
   }
 }

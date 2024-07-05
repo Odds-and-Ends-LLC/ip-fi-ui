@@ -5,15 +5,21 @@ import { PaymentForm } from "..";
 import { useAtom } from "jotai";
 import { purchaseCatalogDataAtom } from "@/atoms";
 
-export default function CatalogPaymentSection() {
+export default function CatalogPaymentSection({
+  onBack,
+  onPurchase,
+} : {
+  onBack: () => void;
+  onPurchase: () => void;
+}) {
   const [purchaseCatalogData, setPurchaseCatalogData] = useAtom(purchaseCatalogDataAtom);
 
   const handleBack = () => {
-
+    onBack();
   };
 
   const handlePurchaseCatalog = () => {
-
+    onPurchase();
   };
 
   return (
@@ -37,7 +43,7 @@ export default function CatalogPaymentSection() {
         className={styles.catalogMainSection}
         sx={{ padding: { mobile: "0 24px", tablet: "0 64px" } }}
       >
-        <PaymentForm data={purchaseCatalogData.cartItem} onPurchaseCatalog={handlePurchaseCatalog} />
+        <PaymentForm data={purchaseCatalogData} onPurchaseCatalog={handlePurchaseCatalog} />
       </Stack>
     </Stack>
   )
