@@ -1,5 +1,6 @@
 import { Breakpoint } from "@mui/material";
 
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 export type ResponsiveCssProp<T> =
   | {
       [K in Breakpoint]?: T;
@@ -15,6 +16,7 @@ export type JustifyType =
 export type AlignType = "start" | "center" | "left" | "right" | string;
 
 export type TimeFilterType = "all" | "1h" | "6h" | "24h" | "7d";
+export type PaymentMethodType = "usdc" | "ethereum" | "credit-card";
 
 export interface UserType {
   id: string;
@@ -116,7 +118,7 @@ export interface CatalogType {
   creatorName: string;
   creatorUserId: string;
   createdAt: Date;
-  nfts?: NFTType[];
+  nfts: NFTType[];
   owners?: UserType[];
   coverImage: string;
   coverImageNFTId: string;
@@ -151,6 +153,11 @@ export interface CatalogMarketDataType {
   priceChange: number;
   catalog: CatalogType;
 };
+
+export interface CartItemType {
+  id: string;
+  catalog: Optional<CatalogType, "coverColor" | "coverImage" | "coverImageNFTId">;
+}
 
 export interface NFTMarketDataType {
   id: string;
@@ -210,6 +217,22 @@ export interface UpdateCatalogPayloadType {
   coverColor: string;
   allowExclusiveLicense: boolean;
 }
+
+export interface PurchaseCatalogPayloadType {
+  cartItem: CartItemType;
+  paymentMethod: PaymentMethodType;
+  signature: string;
+};
+
+export interface PurchaseCatalogDetailsType {
+  id: string;
+  catalog: CatalogType;
+  purchasedAt: Date;
+  paymentMethod: PaymentMethodType;
+  subtotalEth: number;
+  subtotal: number;
+  contractFile: string;
+};
 
 export interface EditProfilePayloadType {
   username?: string;

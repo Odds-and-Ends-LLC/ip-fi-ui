@@ -76,6 +76,7 @@ export default function Explore() {
           <Button
             variant="outlineWhite"
             startIcon={<Icon icon="add" />}
+            href="/cart?create=true"
           >
             CREATE CATALOG
           </Button>

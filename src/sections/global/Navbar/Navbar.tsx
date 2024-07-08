@@ -75,6 +75,10 @@ export default function Navbar() {
         <Stack className={styles.navbarLinksDesktop}>
           {userSession && (
             <>
+
+              <Button variant="clearWhite" mode="icon" href="/cart">
+                <Icon icon="cart" />
+              </Button>
               <Link href={`/${userSession.username}`} className={styles.navbarLogo} rel="" target="">
                 <Avatar image={userSession.pfp} size="s" />
               </Link>

@@ -27,7 +27,7 @@ export default function TopCatalogs() {
   }
 
   if (!topCatalogs?.data) {
-    return;
+    return <></>;
   }
 
   return (

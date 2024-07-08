@@ -1,6 +1,6 @@
 // packages
 import { useState } from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 
 // styles
@@ -10,26 +10,57 @@ import styles from "./CatalogNftTable.module.css";
 import { Icon, Table } from "@/components";
 
 // types
-import { NFTType } from "@/types";
+import { CartItemType, NFTType } from "@/types";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
-
-// data
-const currentUserId = "user1"; // sample only - get current user ID
+import { LoadingButton } from "@mui/lab";
 
 export default function CatalogNftTable({
-  data = [],
+  data,
   isEditable,
+  isDeleting,
+  onDeleteNFTs,
 }: {
-  data?: NFTType[];
+  data?: CartItemType;
   isEditable?: boolean;
+  isDeleting?: boolean;
+  onDeleteNFTs?: (ids: string[]) => void;
 }) {
   const [selectedNfts, setSelectedNfts] = useState<GridRowSelectionModel>([]);
-  const hasBoughtwithExclusiveLicense = (users: { id: string }[] | undefined) => {
-    return users?.find((user) => user.id === currentUserId);
-  };
+
   const handleSelectNfts = (ids: GridRowSelectionModel) => {
     setSelectedNfts(ids);
   };
+
+  const handleDeleteNFTs = (id?: string) => {
+    if (!onDeleteNFTs) return;
+
+    if (!id) {
+      onDeleteNFTs(selectedNfts as string[]);
+      return;
+    }
+
+    onDeleteNFTs([id]);
+  };
+
+  // const handleDeleteNFTs = async (ids?: string[]) => {
+  //   if (!data) return;
+
+  //   setIsDeletingNFTs(true);
+
+  //   const res = await removeNFTsFromCatalogCartItem(data.id, ids || selectedNfts as string[]);
+
+  //   if (res.error) {
+  //     // handle error
+  //     setIsDeletingNFTs(false);
+  //     return;
+  //   }
+
+  //   if (res.data) {
+  //     onUpdateCartItem(res.data);
+  //     setIsDeletingNFTs(false);
+  //     return;
+  //   }
+  // };
 
   const columns = [
     {
@@ -37,7 +68,7 @@ export default function CatalogNftTable({
       renderHeader: () => <Typography variant="label3">NFT</Typography>,
       minWidth: 280,
       flex: 1,
-      sortable: true,
+      sortable: false,
       renderCell: ({ row }: { row: NFTType }) => (
         <Stack sx={{ flexDirection: "row", gap: "16px", flex: 1 }}>
           <Image src={row.image} alt="nft" width={80} height={80} style={{ borderRadius: "8px" }} />
@@ -90,7 +121,7 @@ export default function CatalogNftTable({
       sortable: false,
       renderCell: ({ row }: { row: NFTType }) => (
         <Stack className={styles.tableColumnPrice}>
-          <Icon icon="ethereum" />
+          <Icon icon="ethereum" color={row.withExclusiveLicense ? "text.brandSecondary" : ""} />
           <Typography color="text.secondary">{row?.price?.toString()}</Typography>
           {row.withExclusiveLicense && ( // update condition and value
             <Typography color="text.disabledBlue" sx={{ textDecoration: "line-through" }}>
@@ -103,20 +134,23 @@ export default function CatalogNftTable({
     {
       field: "delete",
       renderHeader: () => (
-        <Button
+        <LoadingButton
           aria-label="delete nft"
           variant="clearRed"
           disabled={selectedNfts.length === 0}
           sx={{ flexDirection: "row", gap: "8px", alignItems: "center" }}
+          onClick={() => handleDeleteNFTs()}
+          loading={isDeleting}
+          loadingIndicator={<CircularProgress color="secondary" size={20} />}
         >
           <Icon icon="delete" />
           <Typography variant="button1">({selectedNfts?.length})</Typography>
-        </Button>
+        </LoadingButton>
       ),
       minWidth: 104,
       sortable: false,
       renderCell: ({ row }: { row: NFTType }) => (
-        <Button aria-label="delete nft" variant="clearRed" mode="icon">
+        <Button disabled={isDeleting} aria-label="delete nft" variant="clearRed" mode="icon" onClick={() => handleDeleteNFTs(row.id)}>
           <Icon icon="delete" />
         </Button>
       ),
@@ -131,7 +165,7 @@ export default function CatalogNftTable({
       }}
     >
       <Table
-        rows={data}
+        rows={data?.catalog.nfts || []}
         columns={columns}
         minHeight="0px"
         maxHeight="100%"
@@ -205,7 +239,7 @@ export default function CatalogNftTable({
           },
         }}
       />
-      {data?.length === 0 && (
+      {data?.catalog.nfts?.length === 0 && (
         <Stack className={styles.nftTableEmpty}>
           <Image
             src="/images/empty_box.png"

@@ -7,22 +7,22 @@ import styles from "./PaymentMethod.module.css";
 
 // components
 import { Avatar } from "@/components";
+import { useAtom } from "jotai";
+import { purchaseCatalogDataAtom } from "@/atoms";
+import { PaymentMethodType } from "@/types";
 
 // types
 
 export default function PaymentMethod({
-  onChangePaymentMethod,
-}: {
-  onChangePaymentMethod: (paymentOption?: string) => void;
+  selected,
+  onChange
+} : {
+  selected?: PaymentMethodType;
+  onChange: (method: PaymentMethodType) => void;
 }) {
-  const [paymentOption, setPaymentOption] = useState<string | undefined>(undefined);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPaymentOption(event.target.value);
+    onChange(event.target.value as PaymentMethodType)
   };
-
-  useEffect(() => {
-    onChangePaymentMethod(paymentOption);
-  }, [onChangePaymentMethod, paymentOption]);
 
   const PaymentOption = ({
     icon,
@@ -49,7 +49,7 @@ export default function PaymentMethod({
           </Stack>
         </Stack>
         <Radio
-          checked={paymentOption === value}
+          checked={selected === value}
           onChange={handleChange}
           value={value}
           name="payment-methods"
@@ -85,7 +85,7 @@ export default function PaymentMethod({
           description="Pay under Crypto"
         />
         <PaymentOption
-          icon="/images/payment_credit_card.png"
+          icon="/images/payment_credit-card.png"
           value="credit-card"
           label="Credit Card"
           description="Pay under Stripe"

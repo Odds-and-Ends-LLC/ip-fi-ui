@@ -24,7 +24,7 @@ export default function Catalogs() {
   }
 
   if (!catalogs?.data) {
-    return;
+    return <></>;
   }
 
   return (

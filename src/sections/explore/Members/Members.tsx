@@ -21,7 +21,7 @@ export default function Members() {
   }
 
   if (!members?.data) {
-    return;
+    return <></>;
   }
 
   return (

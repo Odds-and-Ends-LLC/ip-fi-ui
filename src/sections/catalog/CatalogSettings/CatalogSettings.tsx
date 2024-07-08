@@ -18,7 +18,6 @@ const schema = z.object({
   name: z
     .string()
     .min(1, "Catalog name is required."),
-
 });
 
 export default function CatalogSettings({
@@ -48,7 +47,7 @@ export default function CatalogSettings({
 
     newCatalog.name = name;
     newCatalog.coverImageNFTId = coverImageNFTId;
-    const nft = newCatalog.nfts?.find(({ id }) => id === newCatalog.coverImageNFTId);
+    const nft = newCatalog.nfts.find(({ id }) => id === newCatalog.coverImageNFTId);
 
     if (nft) {
       newCatalog.coverImage = nft.image;
