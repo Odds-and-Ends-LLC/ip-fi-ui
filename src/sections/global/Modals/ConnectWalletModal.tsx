@@ -3,12 +3,12 @@ import { Typography } from "@mui/material";
 import { useAtom } from "jotai"
 
 // components
-import { connectWalletModalOpen } from "@/atoms"
+import { connectWalletModalOpenAtom } from "@/atoms"
 import { Modal } from "@/components"
 import { ConnectWalletButton } from "..";
 
 export default function ConnectWalletModal() {
-  const [open, setOpen] = useAtom(connectWalletModalOpen);
+  const [open, setOpen] = useAtom(connectWalletModalOpenAtom);
 
   return (
     <Modal

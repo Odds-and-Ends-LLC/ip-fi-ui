@@ -1254,6 +1254,12 @@ theme.components = {
         padding: 0,
         justifyContent: "center",
       },
+      positionEnd: {
+        flexShrink: 0,
+        minWidth: "24px",
+        padding: 0,
+        justifyContent: "center",
+      },
     },
   },
   MuiCardActionArea: {

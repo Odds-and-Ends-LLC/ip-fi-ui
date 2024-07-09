@@ -2,7 +2,7 @@ import { catalogs, marketCatalogs, nfts, users } from "@/data";
 
 export const checkIfUsernameAvailable = async (username: string) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return true
   } catch (error) {
@@ -15,7 +15,7 @@ export const checkIfUsernameAvailable = async (username: string) => {
 
 export const getFeaturedUsers = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: users.slice(0, 12),
@@ -47,7 +47,7 @@ export const getUserCatalogs = async (username: string, page: number, query?: UR
 
 export const getUserCatalogsMarket = async (username: string, query?: URLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: marketCatalogs,
@@ -73,6 +73,23 @@ export const getUserNFTs = async (username: string, page: number, query?: URLSea
     console.log("failed to fetch user nfts");
     return {
       error: "Failed to fetch user nfts at this time."
+    }
+  }
+};
+
+export const getUsers = async (page: number, query?: URLSearchParams) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    return {
+      data: users.slice(0, 24),
+      hasNextPage: true,
+      page,
+    };
+  } catch (error) {
+    console.log("failed to fetch users");
+    return {
+      error: "Failed to fetch users at this time."
     }
   }
 };

@@ -170,7 +170,7 @@ export default function CatalogCartSection({
         <Button
           variant="clearGreen"
           startIcon={<Icon icon="arrowLeft" />}
-          href="/"
+          href="/explore"
           sx={{ marginLeft: { mobile: "24px", tablet: "64px" }, marginBottom: "32px" }}
         >
           CONTINUE SHOPPING

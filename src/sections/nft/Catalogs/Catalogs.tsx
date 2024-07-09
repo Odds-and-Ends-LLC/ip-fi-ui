@@ -19,7 +19,6 @@ export default function Catalogs() {
     queryFn: ({ pageParam }) => getNFTCatalogs(nft.collectionAddress, nft.tokenId, pageParam, query),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
-    placeholderData: (lastPage) => lastPage,
   });
 
   const nftCatalogs = data?.pages.map(({ data: nftCatalogs }) => nftCatalogs || [])?.flat() || [];

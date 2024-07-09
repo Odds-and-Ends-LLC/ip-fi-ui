@@ -1,5 +1,6 @@
 "use client";
 
+export * from "./FilterGroup";
 export { default as Footer } from "./Footer";
 export { default as Frame } from "./Frame";
 export { default as TextBox } from "./TextBox";
@@ -27,4 +28,5 @@ export { default as Select } from "./Select";
 export { default as GlassCoverImage } from "./GlassCoverImage";
 export { default as Icon } from "./Icon";
 export { default as InfiniteGridScroller } from "./InfiniteGridScroller";
+export { default as InventoryContainer } from "./InventoryContainer";
 export { default as CatalogListName } from "./CatalogListName";
