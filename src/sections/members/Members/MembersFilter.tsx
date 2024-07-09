@@ -1,14 +1,7 @@
 import { CheckboxGroupFilter, FilterGroup, ItemsSectionHeader, MinMaxFilter } from "@/components";
-import { useSearchParams } from "next/navigation";
 import { Stack } from "@mui/material";
 
 export default function MembersFilter() {
-  const query = useSearchParams();
-
-  const handleQueryChange = (newQuery: URLSearchParams) => {
-    window.history.pushState(null, "", `?${newQuery.toString()}`);
-  };
-
   return (
     <Stack
       sx={{
@@ -21,10 +14,7 @@ export default function MembersFilter() {
       }}
     >
       <ItemsSectionHeader title="Members" />
-      <FilterGroup
-        initialQuery={query}
-        onChange={handleQueryChange}
-      >
+      <FilterGroup>
         <MinMaxFilter name="nftsOwned" title="NFTs Owned" />
         <MinMaxFilter name="catalogsOwned" title="Catalogs Owned" />
         <MinMaxFilter name="catalogsCreated" title="Catalogs Created" />

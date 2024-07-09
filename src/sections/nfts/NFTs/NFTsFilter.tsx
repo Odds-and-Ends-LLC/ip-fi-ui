@@ -1,5 +1,4 @@
 import { FilterGroup, ItemsSectionHeader, MinMaxFilter, TagSelectionFilter } from "@/components";
-import { useSearchParams } from "next/navigation";
 import { Stack } from "@mui/material";
 
 export default function NFTsFilter() {
