@@ -1,14 +1,36 @@
 import { catalogs, marketCatalogs, nfts, users } from "@/data";
+import axios from "axios";
 
 export const checkIfUsernameAvailable = async (username: string) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    const { data: { data: result} } = await axios.get("/api/auth/verify-username", {
+      params: {
+        username
+      }
+    });
 
-    return true
+    return result.success
   } catch (error) {
     console.log("failed to check username availability");
     return {
       error: "Failed to check username availability at this time.",
+    };
+  }
+};
+
+export const checkIfEmailAvailable = async (email: string) => {
+  try {
+    const { data: { data: result} } = await axios.get("/api/auth/verify-email", {
+      params: {
+        email
+      }
+    });
+
+    return result.success
+  } catch (error) {
+    console.log("failed to check email availability");
+    return {
+      error: "Failed to check email availability at this time.",
     };
   }
 };

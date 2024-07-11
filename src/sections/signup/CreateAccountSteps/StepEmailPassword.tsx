@@ -14,6 +14,7 @@ import { useAtom } from "jotai";
 import { signupPayloadAtom } from "@/atoms";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { checkIfEmailAvailable } from "@/lib/client/user";
 
 interface EmailPasswordAboutForm {
   email: string;
@@ -57,6 +58,14 @@ export default function StepEmailPassword({
 
   const onSubmit: SubmitHandler<EmailPasswordAboutForm> = async (data) => {
     setError("");
+
+    const available = await checkIfEmailAvailable(data.email);
+
+    if (!available) {
+      setError("The email is already taken.");
+      return;
+    }
+
     setSignupPayload((payload) => ({ ...payload, ...data }));
 
     onNext();

@@ -11,6 +11,8 @@ import { signupPayloadAtom } from "@/atoms";
 
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5";
+import { act, useEthers } from "@usedapp/core";
+import { useEffect, useState } from "react";
 
 export default function StepConnectWallet({
   onBack,
@@ -20,15 +22,32 @@ export default function StepConnectWallet({
   onNext: () => void;
 }) {
   const [signupPayload, setSignupPayload] = useAtom(signupPayloadAtom);
+  const [connecting, setConnecting] = useState(false);
+  const { account, activateBrowserWallet } = useEthers();
+
   const handleConnectWallet = () => {
-    setSignupPayload((data) => ({ ...data, walletAddresses: data.walletAddresses.concat([`${userWalletA}${Math.floor(Math.random() * 10)}`]) }));
+    setConnecting(true);
+    activateBrowserWallet({
+      type: "metamask",
+    });
   };
+
   const handleRemoveWallet = (walletAddress: string) => {
     const walletAddresses = [...signupPayload.walletAddresses];
     const walletAddressIndex = walletAddresses.indexOf(walletAddress);
     walletAddresses.splice(walletAddressIndex, 1);
     setSignupPayload((data) => ({ ...data, walletAddresses }));
   };
+
+  useEffect(() => {
+    if (account && connecting) {
+      setSignupPayload((data) => ({
+        ...data,
+        walletAddresses: data.walletAddresses.concat([account]),
+      }));
+      setConnecting(false);
+    }
+  }, [account, connecting]);
 
   return (
     <>
@@ -40,8 +59,9 @@ export default function StepConnectWallet({
                 Connect Wallet
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Explain why this step is required. Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Explain why this step is required. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.
               </Typography>
             </Stack>
             <Button variant="solidGreen" onClick={handleConnectWallet}>
@@ -55,8 +75,9 @@ export default function StepConnectWallet({
                 Setup Wallet
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Explain why this step is required. Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Explain why this step is required. Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.
               </Typography>
             </Stack>
             <Stack gap="16px">
@@ -88,7 +109,11 @@ export default function StepConnectWallet({
         )}
       </Stack>
       <Stack className={styles.createAccountButtons}>
-        <Button variant="clearGreen" startIcon={<Icon icon="arrowLeft" />} onClick={onBack}>
+        <Button
+          variant="clearGreen"
+          startIcon={<Icon icon="arrowLeft" />}
+          onClick={onBack}
+        >
           BACK
         </Button>
         <Button

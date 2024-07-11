@@ -1,0 +1,149 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum ConnectedAccountType {
+  WALLET
+  WEBSITE
+  TWITTER
+  INSTAGRAM
+  DISCORD
+  LOOKSRARE
+  OPENSEA
+}
+
+enum CatalogStatus {
+  ACTIVE
+  ENDED
+}
+
+model User {
+  id              Int      @id @default(autoincrement())
+  email           String   @unique
+  password        String
+  username        String?  @unique
+  profile_picture String?  @db.LongText
+  cover_picture   String?  @db.LongText
+  description     String?  @db.LongText
+  responseTime    Float    @default(0)
+  responseRate    String?
+  createdAt       DateTime @default(now())
+
+  connectedAccounts       UserConnectedAccount[]
+  createdCatalog          Catalog[]
+  ownedCatalog            CatalogOwners[]
+  createdDerivativeNfts   DerivativeNfts[]
+  ownedDerivativeLicenses DerivativeNftLicenses[]
+  catalogSales            CatalogSales[]
+
+  @@map("users")
+}
+
+model UserConnectedAccount {
+  id     Int                  @id @default(autoincrement())
+  userId Int
+  type   ConnectedAccountType
+  value  String               @db.LongText
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("user_connected_accounts")
+}
+
+model Nft {
+  id                Int     @id @default(autoincrement())
+  collectionAddress String
+  tokenId           String
+  views             Float   @default(0)
+  amountEarned      Float   @default(0)
+  private           Boolean @default(false)
+  price             Float   @default(0)
+
+  @@map("nfts")
+}
+
+model Catalog {
+  id                   Int      @id @default(autoincrement())
+  contractTokenId      Int
+  name                 String
+  slug                 String
+  coverImageNftAddress String
+  coverImageNftId      String
+  coverColor           String
+  creationTxHash       String
+  creatorId            Int
+  createdAt            DateTime @default(now())
+
+  creator       User            @relation(fields: [creatorId], references: [id])
+  catalogOwners CatalogOwners[]
+  nfts          CatalogNfts[]
+  sales         CatalogSales[]
+
+  @@map("catalogs")
+}
+
+model CatalogSales {
+  id             Int      @id @default(autoincrement())
+  catalogId      Int
+  price          Float
+  quantity       Float
+  buyerId        Int
+  purchaseTxHash String
+  purchasedAt    DateTime @default(now())
+
+  buyer   User    @relation(fields: [buyerId], references: [id])
+  catalog Catalog @relation(fields: [catalogId], references: [id])
+
+  @@map("catalog_sales")
+}
+
+model CatalogOwners {
+  id        Int @id @default(autoincrement())
+  userId    Int
+  catalogId Int
+
+  user    User    @relation(fields: [userId], references: [id])
+  catalog Catalog @relation(fields: [catalogId], references: [id])
+
+  @@map("catalog_owners")
+}
+
+model DerivativeNfts {
+  id                Int      @id @default(autoincrement())
+  collectionAddress String
+  tokenId           String
+  derivativeTokenId String
+  creatorId         Int
+  createdAt         DateTime @default(now())
+
+  creator  User          @relation(fields: [creatorId], references: [id])
+  catalogs CatalogNfts[]
+
+  @@map("derivative_nfts")
+}
+
+model DerivativeNftLicenses {
+  id              Int @id @default(autoincrement())
+  derivativeNftId Int
+  ownerId         Int
+
+  owner User @relation(fields: [ownerId], references: [id])
+
+  @@map("derivative_nft_licenses")
+}
+
+model CatalogNfts {
+  id              Int @id @default(autoincrement())
+  catalogId       Int
+  derivativeNftId Int
+
+  catalog Catalog         @relation(fields: [catalogId], references: [id])
+  nft     DerivativeNfts? @relation(fields: [derivativeNftId], references: [id])
+
+  @@map("catalog_nfts")
+}

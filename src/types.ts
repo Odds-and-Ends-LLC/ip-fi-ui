@@ -1,9 +1,14 @@
 import { Breakpoint } from "@mui/material";
 
+export type Override<T1, T2> = Omit<T1, keyof T2> & T2;
+export type QueryString<T> = { query: T; };
+export type RequestBody<T> = { body: T; };
+export type QueryStringAndRequestBody<T1, T2> = { query: T1; body: T2; };
+
 export type ResponsiveCssProp<T> =
   | {
-      [K in Breakpoint]?: T;
-    }
+    [K in Breakpoint]?: T;
+  }
   | T;
 export type JustifyType =
   | "flex-start"
@@ -45,6 +50,7 @@ export type UserSessionType = {
   username: string;
   walletAddresses: string[];
   pfp?: string;
+  token?: string;
 };
 
 export interface TraitType {
@@ -202,6 +208,12 @@ export interface SignupPayloadType {
 export interface LoginPayloadType {
   email: string;
   password: string;
+}
+
+export interface WalletLoginPayloadType {
+  wallet: string;
+  message: string;
+  signature: string;
 }
 
 export interface UpdateCatalogPayloadType {
