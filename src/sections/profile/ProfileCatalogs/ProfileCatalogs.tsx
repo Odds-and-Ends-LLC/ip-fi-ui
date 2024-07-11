@@ -20,7 +20,6 @@ export default function ProfileCatalogs() {
     queryFn: ({ pageParam }) => getUserCatalogs(profile.username, pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
-    placeholderData: (lastPage) => lastPage,
   });
 
   const profileCatalogs = data?.pages.map(({ data: profileCatalogs }) => profileCatalogs || [])?.flat() || [];

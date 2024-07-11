@@ -1552,7 +1552,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 1",
     creatorUserId: "creator1",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(2, 15),
   },
   {
     id: "2",
@@ -1564,7 +1564,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 2",
     creatorUserId: "creator2",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(3, 8),
   },
   {
     id: "3",
@@ -1576,7 +1576,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 3",
     creatorUserId: "creator3",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(1, 9),
   },
   {
     id: "4",
@@ -1588,7 +1588,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 4",
     creatorUserId: "creator4",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(0, 4),
   },
   {
     id: "5",
@@ -1600,7 +1600,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 5",
     creatorUserId: "creator5",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(2, 9),
   },
   {
     id: "6",
@@ -1612,7 +1612,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 6",
     creatorUserId: "creator6",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(2, 7),
   },
   {
     id: "7",
@@ -1624,7 +1624,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 7",
     creatorUserId: "creator7",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(7, 11),
   },
   {
     id: "8",
@@ -1636,7 +1636,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 8",
     creatorUserId: "creator8",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(6, 12),
   },
   {
     id: "9",
@@ -1660,7 +1660,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 10",
     creatorUserId: "creator10",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(13, 15),
   },
   {
     id: "11",
@@ -1672,7 +1672,7 @@ export const catalogs: CatalogType[] = [
     coverColor: "#eda73d",
     creatorName: "Creator 11",
     creatorUserId: "creator11",
-    nfts: nfts.slice(0, 15),
+    nfts: nfts.slice(10, 14),
   },
   {
     id: "12",

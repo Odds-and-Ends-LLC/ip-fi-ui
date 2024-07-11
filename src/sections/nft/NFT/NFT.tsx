@@ -105,7 +105,7 @@ export default function NFT({
               </Stack>
               <Stack className={styles.nftProfileOwner}>
                 <Typography variant="body2">Owner:</Typography>
-                <Member variant="list" lastActive={nft.ownerLastActive} memberName={nft.ownerName} />
+                <Member variant="list" lastActive={nft.ownerLastActive} username={nft.ownerName} />
               </Stack>
             </Stack>
           </Stack>

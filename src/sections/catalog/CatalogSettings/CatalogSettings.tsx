@@ -18,7 +18,6 @@ const schema = z.object({
   name: z
     .string()
     .min(1, "Catalog name is required."),
-
 });
 
 export default function CatalogSettings({
@@ -48,7 +47,7 @@ export default function CatalogSettings({
 
     newCatalog.name = name;
     newCatalog.coverImageNFTId = coverImageNFTId;
-    const nft = newCatalog.nfts?.find(({ id }) => id === newCatalog.coverImageNFTId);
+    const nft = newCatalog.nfts.find(({ id }) => id === newCatalog.coverImageNFTId);
 
     if (nft) {
       newCatalog.coverImage = nft.image;
@@ -156,32 +155,32 @@ export default function CatalogSettings({
         </Paper>
       </Stack>
       <Snackbar
-          open={openSnackbar}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
-          autoHideDuration={4000}
+        open={openSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        autoHideDuration={4000}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert
+          icon={<Icon icon="check" size={18} />}
+          severity="success"
+          variant="filled"
           onClose={() => setOpenSnackbar(false)}
+          sx={{ alignItems: { mobile: "start", tablet: "center" } }}
         >
-          <Alert
-            icon={<Icon icon="check" size={18} />}
-            severity="success"
-            variant="filled"
-            onClose={() => setOpenSnackbar(false)}
-            sx={{ alignItems: { mobile: "start", tablet: "center" } }}
+          <Stack
+            gap="12px"
+            sx={{
+              flexDirection: { tablet: "row" },
+              alignItems: { tablet: "center" },
+            }}
           >
-            <Stack
-              gap="12px"
-              sx={{
-                flexDirection: { tablet: "row" },
-                alignItems: { tablet: "center" },
-              }}
-            >
-              <Typography variant="label2" textTransform="none">
-                Success
-              </Typography>
-              <Typography variant="body2">Catalog successfully updated!</Typography>
-            </Stack>
-          </Alert>
-        </Snackbar>
+            <Typography variant="label2" textTransform="none">
+              Success
+            </Typography>
+            <Typography variant="body2">Catalog successfully updated!</Typography>
+          </Stack>
+        </Alert>
+      </Snackbar>
     </Stack>
   );
 }

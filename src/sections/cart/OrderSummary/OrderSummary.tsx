@@ -9,17 +9,19 @@ import { Icon } from "@/components";
 import { ItemDetail } from "..";
 
 // types
-import { CatalogType } from "@/types";
+import { CartItemType } from "@/types";
 
 export default function OrderSummary({
   data,
   hideSubtotal,
   ContinueBtnProps,
 }: {
-  data?: CatalogType;
+  data: CartItemType;
   hideSubtotal?: boolean;
   ContinueBtnProps?: ButtonProps;
 }) {
+  const subtotal = data.catalog.nfts?.reduce((total, nft) => total + nft.currentPrice, 0);
+  const withExclusiveLicenses = data.catalog.nfts?.filter((nft) => nft.withExclusiveLicense).length;
   return (
     <Stack>
       <Paper
@@ -31,20 +33,20 @@ export default function OrderSummary({
         <Typography variant="h5" textTransform="none">
           Order Summary
         </Typography>
-        <ItemDetail justify label="Catalog Name" value={data?.name} />
-        <ItemDetail justify label="Total NFTs" value={data?.nfts?.length} />
-        <ItemDetail justify label="Total NFTs with Exclusive License" value={data?.nfts?.length} />
+        <ItemDetail justify label="Catalog Name" value={data.catalog.name} />
+        <ItemDetail justify label="Total NFTs" value={data.catalog.nfts?.length} />
+        <ItemDetail justify label="Total NFTs with Exclusive License" value={withExclusiveLicenses} />
         {/* update Total NFTs with Exclusive License value */}
         <ItemDetail
           justify
           label="Subtotal in ETH"
           valueIcon={<Icon icon="ethereum" size={18} />}
-          value={0}
+          value={subtotal}
         />
         {!hideSubtotal && (
           <>
             <Divider flexItem sx={{ borderColor: "dividerGray.main" }} />
-            <ItemDetail justify label="Subtotal" value={`$ ${0}`} valueTextVariant="h4" />
+            <ItemDetail justify label="Subtotal" value={`$ ${subtotal}`} valueTextVariant="h4" />
             <Button variant="solidGreen" endIcon={<Icon icon="arrowRight" />} {...ContinueBtnProps}>
               CONTINUE
             </Button>

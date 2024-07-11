@@ -3,7 +3,7 @@ import { catalogs, marketNFTs, nfts, users } from "@/data";
 
 export const getFeaturedNFTs = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: nfts.slice(0, 12)
@@ -18,7 +18,7 @@ export const getFeaturedNFTs = async () => {
 
 export const getNFTsMarket = async (catalogId: string, time?: TimeFilterType, query?: URLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: marketNFTs,
@@ -33,7 +33,7 @@ export const getNFTsMarket = async (catalogId: string, time?: TimeFilterType, qu
 
 export const getNFTCatalogs = async (collectionAddress: string, tokenId: string, page: number, query?: URLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const data: NFTCatalogType[] = [
       { catalogUid: catalogs[0].uid, catalogCoverImage: catalogs[0].coverImage, catalogName: catalogs[0].name, royalty: "150 $NULL per 5 years", status: "active", nftName: "NFT 1", collectionName: "Collection 1", licensorName: "Licensor", licenseeName: "Licensee" },
@@ -62,7 +62,7 @@ export const getNFTCatalogs = async (collectionAddress: string, tokenId: string,
 
 export const getNFTHistory = async (collectionAddress: string, tokenId: string, page: number, query?: URLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const data: NFTHistoryType[] = [
       { id: "1" + page, event: "transfer", price: 21.1, fromUserPfp: users[0].pfp, fromUserUsername: users[0].username, toUserPfp: users[0].pfp, toUserUsername: users[0].username, purchasedAt: new Date()},
@@ -90,3 +90,19 @@ export const getNFTHistory = async (collectionAddress: string, tokenId: string, 
   }
 };
 
+export const getNFTs = async (page: number, query?: URLSearchParams) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return {
+      data: nfts.slice(0, 24),
+      hasNextPage: true,
+      page,
+    };
+  } catch (error) {
+    console.log("failed to fetch nfts");
+    return {
+      error: "Failed to fetch nfts at this time."
+    }
+  }
+};

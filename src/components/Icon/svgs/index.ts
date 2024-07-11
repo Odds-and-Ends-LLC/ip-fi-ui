@@ -12,6 +12,7 @@ export { default as Asterisk } from "./Asterisk";
 export { default as Avatar } from "./Avatar";
 export { default as Calendar } from "./Calendar";
 export { default as Camera } from "./Camera";
+export { default as Cart } from "./Cart";
 export { default as Check } from "./Check";
 export { default as ChevronDown } from "./ChevronDown";
 export { default as ChevronUp } from "./ChevronUp";

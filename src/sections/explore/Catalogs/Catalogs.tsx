@@ -24,13 +24,13 @@ export default function Catalogs() {
   }
 
   if (!catalogs?.data) {
-    return;
+    return <></>;
   }
 
   return (
     <ItemsCarousel
       title="CATALOGS"
-      viewAllUrl="/"
+      viewAllUrl="/catalogs"
       items={
         catalogs.data.map((catalog, i) => (
           <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>

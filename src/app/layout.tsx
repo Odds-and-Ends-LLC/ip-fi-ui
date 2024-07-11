@@ -7,7 +7,7 @@ import { ClientProviders, Modals, Navbar } from "@/sections/global";
 
 // styles
 import { theme } from "@/styles/theme";
-import { getUserSession } from "@/lib/server/user";
+import { getCurrentUserCart, getUserSession } from "@/lib/server/user";
 import { Provider } from "jotai";
 
 export const metadata = {
@@ -19,6 +19,7 @@ export default async function RootLayout({ children } : Readonly<{
   children: React.ReactNode;
 }>) {
   const userSession = await getUserSession();
+  const cart = await getCurrentUserCart();
 
   return (
     <html lang="en">
@@ -27,7 +28,7 @@ export default async function RootLayout({ children } : Readonly<{
           <ThemeProvider theme={theme}>
             <Provider>
               <CssBaseline />
-              <ClientProviders user={userSession?.data || null}>
+              <ClientProviders user={userSession?.data || null} cart={cart.data || []}>
                 <Navbar />
                 <Container>
                   {children}

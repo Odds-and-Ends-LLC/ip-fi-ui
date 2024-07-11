@@ -11,7 +11,7 @@ import { Icon, PasswordInput, TextField } from "@/components";
 import { LoadingButton } from "@mui/lab";
 import { LoginPayloadType } from "@/types";
 import { useSetAtom } from "jotai";
-import { connectWalletModalOpen, userSessionAtom } from "@/atoms";
+import { connectWalletModalOpenAtom, userSessionAtom } from "@/atoms";
 
 // actions
 import { login } from "@/lib/actions/auth";
@@ -30,7 +30,7 @@ const schema = z.object({
 
 export default function LoginForm() {
   const router = useRouter();
-  const setConnectWalletModalOpen = useSetAtom(connectWalletModalOpen);
+  const setConnectWalletModalOpen = useSetAtom(connectWalletModalOpenAtom);
   const setUserSession = useSetAtom(userSessionAtom);
   const [error, setError] = useState("");
   const form = useForm<LoginPayloadType>({

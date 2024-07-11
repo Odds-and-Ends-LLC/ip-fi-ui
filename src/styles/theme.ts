@@ -649,7 +649,6 @@ theme.components = {
       disableColumnMenu: true,
       sortingMode: "server",
       filterMode: "server",
-      rowSelection: false,
       sortingOrder: ["desc", "asc"],
     },
     styleOverrides: {
@@ -1250,6 +1249,12 @@ theme.components = {
         height: "100%",
       },
       positionStart: {
+        flexShrink: 0,
+        minWidth: "24px",
+        padding: 0,
+        justifyContent: "center",
+      },
+      positionEnd: {
         flexShrink: 0,
         minWidth: "24px",
         padding: 0,

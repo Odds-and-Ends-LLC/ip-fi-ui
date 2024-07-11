@@ -16,19 +16,20 @@ export default function NFTs() {
   }
 
   if (!nfts?.data) {
-    return;
+    return <></>;
   }
 
   return (
     <ItemsCarousel
       title="NFTS"
-      viewAllUrl="/"
+      viewAllUrl="/nfts"
       items={
         nfts.data.map((nft, i) => (
           <Box key={i} sx={{ aspectRatio: "1/1.29", width: "100%", maxHeight: "426px" }}>
             <NFT
               nft={nft}
               variant="card"
+              action="add"
             />
           </Box>
         ))

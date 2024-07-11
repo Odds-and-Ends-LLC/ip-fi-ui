@@ -1,5 +1,6 @@
 "use client";
 
+export * from "./FilterGroup";
 export { default as Footer } from "./Footer";
 export { default as Frame } from "./Frame";
 export { default as TextBox } from "./TextBox";
@@ -7,7 +8,7 @@ export { default as CustomList } from "./CustomList";
 export { default as Carousel } from "./Carousel";
 export { default as Modal } from "./Modal";
 export { default as PaperTranslucent } from "./PaperTranslucent";
-export { default as Tabs } from "./Tabs";
+export { default as Tabs, type TabProps } from "./Tabs";
 export { default as ProfilePicture } from "./ProfilePicture";
 export { default as Member } from "./Member";
 export { default as NFT } from "./NFT";
@@ -27,4 +28,5 @@ export { default as Select } from "./Select";
 export { default as GlassCoverImage } from "./GlassCoverImage";
 export { default as Icon } from "./Icon";
 export { default as InfiniteGridScroller } from "./InfiniteGridScroller";
+export { default as InventoryContainer } from "./InventoryContainer";
 export { default as CatalogListName } from "./CatalogListName";

@@ -31,6 +31,7 @@ export default function CatalogListName({
           backgroundColor: "background.grayOverlay",
         },
       }}
+      onClick={onClick}
     >
       <Avatar size="s" image={image} />
       <Stack className={styles.catalogListNameText}>

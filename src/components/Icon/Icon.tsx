@@ -22,6 +22,7 @@ const icons = {
   avatar: <Svg.Avatar />,
   calendar: <Svg.Calendar />,
   camera: <Svg.Camera />,
+  cart: <Svg.Cart />,
   check: <Svg.Check />,
   chevronDown: <Svg.ChevronDown />,
   chevronUp: <Svg.ChevronUp />,
