@@ -26,7 +26,6 @@ export default function History() {
     queryFn: ({ pageParam }) => getNFTHistory(nft.collectionAddress, nft.tokenId, pageParam, query),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
-    placeholderData: (lastPage) => lastPage,
   });
 
   const nftHistory = data?.pages.map(({ data: transactions }) => transactions || [])?.flat() || [];

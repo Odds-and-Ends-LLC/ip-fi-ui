@@ -4,7 +4,7 @@ import { TimeFilterType, PriceVolumeDataType, TopCatalogType, CatalogStatisticsT
 
 export const getTopCatalogs = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const raw = catalogs.slice(0, 5);
     const topCatalogs: TopCatalogType[] = raw.map((catalog, i) => ({ rank: i + 1, catalog }));
@@ -22,7 +22,7 @@ export const getTopCatalogs = async () => {
 
 export const getTrendingCatalogs = async (time?: TimeFilterType) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: trendingCatalogs.slice(0, 10),
@@ -37,7 +37,7 @@ export const getTrendingCatalogs = async (time?: TimeFilterType) => {
 
 export const getCatalogsMarket = async (time?: TimeFilterType, query?: URLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: marketCatalogs,
@@ -52,7 +52,7 @@ export const getCatalogsMarket = async (time?: TimeFilterType, query?: URLSearch
 
 export const getPriceVolumeHistory = async (catalogId: string) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const history: PriceVolumeDataType[] = [
       { month: "Jan", price: 300, volume: 344 },
@@ -112,7 +112,7 @@ export const getTradeHistory = async (catalogId: string) => {
 
 export const getFeaturedCatalogs = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     return {
       data: catalogs.slice(0, 12)
@@ -125,9 +125,26 @@ export const getFeaturedCatalogs = async () => {
   }
 };
 
+export const getCatalogs = async (page: number, query?: URLSearchParams) => {
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return {
+      data: catalogs.slice(0, 24),
+      hasNextPage: true,
+      page,
+    };
+  } catch (error) {
+    console.log("failed to fetch catalogs");
+    return {
+      error: "Failed to fetch catalogs at this time."
+    }
+  }
+};
+
 export const getCatalogSales = async (id: string, query?: URLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const sales = catalogSalesData;
 
@@ -144,7 +161,7 @@ export const getCatalogSales = async (id: string, query?: URLSearchParams) => {
 
 export const getCatalogStatistics = async (id: string) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const stats: CatalogStatisticsType = {
       price: 23.1,

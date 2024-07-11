@@ -5,12 +5,12 @@ import { Suspense } from "react";
 import { getCurrentUserCart } from "@/lib/server/user";
 import { Cart } from "@/sections/cart";
 
-export default async function CartLayout() {
+export default async function CartPage() {
   const cart = await getCurrentUserCart();
 
   return (
     <Suspense>
-      <Cart cart={cart.data || []} />;
+      <Cart cart={cart.data || []} />
     </Suspense>
   )
 }

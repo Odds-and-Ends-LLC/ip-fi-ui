@@ -30,7 +30,7 @@ export default function Catalogs() {
   return (
     <ItemsCarousel
       title="CATALOGS"
-      viewAllUrl="/"
+      viewAllUrl="/catalogs"
       items={
         catalogs.data.map((catalog, i) => (
           <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>

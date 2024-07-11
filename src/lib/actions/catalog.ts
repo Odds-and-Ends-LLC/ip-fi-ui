@@ -1,6 +1,6 @@
 "use server";
 
-import { CartItemType, CatalogType, PurchaseCatalogDetailsType, PurchaseCatalogPayloadType, UpdateCatalogPayloadType } from "@/types";
+import { CartItemType, CatalogType, NFTType, PurchaseCatalogDetailsType, PurchaseCatalogPayloadType, UpdateCatalogPayloadType } from "@/types";
 import { catalogs, user } from "@/data";
 
 export async function updateCatalog(data: Partial<UpdateCatalogPayloadType>) {
@@ -93,5 +93,33 @@ export async function purchaseCatalog(data: PurchaseCatalogPayloadType) {
   } catch(e) {
     console.log(e);
     return { error: "Failed to purchase catalog. Try again." };
+  }
+}
+
+
+
+export async function addNftToCatalog(nft: NFTType, cartItem: CartItemType) {
+  try {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('');
+      }, 1500);
+    });
+
+    const cart: CartItemType[] = [
+      { id: "1", catalog: catalogs[0] },
+      { id: "2", catalog: catalogs[1] },
+      { id: "3", catalog: catalogs[2] },
+      { id: "4", catalog: catalogs[3] },
+      { id: "5", catalog: catalogs[3] },
+    ]
+
+    // return updated cart
+    return {
+      data: cart,
+    };
+  } catch(e) {
+    console.log(e);
+    return { error: "Failed to add nft to catalog. Try again." };
   }
 }

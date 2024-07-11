@@ -49,13 +49,13 @@ export default function Members() {
       </Box>
       <ItemsCarousel
         title="MEMBERS"
-        viewAllUrl="/"
+        viewAllUrl="/members"
         items={
           members.data.map((member, i) => (
             <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "232px", maxHeight: "232px" }}>
               <Member
                 key={i}
-                memberName={member.username}
+                username={member.username}
                 pfp={member.pfp}
                 lastActive={member.lastActiveAt}
                 collections={member.collectionCount}

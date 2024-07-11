@@ -17,7 +17,6 @@ export default function ProfileNFTs() {
     queryFn: ({ pageParam }) => getUserNFTs(profile.username, pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
-    placeholderData: (lastPage) => lastPage,
   });
 
   const profileNfts = data?.pages.map(({ data: profileNfts }) => profileNfts || [])?.flat() || [];

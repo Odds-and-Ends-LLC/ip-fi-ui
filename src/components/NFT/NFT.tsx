@@ -7,6 +7,8 @@ import Link from "next/link";
 import styles from "./NFT.module.css";
 import { NFTType } from "@/types";
 import { Icon } from "..";
+import { useSetAtom } from "jotai";
+import { addNftToCatalogModalAtom } from "@/atoms";
 
 export default function NFTComponent({
   nft,
@@ -27,6 +29,7 @@ export default function NFTComponent({
 }) {
   const theme = useTheme();
   const [visibleState, setVisibleState] = useState(visible);
+  const setAddNftToCatalogModal = useSetAtom(addNftToCatalogModalAtom);
 
   const handleHeaderActionClick = () => {
     if (headerAction === "visibility") {
@@ -35,6 +38,13 @@ export default function NFTComponent({
     } else if (headerAction === "expand") {
       onExpand(nft);
     }
+  };
+
+  const handleAddCatalog = () => {
+    setAddNftToCatalogModal({
+      isOpen: true,
+      nft
+    });
   };
 
   return (
@@ -154,7 +164,7 @@ export default function NFTComponent({
         {action &&
           <>
             {action == "view" && <Button className={styles.nftActionButton} variant="solidDark" fullWidth>VIEW CATALOGS</Button>}
-            {action == "add" && <Button className={styles.nftActionButton} variant="solidDark" fullWidth>ADD TO CATALOG</Button>}
+            {action == "add" && <Button className={styles.nftActionButton} variant="solidDark" onClick={handleAddCatalog} fullWidth>ADD TO CATALOG</Button>}
           </>
         }
       </CardActions>
