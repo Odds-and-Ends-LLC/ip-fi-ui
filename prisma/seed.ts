@@ -3,6 +3,9 @@ import { ConnectedAccountType, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 import { faker } from '@faker-js/faker'
 import bcrypt from "bcrypt";
+import { catalog as catalogService, nft as nftService } from '../src/services';
+import { NftPayload } from '@/services/types';
+import moment from 'moment';
 
 const collectionRandom = [
   {
@@ -39,18 +42,15 @@ const collectionRandom = [
   },
 ];
 
-const generateRandomNfts = (): ({
-  collection: string;
-  tokenId: number;
-}[]) => {
-  const nftList = [];
+const generateRandomNfts = (): NftPayload[] => {
+  const nftList: NftPayload[] = [];
 
   for (let i = 0; i < 20; i++) {
     const nft = faker.helpers.arrayElement(collectionRandom);
 
     nftList.push({
-      collection: nft.collectionAddress,
-      tokenId: faker.number.int({ max: nft.maxToken })
+      contract: nft.collectionAddress,
+      tokenId: (faker.number.int({ max: nft.maxToken })).toString(),
     })
   }
 
@@ -58,31 +58,32 @@ const generateRandomNfts = (): ({
 }
 
 async function main() {
+  let purchaseDate = moment("2024-06-01");
   //create users
 
-  // for (let i = 0; i < 20; i++) {
-  //   const user = await prisma.user.create({
-  //     data: {
-  //       email: faker.internet.email(),
-  //       password: await bcrypt.hash("password", 10),
-  //       username: faker.internet.userName(),
-  //       createdAt: faker.date.between({
-  //         from: '2020-01-01T00:00:00.000Z',
-  //         to: '2024-06-01T00:00:00.000Z'
-  //       })
-  //     }
-  //   });
+  for (let i = 0; i < 20; i++) {
+    const user = await prisma.user.create({
+      data: {
+        email: faker.internet.email(),
+        password: await bcrypt.hash("password", 10),
+        username: faker.internet.userName(),
+        createdAt: faker.date.between({
+          from: '2020-01-01T00:00:00.000Z',
+          to: '2024-06-01T00:00:00.000Z'
+        })
+      }
+    });
 
-  //   await prisma.userConnectedAccount.create({
-  //     data: {
-  //       userId: user.id,
-  //       type: ConnectedAccountType.WALLET,
-  //       value: faker.string.hexadecimal({
-  //         length: 32
-  //       })
-  //     }
-  //   })
-  // }
+    await prisma.userConnectedAccount.create({
+      data: {
+        userId: user.id,
+        type: ConnectedAccountType.WALLET,
+        value: faker.string.hexadecimal({
+          length: 32
+        })
+      }
+    })
+  }
 
   const users = await prisma.user.findMany();
   // create catalogs
@@ -90,54 +91,114 @@ async function main() {
   for (let i = 0; i < 20; i++) {
     const creator = faker.helpers.arrayElement(users);
     const nfts = generateRandomNfts();
+    let price = 0;
 
-    const catalog = await prisma.catalog.create({
-      data: {
-        contractTokenId: i,
-        name: faker.internet.userName(),
-        slug: faker.internet.domainWord(),
-        coverColor: faker.color.rgb(),
-        creationTxHash: faker.string.hexadecimal({ length: 32 }),
-        creatorId: creator.id,
-        coverImageNftAddress: nfts.at(0)?.collection ?? "",
-        coverImageNftId: nfts.at(0)?.tokenId.toString() ?? "",
+    for (let j = 0; j < nfts.length; j++) {
+      const nft = nfts[j];
+      await nftService.show(nft);
+      await nftService.purchase(nft);
+    }
+
+    const catalog = await catalogService.create(
+      faker.internet.userName(),
+      faker.color.rgb(),
+      creator
+    )
+
+    await catalogService.updateNft(catalog, nfts, []);
+    const catalogNfts = await _prisma.catalogNfts.findMany({
+      where: {
+        catalogId: catalog.id,
+      },
+      include: {
+        nft: true
       }
     });
 
-    await prisma.catalogOwners.create({
-      data: {
-        userId: creator.id,
-        catalogId: catalog.id,
-      }
-    })
-
-    for (let i = 0; i < nfts.length; i++) {
-      const nft = nfts[i];
-
-      let derivativeNft = await prisma.derivativeNfts.findFirst({
+    for (let j = 0; j < catalogNfts.length; j++) {
+      const item = catalogNfts[j];
+      const currentData = await _prisma.nft.findFirst({
         where: {
-          collectionAddress: nft.collection,
-          tokenId: nft.collection + "-" + nft.tokenId.toString(),
+          collectionAddress: item.nft?.collectionAddress,
+          tokenId: item.nft?.tokenId
         }
       });
 
-      if (!derivativeNft) {
-        derivativeNft = await prisma.derivativeNfts.create({
-          data: {
-            collectionAddress: nft.collection,
-            tokenId: nft.tokenId.toString(),
-            derivativeTokenId: nft.collection + "-" + nft.tokenId.toString(),
-            creatorId: creator.id,
-          }
-        })
+      if (currentData) {
+        price += currentData.price
       }
-      
-      await prisma.catalogNfts.create({
-        data: {
-          catalogId: catalog.id,
-          derivativeNftId: derivativeNft.id,
+    }
+
+    await catalogService.mint(
+      catalog,
+      i,
+      faker.string.hexadecimal({ length: 40 }),
+      price,
+      purchaseDate
+    )
+  }
+
+  const catalogs = await prisma.catalog.findMany({
+    include: {
+      nfts: {
+        include: {
+          nft: true,
         }
-      })
+      },
+    }
+  });
+
+  for (let j = 1; j <= 30; j++) {
+    purchaseDate = purchaseDate.add(1, "day");
+    const randomCount = faker.number.int({
+      min: 5,
+      max: 10,
+    });
+
+    for (let i = 0; i < randomCount; i++) {
+      const buyer = faker.helpers.arrayElement(users);
+      const catalog = faker.helpers.arrayElement(catalogs);
+      const nfts = catalog.nfts;
+      let price = 0;
+
+      for (let j = 0; j < nfts.length; j++) {
+        const nft:NftPayload = {
+          contract: nfts[j].nft?.collectionAddress ?? "",
+          tokenId: nfts[j].nft?.tokenId ?? "",
+        };
+        await nftService.purchase(nft);
+      }
+
+      const catalogNfts = await _prisma.catalogNfts.findMany({
+        where: {
+          catalogId: catalog.id,
+        },
+        include: {
+          nft: true
+        }
+      });
+
+      for (let j = 0; j < catalogNfts.length; j++) {
+        const item = catalogNfts[j];
+        const currentData = await _prisma.nft.findFirst({
+          where: {
+            collectionAddress: item.nft?.collectionAddress,
+            tokenId: item.nft?.tokenId
+          }
+        });
+
+        if (currentData) {
+          price += currentData.price
+        }
+      }
+
+      await catalogService.purchase(
+        catalog,
+        buyer,
+        price,
+        faker.string.hexadecimal({ length: 40 }),
+        purchaseDate
+      )
     }
   }
 }

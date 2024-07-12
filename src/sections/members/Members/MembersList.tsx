@@ -7,8 +7,8 @@ import { useSearchParams } from "next/navigation";
 export default function MembersList() {
   const query = useSearchParams();
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["members", query.toString()],
-    queryFn: ({ pageParam }) => getUsers(pageParam, query),
+    queryKey: ["members", query?.toString()],
+    queryFn: ({ pageParam }) => getUsers(pageParam, query ?? undefined),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
   });

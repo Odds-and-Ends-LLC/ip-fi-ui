@@ -29,6 +29,7 @@ export default function FilterGroup({
   const HydrateAtoms = ({ children } : { children: ReactNode }) => {
     const urlQuery = useSearchParams();
 
+    //@ts-ignore
     useHydrateAtoms([[filterQueryAtom, urlQuery]]);
     return children;
   };

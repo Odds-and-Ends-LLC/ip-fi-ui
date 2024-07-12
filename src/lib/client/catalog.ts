@@ -1,18 +1,27 @@
 import { catalogSalesData, catalogs, marketCatalogs, trendingCatalogs } from "@/data";
-import { TimeFilterType, PriceVolumeDataType, TopCatalogType, CatalogStatisticsType, TradeHistoryDataType } from "@/types";
+import { TimeFilterType, PriceVolumeDataType, TopCatalogType, CatalogStatisticsType, TradeHistoryDataType, CatalogType } from "@/types";
+import ax from "../axios";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 
 export const getTopCatalogs = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { data: respData } = await ax.get("/api/top/catalog");
+    const topCatalogs: TopCatalogType[] = [];
 
-    const raw = catalogs.slice(0, 5);
-    const topCatalogs: TopCatalogType[] = raw.map((catalog, i) => ({ rank: i + 1, catalog }));
+    respData.data.forEach((item: CatalogType, i: number) => {
+      topCatalogs.push({
+        rank: i + 1,
+        catalog: item,
+      })
+    })
 
     return {
       data: topCatalogs,
     };
   } catch (error) {
+    console.log(error);
+
     console.log("failed to fetch top catalogs");
     return {
       error: "Failed to fetch top catalogs at this time."
@@ -22,10 +31,10 @@ export const getTopCatalogs = async () => {
 
 export const getTrendingCatalogs = async (time?: TimeFilterType) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { data: respData } = await ax.get("/api/top/trending-catalog");
 
     return {
-      data: trendingCatalogs.slice(0, 10),
+      data: respData.data,
     };
   } catch (error) {
     console.log("failed to fetch trending catalogs");
@@ -112,11 +121,11 @@ export const getTradeHistory = async (catalogId: string) => {
 
 export const getFeaturedCatalogs = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { data: respData } = await ax.get("/api/top/featured-catalog");
 
     return {
-      data: catalogs.slice(0, 12)
-    }
+      data: respData.data,
+    };
   } catch (error) {
     console.log("failed to fetch featured catalogs");
     return {
@@ -125,15 +134,15 @@ export const getFeaturedCatalogs = async () => {
   }
 };
 
-export const getCatalogs = async (page: number, query?: URLSearchParams) => {
+export const getCatalogs = async (page: number, query?: ReadonlyURLSearchParams) => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { data: respData } = await ax.get("/api/catalog", {
+      params: {
+        page
+      }
+    });
 
-    return {
-      data: catalogs.slice(0, 24),
-      hasNextPage: true,
-      page,
-    };
+    return respData.data;
   } catch (error) {
     console.log("failed to fetch catalogs");
     return {

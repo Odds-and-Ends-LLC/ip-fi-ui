@@ -22,8 +22,8 @@ export default function History() {
   const nft = useAtomValue(nftViewAtom);
 
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["nft-history", query.toString()],
-    queryFn: ({ pageParam }) => getNFTHistory(nft.collectionAddress, nft.tokenId, pageParam, query),
+    queryKey: ["nft-history", query?.toString()],
+    queryFn: ({ pageParam }) => getNFTHistory(nft.collectionAddress, nft.tokenId, pageParam, query ?? undefined),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
   });

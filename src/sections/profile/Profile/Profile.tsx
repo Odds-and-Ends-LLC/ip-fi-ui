@@ -28,7 +28,7 @@ export default function Profile({
   useHydrateAtoms([[profileViewAtom, user]]);
 
   const userSession = useAtomValue(userSessionAtom);
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
   const profileTab = fragments[1] || "catalogs";
   const loggedInUser = user.id === userSession?.userId;

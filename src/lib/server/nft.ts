@@ -3,17 +3,15 @@
 // packages
 import "server-only";
 
-import { nfts } from "@/data";
 import { cache } from "react";
+import ax from "../axios";
 
 export const getNFT = cache(async (collectionAddress: string, tokenId: string) => {
   try {
-    const nft = nfts.find((nft) => nft.collectionAddress === collectionAddress && nft.tokenId === tokenId);
-
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    const { data: respData } = await ax.get(`/nfts/${collectionAddress}/${tokenId}`);
 
     return {
-      data: nft,
+      data: respData.data,
     };
   } catch (error) {
     console.log("failed to fetch nft");

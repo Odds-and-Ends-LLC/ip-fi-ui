@@ -11,7 +11,7 @@ import { signupPayloadAtom } from "@/atoms";
 
 // data
 const userWalletA = "5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5";
-import { act, useEthers } from "@usedapp/core";
+import { useEthers } from "@usedapp/core";
 import { useEffect, useState } from "react";
 
 export default function StepConnectWallet({

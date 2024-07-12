@@ -15,8 +15,8 @@ export default function Catalogs() {
   const query = useSearchParams();
   const nft = useAtomValue(nftViewAtom);
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["nft-catalogs", query.toString()],
-    queryFn: ({ pageParam }) => getNFTCatalogs(nft.collectionAddress, nft.tokenId, pageParam, query),
+    queryKey: ["nft-catalogs", query?.toString()],
+    queryFn: ({ pageParam }) => getNFTCatalogs(nft.collectionAddress, nft.tokenId, pageParam, query ?? undefined),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
   });

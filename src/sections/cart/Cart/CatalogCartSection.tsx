@@ -33,7 +33,7 @@ export default function CatalogCartSection({
   const query = useSearchParams();
   const [cartItems, setCartItems] = useState<CartItemType[]>(cart);
   const setPurchaseCatalogData = useSetAtom(purchaseCatalogDataAtom);
-  const [createModalOpen, setCreateModalOpen] = useState(query.get("create")?.toString() === "true");
+  const [createModalOpen, setCreateModalOpen] = useState(query?.get("create")?.toString() === "true");
   const [deleting, setDeleting] = useState(false);
 
   const form = useForm<CreateCatalogPayloadType>({
@@ -45,7 +45,7 @@ export default function CatalogCartSection({
   });
 
   const { reset, setError, handleSubmit, formState: { isSubmitting, isValid } } = form;
-  const activeCartItem = cartItems.find((item) => item.id === query.get("item")) || cartItems[0];
+  const activeCartItem = cartItems.find((item) => item.id === query?.get("item")) || cartItems[0];
   const catalogTabs: TabProps[] = cartItems.map((item) => ({
     label: item.catalog.name || "",
     value: item.id,
@@ -117,7 +117,7 @@ export default function CatalogCartSection({
       >
         <Stack className={styles.catalogTabs}>
           <Tabs
-            value={query.get("item")?.toString() || ""}
+            value={query?.get("item")?.toString() || ""}
             tabStyle={{ padding: "0 16px", "& .MuiTab-iconWrapper": { margin: 0 } }}
             tabs={catalogTabs}
             onChange={handleSelectActiveItem}

@@ -32,7 +32,7 @@ export default function Catalogs() {
       title="CATALOGS"
       viewAllUrl="/catalogs"
       items={
-        catalogs.data.map((catalog, i) => (
+        catalogs.data.map((catalog: CatalogType, i: number) => (
           <Box key={i} sx={{ aspectRatio: "1/.7", width: "100%" }}>
             {renderCatalog(catalog)}
           </Box>

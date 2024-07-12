@@ -5,7 +5,6 @@ import { CartItemType, UserSessionType } from "@/types";
 import { cartAtom, userSessionAtom } from "@/atoms";
 import { useHydrateAtoms } from "jotai/utils";
 import { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   DAppProvider,
   DEFAULT_SUPPORTED_CHAINS,

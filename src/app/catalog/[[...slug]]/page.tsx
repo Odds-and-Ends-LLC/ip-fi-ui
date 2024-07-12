@@ -10,8 +10,6 @@ export default async function CatalogViewPage({
 } : {
   params: { slug?: string[] };
 }) {
-  console.log(params);
-
   const goodSlugs = ["nft", "analytics", "settings"];
 
   if (!params.slug || params.slug.length > 2) {
@@ -25,7 +23,8 @@ export default async function CatalogViewPage({
   }
 
   const catalog = await getCatalog(uid);
-
+  console.log(catalog.data);
+  
   if (!catalog || !catalog.data) {
     notFound();
   }

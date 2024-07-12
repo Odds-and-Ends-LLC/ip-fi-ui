@@ -9,6 +9,7 @@ import { Circle, ItemsCarousel, Member } from "@/components";
 import { getFeaturedUsers } from "@/lib/client/user";
 import MembersSkeleton from "./MembersSkeleton";
 import styles from "./Members.module.css";
+import { UserType } from "@/types";
 
 export default function Members() {
   const { data: members, isFetching } = useQuery({
@@ -51,7 +52,7 @@ export default function Members() {
         title="MEMBERS"
         viewAllUrl="/members"
         items={
-          members.data.map((member, i) => (
+          members.data.map((member: UserType, i:number) => (
             <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "232px", maxHeight: "232px" }}>
               <Member
                 key={i}

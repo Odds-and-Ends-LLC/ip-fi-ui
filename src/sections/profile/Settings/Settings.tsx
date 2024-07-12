@@ -31,7 +31,7 @@ export default function Settings({
 } : {
   user: UserType;
 }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
   const settingsTab = fragments[1] || "profile";
 

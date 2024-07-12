@@ -1,4 +1,6 @@
 import { Breakpoint } from "@mui/material";
+import { User } from "@prisma/client";
+import { NextRequest } from "next/server";
 
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2;
 export type QueryString<T> = { query: T; };
@@ -22,6 +24,10 @@ export type AlignType = "start" | "center" | "left" | "right" | string;
 
 export type TimeFilterType = "all" | "1h" | "6h" | "24h" | "7d";
 export type PaymentMethodType = "usdc" | "ethereum" | "credit-card";
+
+export interface AuthenticatedNextRequest extends NextRequest {
+  user: User
+};
 
 export interface UserType {
   id: string;
@@ -56,7 +62,7 @@ export type UserSessionType = {
 };
 
 export interface TraitType {
-  traitType: string;
+  trait_type: string;
   value: string;
 };
 
@@ -129,6 +135,7 @@ export interface CatalogType {
   coverImage: string;
   coverImageNFTId: string;
   coverColor: string;
+  nftCount?: number
 };
 
 export interface CatalogStatisticsType {

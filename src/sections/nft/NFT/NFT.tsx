@@ -19,7 +19,7 @@ export default function NFT({
   nft: NFTType,
 }) {
   useHydrateAtoms([[nftViewAtom, nft]]);
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
   const nftTab = fragments[3] || "catalogs";
 

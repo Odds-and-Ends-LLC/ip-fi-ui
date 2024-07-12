@@ -46,7 +46,7 @@ export default function TrendingTable({
         >
           {row.catalog.name}
         </Typography>
-        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.catalog.nfts?.length || 0} Total NFTS</Typography>
+        <Typography color="text.disabledBlue" sx={{ typography: { desktop: "body2", mobile: "body3" }}}>{row.catalog.nftCount || 0} Total NFTS</Typography>
         {showPrice &&
           <Stack flexDirection="row" alignItems="center">
             <Typography sx={{ typography: { desktop: "body1", mobile: "body3" }}}>Price: </Typography>

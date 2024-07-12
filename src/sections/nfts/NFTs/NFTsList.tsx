@@ -7,10 +7,10 @@ import { useSearchParams } from "next/navigation";
 export default function NFTsList() {
   const query = useSearchParams();
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["nfts", query.toString()],
-    queryFn: ({ pageParam }) => getNFTs(pageParam, query),
+    queryKey: ["nfts", query?.toString()],
+    queryFn: ({ pageParam }) => getNFTs(pageParam, query ?? undefined),
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
+    getNextPageParam: (lastPage) => lastPage.hasNextPage ? Number(lastPage.page) + 1 : undefined,
   });
 
   const nfts = data?.pages.map(({ data: nfts }) => nfts || [])?.flat() || [];

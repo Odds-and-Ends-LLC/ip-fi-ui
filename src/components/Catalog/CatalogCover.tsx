@@ -117,7 +117,7 @@ export default function CatalogCover({
             {catalog.creatorName}
           </Typography>
           <Typography sx={{ typography: { mobile: "body3", tablet: "body2" } }} color="text.disabled">
-            {catalog.nfts.length || 0} NFTS
+            {catalog.nftCount || 0} NFTS
           </Typography>
         </Stack>
       }

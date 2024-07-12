@@ -8,11 +8,14 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'source.unsplash.com',
-        port: '',
-        pathname: '/random',
+        protocol: "https",
+        hostname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "**",
+        pathname: "**/.*/**",
+      }
     ],
   },
   webpack: (config) => {

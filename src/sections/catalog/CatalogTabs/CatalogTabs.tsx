@@ -10,7 +10,7 @@ import { Analytics } from "..";
 
 export default function CatalogTabs() {
   const catalog = useAtomValue(catalogViewAtom);
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
 
   const fragments = pathname.split("/").filter((fragment) => fragment !== "") ;
   const catalogTab = fragments[2] || "nft";

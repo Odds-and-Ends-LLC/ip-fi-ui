@@ -1,7 +1,7 @@
 // packages
 "use client";
 
-import { connectWalletModalOpen, userSessionAtom } from "@/atoms";
+import { connectWalletModalOpenAtom, userSessionAtom } from "@/atoms";
 import { walletLogin } from "@/lib/actions/auth";
 import { Button } from "@mui/material";
 import { useEthers } from "@usedapp/core";
@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function ConnectWalletButton() {
   const router = useRouter();
-  const setOpen = useSetAtom(connectWalletModalOpen);
+  const setOpen = useSetAtom(connectWalletModalOpenAtom);
   const [connecting, setConnecting] = useState(false);
   const { account, activateBrowserWallet, deactivate, library } = useEthers();
   const setUserSession = useSetAtom(userSessionAtom);

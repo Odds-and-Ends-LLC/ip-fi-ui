@@ -1,5 +1,6 @@
 import { catalogs, marketCatalogs, nfts, users } from "@/data";
 import axios from "axios";
+import ax from "../axios";
 
 export const checkIfUsernameAvailable = async (username: string) => {
   try {
@@ -37,11 +38,11 @@ export const checkIfEmailAvailable = async (email: string) => {
 
 export const getFeaturedUsers = async () => {
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { data: respData } = await ax.get("/api/top/featured-users");
 
     return {
-      data: users.slice(0, 12),
-    }
+      data: respData.data,
+    };
   } catch (error) {
     console.log("failed to fetch featured users");
     return {

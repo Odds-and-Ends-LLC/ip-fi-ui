@@ -7,10 +7,10 @@ import { useSearchParams } from "next/navigation";
 export default function CatalogsList() {
   const query = useSearchParams();
   const { data, isFetching, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["catalogs", query.toString()],
-    queryFn: ({ pageParam }) => getCatalogs(pageParam, query),
+    queryKey: ["catalogs", query?.toString()],
+    queryFn: ({ pageParam }) => getCatalogs(pageParam, query ?? undefined),
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.hasNextPage ? lastPage.page + 1 : undefined,
+    getNextPageParam: (lastPage) => lastPage.hasNextPage ? Number(lastPage.page) + 1 : undefined,
   });
 
   const catalogs = data?.pages.map(({ data: catalogs }) => catalogs || [])?.flat() || [];

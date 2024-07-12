@@ -5,17 +5,18 @@ import "server-only";
 
 import { catalogs } from "@/data";
 import { cache } from "react";
+import ax from "../axios";
 
 export const getCatalog = cache(async (uid: string) => {
   try {
-    const catalog = catalogs.find((catalog) => catalog.uid === uid);
-
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    const { data:respData } = await ax.get(`/catalog/${uid}`);
 
     return {
-      data: catalog,
+      data: respData.data,
     };
   } catch (error) {
+    console.error(error);
+    
     console.log("failed to fetch catalog");
     return {
       error: "Failed to fetch catalog at this time.",

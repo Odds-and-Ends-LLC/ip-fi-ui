@@ -34,7 +34,7 @@ export default function Details() {
         >
           {nft.traits?.map((trait, i) => (
             <Fragment key={i}>
-              <DetailItem label={trait.traitType} value={trait.value} />
+              <DetailItem label={trait.trait_type} value={trait.value} />
               <DetailDivider
                 display={{
                   mobile: "none",

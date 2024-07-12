@@ -28,11 +28,11 @@ export const user : UserType & { password: string; } = {
 };
 
 const traits: TraitType[] = [
-  { traitType: "Background", value: "Gradient 2" },
-  { traitType: "Head", value: "Purple" },
-  { traitType: "Hair", value: "Brown Bushcut" },
-  { traitType: "Face", value: "Straw" },
-  { traitType: "Body", value: "Gradient 2" },
+  { trait_type: "Background", value: "Gradient 2" },
+  { trait_type: "Head", value: "Purple" },
+  { trait_type: "Hair", value: "Brown Bushcut" },
+  { trait_type: "Face", value: "Straw" },
+  { trait_type: "Body", value: "Gradient 2" },
 ];
 
 export const nfts: NFTType[] = [

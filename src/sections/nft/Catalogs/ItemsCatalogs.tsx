@@ -10,6 +10,8 @@ import styles from "./Catalogs.module.css";
 import { NFTCatalogType } from "@/types";
 
 export default function ItemsCatalogs({ data }: { data: Partial<NFTCatalogType> }) {
+  console.log(data);
+  
   const {
     catalogUid,
     catalogCoverImage,

@@ -18,7 +18,7 @@ export default function SearchFilter({
     query.set("search", debouncedTerm || "");
 
     setFilterQuery(query);
-  }, [debouncedTerm, filterQuery, setFilterQuery]);
+  }, [debouncedTerm, setFilterQuery]);
 
   return (
     <TextField

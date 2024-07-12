@@ -18,6 +18,7 @@ enum ConnectedAccountType {
 }
 
 enum CatalogStatus {
+  DRAFT
   ACTIVE
   ENDED
 }
@@ -56,28 +57,36 @@ model UserConnectedAccount {
 }
 
 model Nft {
-  id                Int     @id @default(autoincrement())
+  id                Int              @id @default(autoincrement())
   collectionAddress String
   tokenId           String
-  views             Float   @default(0)
-  amountEarned      Float   @default(0)
-  private           Boolean @default(false)
-  price             Float   @default(0)
+  views             Float            @default(0)
+  amountEarned      Float            @default(0)
+  private           Boolean          @default(false)
+  price             Float            @default(0)
+  alchemyData       Json?
+  imageUrl          String?
+  lastCachedDate    DateTime         @default(now())
+  DerivativeNfts    DerivativeNfts[]
 
+  @@unique([collectionAddress, tokenId])
   @@map("nfts")
 }
 
 model Catalog {
-  id                   Int      @id @default(autoincrement())
-  contractTokenId      Int
+  id                   Int           @id @default(autoincrement())
+  contractTokenId      Int?
+  status               CatalogStatus @default(DRAFT)
   name                 String
   slug                 String
-  coverImageNftAddress String
-  coverImageNftId      String
-  coverColor           String
-  creationTxHash       String
+  coverImageNftAddress String?
+  coverImageNftId      String?
+  coverColor           String?
+  creationTxHash       String?
+  catalogHash          String?
+  lastPrice            Float         @default(0)
   creatorId            Int
-  createdAt            DateTime @default(now())
+  createdAt            DateTime      @default(now())
 
   creator       User            @relation(fields: [creatorId], references: [id])
   catalogOwners CatalogOwners[]
@@ -117,12 +126,13 @@ model DerivativeNfts {
   id                Int      @id @default(autoincrement())
   collectionAddress String
   tokenId           String
-  derivativeTokenId String
+  derivativeTokenId String?
   creatorId         Int
   createdAt         DateTime @default(now())
 
   creator  User          @relation(fields: [creatorId], references: [id])
   catalogs CatalogNfts[]
+  nftData  Nft           @relation(fields: [collectionAddress, tokenId], references: [collectionAddress, tokenId])
 
   @@map("derivative_nfts")
 }
