@@ -90,18 +90,6 @@ export default function History() {
   ];
   return (
     <Stack className={styles.history}>
-      <Stack className={styles.historyHeader} sx={{ flexDirection: { tablet: "row" } }}>
-        <Typography variant="h4">HISTORY</Typography>
-        <Stack className={styles.historyHeaderOptions}>
-          <Select
-            minWidth="112px"
-            label="FILTER"
-            options={["filter 1", "filter 2"]}
-            onChange={(value) => console.log(value)}
-          />
-          <Select minWidth="104px" label="SORT" onChange={undefined} hideNone={undefined} />
-        </Stack>
-      </Stack>
       <Paper ref={tableRef} variant="outlined" component={Stack} className={styles.historyContent} onScroll={() => {
         if (isFetching || !hasNextPage || !tableRef.current?.scrollHeight) return;
 

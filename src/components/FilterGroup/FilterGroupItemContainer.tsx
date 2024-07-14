@@ -26,7 +26,7 @@ export default function FilterGroupItemContainer({
         sx={{
           bgcolor: "background.secondary",
           maxHeight: "32px",
-          p: "16px",
+          p: "16px !important",
           "&.Mui-expanded": {
             minHeight: "48px",
           }

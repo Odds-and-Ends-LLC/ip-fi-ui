@@ -37,7 +37,7 @@ export const getNFTCatalogs = async (collectionAddress: string, tokenId: string,
     const { data: respData } = await ax.get(`/api/nfts/${collectionAddress}/${tokenId}/catalog`, {
       params: { page }
     });
-    
+
     return respData.data;
   } catch (error) {
     console.log(error);

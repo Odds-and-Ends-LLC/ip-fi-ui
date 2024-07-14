@@ -1,9 +1,10 @@
-import { filterModalOpenAtom, filterOpenAtom } from "@/atoms";
-import { FilterGroup, MinMaxFilter, Modal, SliderRangeFilter, TagSelectionFilter } from "@/components";
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
-import { useAtom, useAtomValue } from "jotai";
 
-export default function CatalogsFilter() {
+import { MinMaxFilter, Modal, TagSelectionFilter } from "@/components";
+import { useAtom, useAtomValue } from "jotai";
+import { filterModalOpenAtom, filterOpenAtom } from "@/atoms";
+
+export default function ProfileNFTsFilter() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("large"));
   const open = useAtomValue(filterOpenAtom);
@@ -13,18 +14,18 @@ export default function CatalogsFilter() {
     <Stack
       sx={!isMobile ? {
         position: "sticky",
-        top: "168px",
-        height: "calc(100dvh - 200px)",
+        top: "200px",
+        height: "calc(100dvh - 232px)",
         overflow: "auto",
         gap: "16px",
         pr: "16px",
       } : {}}
     >
+      <MinMaxFilter name="catalog_inclusion_count" title="Catalogs a part of" />
       <MinMaxFilter name="cost" title="Cost" />
-      <SliderRangeFilter name="nftCount" title="NFT Count" min={1} max={20} step={1} />
-      <MinMaxFilter name="ownerCount" title="Number of owners" />
-      <TagSelectionFilter name="ownerAddresses" title="Owners" />
-      <TagSelectionFilter name="creatorAddresses" title="Creators" />
+      <MinMaxFilter name="floor_price" title="Floor Price" />
+      <TagSelectionFilter name="owners" title="Owners" />
+      <MinMaxFilter name="earnings" title="Earnings" />
     </Stack>
   )
 

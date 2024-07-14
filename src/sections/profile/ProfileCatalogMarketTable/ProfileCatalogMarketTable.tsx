@@ -6,15 +6,14 @@ import { Avatar, Icon, Table } from "@/components";
 
 // styles
 import styles from "./ProfileCatalogMarketTable.module.css";
-import { GridColDef, GridRowModel, GridSortModel } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel, GridRowSelectionModel, GridSortModel } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
-import { getCatalogsMarket } from "@/lib/client/catalog";
-import { CatalogMarketDataType, TimeFilterType } from "@/types";
+import { CatalogMarketDataType } from "@/types";
 import ProfileCatalogMarketTableSkeleton from "./ProfileCatalogMarketTableSkeleton";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { getUserCatalogsMarket } from "@/lib/client/user";
-import { profileViewAtom } from "@/atoms";
-import { useAtomValue } from "jotai";
+import { profileViewAtom, selectedCatalogAtom } from "@/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
 
 const sortMapping: Record<string, string> = {
   // database field name: query field name
@@ -23,6 +22,7 @@ const sortMapping: Record<string, string> = {
 
 export default function ProfileCatalogMarketTable() {
   const profile = useAtomValue(profileViewAtom);
+  const setSelectedCatalog = useSetAtom(selectedCatalogAtom);
   const [query, setQuery] = useState<URLSearchParams>(new URLSearchParams());
   const { data: catalogMarket, isFetching} = useQuery({
     queryKey: ["user-catalogs-market", query.toString()],
@@ -97,6 +97,16 @@ export default function ProfileCatalogMarketTable() {
     setQuery(params);
   };
 
+  const handleRowSelect = (model: GridRowSelectionModel) => {
+    if (!catalogMarket || !catalogMarket.data) return;
+
+    const selectedCatalog = catalogMarket.data.find((item) => item.id === model[0]);
+
+    if (!selectedCatalog) return;
+
+    setSelectedCatalog(selectedCatalog.catalog);
+  };
+
   const columns : GridColDef[] = [
     {
       field: "catalog",
@@ -140,6 +150,7 @@ export default function ProfileCatalogMarketTable() {
         slots: {
           loadingOverlay: ProfileCatalogMarketTableSkeleton
         },
+        onRowSelectionModelChange: handleRowSelect,
         sx: {
           "& .MuiDataGrid-overlayWrapper": {
             height: "360px !important",

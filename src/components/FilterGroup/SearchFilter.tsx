@@ -15,10 +15,14 @@ export default function SearchFilter({
 
   useEffect(() => {
     const query = new URLSearchParams(filterQuery.toString());
-    query.set("search", debouncedTerm || "");
+    if (!debouncedTerm) {
+      query.delete("search");
+    } else {
+      query.set("search", debouncedTerm || "");
+    }
 
     setFilterQuery(query);
-  }, [debouncedTerm, setFilterQuery]);
+  }, [debouncedTerm, setFilterQuery, filterQuery]);
 
   return (
     <TextField
@@ -26,6 +30,7 @@ export default function SearchFilter({
       placeholder={title}
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
+      fullWidth
     />
   )
 }

@@ -28,17 +28,25 @@ import styles from "./Navbar.module.css";
 import { logout } from "@/lib/actions/auth";
 import { userSessionAtom } from "@/atoms";
 
+const coloredPaths = [
+  "/catalogs",
+  "/nfts",
+  "/members",
+];
+
 export default function Navbar() {
   const pathname = usePathname();
   const [userSession, setUserSession] = useAtom(userSessionAtom);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState<string>("transparent");
+  const [backgroundColor, setBackgroundColor] = useState<string>(coloredPaths.includes(pathname || "") ? "background.default" : "transparent");
   const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("desktop"));
   const displayDesktop = { desktop: "flex", mobile: "none" };
   const displayMobile = { desktop: "none", mobile: "flex" };
 
   useEffect(() => {
+    if (coloredPaths.includes(pathname || "")) return;
+
     const handleScroll = () => {
       if (window.scrollY > 24) {
         setBackgroundColor("background.default");

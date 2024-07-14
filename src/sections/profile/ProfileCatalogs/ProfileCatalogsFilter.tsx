@@ -1,9 +1,9 @@
 import { filterModalOpenAtom, filterOpenAtom } from "@/atoms";
-import { FilterGroup, MinMaxFilter, Modal, SliderRangeFilter, TagSelectionFilter } from "@/components";
+import { MinMaxFilter, Modal, SliderRangeFilter, TagSelectionFilter } from "@/components";
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { useAtom, useAtomValue } from "jotai";
 
-export default function CatalogsFilter() {
+export default function ProfileCatalogsFilter() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("large"));
   const open = useAtomValue(filterOpenAtom);
@@ -13,8 +13,8 @@ export default function CatalogsFilter() {
     <Stack
       sx={!isMobile ? {
         position: "sticky",
-        top: "168px",
-        height: "calc(100dvh - 200px)",
+        top: "200px",
+        height: "calc(100dvh - 232px)",
         overflow: "auto",
         gap: "16px",
         pr: "16px",

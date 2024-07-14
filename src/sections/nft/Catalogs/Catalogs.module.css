@@ -15,9 +15,15 @@
   justify-content: space-between;
 }
 
+.catalogsTable {
+  flex-direction: row;
+  gap: 16px;
+  height: 100%;
+}
+
 .catalogsContent {
   gap: 16px;
-  overflow-y: auto;
+  width: 100%;
 }
 
 .itemsContract {

@@ -1,7 +1,7 @@
 "use client";
 
 // packages
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
 import { useHydrateAtoms } from "jotai/utils";
 import { useColor } from "color-thief-react";
@@ -19,6 +19,8 @@ import ProfileCatalogs from "../ProfileCatalogs";
 import ProfileNFTs from "../ProfileNFTs";
 import { UserType } from "@/types";
 import { useAtomValue } from "jotai";
+import ProfileCatalogMarketTable from "../ProfileCatalogMarketTable";
+import { TradeHistoryGraph } from "@/sections/global";
 
 export default function Profile({
   user
@@ -172,6 +174,14 @@ export default function Profile({
         <Divider
           sx={{ borderColor: "dividers.default" }}
         />
+        <Grid container spacing={3}>
+          <Grid item mobile={12} laptop={6}>
+            <ProfileCatalogMarketTable />
+          </Grid>
+          <Grid item mobile={12} laptop={6}>
+            <TradeHistoryGraph  />
+          </Grid>
+        </Grid>
         <Stack sx={{ position: "sticky", top: "72px", height: "72px", justifyContent: "center", zIndex: 10, bgcolor: "background.secondary" }}>
           <Tabs
             value={profileTab}
