@@ -13,11 +13,7 @@ import { catalogViewAtom } from "@/atoms";
 import { CatalogType } from "@/types";
 import { CatalogTabs } from "..";
 
-export default function CatalogView({
-  catalog
-} : {
-  catalog: CatalogType;
-}) {
+export default function CatalogView({ catalog }: { catalog: CatalogType }) {
   useHydrateAtoms([[catalogViewAtom, catalog]]);
 
   return (
@@ -37,14 +33,21 @@ export default function CatalogView({
           padding: { mobile: "104px 24px 32px", tablet: "96px 64px 32px" },
         }}
       >
-        <Stack className={styles.catalogViewHeader} sx={{ flexDirection: { tablet: "row", mobile: "column" } }}>
+        <Stack
+          className={styles.catalogViewHeader}
+          sx={{ flexDirection: { tablet: "row", mobile: "column" } }}
+        >
           <Stack className={styles.catalogViewHeaderLeft}>
             <Avatar image="/images/image_2.png" size="m" icon={<Icon icon="ethereum" />} />
             <Stack className={styles.catalogViewTitle}>
               <Typography variant="h4">{catalog.name}</Typography>
               <Stack className={styles.catalogViewTitleDetails}>
-                <Typography variant="body2" color="text.disabledBlue">Created by:</Typography>
-                <Typography variant="body2" color="text.white">{catalog.creatorName}</Typography>
+                <Typography variant="body2" color="text.disabledBlue">
+                  Created by:
+                </Typography>
+                <Typography variant="body2" color="text.white">
+                  {catalog.creatorName}
+                </Typography>
               </Stack>
             </Stack>
           </Stack>
@@ -53,28 +56,50 @@ export default function CatalogView({
               withBackground
               walletAddress="5507FecAF4ce510xaDE345a6428b4C8A7Bd2180D5C"
             />
-            <Button variant="outlineWhite" href={`/catalog/${catalog.uid}/settings`}>
-              <Icon icon="settings" />
-            </Button>
-            <Button
-              variant="outlineWhite"
-              startIcon={<Icon icon="share" />}
-            >
-              SHARE
-            </Button>
+            <Stack className={styles.catalogViewHeaderRightBtns}>
+              <Button variant="outlineWhite" mode="icon" href={`/catalog/${catalog.uid}/settings`}>
+                <Icon icon="settings" />
+              </Button>
+              <Button
+                variant="outlineWhite"
+                startIcon={<Icon icon="share" />}
+                sx={{ display: { mobile: "none", laptop: "flex" } }}
+              >
+                SHARE
+              </Button>
+              <Button
+                variant="outlineWhite"
+                mode="icon"
+                sx={{ display: { mobile: "flex", laptop: "none" } }}
+              >
+                <Icon icon="share" />
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
         <InfoList
-          info={
-            [
-              { label: "Created At", value: <Typography variant="body2" color="text.primary">{formatDistanceToNow(catalog.createdAt, { addSuffix: true })}</Typography> },
-              { label: "Owners", value: <Typography variant="body2" color="text.primary">{catalog.owners?.length || 0}</Typography> },
-            ]
-          }
+          info={[
+            {
+              label: "Created At",
+              value: (
+                <Typography variant="body2" color="text.primary">
+                  {formatDistanceToNow(catalog.createdAt, { addSuffix: true })}
+                </Typography>
+              ),
+            },
+            {
+              label: "Owners",
+              value: (
+                <Typography variant="body2" color="text.primary">
+                  {catalog.owners?.length || 0}
+                </Typography>
+              ),
+            },
+          ]}
         />
         <Divider flexItem />
         <CatalogTabs />
       </Stack>
     </Stack>
   );
-};
+}
