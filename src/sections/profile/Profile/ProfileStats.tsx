@@ -25,7 +25,7 @@ export default function ProfileStats({
       }}
     >
       {stats.map(({ label, value }, i) => (
-        <Stack key={i}>
+        <Stack key={i} className={styles.profileStatsItem}>
           <Typography variant="body2" color="text.disabled">{label}</Typography>
           <Typography variant="h6" color="text.primary">{value}</Typography>
         </Stack>
