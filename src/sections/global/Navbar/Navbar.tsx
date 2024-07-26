@@ -40,9 +40,9 @@ export default function Navbar() {
   const [backgroundColor, setBackgroundColor] = useState<string>(
     coloredPaths.includes(pathname || "") ? "background.default" : "transparent",
   );
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("desktop"));
-  const displayDesktop = { desktop: "flex", mobile: "none" };
-  const displayMobile = { desktop: "none", mobile: "flex" };
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("tablet"));
+  const displayTablet = { tablet: "flex", mobile: "none" };
+  const displayMobile = { tablet: "none", mobile: "flex" };
 
   useEffect(() => {
     if (coloredPaths.includes(pathname || "")) return;
@@ -183,10 +183,10 @@ export default function Navbar() {
         <Link href="/" className={styles.navbarLogo} rel="" target="">
           <Image src="/images/logo.svg" alt="logo" width={106} height={40} />
         </Link>
-        <Box className={styles.navbarLinksContainer} sx={{ display: displayDesktop }}>
+        <Box className={styles.navbarLinksContainer} sx={{ display: displayTablet }}>
           <Stack
             className={styles.navbarLinks}
-            sx={{ flexDirection: { desktop: "row", mobile: "column" } }}
+            sx={{ flexDirection: { tablet: "row", mobile: "column" } }}
           >
             {renderDesktopLinks()}
           </Stack>
@@ -226,7 +226,7 @@ export default function Navbar() {
             <Stack className={styles.navbarMobileDrawerContent}>
               <Stack
                 className={styles.navbarLinks}
-                sx={{ flexDirection: { desktop: "row", mobile: "column" }, flex: "1 0" }}
+                sx={{ flexDirection: { tablet: "row", mobile: "column" }, flex: "1 0" }}
               >
                 {renderMobileLinks()}
               </Stack>
