@@ -31,6 +31,7 @@ export { default as Link } from "./Link";
 export { default as LinkedIn } from "./LinkedIn";
 export { default as Logout } from "./Logout";
 export { default as LooksRare } from "./LooksRare";
+export { default as Menu } from "./Menu";
 export { default as Message } from "./Message";
 export { default as OpenSea } from "./OpenSea";
 export { default as Password } from "./Password";
