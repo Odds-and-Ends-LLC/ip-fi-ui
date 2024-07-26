@@ -79,7 +79,11 @@ export default function Carousel({
           {header(buttonPrev, buttonNext)}
         </Stack>
       }
-      <Box ref={emblaRef} className={styles.carouselViewport}>
+      <Box
+        ref={emblaRef}
+        className={styles.carouselViewport}
+        sx={{ overflow: { mobile: "unset", tablet: "hidden" } }}
+      >
         <Stack className={styles.carouselContainer} sx={{ ml: { tablet: `-${slideGap}` } }}>
           {slides.map((slide, index) => (
             <Box

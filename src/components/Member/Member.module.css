@@ -43,10 +43,14 @@
 
 .memberCardItem {
   align-items: center;
+  flex: 1 0;
+  min-width: 88px;
 }
 
 .memberCardNumbers {
   flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
   justify-content: space-between;
 }
 
