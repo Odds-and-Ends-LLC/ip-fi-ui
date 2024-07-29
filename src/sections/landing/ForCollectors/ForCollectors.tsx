@@ -72,7 +72,7 @@ export default function ForCollectors() {
               title={
                 <>
                   <Typography variant="h6">Notification</Typography>
-                  <Image src="/icons/circles.svg" alt="icon" width={40} height={8} />
+                  <Image src="/images/circles_window.svg" alt="icon" width={40} height={8} />
                 </>
               }
               width="100%"
