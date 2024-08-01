@@ -14,11 +14,11 @@ import { UserType } from "@/types";
 export default function Members() {
   const { data: members, isFetching } = useQuery({
     queryKey: ["featured-users"],
-    queryFn: () => getFeaturedUsers()
+    queryFn: () => getFeaturedUsers(),
   });
 
   if (isFetching) {
-    return <MembersSkeleton />
+    return <MembersSkeleton />;
   }
 
   if (!members?.data) {
@@ -51,22 +51,28 @@ export default function Members() {
       <ItemsCarousel
         title="MEMBERS"
         viewAllUrl="/members"
-        items={
-          members.data.map((member: UserType, i:number) => (
-            <Box key={i} sx={{ aspectRatio: "1/1.05", width: "100%", minHeight: "232px", maxHeight: "232px" }}>
-              <Member
-                key={i}
-                username={member.username}
-                pfp={member.pfp}
-                lastActive={member.lastActiveAt}
-                collections={member.collectionCount}
-                catalogs={member.catalogCount}
-                joinedDate={member.joinedAt}
-              />
-            </Box>
-          ))
-        }
+        items={members.data.map((member: UserType, i: number) => (
+          <Box
+            key={i}
+            sx={{
+              aspectRatio: "1/1.05",
+              width: "100%",
+              minHeight: "232px",
+              // maxHeight: "252px"
+            }}
+          >
+            <Member
+              key={i}
+              username={member.username}
+              pfp={member.pfp}
+              lastActive={member.lastActiveAt}
+              collections={member.collectionCount}
+              catalogs={member.catalogCount}
+              joinedDate={member.joinedAt}
+            />
+          </Box>
+        ))}
       />
     </Box>
-  )
+  );
 }

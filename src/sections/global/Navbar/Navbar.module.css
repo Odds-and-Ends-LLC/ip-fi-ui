@@ -10,6 +10,7 @@
 }
 
 .navbarLinks {
+  flex-grow: 1;
   width: 100%;
   justify-content: space-between;
 }
@@ -29,7 +30,7 @@
 .navbarMobileDrawer {
   width: 100%;
   z-index: 2;
-  padding: 24px;
+  padding: 16px 24px;
   gap: 24px;
 }
 
@@ -39,6 +40,7 @@
 }
 
 .navbarMobileDrawerContent {
+  flex: 1 0;
   gap: 24px;
 }
 
@@ -60,4 +62,30 @@
 
 .navbarAvatarProfile {
   gap: 16px;
+}
+
+.navbarLinksMobile {
+  flex: 1 0;
+  gap: 24px;
+  width: 100%;
+}
+
+.navbarUserDetailsMobile {
+  gap: 16px;
+  width: 100%;
+}
+
+.navbarMobileButtons {
+  flex: 1 0;
+  gap: 24px;
+}
+
+.navbarMobileUserButtons {
+  flex: 1 0;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.mobileButtonClear {
+  padding: 8px 4px;
 }

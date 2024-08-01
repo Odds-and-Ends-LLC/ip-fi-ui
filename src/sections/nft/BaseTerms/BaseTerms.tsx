@@ -14,13 +14,18 @@ export default function BaseTerms() {
     <Stack className={styles.baseTerms}>
       <Typography variant="h4">BASE TERMS</Typography>
       <Divider />
-      <Stack className={styles.baseTermsRow} sx={{ flexDirection: { tablet: "row" } }}>
-        <StatisticsItem label="Current Price" value={nft.currentPrice} />
-        <StatisticsItem label="Current Term Length" value={nft.currentTermLength} />
-      </Stack>
-      <Stack className={styles.baseTermsRow} sx={{ flexDirection: { tablet: "row" } }}>
-        <StatisticsItem label="Number of Catalog Holders" value={nft.catalogHolderCount} />
-        <StatisticsItem label="Current Holder Ownership Length" value={nft.currentHolderOwnershipLength} />
+      <Stack sx={{ gap: { mobile: "16px", tablet: "24px" } }}>
+        <Stack className={styles.baseTermsRow} sx={{ flexDirection: { tablet: "row" } }}>
+          <StatisticsItem label="Current Price" value={nft.currentPrice} />
+          <StatisticsItem label="Current Term Length" value={nft.currentTermLength} />
+        </Stack>
+        <Stack className={styles.baseTermsRow} sx={{ flexDirection: { tablet: "row" } }}>
+          <StatisticsItem label="Number of Catalog Holders" value={nft.catalogHolderCount} />
+          <StatisticsItem
+            label="Current Holder Ownership Length"
+            value={nft.currentHolderOwnershipLength}
+          />
+        </Stack>
       </Stack>
     </Stack>
   );

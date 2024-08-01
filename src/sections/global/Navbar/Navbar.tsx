@@ -8,6 +8,7 @@ import {
   AppBar,
   Box,
   Button,
+  Divider,
   Drawer,
   Link,
   Stack,
@@ -16,6 +17,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { truncate } from "@/utils/truncate";
 import Image from "next/image";
 
 // components
@@ -28,21 +30,19 @@ import styles from "./Navbar.module.css";
 import { logout } from "@/lib/actions/auth";
 import { userSessionAtom } from "@/atoms";
 
-const coloredPaths = [
-  "/catalogs",
-  "/nfts",
-  "/members",
-];
+const coloredPaths = ["/catalogs", "/nfts", "/members"];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [userSession, setUserSession] = useAtom(userSessionAtom);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
-  const [backgroundColor, setBackgroundColor] = useState<string>(coloredPaths.includes(pathname || "") ? "background.default" : "transparent");
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("desktop"));
-  const displayDesktop = { desktop: "flex", mobile: "none" };
-  const displayMobile = { desktop: "none", mobile: "flex" };
+  const [backgroundColor, setBackgroundColor] = useState<string>(
+    coloredPaths.includes(pathname || "") ? "background.default" : "transparent",
+  );
+  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("tablet"));
+  const displayTablet = { tablet: "flex", mobile: "none" };
+  const displayMobile = { tablet: "none", mobile: "flex" };
 
   useEffect(() => {
     if (coloredPaths.includes(pathname || "")) return;
@@ -69,25 +69,26 @@ export default function Navbar() {
     setLogoutOpen(false);
   };
 
-  const renderLinks = () => (
-    <Stack
-      className={styles.navbarLinks}
-      sx={{ flexDirection: { desktop: "row", mobile: "column" } }}
-    >
+  const renderDesktopLinks = () => (
+    <>
       <Stack className={styles.navbarLinksDesktop}>
         <Button variant="clearWhite" href="/explore">
           Explore
         </Button>
       </Stack>
-      {pathname !== "/login" &&
+      {pathname !== "/login" && (
         <Stack className={styles.navbarLinksDesktop}>
           {userSession && (
             <>
-
               <Button variant="clearWhite" mode="icon" href="/cart">
                 <Icon icon="cart" />
               </Button>
-              <Link href={`/${userSession.username}`} className={styles.navbarLogo} rel="" target="">
+              <Link
+                href={`/${userSession.username}`}
+                className={styles.navbarLogo}
+                rel=""
+                target=""
+              >
                 <Avatar image={userSession.pfp} size="s" />
               </Link>
               <Button variant="clearWhite" mode="icon" onClick={() => setLogoutOpen(true)}>
@@ -96,16 +97,84 @@ export default function Navbar() {
             </>
           )}
           {!userSession && (
-            <Button
-              variant="solidGradient"
-              href="/login"
-            >
+            <Button variant="solidGradient" href="/login">
               Login
             </Button>
           )}
         </Stack>
-      }
-    </Stack>
+      )}
+    </>
+  );
+
+  const renderMobileLinks = () => (
+    <>
+      <Stack className={styles.navbarLinksMobile}>
+        {pathname !== "/login" && (
+          <>
+            {userSession && (
+              <>
+                <Link href={`/${userSession.username}`} rel="" target="">
+                  <Stack
+                    className={styles.navbarUserDetailsMobile}
+                    onClick={() => setDrawerOpen(false)}
+                  >
+                    <Avatar image={userSession.pfp} size="s" />
+                    <Stack>
+                      <Typography variant="label2" color="text.primary">
+                        {userSession.username}
+                      </Typography>
+                      {userSession?.walletAddresses?.map((address, i) => (
+                        <Typography
+                          key={i}
+                          variant="label2"
+                          color="text.brandSecondary"
+                          textTransform="none"
+                        >
+                          {truncate(address, 4, 4)}
+                        </Typography>
+                      ))}
+                    </Stack>
+                  </Stack>
+                </Link>
+                <Divider flexItem />
+              </>
+            )}
+            {!userSession && (
+              <Button variant="solidGradient" href="/login">
+                Login
+              </Button>
+            )}
+          </>
+        )}
+        <Stack className={styles.navbarMobileButtons}>
+          <Button variant="solidGradient" fullWidth href="/explore">
+            Explore
+          </Button>
+          {userSession && (
+            <Stack className={styles.navbarMobileUserButtons}>
+              <Button
+                variant="clearWhite"
+                startIcon={<Icon icon="cart" />}
+                endIcon={<Icon icon="arrowHeadRight" />}
+                href="/cart"
+                className={styles.mobileButtonClear}
+              >
+                <Typography variant="button1" width="100%" textAlign="start">
+                  CART
+                </Typography>
+              </Button>
+              <Button
+                variant="outlineWhite"
+                startIcon={<Icon icon="logout" />}
+                onClick={() => setLogoutOpen(true)}
+              >
+                LOGOUT
+              </Button>
+            </Stack>
+          )}
+        </Stack>
+      </Stack>
+    </>
   );
 
   return (
@@ -114,8 +183,13 @@ export default function Navbar() {
         <Link href="/" className={styles.navbarLogo} rel="" target="">
           <Image src="/images/logo.svg" alt="logo" width={106} height={40} />
         </Link>
-        <Box className={styles.navbarLinksContainer} sx={{ display: displayDesktop }}>
-          {renderLinks()}
+        <Box className={styles.navbarLinksContainer} sx={{ display: displayTablet }}>
+          <Stack
+            className={styles.navbarLinks}
+            sx={{ flexDirection: { tablet: "row", mobile: "column" } }}
+          >
+            {renderDesktopLinks()}
+          </Stack>
         </Box>
         <Button
           className={styles.navbarMobileMenu}
@@ -123,7 +197,7 @@ export default function Navbar() {
           sx={{ display: displayMobile }}
           onClick={() => setDrawerOpen(true)}
         >
-          <Image src="/icons/menu.svg" alt="menu" width={24} height={24} />
+          <Icon icon="menu" />
         </Button>
         {isMobile && (
           <Drawer
@@ -146,10 +220,17 @@ export default function Navbar() {
                 sx={{ display: displayMobile }}
                 onClick={() => setDrawerOpen(false)}
               >
-                <Image src="/icons/close.svg" alt="menu" width={24} height={24} />
+                <Icon icon="close" />
               </Button>
             </Stack>
-            <Stack className={styles.navbarMobileDrawerContent}>{renderLinks()}</Stack>
+            <Stack className={styles.navbarMobileDrawerContent}>
+              <Stack
+                className={styles.navbarLinks}
+                sx={{ flexDirection: { tablet: "row", mobile: "column" }, flex: "1 0" }}
+              >
+                {renderMobileLinks()}
+              </Stack>
+            </Stack>
             <Stack className={styles.navbarMobileDrawerFooter}>
               <Stack className={styles.navbarMobileDrawerSocials}>
                 <Button variant="solidGreen" mode="icon" href="/">
@@ -165,9 +246,7 @@ export default function Navbar() {
                   <Icon icon="linkedIn" />
                 </Button>
               </Stack>
-              <Typography variant="label1">
-                {new Date().getFullYear()} © Kek Labs.
-              </Typography>
+              <Typography variant="label1">{new Date().getFullYear()} © Kek Labs.</Typography>
             </Stack>
           </Drawer>
         )}
@@ -182,10 +261,7 @@ export default function Navbar() {
             <Button variant="outlineWhite" onClick={() => setLogoutOpen(false)}>
               CANCEL
             </Button>
-            <Button
-              variant="solidGradient"
-              onClick={handleLogout}
-            >
+            <Button variant="solidGradient" onClick={handleLogout}>
               YES, LOGOUT
             </Button>
           </>
