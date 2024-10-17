@@ -46,8 +46,7 @@ export default function Footer() {
         >
           <Stack className={styles.footerTeam}>
             <Typography variant="h6">TEAM</Typography>
-            <Link href="/" color="text.brandSecondary">@phygital_good</Link>
-            <Link href="/" color="text.brandSecondary">@guyettaaron</Link>
+            <Link href="https://x.com/guyettaaron" color="text.brandSecondary">@guyettaaron</Link>
           </Stack>
           <Stack className={styles.footerContact}>
             <Typography variant="h6">CONTACT</Typography>
