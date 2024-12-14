@@ -3,23 +3,21 @@ import { Box, Divider, Stack, Typography } from "@mui/material";
 
 // components
 import { DataContainer } from "@/components";
-import { Area, AreaChart, Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 // styles
 import styles from "./TradeHistoryGraph.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { getPriceVolumeHistory, getTradeHistory } from "@/lib/client/catalog";
+import { getTradeHistory } from "@/lib/client/catalog";
 import TradeHistoryGraphSkeleton from "./TradeHistoryGraphSkeleton";
-import { CatalogType } from "@/types";
+import { useAtomValue } from "jotai";
+import { selectedCatalogAtom } from "@/atoms";
 
-export default function TradeHistoryGraph({
-  catalog,
-} : {
-  catalog: CatalogType;
-}) {
+export default function TradeHistoryGraph() {
+  const selectedCatalog = useAtomValue(selectedCatalogAtom);
   const { data: tradeHistory, isFetching } = useQuery({
-    queryKey: ["trade-history", catalog.id],
-    queryFn: () => getTradeHistory(catalog.id),
+    queryKey: ["trade-history", selectedCatalog.id],
+    queryFn: () => getTradeHistory(selectedCatalog.id),
   })
 
   const renderHeaderLeft = () => (
@@ -31,7 +29,7 @@ export default function TradeHistoryGraph({
           width: { mobile: "calc(100%)", desktop: "unset" },
         }}
       >
-        {catalog.name}
+        {selectedCatalog.name}
       </Typography>
     </Stack>
   );

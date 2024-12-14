@@ -41,6 +41,7 @@ const icons = {
   linkedIn: <Svg.LinkedIn />,
   logout: <Svg.Logout />,
   looksRare: <Svg.LooksRare />,
+  menu: <Svg.Menu />,
   message: <Svg.Message />,
   openSea: <Svg.OpenSea />,
   password: <Svg.Password />,

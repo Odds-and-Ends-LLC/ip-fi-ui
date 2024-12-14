@@ -59,7 +59,7 @@ export default function InfiniteGridScroller<T>({
       {header && <Stack sx={{ zIndex: 10, position: stickyHeader ? "sticky" : "relative", top: stickyHeader ? stickyHeaderTopOffset : 0 }}>{header}</Stack>}
       <Grid ref={grid} container spacing={{ mobile: 1, laptop: 3 }}>
         {data.map((item, i) => (
-          <Grid key={i} item mobile={6} tablet={6} laptop={4} desktop={3}>
+          <Grid key={i} item mobile={12} tablet={6} laptop={4} desktop={3}>
             {renderItem({ item, index: i })}
           </Grid>
         ))}

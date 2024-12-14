@@ -3,23 +3,19 @@ import { ScopeProvider } from 'jotai-scope'
 import { filterQueryAtom } from '@/atoms';
 import { useAtomValue } from 'jotai';
 import { ReactNode, useEffect } from 'react';
-import { Stack } from '@mui/material';
-import SearchFilter from './SearchFilter';
 import { useSearchParams } from 'next/navigation';
 
 export default function FilterGroup({
   children,
-  searchbarPlaceholder,
 } : {
   children: ReactNode;
-  searchbarPlaceholder?: string;
 }) {
   const QueryReporter = () => {
     const filterQuery = useAtomValue(filterQueryAtom);
 
     useEffect(() => {
       if (filterQuery) {
-        window.history.pushState(null, "", `?${filterQuery.toString()}`);
+        window.history.replaceState(null, "", `?${filterQuery.toString()}`);
       }
     }, [filterQuery]);
 
@@ -27,9 +23,8 @@ export default function FilterGroup({
   };
 
   const HydrateAtoms = ({ children } : { children: ReactNode }) => {
-    const urlQuery = useSearchParams();
+    const urlQuery: URLSearchParams = useSearchParams() || new URLSearchParams();
 
-    //@ts-ignore
     useHydrateAtoms([[filterQueryAtom, urlQuery]]);
     return children;
   };
@@ -38,10 +33,7 @@ export default function FilterGroup({
     <ScopeProvider atoms={[filterQueryAtom]}>
       <HydrateAtoms>
         <QueryReporter />
-        <Stack gap="8px" maxWidth="380px">
-          <SearchFilter title={searchbarPlaceholder} />
-          {children}
-        </Stack>
+        {children}
       </HydrateAtoms>
     </ScopeProvider>
   );

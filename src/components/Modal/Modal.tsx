@@ -8,6 +8,8 @@ import {
   Stack,
   SxProps,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 
 // styles
@@ -34,8 +36,10 @@ export default function Modal({
   onClose: () => void;
   contentStyles?: SxProps;
 }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("large"));
   return (
-    <Dialog scroll="paper" open={open} onClose={onClose}>
+    <Dialog scroll="paper" open={open} onClose={onClose} fullScreen={isMobile}>
       <DialogTitle>
         <Stack className={styles.modalTitle} color="text.brandSecondary">
           {titleIcon}

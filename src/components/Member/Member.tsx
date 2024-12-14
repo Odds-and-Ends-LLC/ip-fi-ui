@@ -57,7 +57,7 @@ export default function Member({
                   {username}
                 </Typography>
                 {lastActive &&
-                  <Typography variant="body2" color="text.disabledBlue">
+                  <Typography variant="body2" color="text.disabledBlue" textAlign="center">
                     Active {formatDistanceToNow(lastActive, { addSuffix: true })}
                   </Typography>
                 }

@@ -59,6 +59,7 @@
 
 .profileSectionName {
   flex-direction: row;
+  gap: 16px;
   justify-content: space-between;
 }
 
@@ -76,4 +77,9 @@
 /* Profile Stats */
 .profileStats {
   flex-direction: row;
+  max-width: 400px;
+}
+
+.profileStatsItem {
+  flex: 1 0;
 }

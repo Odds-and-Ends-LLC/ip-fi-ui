@@ -1,7 +1,7 @@
 import { filterQueryAtom } from "@/atoms";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { Stack, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useDebounce } from "@uidotdev/usehooks";
 
 export default function SearchFilter({
@@ -10,15 +10,21 @@ export default function SearchFilter({
   title?: string;
 }) {
   const [filterQuery, setFilterQuery] = useAtom(filterQueryAtom);
-  const [searchTerm, setSearchTerm] = useState(filterQuery.get("search"));
+  const [searchTerm, setSearchTerm] = useState<string | null>(null);
   const debouncedTerm = useDebounce(searchTerm, 300);
 
   useEffect(() => {
+    if (debouncedTerm === null) return;
+
     const query = new URLSearchParams(filterQuery.toString());
-    query.set("search", debouncedTerm || "");
+    if (!debouncedTerm) {
+      query.delete("search");
+    } else {
+      query.set("search", debouncedTerm || "");
+    }
 
     setFilterQuery(query);
-  }, [debouncedTerm, setFilterQuery]);
+  }, [debouncedTerm]);
 
   return (
     <TextField
@@ -26,6 +32,7 @@ export default function SearchFilter({
       placeholder={title}
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
+      fullWidth
     />
   )
 }

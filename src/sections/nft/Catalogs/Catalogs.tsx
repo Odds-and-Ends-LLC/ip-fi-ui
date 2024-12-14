@@ -5,8 +5,9 @@ import { useSearchParams } from "next/navigation";
 import { useAtomValue } from "jotai";
 
 // components
-import { ItemsSectionHeader, Select } from "@/components";
+import { FilterGroupToggleButton, ItemsSectionHeader } from "@/components";
 import { getNFTCatalogs } from "@/lib/client/nft";
+import CatalogsFilter from "./CatalogsFilter";
 import styles from "./Catalogs.module.css";
 import { nftViewAtom } from "@/atoms";
 import { ItemsCatalogs } from ".";
@@ -25,28 +26,26 @@ export default function Catalogs() {
 
   return (
     <Stack className={styles.catalogs}>
-      <Stack className={styles.catalogsHeader} sx={{ flexDirection: { tablet: "row" } }}>
+      <Stack className={styles.catalogsHeader} sx={{ flexDirection: "row" }}>
         <ItemsSectionHeader title="CATALOGS" count={nft.catalogCount} />
-        <Stack className={styles.catalogsHeaderOptions}>
-          <Select
-            minWidth="118px"
-            label="FILTER"
-            options={["filter 1", "filter 2"]}
-            onChange={(value) => console.log(value)}
-          />
-          <Select minWidth="106px" label="SORT" />
-        </Stack>
+        <FilterGroupToggleButton modalMode />
       </Stack>
-      <Paper variant="translucent" component={Stack} className={styles.catalogsContent}>
-        {nftCatalogs?.map((nftCatalog, i) => (
-          <ItemsCatalogs key={i} data={nftCatalog} />
-        ))}
-        {isFetching ?
-          <CircularProgress size={32} color="secondary" sx={{ mx: "auto" }} /> :
-          hasNextPage && <Button fullWidth variant="outlineWhite" onClick={() => fetchNextPage()}>
-            LOAD MORE
-          </Button>
-        }
+      <Paper variant="translucent" component={Stack} className={styles.catalogsTable}>
+        <CatalogsFilter />
+        <Stack className={styles.catalogsContent}>
+          {nftCatalogs?.map((nftCatalog, i) => (
+            <ItemsCatalogs key={i} data={nftCatalog} />
+          ))}
+          <Stack sx={{ pb: "16px" }}>
+            {isFetching ?
+              <CircularProgress size={32} color="secondary" sx={{ mx: "auto" }} /> :
+              hasNextPage &&
+                <Button fullWidth variant="outlineWhite" onClick={() => fetchNextPage()}>
+                  LOAD MORE
+                </Button>
+            }
+            </Stack>
+        </Stack>
       </Paper>
     </Stack>
   );

@@ -37,3 +37,9 @@ export const purchaseCatalogDataAtom = atom<PurchaseCatalogPayloadType>({} as Pu
 
 // Filter Atoms
 export const filterQueryAtom = atom<URLSearchParams>(new URLSearchParams());
+export const filterOpenAtom = atom(true);
+export const filterModalOpenAtom = atom(false);
+
+
+// Profile Atoms
+export const selectedCatalogAtom = atom<CatalogType>({} as CatalogType);

@@ -26,8 +26,8 @@ export default function ForBrands() {
         title={
           <>
             <Typography variant="h6">{title}</Typography>
-            <Image src="/icons/circles.svg" alt="icon" width={40} height={8} />
-            <Image src="/icons/window_buttons.svg" alt="buttons" width={70} height={18} />
+            <Image src="/images/circles_window.svg" alt="icon" width={40} height={8} />
+            <Image src="/images/window_buttons.svg" alt="buttons" width={70} height={18} />
           </>
         }
         height="fit-content"
@@ -73,17 +73,17 @@ export default function ForBrands() {
                 <Box
                   className={styles.brandsImageBar}
                   sx={{
-                    borderColor: "primary.main",
+                    borderColor: "secondary.main",
                   }}
                 >
                   <Box
                     className={styles.brandsImageBarProgress}
                     sx={{
-                      backgroundColor: "primary.main",
+                      backgroundColor: "secondary.main",
                     }}
                   />
                 </Box>
-                <Image src="/icons/playlist_buttons.svg" alt="buttons" width={120} height={18} />
+                <Image src="/images/playlist_buttons.svg" alt="buttons" width={120} height={18} />
               </Window>
             </Box>
             <Box
@@ -94,7 +94,7 @@ export default function ForBrands() {
               }}
             >
               <Window title="CloneX #19799">
-                <Image src="/icons/check_circle.svg" alt="check" width={34} height={34} />
+                <Image src="/images/check_circle.svg" alt="check" width={34} height={34} />
                 <Typography>
                   BORED APP YACHT CLUB #11, CURRENTLY IN THE POSSESSION OF E11EVEN MIAMI.
                 </Typography>

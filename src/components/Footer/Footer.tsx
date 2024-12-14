@@ -46,8 +46,7 @@ export default function Footer() {
         >
           <Stack className={styles.footerTeam}>
             <Typography variant="h6">TEAM</Typography>
-            <Link href="/" color="text.brandSecondary">@phygital_good</Link>
-            <Link href="/" color="text.brandSecondary">@guyettaaron</Link>
+            <Link href="https://x.com/guyettaaron" color="text.brandSecondary">@guyettaaron</Link>
           </Stack>
           <Stack className={styles.footerContact}>
             <Typography variant="h6">CONTACT</Typography>
@@ -62,16 +61,16 @@ export default function Footer() {
           <Link href="/" color="text.brandSecondary">Terms</Link>
         </Stack>
         <Stack className={styles.footerSocials}>
-          <SocialLink icon={<Icon icon="twitterX" />} href="/">
+          <SocialLink icon={<Icon icon="twitterX" color="secondary.main" />} href="/">
             TWITTER
           </SocialLink>
-          <SocialLink icon={<Icon icon="instagram" />} href="/">
+          <SocialLink icon={<Icon icon="instagram" color="secondary.main" />} href="/">
             INSTAGRAM
           </SocialLink>
-          <SocialLink icon={<Icon icon="discord" />} href="/">
+          <SocialLink icon={<Icon icon="discord" color="secondary.main" />} href="/">
             DISCORD
           </SocialLink>
-          <SocialLink icon={<Icon icon="linkedIn" />} href="/">
+          <SocialLink icon={<Icon icon="linkedIn" color="secondary.main" />} href="/">
             LINKEDIN
           </SocialLink>
         </Stack>

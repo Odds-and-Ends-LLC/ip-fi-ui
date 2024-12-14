@@ -29,6 +29,13 @@
 .catalogViewHeaderRight {
   flex-direction: row;
   gap: 12px;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.catalogViewHeaderRightBtns {
+  flex-direction: row;
+  gap: 12px;
   align-items: center;
 }
 
@@ -38,5 +45,6 @@
 
 .catalogViewTitleDetails {
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 8px;
 }
